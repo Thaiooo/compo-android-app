@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-public class QuizzLevelSelectAdapter extends FragmentStatePagerAdapter {
+public class SelectQuizzLevelAdapter extends FragmentStatePagerAdapter {
 
-	public QuizzLevelSelectAdapter(FragmentManager fm) {
+	public SelectQuizzLevelAdapter(FragmentManager fm) {
 		super(fm);
 	}
 

@@ -12,11 +12,11 @@ import android.widget.TextView;
 
 import com.compo.android.app.model.GamePack;
 
-public class GameSelectAdapter extends BaseAdapter {
+public class SelectGameAdapter extends BaseAdapter {
 	private static LayoutInflater inflater = null;
 	private List<GamePack> gamesPack;
 
-	public GameSelectAdapter(Context c, List<GamePack> aGamesPack) {
+	public SelectGameAdapter(Context c, List<GamePack> aGamesPack) {
 		inflater = (LayoutInflater) c
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		gamesPack = aGamesPack;

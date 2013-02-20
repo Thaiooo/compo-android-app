@@ -29,7 +29,7 @@ public class QuizzLevelFragment extends Fragment {
 		quizzList = loadQuizzList();
 
 		GridView gridview = (GridView) rootView.findViewById(R.id.quizzGrid);
-		gridview.setAdapter(new QuizzSelectAdapter(getActivity(), quizzList));
+		gridview.setAdapter(new SelectQuizzAdapter(getActivity(), quizzList));
 
 		gridview.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v,

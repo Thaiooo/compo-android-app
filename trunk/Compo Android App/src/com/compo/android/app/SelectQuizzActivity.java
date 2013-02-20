@@ -20,7 +20,7 @@ public class SelectQuizzActivity extends FragmentActivity {
 	 * memory and is a best practice when allowing navigation between objects in
 	 * a potentially large collection.
 	 */
-	private QuizzLevelSelectAdapter _collectionQuizzLevelPagerAdapter;
+	private SelectQuizzLevelAdapter _collectionQuizzLevelPagerAdapter;
 
 	/**
 	 * The {@link android.support.v4.view.ViewPager} that will display the
@@ -37,7 +37,7 @@ public class SelectQuizzActivity extends FragmentActivity {
 		// the collection.
 		// ViewPager and its adapters use support library fragments, so we must
 		// use getSupportFragmentManager.
-		_collectionQuizzLevelPagerAdapter = new QuizzLevelSelectAdapter(
+		_collectionQuizzLevelPagerAdapter = new SelectQuizzLevelAdapter(
 				getSupportFragmentManager());
 
 		// Set up action bar.
