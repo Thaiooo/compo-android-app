@@ -33,7 +33,7 @@ public class SelectGameActivity extends Activity {
 		gamePacks = loadGamePacks();
 
 		GridView gridview = (GridView) findViewById(R.id.gridview);
-		gridview.setAdapter(new GameSelectAdapter(this, gamePacks));
+		gridview.setAdapter(new SelectGameAdapter(this, gamePacks));
 
 		gridview.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v,

@@ -12,11 +12,11 @@ import android.widget.TextView;
 
 import com.compo.android.app.model.Quizz;
 
-public class QuizzSelectAdapter extends BaseAdapter {
+public class SelectQuizzAdapter extends BaseAdapter {
 	private static LayoutInflater inflater = null;
 	private List<Quizz> quizzList;
 
-	public QuizzSelectAdapter(Context c, List<Quizz> aQuizzList) {
+	public SelectQuizzAdapter(Context c, List<Quizz> aQuizzList) {
 		inflater = (LayoutInflater) c
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		quizzList = aQuizzList;
