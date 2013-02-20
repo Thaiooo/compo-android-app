@@ -13,11 +13,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
+import com.compo.android.app.model.GamePack;
 import com.compo.android.app.model.Quizz;
 
 public class QuizzLevelFragment extends Fragment {
 
-	public final static String EXTRA_MESSAGE = "com.compo.android.app.QuizzLevelFragment.MESSAGE";
+	public final static String EXTRA_MESSAGE_QUIZZ = "com.compo.android.app.QuizzLevelFragment.MESSAGE.QUIZZ";
+	public final static String EXTRA_MESSAGE_GAME = "com.compo.android.app.QuizzLevelFragment.MESSAGE.GAME";
 	private List<Quizz> quizzList;
 
 	@Override
@@ -35,9 +37,13 @@ public class QuizzLevelFragment extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
 
+				GamePack selectPack = (GamePack) getActivity().getIntent()
+						.getSerializableExtra(SelectGameActivity.EXTRA_MESSAGE);
+
 				Quizz selectQuizz = quizzList.get(position);
 				Intent intent = new Intent(getActivity(), QuizzActivity.class);
-				intent.putExtra(EXTRA_MESSAGE, selectQuizz);
+				intent.putExtra(EXTRA_MESSAGE_QUIZZ, selectQuizz);
+				intent.putExtra(EXTRA_MESSAGE_GAME, selectPack);
 				startActivity(intent);
 			}
 		});
