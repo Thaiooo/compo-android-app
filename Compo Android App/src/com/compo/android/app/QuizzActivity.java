@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.compo.android.app.model.GamePack;
 import com.compo.android.app.model.Quizz;
 
 public class QuizzActivity extends Activity {
@@ -20,8 +21,9 @@ public class QuizzActivity extends Activity {
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		Intent intent = getIntent();
+
 		Quizz selectQuizz = (Quizz) intent
-				.getSerializableExtra(QuizzLevelFragment.EXTRA_MESSAGE);
+				.getSerializableExtra(QuizzLevelFragment.EXTRA_MESSAGE_QUIZZ);
 		actionBar.setTitle(selectQuizz.getName());
 	}
 
@@ -34,9 +36,14 @@ public class QuizzActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
+
+			GamePack selectGame = (GamePack) getIntent().getSerializableExtra(
+					QuizzLevelFragment.EXTRA_MESSAGE_GAME);
+
 			// app icon in action bar clicked; go home
 			Intent intent = new Intent(this, SelectQuizzActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.putExtra(SelectGameActivity.EXTRA_MESSAGE, selectGame);
 			startActivity(intent);
 			return true;
 		default:
