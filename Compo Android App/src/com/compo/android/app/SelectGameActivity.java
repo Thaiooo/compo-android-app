@@ -27,7 +27,7 @@ public class SelectGameActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_select_game);
 
-		final ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		gamePacks = loadGamePacks();
