@@ -1,6 +1,5 @@
 package com.compo.android.app;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -14,9 +13,9 @@ public class QuizzLevelSelectAdapter extends FragmentStatePagerAdapter {
 	@Override
 	public Fragment getItem(int i) {
 		Fragment fragment = new QuizzLevelFragment();
-		Bundle args = new Bundle();
-		args.putInt(QuizzLevelFragment.ARG_OBJECT, i + 1);
-		fragment.setArguments(args);
+		// Bundle args = new Bundle();
+		// args.putInt(QuizzLevelFragment.ARG_OBJECT, i + 1);
+		// fragment.setArguments(args);
 		return fragment;
 	}
 

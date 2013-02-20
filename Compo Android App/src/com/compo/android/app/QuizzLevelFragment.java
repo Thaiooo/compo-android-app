@@ -3,19 +3,21 @@ package com.compo.android.app;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
 import com.compo.android.app.model.Quizz;
 
 public class QuizzLevelFragment extends Fragment {
 
-	public static final String ARG_OBJECT = "object";
-
+	public final static String EXTRA_MESSAGE = "com.compo.android.app.QuizzLevelFragment.MESSAGE";
 	private List<Quizz> quizzList;
 
 	@Override
@@ -29,10 +31,22 @@ public class QuizzLevelFragment extends Fragment {
 		GridView gridview = (GridView) rootView.findViewById(R.id.quizzGrid);
 		gridview.setAdapter(new QuizzSelectAdapter(getActivity(), quizzList));
 
+		gridview.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View v,
+					int position, long id) {
+
+				Quizz selectQuizz = quizzList.get(position);
+				Intent intent = new Intent(getActivity(), QuizzActivity.class);
+				intent.putExtra(EXTRA_MESSAGE, selectQuizz);
+				startActivity(intent);
+			}
+		});
+
 		// Bundle args = getArguments();
 		// ((TextView)
 		// rootView.findViewById(android.R.id.text1)).setText(Integer
 		// .toString(args.getInt(ARG_OBJECT)));
+
 		return rootView;
 	}
 
