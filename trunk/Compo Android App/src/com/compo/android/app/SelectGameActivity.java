@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
@@ -40,6 +41,11 @@ public class SelectGameActivity extends Activity {
 					int position, long id) {
 
 				GamePack selectPack = gamePacks.get(position);
+				if (selectPack.isLock()) {
+					Toast.makeText(SelectGameActivity.this,
+							"Ce pack est bloqué", Toast.LENGTH_SHORT).show();
+					return;
+				}
 				Intent intent = new Intent(SelectGameActivity.this,
 						SelectQuizzActivity.class);
 				intent.putExtra(EXTRA_MESSAGE, selectPack);
