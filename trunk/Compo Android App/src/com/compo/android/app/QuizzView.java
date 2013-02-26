@@ -3,19 +3,25 @@ package com.compo.android.app;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 public class QuizzView extends View {
 
-	private Context _context;
-	private BitmapDrawable _terrain;
-	private BitmapDrawable _playerBleu;
-	private BitmapDrawable _playerRed;
-	private int _playerW;
-	private int _playerH;
+	protected static final int MARGE = 20;
+
+	protected Context _context;
+	protected BitmapDrawable _terrain;
+	protected BitmapDrawable _playerBleu;
+	protected BitmapDrawable _playerRed;
+	protected Paint _paint;
+	protected int _playerW;
+	protected int _playerH;
 
 	public QuizzView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -28,9 +34,13 @@ public class QuizzView extends View {
 
 		_playerW = _playerBleu.getBitmap().getWidth();
 		_playerH = _playerBleu.getBitmap().getHeight();
+
+		_paint = new Paint();
+		_paint.setColor(Color.BLACK);
+		_paint.setTextSize(20);
 	}
 
-	private BitmapDrawable scaleImage(BitmapDrawable srcTerrain, int destW,
+	protected BitmapDrawable scaleImage(BitmapDrawable srcTerrain, int destW,
 			int destH) {
 		int terrainW = srcTerrain.getBitmap().getWidth();
 		int terrainH = srcTerrain.getBitmap().getHeight();
@@ -60,95 +70,103 @@ public class QuizzView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		int screenW = this.getWidth();
-		int screenH = this.getHeight();
 
 		// =================================================================
 		// Terrain
 		// =================================================================
-		BitmapDrawable terrain = (BitmapDrawable) _context.getResources()
-				.getDrawable(R.drawable.terrain);
-		_terrain = scaleImage(terrain, screenW, screenH);
-		int terrainX = (screenW - _terrain.getBitmap().getWidth()) / 2;
-		canvas.drawBitmap(_terrain.getBitmap(), terrainX, 0, null);
+		printTerrain(canvas);
 
 		// =================================================================
 		// Equipe 1
 		// =================================================================
 
-		int terainW = _terrain.getBitmap().getWidth();
-		int terainH = _terrain.getBitmap().getHeight();
-		int marge = (screenW - terainW) / 2;
-
 		// Gardien
-		int xPlayer = terainW / 2 - _playerW / 2 + marge;
-		int yPlayer = 20;
-		canvas.drawBitmap(_playerBleu.getBitmap(), xPlayer, yPlayer, null);
+		printPlayerTeam1(canvas, 0.5f, 0.0f, "Player 1");
 
 		// Ligne 1
-		xPlayer = terainW / 5 - _playerW / 2 + marge;
-		yPlayer = terainH / 2 / 4 + 20;
-		canvas.drawBitmap(_playerBleu.getBitmap(), xPlayer, yPlayer, null);
-		xPlayer = (terainW / 5) * 2 - _playerW / 2 + marge;
-		canvas.drawBitmap(_playerBleu.getBitmap(), xPlayer, yPlayer, null);
-		xPlayer = (terainW / 5) * 3 - _playerW / 2 + marge;
-		canvas.drawBitmap(_playerBleu.getBitmap(), xPlayer, yPlayer, null);
-		xPlayer = (terainW / 5) * 4 - _playerW / 2 + marge;
-		canvas.drawBitmap(_playerBleu.getBitmap(), xPlayer, yPlayer, null);
+		printPlayerTeam1(canvas, 0.2f, 0.25f, "Player 2");
+		printPlayerTeam1(canvas, 0.4f, 0.25f, "Player 3");
+		printPlayerTeam1(canvas, 0.6f, 0.25f, "Player 4");
+		printPlayerTeam1(canvas, 0.8f, 0.25f, "Player 5");
 
 		// Ligne 2
-		xPlayer = (terainW / 4) * 1 - _playerW / 2 + marge;
-		yPlayer = (terainH / 2 / 4) * 2 + 20;
-		canvas.drawBitmap(_playerBleu.getBitmap(), xPlayer, yPlayer, null);
-		xPlayer = (terainW / 4) * 2 - _playerW / 2 + marge;
-		canvas.drawBitmap(_playerBleu.getBitmap(), xPlayer, yPlayer, null);
-		xPlayer = (terainW / 4) * 3 - _playerW / 2 + marge;
-		canvas.drawBitmap(_playerBleu.getBitmap(), xPlayer, yPlayer, null);
+		printPlayerTeam1(canvas, 0.25f, 0.5f, "Player 6");
+		printPlayerTeam1(canvas, 0.5f, 0.5f, "Player 7");
+		printPlayerTeam1(canvas, 0.75f, 0.5f, "Player 8");
 
 		// Ligne 3
-		xPlayer = (terainW / 4) * 1 - _playerW / 2 + marge;
-		yPlayer = (terainH / 2 / 4) * 3 + 20;
-		canvas.drawBitmap(_playerBleu.getBitmap(), xPlayer, yPlayer, null);
-		xPlayer = (terainW / 4) * 2 - _playerW / 2 + marge;
-		canvas.drawBitmap(_playerBleu.getBitmap(), xPlayer, yPlayer, null);
-		xPlayer = (terainW / 4) * 3 - _playerW / 2 + marge;
-		canvas.drawBitmap(_playerBleu.getBitmap(), xPlayer, yPlayer, null);
+		printPlayerTeam1(canvas, 0.25f, 0.75f, "Player 9");
+		printPlayerTeam1(canvas, 0.5f, 0.75f, "Player 10");
+		printPlayerTeam1(canvas, 0.75f, 0.75f, "Player 11");
 
 		// =================================================================
 		// Equipe 2
 		// =================================================================
 		// Gardien
-		xPlayer = terainW / 2 - _playerW / 2 + marge;
-		yPlayer = terainH - _playerH - 20;
-		canvas.drawBitmap(_playerRed.getBitmap(), xPlayer, yPlayer, null);
+		printPlayerTeam2(canvas, 0.5f, 0.0f, "Player 1");
 
 		// Ligne 1
-		xPlayer = terainW / 5 - _playerW / 2 + marge;
-		yPlayer = terainH - (terainH / 2 / 4) - _playerH - 20;
-		canvas.drawBitmap(_playerRed.getBitmap(), xPlayer, yPlayer, null);
-		xPlayer = (terainW / 5) * 2 - _playerW / 2 + marge;
-		canvas.drawBitmap(_playerRed.getBitmap(), xPlayer, yPlayer, null);
-		xPlayer = (terainW / 5) * 3 - _playerW / 2 + marge;
-		canvas.drawBitmap(_playerRed.getBitmap(), xPlayer, yPlayer, null);
-		xPlayer = (terainW / 5) * 4 - _playerW / 2 + marge;
-		canvas.drawBitmap(_playerRed.getBitmap(), xPlayer, yPlayer, null);
+		printPlayerTeam2(canvas, 0.2f, 0.25f, "Player 2");
+		printPlayerTeam2(canvas, 0.4f, 0.25f, "Player 3");
+		printPlayerTeam2(canvas, 0.6f, 0.25f, "Player 4");
+		printPlayerTeam2(canvas, 0.8f, 0.25f, "Player 5");
 
 		// Ligne 2
-		xPlayer = (terainW / 4) * 1 - _playerW / 2 + marge;
-		yPlayer = terainH - (terainH / 2 / 4) * 2 - _playerH - 20;
-		canvas.drawBitmap(_playerRed.getBitmap(), xPlayer, yPlayer, null);
-		xPlayer = (terainW / 4) * 2 - _playerW / 2 + marge;
-		canvas.drawBitmap(_playerRed.getBitmap(), xPlayer, yPlayer, null);
-		xPlayer = (terainW / 4) * 3 - _playerW / 2 + marge;
-		canvas.drawBitmap(_playerRed.getBitmap(), xPlayer, yPlayer, null);
+		printPlayerTeam2(canvas, 0.25f, 0.5f, "Player 6");
+		printPlayerTeam2(canvas, 0.5f, 0.5f, "Player 7");
+		printPlayerTeam2(canvas, 0.75f, 0.5f, "Player 8");
 
 		// Ligne 3
-		xPlayer = (terainW / 4) * 1 - _playerW / 2 + marge;
-		yPlayer = terainH - (terainH / 2 / 4) * 3 - _playerH - 20;
-		canvas.drawBitmap(_playerRed.getBitmap(), xPlayer, yPlayer, null);
-		xPlayer = (terainW / 4) * 2 - _playerW / 2 + marge;
-		canvas.drawBitmap(_playerRed.getBitmap(), xPlayer, yPlayer, null);
-		xPlayer = (terainW / 4) * 3 - _playerW / 2 + marge;
-		canvas.drawBitmap(_playerRed.getBitmap(), xPlayer, yPlayer, null);
+		printPlayerTeam2(canvas, 0.25f, 0.75f, "Player 9");
+		printPlayerTeam2(canvas, 0.5f, 0.75f, "Player 10");
+		printPlayerTeam2(canvas, 0.75f, 0.75f, "Player 11");
+	}
+
+	protected void printTerrain(Canvas canvas) {
+		int screenW = this.getWidth();
+		int screenH = this.getHeight();
+		BitmapDrawable terrain = (BitmapDrawable) _context.getResources()
+				.getDrawable(R.drawable.terrain);
+		if (_terrain == null) {
+			_terrain = scaleImage(terrain, screenW, screenH);
+		}
+		int terrainX = (screenW - _terrain.getBitmap().getWidth()) / 2;
+		canvas.drawBitmap(_terrain.getBitmap(), terrainX, 0, null);
+	}
+
+	protected void printPlayerTeam1(Canvas canvas, float aXPercentPosition,
+			float aYPercentPosition, String aName) {
+		int screenW = this.getWidth();
+		int terainW = _terrain.getBitmap().getWidth();
+		int terainH = _terrain.getBitmap().getHeight();
+		int lateralMarge = (screenW - terainW) / 2;
+
+		float x = terainW * aXPercentPosition - _playerW / 2 + lateralMarge;
+		float y = (terainH / 2) * aYPercentPosition + MARGE;
+		canvas.drawBitmap(_playerBleu.getBitmap(), x, y, null);
+		canvas.drawText(aName, x, y + _playerH + 20, _paint);
+	}
+
+	protected void printPlayerTeam2(Canvas canvas, float aXPercentPosition,
+			float aYPercentPosition, String aName) {
+		int screenW = this.getWidth();
+		int terainW = _terrain.getBitmap().getWidth();
+		int terainH = _terrain.getBitmap().getHeight();
+		int lateralMarge = (screenW - terainW) / 2;
+
+		float x = terainW * aXPercentPosition - _playerW / 2 + lateralMarge;
+		float y = terainH - ((terainH / 2) * aYPercentPosition) - _playerH
+				- MARGE;
+		canvas.drawBitmap(_playerRed.getBitmap(), x, y, null);
+		canvas.drawText(aName, x, y + _playerH + 20, _paint);
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		boolean b = super.onTouchEvent(event);
+		System.out.println("=============> X" + event.getX() + " Y:"
+				+ event.getY());
+
+		return b;
 	}
 }
