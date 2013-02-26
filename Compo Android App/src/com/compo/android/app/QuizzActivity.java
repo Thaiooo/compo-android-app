@@ -17,6 +17,11 @@ public class QuizzActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quizz);
 
+		QuizzView quizzView = (QuizzView) findViewById(R.id.quizz_view);
+		if (quizzView == null) {
+			quizzView = (QuizzView) findViewById(R.id.quizz_view_land);
+		}
+
 		ActionBar actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -24,6 +29,9 @@ public class QuizzActivity extends Activity {
 
 		Quizz selectQuizz = (Quizz) intent
 				.getSerializableExtra(QuizzLevelFragment.EXTRA_MESSAGE_QUIZZ);
+
+		quizzView.setQuizz(selectQuizz);
+
 		actionBar.setTitle(selectQuizz.getName());
 	}
 
