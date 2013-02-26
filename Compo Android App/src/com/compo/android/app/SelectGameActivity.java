@@ -16,6 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
 import com.compo.android.app.model.GamePack;
+import com.compo.android.app.model.Quizz;
 
 public class SelectGameActivity extends Activity {
 
@@ -61,12 +62,31 @@ public class SelectGameActivity extends Activity {
 			GamePack pack = new GamePack();
 			pack.setLock(false);
 			pack.setName("Pack " + i);
+			pack.setQuizzList(loadQuizzList());
 			gamePacks.add(pack);
 		}
 		for (int i = 5; i < 12; i++) {
 			GamePack pack = new GamePack();
 			pack.setLock(true);
 			pack.setName("Pack " + i);
+			gamePacks.add(pack);
+		}
+		return gamePacks;
+	}
+
+	private List<Quizz> loadQuizzList() {
+		// TODO: Chargement des quizz
+		List<Quizz> gamePacks = new ArrayList<Quizz>();
+		for (int i = 1; i < 2; i++) {
+			Quizz quizz = new Quizz();
+			quizz.setSuccess(true);
+			quizz.setName("Match " + i);
+			gamePacks.add(quizz);
+		}
+		for (int i = 2; i < 16; i++) {
+			Quizz pack = new Quizz();
+			pack.setSuccess(false);
+			pack.setName("Match " + i);
 			gamePacks.add(pack);
 		}
 		return gamePacks;

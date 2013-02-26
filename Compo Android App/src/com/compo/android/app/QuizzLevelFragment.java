@@ -1,6 +1,5 @@
 package com.compo.android.app;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
@@ -20,7 +19,8 @@ public class QuizzLevelFragment extends Fragment {
 
 	public final static String EXTRA_MESSAGE_QUIZZ = "com.compo.android.app.QuizzLevelFragment.MESSAGE.QUIZZ";
 	public final static String EXTRA_MESSAGE_GAME = "com.compo.android.app.QuizzLevelFragment.MESSAGE.GAME";
-	private List<Quizz> quizzList;
+	private List<Quizz> _quizzList;
+	private GamePack _selectPack;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,22 +28,21 @@ public class QuizzLevelFragment extends Fragment {
 		final View rootView = inflater.inflate(R.layout.fragment_quizz_menu,
 				container, false);
 
-		quizzList = loadQuizzList();
+		GamePack selectPack = (GamePack) getActivity().getIntent()
+				.getSerializableExtra(SelectGameActivity.EXTRA_MESSAGE);
+		_quizzList = selectPack.getQuizzList();
 
 		GridView gridview = (GridView) rootView.findViewById(R.id.quizzGrid);
-		gridview.setAdapter(new SelectQuizzAdapter(getActivity(), quizzList));
+		gridview.setAdapter(new SelectQuizzAdapter(getActivity(), _quizzList));
 
 		gridview.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v,
 					int position, long id) {
 
-				GamePack selectPack = (GamePack) getActivity().getIntent()
-						.getSerializableExtra(SelectGameActivity.EXTRA_MESSAGE);
-
-				Quizz selectQuizz = quizzList.get(position);
+				Quizz selectQuizz = _quizzList.get(position);
 				Intent intent = new Intent(getActivity(), QuizzActivity.class);
 				intent.putExtra(EXTRA_MESSAGE_QUIZZ, selectQuizz);
-				intent.putExtra(EXTRA_MESSAGE_GAME, selectPack);
+				intent.putExtra(EXTRA_MESSAGE_GAME, _selectPack);
 				startActivity(intent);
 			}
 		});
@@ -54,23 +53,5 @@ public class QuizzLevelFragment extends Fragment {
 		// .toString(args.getInt(ARG_OBJECT)));
 
 		return rootView;
-	}
-
-	private List<Quizz> loadQuizzList() {
-		// TODO: Chargement des packs
-		List<Quizz> gamePacks = new ArrayList<Quizz>();
-		for (int i = 1; i < 2; i++) {
-			Quizz quizz = new Quizz();
-			quizz.setSuccess(true);
-			quizz.setName("Match " + i);
-			gamePacks.add(quizz);
-		}
-		for (int i = 2; i < 16; i++) {
-			Quizz pack = new Quizz();
-			pack.setSuccess(false);
-			pack.setName("Match " + i);
-			gamePacks.add(pack);
-		}
-		return gamePacks;
 	}
 }
