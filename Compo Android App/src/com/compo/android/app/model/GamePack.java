@@ -1,6 +1,7 @@
 package com.compo.android.app.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GamePack implements Serializable {
@@ -11,7 +12,7 @@ public class GamePack implements Serializable {
 	private boolean lock;
 	private String name;
 	private String description;
-	private List<Quizz> quizzList;
+	private List<Quizz> quizzList = new ArrayList<Quizz>();
 
 	public boolean isLock() {
 		return lock;

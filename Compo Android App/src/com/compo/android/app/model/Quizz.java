@@ -10,6 +10,42 @@ public class Quizz implements Serializable {
 	private boolean success;
 	private String name;
 	private String description;
+	private Equipe equipeDomicile;
+	private Equipe equipeExterieur;
+	private int scoreEquipeDomicile;
+	private int scoreEquipeExterieur;
+
+	public int getScoreEquipeDomicile() {
+		return scoreEquipeDomicile;
+	}
+
+	public void setScoreEquipeDomicile(int scoreEquipeDomicile) {
+		this.scoreEquipeDomicile = scoreEquipeDomicile;
+	}
+
+	public int getScoreEquipeExterieur() {
+		return scoreEquipeExterieur;
+	}
+
+	public void setScoreEquipeExterieur(int scoreEquipeExterieur) {
+		this.scoreEquipeExterieur = scoreEquipeExterieur;
+	}
+
+	public Equipe getEquipeDomicile() {
+		return equipeDomicile;
+	}
+
+	public void setEquipeDomicile(Equipe equipeDomicile) {
+		this.equipeDomicile = equipeDomicile;
+	}
+
+	public Equipe getEquipeExterieur() {
+		return equipeExterieur;
+	}
+
+	public void setEquipeExterieur(Equipe equipeExterieur) {
+		this.equipeExterieur = equipeExterieur;
+	}
 
 	public boolean isSuccess() {
 		return success;
