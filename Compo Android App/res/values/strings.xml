@@ -10,4 +10,6 @@
     <string name="activity_quizz">Composition</string>
     <string name="activity_select_quizz">Selection Quizz</string>
 
+    <dimen name="myFontSize">10sp</dimen>
+
 </resources>

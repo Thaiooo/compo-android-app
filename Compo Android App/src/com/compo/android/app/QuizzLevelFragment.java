@@ -28,9 +28,9 @@ public class QuizzLevelFragment extends Fragment {
 		final View rootView = inflater.inflate(R.layout.fragment_quizz_menu,
 				container, false);
 
-		GamePack selectPack = (GamePack) getActivity().getIntent()
+		_selectPack = (GamePack) getActivity().getIntent()
 				.getSerializableExtra(SelectGameActivity.EXTRA_MESSAGE);
-		_quizzList = selectPack.getQuizzList();
+		_quizzList = _selectPack.getQuizzList();
 
 		GridView gridview = (GridView) rootView.findViewById(R.id.quizzGrid);
 		gridview.setAdapter(new SelectQuizzAdapter(getActivity(), _quizzList));

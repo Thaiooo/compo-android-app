@@ -12,6 +12,8 @@ import com.compo.android.app.model.Quizz;
 
 public class QuizzActivity extends Activity {
 
+	private GamePack _selectGame;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,6 +32,9 @@ public class QuizzActivity extends Activity {
 		Quizz selectQuizz = (Quizz) intent
 				.getSerializableExtra(QuizzLevelFragment.EXTRA_MESSAGE_QUIZZ);
 
+		_selectGame = (GamePack) getIntent().getSerializableExtra(
+				QuizzLevelFragment.EXTRA_MESSAGE_GAME);
+
 		quizzView.setQuizz(selectQuizz);
 
 		actionBar.setTitle(selectQuizz.getName());
@@ -45,13 +50,10 @@ public class QuizzActivity extends Activity {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 
-			GamePack selectGame = (GamePack) getIntent().getSerializableExtra(
-					QuizzLevelFragment.EXTRA_MESSAGE_GAME);
-
 			// app icon in action bar clicked; go home
 			Intent intent = new Intent(this, SelectQuizzActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			intent.putExtra(SelectGameActivity.EXTRA_MESSAGE, selectGame);
+			intent.putExtra(SelectGameActivity.EXTRA_MESSAGE, _selectGame);
 			startActivity(intent);
 			return true;
 		default:
