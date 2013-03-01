@@ -45,9 +45,11 @@ public class QuizzView extends View {
 		_terrainRaw = (BitmapDrawable) _context.getResources().getDrawable(
 				R.drawable.terrain);
 
+		float densityMultiplier = getContext().getResources()
+				.getDisplayMetrics().density;
 		_paint = new Paint();
 		_paint.setColor(Color.BLACK);
-		_paint.setTextSize(20);
+		_paint.setTextSize(12.0f * densityMultiplier);
 
 		Intent intent = ((Activity) context).getIntent();
 		quizz = (Quizz) intent
@@ -155,6 +157,7 @@ public class QuizzView extends View {
 
 		// =================================================================
 		// Terrain
+		// =================================================================
 		printTerrain(canvas);
 
 		// =================================================================
@@ -167,25 +170,6 @@ public class QuizzView extends View {
 				printPlayerTeam1(canvas, j.getPositionXPercent(),
 						j.getPositionYPercent(), j.getName());
 			}
-		} else {
-			// Gardien
-			printPlayerTeam1(canvas, 0.5f, 0.0f, "Player 1");
-
-			// Ligne 1
-			printPlayerTeam1(canvas, 0.2f, 0.25f, "Player 2");
-			printPlayerTeam1(canvas, 0.4f, 0.25f, "Player 3");
-			printPlayerTeam1(canvas, 0.6f, 0.25f, "Player 4");
-			printPlayerTeam1(canvas, 0.8f, 0.25f, "Player 5");
-
-			// Ligne 2
-			printPlayerTeam1(canvas, 0.25f, 0.5f, "Player 6");
-			printPlayerTeam1(canvas, 0.5f, 0.5f, "Player 7");
-			printPlayerTeam1(canvas, 0.75f, 0.5f, "Player 8");
-
-			// Ligne 3
-			printPlayerTeam1(canvas, 0.25f, 0.75f, "Player 9");
-			printPlayerTeam1(canvas, 0.5f, 0.75f, "Player 10");
-			printPlayerTeam1(canvas, 0.75f, 0.75f, "Player 11");
 		}
 
 		// =================================================================
@@ -198,27 +182,7 @@ public class QuizzView extends View {
 				printPlayerTeam2(canvas, j.getPositionXPercent(),
 						j.getPositionYPercent(), j.getName());
 			}
-		} else {
-			// Gardien
-			printPlayerTeam2(canvas, 0.5f, 0.0f, "Player 1");
-
-			// Ligne 1
-			printPlayerTeam2(canvas, 0.2f, 0.25f, "Player 2");
-			printPlayerTeam2(canvas, 0.4f, 0.25f, "Player 3");
-			printPlayerTeam2(canvas, 0.6f, 0.25f, "Player 4");
-			printPlayerTeam2(canvas, 0.8f, 0.25f, "Player 5");
-
-			// Ligne 2
-			printPlayerTeam2(canvas, 0.25f, 0.5f, "Player 6");
-			printPlayerTeam2(canvas, 0.5f, 0.5f, "Player 7");
-			printPlayerTeam2(canvas, 0.75f, 0.5f, "Player 8");
-
-			// Ligne 3
-			printPlayerTeam2(canvas, 0.25f, 0.75f, "Player 9");
-			printPlayerTeam2(canvas, 0.5f, 0.75f, "Player 10");
-			printPlayerTeam2(canvas, 0.75f, 0.75f, "Player 11");
 		}
-
 	}
 
 	protected void printPlayerTeam1(Canvas canvas, float aXPercentPosition,
@@ -232,6 +196,7 @@ public class QuizzView extends View {
 				- _playerBleu.getBitmap().getWidth() / 2 + lateralMarge;
 		float y = (terainH / 2) * aYPercentPosition + MARGE;
 		canvas.drawBitmap(_playerBleu.getBitmap(), x, y, null);
+
 		canvas.drawText(aName, x, y + _playerBleu.getBitmap().getHeight() + 20,
 				_paint);
 	}
@@ -272,7 +237,6 @@ public class QuizzView extends View {
 
 				if (event.getX() >= minX && event.getX() <= maxX
 						&& event.getY() >= minY && event.getY() <= maxY) {
-					System.out.println(j.getName());
 					Toast.makeText(getContext(), j.getName(),
 							Toast.LENGTH_SHORT).show();
 					return b;
