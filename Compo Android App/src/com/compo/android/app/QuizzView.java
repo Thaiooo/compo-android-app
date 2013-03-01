@@ -48,7 +48,6 @@ public class QuizzView extends View {
 		float densityMultiplier = getContext().getResources()
 				.getDisplayMetrics().density;
 		_paint = new Paint();
-		_paint.setColor(Color.BLACK);
 		_paint.setTextSize(12.0f * densityMultiplier);
 
 		Intent intent = ((Activity) context).getIntent();
@@ -142,8 +141,13 @@ public class QuizzView extends View {
 	}
 
 	protected void printTerrain(Canvas canvas) {
+		_paint.setStyle(Paint.Style.FILL);
+		_paint.setColor(Color.rgb(24, 158, 73));
+		canvas.drawRect(0, 0, this.getWidth(), this.getHeight(), _paint);
+
 		int terrainX = (this.getWidth() - _terrain.getBitmap().getWidth()) / 2;
 		canvas.drawBitmap(_terrain.getBitmap(), terrainX, 0, null);
+
 	}
 
 	@Override
@@ -196,7 +200,7 @@ public class QuizzView extends View {
 				- _playerBleu.getBitmap().getWidth() / 2 + lateralMarge;
 		float y = (terainH / 2) * aYPercentPosition + MARGE;
 		canvas.drawBitmap(_playerBleu.getBitmap(), x, y, null);
-
+		_paint.setColor(Color.BLACK);
 		canvas.drawText(aName, x, y + _playerBleu.getBitmap().getHeight() + 20,
 				_paint);
 	}
@@ -213,6 +217,7 @@ public class QuizzView extends View {
 		float y = terainH - ((terainH / 2) * aYPercentPosition)
 				- _playerBleu.getBitmap().getHeight() - MARGE;
 		canvas.drawBitmap(_playerRed.getBitmap(), x, y, null);
+		_paint.setColor(Color.BLACK);
 		canvas.drawText(aName, x, y + _playerBleu.getBitmap().getHeight() + 20,
 				_paint);
 	}
@@ -239,6 +244,10 @@ public class QuizzView extends View {
 						&& event.getY() >= minY && event.getY() <= maxY) {
 					Toast.makeText(getContext(), j.getName(),
 							Toast.LENGTH_SHORT).show();
+
+					Intent intent = new Intent(_context, ResponseActivity.class);
+					_context.startActivity(intent);
+
 					return b;
 				}
 			}
