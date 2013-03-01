@@ -24,26 +24,26 @@ public class QuizzView extends View {
 	protected static final int MARGE = 20;
 
 	protected Context _context;
+	protected BitmapDrawable _terrainRaw;
 	protected BitmapDrawable _terrain;
+	protected BitmapDrawable _playerBleuRaw;
 	protected BitmapDrawable _playerBleu;
+	protected BitmapDrawable _playerRedRaw;
 	protected BitmapDrawable _playerRed;
 	protected Paint _paint;
-	protected int _playerW;
-	protected int _playerH;
-
+	protected Matrix _matrix;
 	protected Quizz quizz;
 
 	public QuizzView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		_context = context;
 
-		_playerBleu = (BitmapDrawable) _context.getResources().getDrawable(
+		_playerBleuRaw = (BitmapDrawable) _context.getResources().getDrawable(
 				R.drawable.player_bleu);
-		_playerRed = (BitmapDrawable) _context.getResources().getDrawable(
+		_playerRedRaw = (BitmapDrawable) _context.getResources().getDrawable(
 				R.drawable.player_red);
-
-		_playerW = _playerBleu.getBitmap().getWidth();
-		_playerH = _playerBleu.getBitmap().getHeight();
+		_terrainRaw = (BitmapDrawable) _context.getResources().getDrawable(
+				R.drawable.terrain);
 
 		_paint = new Paint();
 		_paint.setColor(Color.BLACK);
@@ -52,6 +52,8 @@ public class QuizzView extends View {
 		Intent intent = ((Activity) context).getIntent();
 		quizz = (Quizz) intent
 				.getSerializableExtra(QuizzLevelFragment.EXTRA_MESSAGE_QUIZZ);
+
+		_matrix = new Matrix();
 
 	}
 
@@ -86,13 +88,73 @@ public class QuizzView extends View {
 		this.quizz = quizz;
 	}
 
+	protected void setScaleMatrix() {
+		int screenW = this.getWidth();
+		int screenH = this.getHeight();
+		int terrainW = _terrainRaw.getBitmap().getWidth();
+		int terrainH = _terrainRaw.getBitmap().getHeight();
+
+		float scaleX = 1;
+		if (terrainW > screenW) {
+			scaleX = (float) screenW / (float) terrainW;
+		}
+		float scaleY = 1;
+		if (terrainH > screenH) {
+			scaleY = (float) screenH / (float) terrainH;
+		}
+
+		float scale = scaleX;
+		if (scaleY < scaleX) {
+			scale = scaleY;
+		}
+
+		_matrix.postScale(scale, scale);
+	}
+
+	protected void scaleTerrain() {
+		if (_terrain == null) {
+			Bitmap scaledBitmap = Bitmap.createBitmap(_terrainRaw.getBitmap(),
+					0, 0, _terrainRaw.getBitmap().getWidth(), _terrainRaw
+							.getBitmap().getHeight(), _matrix, true);
+			_terrain = new BitmapDrawable(scaledBitmap);
+		}
+	}
+
+	protected void scalePlayerBleu() {
+		if (_playerBleu == null) {
+			Bitmap scaledBitmap = Bitmap.createBitmap(_playerBleuRaw
+					.getBitmap(), 0, 0, _playerBleuRaw.getBitmap().getWidth(),
+					_playerBleuRaw.getBitmap().getHeight(), _matrix, true);
+			_playerBleu = new BitmapDrawable(scaledBitmap);
+		}
+	}
+
+	protected void scalePlayerRed() {
+		if (_playerRed == null) {
+			Bitmap scaledBitmap = Bitmap.createBitmap(
+					_playerRedRaw.getBitmap(), 0, 0, _playerRedRaw.getBitmap()
+							.getWidth(), _playerRedRaw.getBitmap().getHeight(),
+					_matrix, true);
+			_playerRed = new BitmapDrawable(scaledBitmap);
+		}
+	}
+
+	protected void printTerrain(Canvas canvas) {
+		int terrainX = (this.getWidth() - _terrain.getBitmap().getWidth()) / 2;
+		canvas.drawBitmap(_terrain.getBitmap(), terrainX, 0, null);
+	}
+
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 
+		setScaleMatrix();
+		scaleTerrain();
+		scalePlayerBleu();
+		scalePlayerRed();
+
 		// =================================================================
 		// Terrain
-		// =================================================================
 		printTerrain(canvas);
 
 		// =================================================================
@@ -159,18 +221,6 @@ public class QuizzView extends View {
 
 	}
 
-	protected void printTerrain(Canvas canvas) {
-		int screenW = this.getWidth();
-		int screenH = this.getHeight();
-		BitmapDrawable terrain = (BitmapDrawable) _context.getResources()
-				.getDrawable(R.drawable.terrain);
-		if (_terrain == null) {
-			_terrain = scaleImage(terrain, screenW, screenH);
-		}
-		int terrainX = (screenW - _terrain.getBitmap().getWidth()) / 2;
-		canvas.drawBitmap(_terrain.getBitmap(), terrainX, 0, null);
-	}
-
 	protected void printPlayerTeam1(Canvas canvas, float aXPercentPosition,
 			float aYPercentPosition, String aName) {
 		int screenW = this.getWidth();
@@ -178,10 +228,12 @@ public class QuizzView extends View {
 		int terainH = _terrain.getBitmap().getHeight();
 		int lateralMarge = (screenW - terainW) / 2;
 
-		float x = terainW * aXPercentPosition - _playerW / 2 + lateralMarge;
+		float x = terainW * aXPercentPosition
+				- _playerBleu.getBitmap().getWidth() / 2 + lateralMarge;
 		float y = (terainH / 2) * aYPercentPosition + MARGE;
 		canvas.drawBitmap(_playerBleu.getBitmap(), x, y, null);
-		canvas.drawText(aName, x, y + _playerH + 20, _paint);
+		canvas.drawText(aName, x, y + _playerBleu.getBitmap().getHeight() + 20,
+				_paint);
 	}
 
 	protected void printPlayerTeam2(Canvas canvas, float aXPercentPosition,
@@ -191,11 +243,13 @@ public class QuizzView extends View {
 		int terainH = _terrain.getBitmap().getHeight();
 		int lateralMarge = (screenW - terainW) / 2;
 
-		float x = terainW * aXPercentPosition - _playerW / 2 + lateralMarge;
-		float y = terainH - ((terainH / 2) * aYPercentPosition) - _playerH
-				- MARGE;
+		float x = terainW * aXPercentPosition
+				- _playerBleu.getBitmap().getWidth() / 2 + lateralMarge;
+		float y = terainH - ((terainH / 2) * aYPercentPosition)
+				- _playerBleu.getBitmap().getHeight() - MARGE;
 		canvas.drawBitmap(_playerRed.getBitmap(), x, y, null);
-		canvas.drawText(aName, x, y + _playerH + 20, _paint);
+		canvas.drawText(aName, x, y + _playerBleu.getBitmap().getHeight() + 20,
+				_paint);
 	}
 
 	@Override
@@ -210,11 +264,11 @@ public class QuizzView extends View {
 				&& quizz.getEquipeDomicile().getJoueurs() != null) {
 			List<Joueur> joueurs = quizz.getEquipeDomicile().getJoueurs();
 			for (Joueur j : joueurs) {
-				float minX = terainW * j.getPositionXPercent() - _playerW / 2
-						+ lateralMarge;
-				float maxX = minX + _playerW;
+				float minX = terainW * j.getPositionXPercent()
+						- _playerBleu.getBitmap().getWidth() / 2 + lateralMarge;
+				float maxX = minX + _playerBleu.getBitmap().getWidth();
 				float minY = (terainH / 2) * j.getPositionYPercent() + MARGE;
-				float maxY = minY + _playerH;
+				float maxY = minY + _playerBleu.getBitmap().getHeight();
 
 				if (event.getX() >= minX && event.getX() <= maxX
 						&& event.getY() >= minY && event.getY() <= maxY) {

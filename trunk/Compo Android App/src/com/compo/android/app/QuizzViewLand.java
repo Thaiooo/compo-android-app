@@ -11,18 +11,8 @@ public class QuizzViewLand extends QuizzView {
 
 	public QuizzViewLand(Context context, AttributeSet attrs) {
 		super(context, attrs);
-	}
-
-	protected void printTerrain(Canvas canvas) {
-		int screenW = this.getWidth();
-		int screenH = this.getHeight();
-		BitmapDrawable terrain = (BitmapDrawable) _context.getResources()
-				.getDrawable(R.drawable.terrain_land);
-		if (_terrain == null) {
-			_terrain = scaleImage(terrain, screenW, screenH);
-		}
-		int terrainX = (screenW - _terrain.getBitmap().getWidth()) / 2;
-		canvas.drawBitmap(_terrain.getBitmap(), terrainX, 0, null);
+		_terrainRaw = (BitmapDrawable) _context.getResources().getDrawable(
+				R.drawable.terrain_land);
 	}
 
 	protected void printPlayerTeam1(Canvas canvas, float aXPercentPosition,
@@ -34,9 +24,11 @@ public class QuizzViewLand extends QuizzView {
 
 		float xPlayer = (terrainW / 2) * aYPercentPosition + lateralMarge
 				+ MARGE;
-		float yPlayer = terrainH * aXPercentPosition - _playerH / 2;
+		float yPlayer = terrainH * aXPercentPosition
+				- _playerBleu.getBitmap().getHeight() / 2;
 		canvas.drawBitmap(_playerBleu.getBitmap(), xPlayer, yPlayer, null);
-		canvas.drawText(aName, xPlayer, yPlayer + _playerH + 20, _paint);
+		canvas.drawText(aName, xPlayer, yPlayer
+				+ _playerBleu.getBitmap().getHeight() + 20, _paint);
 
 	}
 
@@ -48,10 +40,12 @@ public class QuizzViewLand extends QuizzView {
 		int lateralMarge = (screenW - terrainW) / 2;
 
 		float xPlayer = terrainW - (terrainW / 2) * aYPercentPosition
-				+ lateralMarge - _playerW - MARGE;
-		float yPlayer = terrainH * aXPercentPosition - _playerH / 2;
+				+ lateralMarge - _playerBleu.getBitmap().getWidth() - MARGE;
+		float yPlayer = terrainH * aXPercentPosition
+				- _playerBleu.getBitmap().getHeight() / 2;
 		canvas.drawBitmap(_playerRed.getBitmap(), xPlayer, yPlayer, null);
-		canvas.drawText(aName, xPlayer, yPlayer + _playerH + 20, _paint);
+		canvas.drawText(aName, xPlayer, yPlayer
+				+ _playerBleu.getBitmap().getHeight() + 20, _paint);
 
 	}
 }
