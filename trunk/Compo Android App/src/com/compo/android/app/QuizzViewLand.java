@@ -2,6 +2,7 @@ package com.compo.android.app;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 
@@ -27,6 +28,7 @@ public class QuizzViewLand extends QuizzView {
 		float yPlayer = terrainH * aXPercentPosition
 				- _playerBleu.getBitmap().getHeight() / 2;
 		canvas.drawBitmap(_playerBleu.getBitmap(), xPlayer, yPlayer, null);
+		_paint.setColor(Color.BLACK);
 		canvas.drawText(aName, xPlayer, yPlayer
 				+ _playerBleu.getBitmap().getHeight() + 20, _paint);
 
@@ -44,6 +46,7 @@ public class QuizzViewLand extends QuizzView {
 		float yPlayer = terrainH * aXPercentPosition
 				- _playerBleu.getBitmap().getHeight() / 2;
 		canvas.drawBitmap(_playerRed.getBitmap(), xPlayer, yPlayer, null);
+		_paint.setColor(Color.BLACK);
 		canvas.drawText(aName, xPlayer, yPlayer
 				+ _playerBleu.getBitmap().getHeight() + 20, _paint);
 
