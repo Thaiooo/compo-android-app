@@ -51,6 +51,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.compo.android.app.MainActivity" />
         </activity>
+         <activity
+            android:name=".ResponseActivity"
+            android:label="@string/activity_quizz" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.compo.android.app.ResponseActivity" />
+        </activity>
     </application>
 
 </manifest>
