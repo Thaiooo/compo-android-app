@@ -10,8 +10,8 @@ public class Quizz implements Serializable {
 	private boolean success;
 	private String name;
 	private String description;
-	private Equipe equipeDomicile;
-	private Equipe equipeExterieur;
+	private Team equipeDomicile;
+	private Team equipeExterieur;
 	private int scoreEquipeDomicile;
 	private int scoreEquipeExterieur;
 
@@ -31,19 +31,19 @@ public class Quizz implements Serializable {
 		this.scoreEquipeExterieur = scoreEquipeExterieur;
 	}
 
-	public Equipe getEquipeDomicile() {
+	public Team getEquipeDomicile() {
 		return equipeDomicile;
 	}
 
-	public void setEquipeDomicile(Equipe equipeDomicile) {
+	public void setEquipeDomicile(Team equipeDomicile) {
 		this.equipeDomicile = equipeDomicile;
 	}
 
-	public Equipe getEquipeExterieur() {
+	public Team getEquipeExterieur() {
 		return equipeExterieur;
 	}
 
-	public void setEquipeExterieur(Equipe equipeExterieur) {
+	public void setEquipeExterieur(Team equipeExterieur) {
 		this.equipeExterieur = equipeExterieur;
 	}
 
