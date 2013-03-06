@@ -3,16 +3,17 @@ package com.compo.android.app;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.compo.android.app.model.Quizz;
 
 public class SelectQuizzAdapter extends BaseAdapter {
+	private static Typeface font;
 	private static LayoutInflater inflater = null;
 	private List<Quizz> quizzList;
 
@@ -20,6 +21,10 @@ public class SelectQuizzAdapter extends BaseAdapter {
 		inflater = (LayoutInflater) c
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		quizzList = aQuizzList;
+		
+		if (font == null) {
+			font = Typeface.createFromAsset(c.getAssets(), "MyLuckyPenny.ttf");
+		}
 	}
 
 	public int getCount() {
@@ -43,6 +48,7 @@ public class SelectQuizzAdapter extends BaseAdapter {
 		Quizz quizz = quizzList.get(position);
 
 		TextView title = (TextView) vi.findViewById(R.id.quizz_name);
+		title.setTypeface(font);
 		title.setText(quizz.getName());
 //		ImageView image = (ImageView) vi.findViewById(R.id.quizz_image);
 //		if (quizz.isSuccess()) {
