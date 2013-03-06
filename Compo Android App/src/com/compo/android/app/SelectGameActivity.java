@@ -10,16 +10,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.Toast;
 
-import com.compo.android.app.model.Team;
 import com.compo.android.app.model.GamePack;
 import com.compo.android.app.model.Player;
 import com.compo.android.app.model.Quizz;
+import com.compo.android.app.model.Team;
 
 public class SelectGameActivity extends Activity {
 
