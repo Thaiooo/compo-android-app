@@ -13,7 +13,7 @@ public class QuizzViewLand extends QuizzView {
 	public QuizzViewLand(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		_terrainRaw = (BitmapDrawable) _context.getResources().getDrawable(
-				R.drawable.terrain_land);
+				R.drawable.football_field_land);
 	}
 
 	protected void printPlayerTeam1(Canvas canvas, float aXPercentPosition,
