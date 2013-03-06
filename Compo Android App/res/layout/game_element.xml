@@ -11,6 +11,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="80dp"
         android:textIsSelectable="false"
-        android:textSize="24sp" />
+        android:textSize="24sp" 
+        android:textColor="@color/black"/>
 
 </RelativeLayout>
