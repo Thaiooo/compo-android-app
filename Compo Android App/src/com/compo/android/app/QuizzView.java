@@ -10,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -22,6 +23,7 @@ import com.compo.android.app.model.Quizz;
 public class QuizzView extends View {
 
 	protected static final int MARGE = 80;
+	private static Typeface font;
 
 	protected Context _context;
 	protected BitmapDrawable _terrainRaw;
@@ -38,6 +40,9 @@ public class QuizzView extends View {
 		super(context, attrs);
 		_context = context;
 
+		font = Typeface.createFromAsset(_context.getAssets(),
+				"MyLuckyPenny.ttf");
+
 		_playerBleuRaw = (BitmapDrawable) _context.getResources().getDrawable(
 				R.drawable.player_bleu);
 		_playerRedRaw = (BitmapDrawable) _context.getResources().getDrawable(
@@ -49,6 +54,7 @@ public class QuizzView extends View {
 				.getDisplayMetrics().density;
 		_paint = new Paint();
 		_paint.setTextSize(12.0f * densityMultiplier);
+		_paint.setTypeface(font);
 
 		Intent intent = ((Activity) context).getIntent();
 		quizz = (Quizz) intent
