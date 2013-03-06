@@ -4,16 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Equipe implements Serializable {
+public class Team implements Serializable {
 
 	/**
 	 */
 	private static final long serialVersionUID = 1L;
 
 	private String name;
-	private List<Joueur> joueurs = new ArrayList<Joueur>();
+	private List<Player> joueurs = new ArrayList<Player>();
 
-	public Equipe(String aName) {
+	public Team(String aName) {
 		name = aName;
 	}
 
@@ -25,11 +25,11 @@ public class Equipe implements Serializable {
 		this.name = name;
 	}
 
-	public List<Joueur> getJoueurs() {
+	public List<Player> getJoueurs() {
 		return joueurs;
 	}
 
-	public void setJoueurs(List<Joueur> joueurs) {
+	public void setJoueurs(List<Player> joueurs) {
 		this.joueurs = joueurs;
 	}
 

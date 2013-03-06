@@ -2,7 +2,7 @@ package com.compo.android.app.model;
 
 import java.io.Serializable;
 
-public class Joueur implements Serializable {
+public class Player implements Serializable {
 	/**
 	 */
 	private static final long serialVersionUID = 1L;
@@ -12,7 +12,7 @@ public class Joueur implements Serializable {
 	private float positionXPercent;
 	private float positionYPercent;
 
-	public Joueur(String aName, int aNumero, float aPositionXPercent,
+	public Player(String aName, int aNumero, float aPositionXPercent,
 			float aPositionYPercent) {
 		name = aName;
 		numero = aNumero;
