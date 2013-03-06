@@ -3,12 +3,9 @@ package com.compo.android.app;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -30,9 +27,6 @@ public class SelectGameActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_select_game);
-
-		ActionBar actionBar = getActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		gamePacks = loadGamePacks();
 
@@ -146,25 +140,6 @@ public class SelectGameActivity extends Activity {
 			gamePacks.add(pack);
 		}
 		return gamePacks;
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		return false;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			// app icon in action bar clicked; go home
-			Intent intent = new Intent(this, MainActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(intent);
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
 	}
 
 }
