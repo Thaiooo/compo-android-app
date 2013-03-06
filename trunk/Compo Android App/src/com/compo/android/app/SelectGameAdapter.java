@@ -3,6 +3,7 @@ package com.compo.android.app;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import com.compo.android.app.model.GamePack;
 
 public class SelectGameAdapter extends BaseAdapter {
+	private static Typeface font;
+
 	private static LayoutInflater inflater = null;
 	private List<GamePack> gamesPack;
 
@@ -19,6 +22,10 @@ public class SelectGameAdapter extends BaseAdapter {
 		inflater = (LayoutInflater) c
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		gamesPack = aGamesPack;
+
+		if (font == null) {
+			font = Typeface.createFromAsset(c.getAssets(), "MyLuckyPenny.ttf");
+		}
 	}
 
 	public int getCount() {
@@ -42,6 +49,7 @@ public class SelectGameAdapter extends BaseAdapter {
 		GamePack pack = gamesPack.get(position);
 
 		TextView title = (TextView) vi.findViewById(R.id.game_name);
+		title.setTypeface(font);
 		title.setText(pack.getName());
 		// ImageView image = (ImageView) vi.findViewById(R.id.game_image);
 		// if (!pack.isLock()) {

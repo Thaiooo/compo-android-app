@@ -10,6 +10,8 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
+	private static Typeface font;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -17,8 +19,9 @@ public class MainActivity extends Activity {
 		Button buttonPlay = (Button) findViewById(R.id.button_play);
 		Button buttonSetting = (Button) findViewById(R.id.button_setting);
 
-		Typeface font = Typeface.createFromAsset(getAssets(),
-				"MyLuckyPenny.ttf");
+		if (font == null) {
+			font = Typeface.createFromAsset(getAssets(), "MyLuckyPenny.ttf");
+		}
 		buttonPlay.setTypeface(font);
 		buttonSetting.setTypeface(font);
 	}
