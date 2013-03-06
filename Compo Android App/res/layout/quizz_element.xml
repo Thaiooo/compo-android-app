@@ -1,23 +1,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/theme1_background_quizz" >
 
+    <!--
     <ImageView
         android:id="@+id/quizz_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:src="@drawable/quizz" />
+        android:src="@drawable/quizz" />    -->
 
     <TextView
         android:id="@+id/quizz_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/quizz_image"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="80dp"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textIsSelectable="false" />
 
 </RelativeLayout>
