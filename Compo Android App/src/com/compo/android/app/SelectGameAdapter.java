@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.compo.android.app.model.GamePack;
@@ -44,13 +43,10 @@ public class SelectGameAdapter extends BaseAdapter {
 
 		TextView title = (TextView) vi.findViewById(R.id.game_name);
 		title.setText(pack.getName());
-		ImageView image = (ImageView) vi.findViewById(R.id.game_image);
-		if (pack.isLock()) {
-			image.setImageResource(R.drawable.game_pack_lock);
-		} else {
-			image.setImageResource(R.drawable.game_pack);
-		}
-
+		// ImageView image = (ImageView) vi.findViewById(R.id.game_image);
+		// if (!pack.isLock()) {
+		// image.setVisibility(View.INVISIBLE);
+		// }
 		return vi;
 	}
 

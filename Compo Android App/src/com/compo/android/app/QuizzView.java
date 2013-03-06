@@ -21,7 +21,7 @@ import com.compo.android.app.model.Quizz;
 
 public class QuizzView extends View {
 
-	protected static final int MARGE = 20;
+	protected static final int MARGE = 80;
 
 	protected Context _context;
 	protected BitmapDrawable _terrainRaw;
@@ -141,9 +141,9 @@ public class QuizzView extends View {
 	}
 
 	protected void printTerrain(Canvas canvas) {
-		_paint.setStyle(Paint.Style.FILL);
-		_paint.setColor(Color.rgb(24, 158, 73));
-		canvas.drawRect(0, 0, this.getWidth(), this.getHeight(), _paint);
+		// _paint.setStyle(Paint.Style.FILL);
+		// _paint.setColor(Color.rgb(24, 158, 73));
+		// canvas.drawRect(0, 0, this.getWidth(), this.getHeight(), _paint);
 
 		int terrainX = (this.getWidth() - _terrain.getBitmap().getWidth()) / 2;
 		canvas.drawBitmap(_terrain.getBitmap(), terrainX, 0, null);
