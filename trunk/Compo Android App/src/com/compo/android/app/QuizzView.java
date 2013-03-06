@@ -16,7 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.compo.android.app.model.Joueur;
+import com.compo.android.app.model.Player;
 import com.compo.android.app.model.Quizz;
 
 public class QuizzView extends View {
@@ -43,7 +43,7 @@ public class QuizzView extends View {
 		_playerRedRaw = (BitmapDrawable) _context.getResources().getDrawable(
 				R.drawable.player_red);
 		_terrainRaw = (BitmapDrawable) _context.getResources().getDrawable(
-				R.drawable.terrain);
+				R.drawable.football_field);
 
 		float densityMultiplier = getContext().getResources()
 				.getDisplayMetrics().density;
@@ -169,8 +169,8 @@ public class QuizzView extends View {
 		// =================================================================
 		if (quizz.getEquipeDomicile() != null
 				&& quizz.getEquipeDomicile().getJoueurs() != null) {
-			List<Joueur> joueurs = quizz.getEquipeDomicile().getJoueurs();
-			for (Joueur j : joueurs) {
+			List<Player> joueurs = quizz.getEquipeDomicile().getJoueurs();
+			for (Player j : joueurs) {
 				printPlayerTeam1(canvas, j.getPositionXPercent(),
 						j.getPositionYPercent(), j.getName());
 			}
@@ -181,8 +181,8 @@ public class QuizzView extends View {
 		// =================================================================
 		if (quizz.getEquipeExterieur() != null
 				&& quizz.getEquipeExterieur().getJoueurs() != null) {
-			List<Joueur> joueurs = quizz.getEquipeExterieur().getJoueurs();
-			for (Joueur j : joueurs) {
+			List<Player> joueurs = quizz.getEquipeExterieur().getJoueurs();
+			for (Player j : joueurs) {
 				printPlayerTeam2(canvas, j.getPositionXPercent(),
 						j.getPositionYPercent(), j.getName());
 			}
@@ -232,8 +232,8 @@ public class QuizzView extends View {
 
 		if (quizz.getEquipeDomicile() != null
 				&& quizz.getEquipeDomicile().getJoueurs() != null) {
-			List<Joueur> joueurs = quizz.getEquipeDomicile().getJoueurs();
-			for (Joueur j : joueurs) {
+			List<Player> joueurs = quizz.getEquipeDomicile().getJoueurs();
+			for (Player j : joueurs) {
 				float minX = terainW * j.getPositionXPercent()
 						- _playerBleu.getBitmap().getWidth() / 2 + lateralMarge;
 				float maxX = minX + _playerBleu.getBitmap().getWidth();

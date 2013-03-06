@@ -46,7 +46,7 @@ public class SelectQuizzAdapter extends BaseAdapter {
 		title.setText(quizz.getName());
 		ImageView image = (ImageView) vi.findViewById(R.id.quizz_image);
 		if (quizz.isSuccess()) {
-			image.setImageResource(R.drawable.quizz_unlock);
+			image.setImageResource(R.drawable.theme1_background_pack);
 		} else {
 			image.setImageResource(R.drawable.quizz);
 		}

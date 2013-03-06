@@ -16,9 +16,9 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
-import com.compo.android.app.model.Equipe;
+import com.compo.android.app.model.Team;
 import com.compo.android.app.model.GamePack;
-import com.compo.android.app.model.Joueur;
+import com.compo.android.app.model.Player;
 import com.compo.android.app.model.Quizz;
 
 public class SelectGameActivity extends Activity {
@@ -71,34 +71,34 @@ public class SelectGameActivity extends Activity {
 		pack.getQuizzList().add(quizz);
 		gamePacks.add(pack);
 
-		Equipe dom = new Equipe("PSG");
-		Joueur j = new Joueur("SIRIGU", 30, 0.5f, 0.0f);
+		Team dom = new Team("PSG");
+		Player j = new Player("SIRIGU", 30, 0.5f, 0.0f);
 		dom.getJoueurs().add(j);
 
-		j = new Joueur("JALLET", 26, 0.1f, 0.25f);
+		j = new Player("JALLET", 26, 0.1f, 0.25f);
 		dom.getJoueurs().add(j);
-		j = new Joueur("ALEX", 13, 0.36f, 0.25f);
+		j = new Player("ALEX", 13, 0.36f, 0.25f);
 		dom.getJoueurs().add(j);
-		j = new Joueur("ARMAND", 22, 0.64f, 0.25f);
+		j = new Player("ARMAND", 22, 0.64f, 0.25f);
 		dom.getJoueurs().add(j);
-		j = new Joueur("MAXWELL", 17, 0.9f, 0.25f);
-		dom.getJoueurs().add(j);
-
-		j = new Joueur("LUCAS", 29, 0.1f, 0.5f);
-		dom.getJoueurs().add(j);
-		j = new Joueur("VERRATI", 24, 0.36f, 0.5f);
-		dom.getJoueurs().add(j);
-		j = new Joueur("MATUIDI", 14, 0.64f, 0.5f);
-		dom.getJoueurs().add(j);
-		j = new Joueur("PASTORE", 27, 0.9f, 0.5f);
+		j = new Player("MAXWELL", 17, 0.9f, 0.25f);
 		dom.getJoueurs().add(j);
 
-		j = new Joueur("LAVEZZI", 11, 0.33f, 0.75f);
+		j = new Player("LUCAS", 29, 0.1f, 0.5f);
 		dom.getJoueurs().add(j);
-		j = new Joueur("IBRAHIMOVIC", 10, 0.66f, 0.75f);
+		j = new Player("VERRATI", 24, 0.36f, 0.5f);
+		dom.getJoueurs().add(j);
+		j = new Player("MATUIDI", 14, 0.64f, 0.5f);
+		dom.getJoueurs().add(j);
+		j = new Player("PASTORE", 27, 0.9f, 0.5f);
 		dom.getJoueurs().add(j);
 
-		Equipe ext = new Equipe("OM");
+		j = new Player("LAVEZZI", 11, 0.33f, 0.75f);
+		dom.getJoueurs().add(j);
+		j = new Player("IBRAHIMOVIC", 10, 0.66f, 0.75f);
+		dom.getJoueurs().add(j);
+
+		Team ext = new Team("OM");
 		quizz.setEquipeDomicile(dom);
 		quizz.setEquipeExterieur(ext);
 
