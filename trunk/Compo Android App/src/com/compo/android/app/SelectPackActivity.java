@@ -17,7 +17,7 @@ import com.compo.android.app.model.Player;
 import com.compo.android.app.model.Quizz;
 import com.compo.android.app.model.Team;
 
-public class SelectGameActivity extends Activity {
+public class SelectPackActivity extends Activity {
 
 	public final static String EXTRA_MESSAGE = "com.compo.android.app.SelectGameActivity.MESSAGE";
 
@@ -26,12 +26,12 @@ public class SelectGameActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_select_game);
+		setContentView(R.layout.activity_select_pack);
 
 		gamePacks = loadGamePacks();
 
 		GridView gridview = (GridView) findViewById(R.id.gridview);
-		gridview.setAdapter(new SelectGameAdapter(this, gamePacks));
+		gridview.setAdapter(new SelectPackAdapter(this, gamePacks));
 
 		gridview.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v,
@@ -39,11 +39,11 @@ public class SelectGameActivity extends Activity {
 
 				Pack selectPack = gamePacks.get(position);
 				if (selectPack.isLock()) {
-					Toast.makeText(SelectGameActivity.this,
+					Toast.makeText(SelectPackActivity.this,
 							"Ce pack est bloqué", Toast.LENGTH_SHORT).show();
 					return;
 				}
-				Intent intent = new Intent(SelectGameActivity.this,
+				Intent intent = new Intent(SelectPackActivity.this,
 						SelectQuizzActivity.class);
 				intent.putExtra(EXTRA_MESSAGE, selectPack);
 				startActivity(intent);

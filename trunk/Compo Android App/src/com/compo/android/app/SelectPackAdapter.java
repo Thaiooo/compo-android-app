@@ -12,13 +12,13 @@ import android.widget.TextView;
 
 import com.compo.android.app.model.Pack;
 
-public class SelectGameAdapter extends BaseAdapter {
+public class SelectPackAdapter extends BaseAdapter {
 	private static Typeface font;
 
 	private static LayoutInflater inflater = null;
 	private List<Pack> gamesPack;
 
-	public SelectGameAdapter(Context c, List<Pack> aGamesPack) {
+	public SelectPackAdapter(Context c, List<Pack> aGamesPack) {
 		inflater = (LayoutInflater) c
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		gamesPack = aGamesPack;

@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void play(View view) {
-		Intent intent = new Intent(MainActivity.this, SelectGameActivity.class);
+		Intent intent = new Intent(MainActivity.this, SelectPackActivity.class);
 		startActivity(intent);
 
 	}
