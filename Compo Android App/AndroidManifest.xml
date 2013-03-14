@@ -24,8 +24,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SelectGameActivity"
-            android:label="@string/activity_select_game" >
+            android:name=".SelectPackActivity"
+            android:label="@string/activity_select_pack" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.compo.android.app.MainActivity" />

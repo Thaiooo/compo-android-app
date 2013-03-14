@@ -6,7 +6,7 @@
     <string name="button_play">Jouer</string>
     <string name="button_setting">Parmètres</string>
     <string name="activity_setting">Parmètres</string>
-    <string name="activity_select_game">Selection Pack</string>
+    <string name="activity_select_pack">Selection Pack</string>
     <string name="activity_quizz">Composition</string>
     <string name="activity_select_quizz">Selection Quizz</string>
 
