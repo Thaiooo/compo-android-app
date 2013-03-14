@@ -32,8 +32,11 @@ public class QuizzView extends View {
 	protected BitmapDrawable _playerBleu;
 	protected BitmapDrawable _playerRedRaw;
 	protected BitmapDrawable _playerRed;
+	protected BitmapDrawable _greenMappingRaw;
+	protected BitmapDrawable _greenMapping;
 	protected Paint _paint;
 	protected Matrix _matrix;
+	protected Matrix _matrixGreenMapping;
 	protected Quizz quizz;
 
 	public QuizzView(Context context, AttributeSet attrs) {
@@ -49,6 +52,8 @@ public class QuizzView extends View {
 				R.drawable.player_red);
 		_terrainRaw = (BitmapDrawable) _context.getResources().getDrawable(
 				R.drawable.football_field);
+		_greenMappingRaw = (BitmapDrawable) _context.getResources()
+				.getDrawable(R.drawable.green_mapping);
 
 		float densityMultiplier = getContext().getResources()
 				.getDisplayMetrics().density;
@@ -61,6 +66,7 @@ public class QuizzView extends View {
 				.getSerializableExtra(QuizzLevelFragment.EXTRA_MESSAGE_QUIZZ);
 
 		_matrix = new Matrix();
+		_matrixGreenMapping = new Matrix();
 
 	}
 
@@ -116,6 +122,22 @@ public class QuizzView extends View {
 		}
 
 		_matrix.postScale(scale, scale);
+
+		// -----------------
+
+		int greenMappingW = _greenMappingRaw.getBitmap().getWidth();
+		int greenMappingH = _greenMappingRaw.getBitmap().getHeight();
+
+		scaleX = 1;
+		if (greenMappingW > screenW) {
+			scaleX = (float) screenW / (float) greenMappingW;
+		}
+		scaleY = 1;
+		if (greenMappingH > screenH) {
+			scaleY = (float) screenH / (float) greenMappingH;
+		}
+
+		_matrixGreenMapping.postScale(scaleX, scaleY);
 	}
 
 	protected void scaleTerrain() {
@@ -124,6 +146,17 @@ public class QuizzView extends View {
 					0, 0, _terrainRaw.getBitmap().getWidth(), _terrainRaw
 							.getBitmap().getHeight(), _matrix, true);
 			_terrain = new BitmapDrawable(scaledBitmap);
+		}
+	}
+
+	protected void scaleGreenMapping() {
+		if (_greenMapping == null) {
+			Bitmap scaledBitmap = Bitmap
+					.createBitmap(_greenMappingRaw.getBitmap(), 0, 0,
+							_greenMappingRaw.getBitmap().getWidth(),
+							_greenMappingRaw.getBitmap().getHeight(),
+							_matrixGreenMapping, true);
+			_greenMapping = new BitmapDrawable(scaledBitmap);
 		}
 	}
 
@@ -151,6 +184,8 @@ public class QuizzView extends View {
 		// _paint.setColor(Color.rgb(24, 158, 73));
 		// canvas.drawRect(0, 0, this.getWidth(), this.getHeight(), _paint);
 
+		canvas.drawBitmap(_greenMapping.getBitmap(), 0, 0, null);
+
 		int terrainX = (this.getWidth() - _terrain.getBitmap().getWidth()) / 2;
 		canvas.drawBitmap(_terrain.getBitmap(), terrainX, 0, null);
 
@@ -162,6 +197,7 @@ public class QuizzView extends View {
 
 		setScaleMatrix();
 		scaleTerrain();
+		scaleGreenMapping();
 		scalePlayerBleu();
 		scalePlayerRed();
 
@@ -173,6 +209,7 @@ public class QuizzView extends View {
 		// =================================================================
 		// Equipe Domicile
 		// =================================================================
+		/*
 		if (quizz.getEquipeDomicile() != null
 				&& quizz.getEquipeDomicile().getJoueurs() != null) {
 			List<Player> joueurs = quizz.getEquipeDomicile().getJoueurs();
@@ -181,10 +218,12 @@ public class QuizzView extends View {
 						j.getPositionYPercent(), j.getName());
 			}
 		}
+		*/
 
 		// =================================================================
 		// Equipe ext
 		// =================================================================
+		/*
 		if (quizz.getEquipeExterieur() != null
 				&& quizz.getEquipeExterieur().getJoueurs() != null) {
 			List<Player> joueurs = quizz.getEquipeExterieur().getJoueurs();
@@ -193,6 +232,7 @@ public class QuizzView extends View {
 						j.getPositionYPercent(), j.getName());
 			}
 		}
+		*/
 	}
 
 	protected void printPlayerTeam1(Canvas canvas, float aXPercentPosition,
@@ -236,6 +276,7 @@ public class QuizzView extends View {
 		int terainH = _terrain.getBitmap().getHeight();
 		int lateralMarge = (screenW - terainW) / 2;
 
+		/*
 		if (quizz.getEquipeDomicile() != null
 				&& quizz.getEquipeDomicile().getJoueurs() != null) {
 			List<Player> joueurs = quizz.getEquipeDomicile().getJoueurs();
@@ -258,6 +299,7 @@ public class QuizzView extends View {
 				}
 			}
 		}
+		*/
 
 		return b;
 	}

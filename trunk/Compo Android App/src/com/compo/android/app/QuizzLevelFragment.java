@@ -12,7 +12,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
-import com.compo.android.app.model.GamePack;
+import com.compo.android.app.model.Pack;
 import com.compo.android.app.model.Quizz;
 
 public class QuizzLevelFragment extends Fragment {
@@ -20,7 +20,7 @@ public class QuizzLevelFragment extends Fragment {
 	public final static String EXTRA_MESSAGE_QUIZZ = "com.compo.android.app.QuizzLevelFragment.MESSAGE.QUIZZ";
 	public final static String EXTRA_MESSAGE_GAME = "com.compo.android.app.QuizzLevelFragment.MESSAGE.GAME";
 	private List<Quizz> _quizzList;
-	private GamePack _selectPack;
+	private Pack _selectPack;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,7 +28,7 @@ public class QuizzLevelFragment extends Fragment {
 		final View rootView = inflater.inflate(R.layout.fragment_quizz_menu,
 				container, false);
 
-		_selectPack = (GamePack) getActivity().getIntent()
+		_selectPack = (Pack) getActivity().getIntent()
 				.getSerializableExtra(SelectGameActivity.EXTRA_MESSAGE);
 		_quizzList = _selectPack.getQuizzList();
 
