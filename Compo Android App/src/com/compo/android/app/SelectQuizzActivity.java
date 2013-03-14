@@ -21,7 +21,7 @@ public class SelectQuizzActivity extends FragmentActivity {
 
 		Intent intent = getIntent();
 		Pack selectPack = (Pack) intent
-				.getSerializableExtra(SelectGameActivity.EXTRA_MESSAGE);
+				.getSerializableExtra(SelectPackActivity.EXTRA_MESSAGE);
 
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(_collectionQuizzLevelPagerAdapter);

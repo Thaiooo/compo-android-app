@@ -29,7 +29,7 @@ public class QuizzLevelFragment extends Fragment {
 				container, false);
 
 		_selectPack = (Pack) getActivity().getIntent()
-				.getSerializableExtra(SelectGameActivity.EXTRA_MESSAGE);
+				.getSerializableExtra(SelectPackActivity.EXTRA_MESSAGE);
 		_quizzList = _selectPack.getQuizzList();
 
 		GridView gridview = (GridView) rootView.findViewById(R.id.quizzGrid);
