@@ -4,14 +4,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GamePack implements Serializable {
+public class Pack implements Serializable {
 	/**
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private boolean lock;
+	private long id;
 	private String name;
 	private String description;
+	private boolean lock;
+	private int scoreLimit;
+	private int creditLimit;
 	private List<Quizz> quizzList = new ArrayList<Quizz>();
 
 	public boolean isLock() {
@@ -46,10 +49,28 @@ public class GamePack implements Serializable {
 		this.quizzList = quizzList;
 	}
 
-	@Override
-	public String toString() {
-		return "GamePack [lock=" + lock + ", name=" + name + ", description="
-				+ description + "]";
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public int getScoreLimit() {
+		return scoreLimit;
+	}
+
+	public void setScoreLimit(int scoreLimit) {
+		this.scoreLimit = scoreLimit;
+	}
+
+	public int getCreditLimit() {
+		return creditLimit;
+	}
+
+	public void setCreditLimit(int creditLimit) {
+		this.creditLimit = creditLimit;
 	}
 
 }

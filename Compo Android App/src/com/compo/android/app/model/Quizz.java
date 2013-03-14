@@ -1,58 +1,54 @@
 package com.compo.android.app.model;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Quizz implements Serializable {
 	/**
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private boolean success;
+	private long id;
 	private String name;
-	private String description;
-	private Team equipeDomicile;
-	private Team equipeExterieur;
-	private int scoreEquipeDomicile;
-	private int scoreEquipeExterieur;
+	private Date date;
+	private int scoreHome;
+	private int scoreAway;
+	private Level level;
+	private int point;
+	private List<QuizzPlayer> quizzList = new ArrayList<QuizzPlayer>();
 
-	public int getScoreEquipeDomicile() {
-		return scoreEquipeDomicile;
+	public long getId() {
+		return id;
 	}
 
-	public void setScoreEquipeDomicile(int scoreEquipeDomicile) {
-		this.scoreEquipeDomicile = scoreEquipeDomicile;
+	public void setId(long id) {
+		this.id = id;
 	}
 
-	public int getScoreEquipeExterieur() {
-		return scoreEquipeExterieur;
+	public int getPoint() {
+		return point;
 	}
 
-	public void setScoreEquipeExterieur(int scoreEquipeExterieur) {
-		this.scoreEquipeExterieur = scoreEquipeExterieur;
+	public void setPoint(int point) {
+		this.point = point;
 	}
 
-	public Team getEquipeDomicile() {
-		return equipeDomicile;
+	public Level getLevel() {
+		return level;
 	}
 
-	public void setEquipeDomicile(Team equipeDomicile) {
-		this.equipeDomicile = equipeDomicile;
+	public void setLevel(Level level) {
+		this.level = level;
 	}
 
-	public Team getEquipeExterieur() {
-		return equipeExterieur;
+	public List<QuizzPlayer> getQuizzList() {
+		return quizzList;
 	}
 
-	public void setEquipeExterieur(Team equipeExterieur) {
-		this.equipeExterieur = equipeExterieur;
-	}
-
-	public boolean isSuccess() {
-		return success;
-	}
-
-	public void setSuccess(boolean success) {
-		this.success = success;
+	public void setQuizzList(List<QuizzPlayer> quizzList) {
+		this.quizzList = quizzList;
 	}
 
 	public String getName() {
@@ -63,18 +59,28 @@ public class Quizz implements Serializable {
 		this.name = name;
 	}
 
-	public String getDescription() {
-		return description;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
-	@Override
-	public String toString() {
-		return "Quizz [success=" + success + ", name=" + name
-				+ ", description=" + description + "]";
+	public int getScoreHome() {
+		return scoreHome;
+	}
+
+	public void setScoreHome(int scoreHome) {
+		this.scoreHome = scoreHome;
+	}
+
+	public int getScoreAway() {
+		return scoreAway;
+	}
+
+	public void setScoreAway(int scoreAway) {
+		this.scoreAway = scoreAway;
 	}
 
 }
