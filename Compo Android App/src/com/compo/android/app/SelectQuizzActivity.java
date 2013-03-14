@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
-import com.compo.android.app.model.GamePack;
+import com.compo.android.app.model.Pack;
 
 public class SelectQuizzActivity extends FragmentActivity {
 
@@ -20,7 +20,7 @@ public class SelectQuizzActivity extends FragmentActivity {
 				getSupportFragmentManager());
 
 		Intent intent = getIntent();
-		GamePack selectPack = (GamePack) intent
+		Pack selectPack = (Pack) intent
 				.getSerializableExtra(SelectGameActivity.EXTRA_MESSAGE);
 
 		mViewPager = (ViewPager) findViewById(R.id.pager);

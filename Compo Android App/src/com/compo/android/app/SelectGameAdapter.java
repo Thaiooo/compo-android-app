@@ -10,15 +10,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.compo.android.app.model.GamePack;
+import com.compo.android.app.model.Pack;
 
 public class SelectGameAdapter extends BaseAdapter {
 	private static Typeface font;
 
 	private static LayoutInflater inflater = null;
-	private List<GamePack> gamesPack;
+	private List<Pack> gamesPack;
 
-	public SelectGameAdapter(Context c, List<GamePack> aGamesPack) {
+	public SelectGameAdapter(Context c, List<Pack> aGamesPack) {
 		inflater = (LayoutInflater) c
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		gamesPack = aGamesPack;
@@ -42,11 +42,12 @@ public class SelectGameAdapter extends BaseAdapter {
 
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View vi = convertView;
+		System.out.println("=====>" + convertView);
 		if (convertView == null) {
 			vi = inflater.inflate(R.layout.game_element, null);
 		}
 
-		GamePack pack = gamesPack.get(position);
+		Pack pack = gamesPack.get(position);
 
 		TextView title = (TextView) vi.findViewById(R.id.game_name);
 		title.setTypeface(font);

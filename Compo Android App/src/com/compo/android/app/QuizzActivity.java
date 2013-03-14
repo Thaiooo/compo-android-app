@@ -4,12 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.compo.android.app.model.GamePack;
+import com.compo.android.app.model.Pack;
 import com.compo.android.app.model.Quizz;
 
 public class QuizzActivity extends Activity {
 
-	private GamePack _selectGame;
+	private Pack _selectGame;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class QuizzActivity extends Activity {
 		Quizz selectQuizz = (Quizz) intent
 				.getSerializableExtra(QuizzLevelFragment.EXTRA_MESSAGE_QUIZZ);
 
-		_selectGame = (GamePack) getIntent().getSerializableExtra(
+		_selectGame = (Pack) getIntent().getSerializableExtra(
 				QuizzLevelFragment.EXTRA_MESSAGE_GAME);
 
 		quizzView.setQuizz(selectQuizz);
