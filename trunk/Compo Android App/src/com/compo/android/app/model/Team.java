@@ -1,8 +1,6 @@
 package com.compo.android.app.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Team implements Serializable {
 
@@ -11,11 +9,7 @@ public class Team implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
-	private List<Player> joueurs = new ArrayList<Player>();
-
-	public Team(String aName) {
-		name = aName;
-	}
+	private String code;
 
 	public String getName() {
 		return name;
@@ -25,12 +19,12 @@ public class Team implements Serializable {
 		this.name = name;
 	}
 
-	public List<Player> getJoueurs() {
-		return joueurs;
+	public String getCode() {
+		return code;
 	}
 
-	public void setJoueurs(List<Player> joueurs) {
-		this.joueurs = joueurs;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }
