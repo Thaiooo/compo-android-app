@@ -4,5 +4,7 @@
     <style name="AppTheme" parent="@android:style/Theme.NoTitleBar"></style>
 
     <color name="black">#000000</color>
+    <color name="blue">#0000FF</color>
+    <color name="red">#DC143C</color>
 
 </resources>

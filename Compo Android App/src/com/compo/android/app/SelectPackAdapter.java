@@ -13,50 +13,64 @@ import android.widget.TextView;
 import com.compo.android.app.model.Pack;
 
 public class SelectPackAdapter extends BaseAdapter {
-	private static Typeface font;
+    private static Typeface font;
 
-	private static LayoutInflater inflater = null;
-	private List<Pack> gamesPack;
+    private static LayoutInflater inflater = null;
+    private List<Pack> gamesPack;
 
-	public SelectPackAdapter(Context c, List<Pack> aGamesPack) {
-		inflater = (LayoutInflater) c
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		gamesPack = aGamesPack;
+    public SelectPackAdapter(Context c, List<Pack> aGamesPack) {
+	inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	gamesPack = aGamesPack;
 
-		if (font == null) {
-			font = Typeface.createFromAsset(c.getAssets(), "MyLuckyPenny.ttf");
-		}
+	if (font == null) {
+	    font = Typeface.createFromAsset(c.getAssets(), "MyLuckyPenny.ttf");
+	}
+    }
+
+    public int getCount() {
+	return gamesPack.size();
+    }
+
+    public Object getItem(int position) {
+	return null;
+    }
+
+    public long getItemId(int position) {
+	return 0;
+    }
+
+    public View getView(int position, View convertView, ViewGroup parent) {
+	View vi = convertView;
+	System.out.println("=====>" + convertView);
+	if (convertView == null) {
+	    vi = inflater.inflate(R.layout.pack_element, null);
 	}
 
-	public int getCount() {
-		return gamesPack.size();
+	Pack pack = gamesPack.get(position);
+
+	TextView name = (TextView) vi.findViewById(R.id.pack_name);
+	name.setTypeface(font);
+	name.setText(pack.getName());
+
+	TextView desciption = (TextView) vi.findViewById(R.id.pack_description);
+	desciption.setTypeface(font);
+	desciption.setText(pack.getDescription());
+
+	if (!pack.isLock()) {
+	    TextView score = (TextView) vi.findViewById(R.id.pack_score);
+	    score.setTypeface(font);
+	    score.setText("0/20");
+	} else {
+	    TextView credit = (TextView) vi.findViewById(R.id.pack_credit);
+	    credit.setTypeface(font);
+	    credit.setText(pack.getScoreLimit() + " guessed needed to unlock");
 	}
 
-	public Object getItem(int position) {
-		return null;
-	}
-
-	public long getItemId(int position) {
-		return 0;
-	}
-
-	public View getView(int position, View convertView, ViewGroup parent) {
-		View vi = convertView;
-		System.out.println("=====>" + convertView);
-		if (convertView == null) {
-			vi = inflater.inflate(R.layout.game_element, null);
-		}
-
-		Pack pack = gamesPack.get(position);
-
-		TextView title = (TextView) vi.findViewById(R.id.game_name);
-		title.setTypeface(font);
-		title.setText(pack.getName());
-		// ImageView image = (ImageView) vi.findViewById(R.id.game_image);
-		// if (!pack.isLock()) {
-		// image.setVisibility(View.INVISIBLE);
-		// }
-		return vi;
-	}
+	// ImageView image = (ImageView) vi.findViewById(R.id.game_image);
+	// if (!pack.isLock()) {
+	// image.setVisibility(View.INVISIBLE);
+	// }
+	return vi;
+    }
 
 }

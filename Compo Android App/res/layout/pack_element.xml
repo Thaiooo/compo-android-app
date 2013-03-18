@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/post_it" >
+
+    <TextView
+        android:id="@+id/pack_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:textIsSelectable="false"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/pack_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pack_name"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:textIsSelectable="false"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/pack_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pack_description"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/blue"
+        android:textIsSelectable="false"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/pack_credit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        android:textColor="@color/red"
+        android:textIsSelectable="false"
+        android:textSize="12sp" />
+
+</RelativeLayout>
