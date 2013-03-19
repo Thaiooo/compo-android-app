@@ -35,14 +35,33 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/pack_credit"
+        android:id="@+id/pack_score_cost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="0dp"
         android:textColor="@color/red"
         android:textIsSelectable="false"
         android:textSize="12sp" />
+
+    <ImageView
+        android:id="@+id/image_coins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/coins" />
+
+    <TextView
+        android:id="@+id/pack_credit_cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/image_coins"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-4dp"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/image_coins"
+        android:textColor="@color/red"
+        android:textIsSelectable="false"
+        android:textSize="16sp" />
 
 </RelativeLayout>

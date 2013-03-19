@@ -41,7 +41,6 @@ public class SelectPackAdapter extends BaseAdapter {
 
     public View getView(int position, View convertView, ViewGroup parent) {
 	View vi = convertView;
-	System.out.println("=====>" + convertView);
 	if (convertView == null) {
 	    vi = inflater.inflate(R.layout.pack_element, null);
 	}
@@ -61,9 +60,15 @@ public class SelectPackAdapter extends BaseAdapter {
 	    score.setTypeface(font);
 	    score.setText("0/20");
 	} else {
-	    TextView credit = (TextView) vi.findViewById(R.id.pack_credit);
-	    credit.setTypeface(font);
-	    credit.setText(pack.getScoreLimit() + " guessed needed to unlock");
+	    TextView scoreLimit = (TextView) vi.findViewById(R.id.pack_score_cost);
+	    scoreLimit.setTypeface(font);
+	    scoreLimit.setText(pack.getScoreLimit() + " guessed");
+
+	    TextView creditLimit = (TextView) vi.findViewById(R.id.pack_credit_cost);
+	    if (creditLimit != null) {
+		creditLimit.setTypeface(font);
+		creditLimit.setText(pack.getCreditLimit() + "");
+	    }
 	}
 
 	// ImageView image = (ImageView) vi.findViewById(R.id.game_image);
