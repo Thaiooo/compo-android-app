@@ -64,6 +64,7 @@ public class SelectPackAdapter extends BaseAdapter {
 	    ImageView image = (ImageView) vi.findViewById(R.id.image_coins);
 	    image.setVisibility(View.INVISIBLE);
 	} else {
+	    vi.setBackgroundResource(R.drawable.post_it_red);
 	    TextView scoreLimit = (TextView) vi.findViewById(R.id.pack_score_cost);
 	    scoreLimit.setTypeface(font);
 	    scoreLimit.setText(pack.getScoreLimit() + " pts required");
