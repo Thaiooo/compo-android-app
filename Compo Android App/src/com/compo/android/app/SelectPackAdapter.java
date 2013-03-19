@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.compo.android.app.model.Pack;
@@ -59,10 +60,13 @@ public class SelectPackAdapter extends BaseAdapter {
 	    TextView score = (TextView) vi.findViewById(R.id.pack_score);
 	    score.setTypeface(font);
 	    score.setText("0/20");
+
+	    ImageView image = (ImageView) vi.findViewById(R.id.image_coins);
+	    image.setVisibility(View.INVISIBLE);
 	} else {
 	    TextView scoreLimit = (TextView) vi.findViewById(R.id.pack_score_cost);
 	    scoreLimit.setTypeface(font);
-	    scoreLimit.setText(pack.getScoreLimit() + " guessed");
+	    scoreLimit.setText(pack.getScoreLimit() + " pts required");
 
 	    TextView creditLimit = (TextView) vi.findViewById(R.id.pack_credit_cost);
 	    if (creditLimit != null) {
@@ -71,10 +75,6 @@ public class SelectPackAdapter extends BaseAdapter {
 	    }
 	}
 
-	// ImageView image = (ImageView) vi.findViewById(R.id.game_image);
-	// if (!pack.isLock()) {
-	// image.setVisibility(View.INVISIBLE);
-	// }
 	return vi;
     }
 
