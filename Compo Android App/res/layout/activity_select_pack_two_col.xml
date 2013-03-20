@@ -4,18 +4,52 @@
     android:layout_height="match_parent" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/button_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="Back" />
 
+    <TextView
+        android:id="@+id/user_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button_back"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:text="17 pts"
+        android:textColor="@color/red"
+        android:textIsSelectable="false"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/user_credit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/user_score"
+        android:layout_marginRight="30dp"
+        android:layout_toLeftOf="@+id/user_score"
+        android:text="100"
+        android:textColor="@color/red"
+        android:textIsSelectable="false"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/image_user_coins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/user_credit"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="11dp"
+        android:layout_toLeftOf="@+id/user_credit"
+        android:src="@drawable/coins" />
+
     <GridView
         android:id="@+id/gridview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/button1"
+        android:layout_below="@+id/button_back"
         android:background="@drawable/theme1_background_main"
         android:gravity="center"
         android:horizontalSpacing="0dp"
