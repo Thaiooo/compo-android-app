@@ -1,25 +1,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-    <Button
-        android:id="@+id/button_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="Back" />
+    android:layout_height="match_parent"
+    android:background="@drawable/theme1_background_head" >
 
     <TextView
         android:id="@+id/user_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button_back"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
         android:text="17 pts"
-        android:textColor="@color/red"
+        android:textColor="@color/black"
         android:textIsSelectable="false"
         android:textSize="20sp" />
 
@@ -28,10 +20,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/user_score"
+        android:layout_alignParentRight="true"
         android:layout_marginRight="30dp"
         android:layout_toLeftOf="@+id/user_score"
         android:text="100"
-        android:textColor="@color/red"
+        android:textColor="@color/black"
         android:textIsSelectable="false"
         android:textSize="20sp" />
 
@@ -41,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/user_credit"
         android:layout_marginRight="2dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="5dp"
         android:layout_toLeftOf="@+id/user_credit"
         android:src="@drawable/coins" />
 
@@ -49,7 +42,7 @@
         android:id="@+id/gridview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/button_back"
+        android:layout_below="@+id/user_score"
         android:background="@drawable/theme1_background_main"
         android:gravity="center"
         android:horizontalSpacing="0dp"
