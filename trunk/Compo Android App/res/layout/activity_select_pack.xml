@@ -4,7 +4,7 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/user_score"
+        android:id="@+id/user_point"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -17,10 +17,10 @@
         android:id="@+id/user_credit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/user_score"
+        android:layout_alignBaseline="@+id/user_point"
         android:layout_alignParentRight="true"
         android:layout_marginRight="30dp"
-        android:layout_toLeftOf="@+id/user_score"
+        android:layout_toLeftOf="@+id/user_point"
         android:textColor="@color/black"
         android:textIsSelectable="false"
         android:textSize="20sp" />

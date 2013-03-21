@@ -34,7 +34,7 @@ public class SelectPackActivity extends Activity {
 
 	TextView userCredit = (TextView) findViewById(R.id.user_credit);
 	userCredit.setText(_user.getCredit() + "");
-	TextView userPoint = (TextView) findViewById(R.id.user_score);
+	TextView userPoint = (TextView) findViewById(R.id.user_point);
 	userPoint.setText(_user.getPoint() + " pts");
 
 	GridView gridview = (GridView) findViewById(R.id.gridview);
