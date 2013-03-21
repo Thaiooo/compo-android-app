@@ -2,8 +2,10 @@ package com.compo.android.app.dao;
 
 import java.sql.Date;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -19,7 +21,7 @@ public class QuizzDao {
 	dataBaseHeleper = new DataBaseHelper(context);
     }
 
-    public List<Quizz> getAllQuizz(long aPackId) {
+    public List<Quizz> getAllQuizz(long aPackId, Level aLevel) {
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = dataBaseHeleper.getReadableDatabase();
 
@@ -30,9 +32,10 @@ public class QuizzDao {
 		TableConstant.QuizzTable.COLUMN_SCORE_HOME };
 
 	// The columns for the WHERE clause
-	String selection = TableConstant.QuizzTable.COLUMN_PACK_ID + " = ?";
+	String selection = TableConstant.QuizzTable.COLUMN_PACK_ID + " = ? AND "
+		+ TableConstant.QuizzTable.COLUMN_LEVEL + " = ?";
 	// The values for the WHERE clause
-	String[] selectionArgs = { String.valueOf(aPackId) };
+	String[] selectionArgs = { String.valueOf(aPackId), aLevel.name() };
 	// Order
 	String sortOrder = TableConstant.QuizzTable.COLUMN_ORDER_NUMBER + " ASC";
 	// Group
@@ -44,13 +47,10 @@ public class QuizzDao {
 		having, sortOrder);
 
 	List<Quizz> l = new ArrayList<Quizz>();
-
-	System.out.println("===========>" + DateFormat.getInstance().format(new Date(1)));
-
 	while (c.moveToNext()) {
 	    long itemId = c.getLong(c.getColumnIndexOrThrow(TableConstant.QuizzTable._ID));
 	    String itemName = c.getString(c.getColumnIndexOrThrow(TableConstant.QuizzTable.COLUMN_NAME));
-	    // String itemDate = c.getString(c.getColumnIndexOrThrow(TableConstant.QuizzTable.COLUMN_DATE));
+	    String itemDate = c.getString(c.getColumnIndexOrThrow(TableConstant.QuizzTable.COLUMN_DATE));
 	    Level itemLevel = Level
 		    .valueOf(c.getString(c.getColumnIndexOrThrow(TableConstant.QuizzTable.COLUMN_LEVEL)));
 	    int itemPoint = c.getInt(c.getColumnIndexOrThrow(TableConstant.QuizzTable.COLUMN_POINT));
@@ -60,7 +60,15 @@ public class QuizzDao {
 	    Quizz p = new Quizz();
 	    p.setId(itemId);
 	    p.setName(itemName);
-	    // p.setDate(itemDesc);
+
+	    try {
+		java.util.Date d = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE).parse(itemDate);
+		Date date = new Date(d.getTime());
+		p.setDate(date);
+	    } catch (ParseException e) {
+		e.printStackTrace();
+	    }
+
 	    p.setLevel(itemLevel);
 	    p.setPoint(itemPoint);
 	    p.setScoreAway(itemScoreAway);
