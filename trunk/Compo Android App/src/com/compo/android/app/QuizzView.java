@@ -1,7 +1,5 @@
 package com.compo.android.app;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -15,9 +13,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
-import com.compo.android.app.model.Player;
 import com.compo.android.app.model.Quizz;
 
 public class QuizzView extends View {
