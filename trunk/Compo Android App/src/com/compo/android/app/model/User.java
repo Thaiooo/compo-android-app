@@ -3,36 +3,45 @@ package com.compo.android.app.model;
 import java.io.Serializable;
 
 public class User implements Serializable {
-	/**
+    /**
 	 */
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private int point;
-	private int credit;
-	private long overallTime;
+    private long id;
+    private int point;
+    private int credit;
+    private long overallTime;
 
-	public int getPoint() {
-		return point;
-	}
+    public long getId() {
+	return id;
+    }
 
-	public void setPoint(int point) {
-		this.point = point;
-	}
+    public void setId(long id) {
+	this.id = id;
+    }
 
-	public int getCredit() {
-		return credit;
-	}
+    public int getPoint() {
+	return point;
+    }
 
-	public void setCredit(int credit) {
-		this.credit = credit;
-	}
+    public void setPoint(int point) {
+	this.point = point;
+    }
 
-	public long getOverallTime() {
-		return overallTime;
-	}
+    public int getCredit() {
+	return credit;
+    }
 
-	public void setOverallTime(long overallTime) {
-		this.overallTime = overallTime;
-	}
+    public void setCredit(int credit) {
+	this.credit = credit;
+    }
+
+    public long getOverallTime() {
+	return overallTime;
+    }
+
+    public void setOverallTime(long overallTime) {
+	this.overallTime = overallTime;
+    }
 
 }
