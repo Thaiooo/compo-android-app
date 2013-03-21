@@ -14,22 +14,22 @@ import android.widget.TextView;
 import com.compo.android.app.model.Pack;
 
 public class SelectPackAdapter extends BaseAdapter {
-    private static Typeface font;
+    private static Typeface _font;
 
-    private static LayoutInflater inflater = null;
-    private List<Pack> gamesPack;
+    private static LayoutInflater _inflater = null;
+    private List<Pack> _gamesPack;
 
     public SelectPackAdapter(Context c, List<Pack> aGamesPack) {
-	inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	gamesPack = aGamesPack;
+	_inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	_gamesPack = aGamesPack;
 
-	if (font == null) {
-	    font = Typeface.createFromAsset(c.getAssets(), "MyLuckyPenny.ttf");
+	if (_font == null) {
+	    _font = Typeface.createFromAsset(c.getAssets(), "MyLuckyPenny.ttf");
 	}
     }
 
     public int getCount() {
-	return gamesPack.size();
+	return _gamesPack.size();
     }
 
     public Object getItem(int position) {
@@ -43,22 +43,22 @@ public class SelectPackAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 	View vi = convertView;
 	if (convertView == null) {
-	    vi = inflater.inflate(R.layout.pack_element, null);
+	    vi = _inflater.inflate(R.layout.pack_element, null);
 	}
 
-	Pack pack = gamesPack.get(position);
+	Pack pack = _gamesPack.get(position);
 
 	TextView name = (TextView) vi.findViewById(R.id.pack_name);
-	name.setTypeface(font);
+	name.setTypeface(_font);
 	name.setText(pack.getName());
 
 	TextView desciption = (TextView) vi.findViewById(R.id.pack_description);
-	desciption.setTypeface(font);
+	desciption.setTypeface(_font);
 	desciption.setText(pack.getDescription());
 
 	if (!pack.isLock()) {
 	    TextView score = (TextView) vi.findViewById(R.id.pack_score);
-	    score.setTypeface(font);
+	    score.setTypeface(_font);
 	    score.setText("0/20");
 
 	    ImageView image = (ImageView) vi.findViewById(R.id.image_coins);
@@ -66,12 +66,12 @@ public class SelectPackAdapter extends BaseAdapter {
 	} else {
 	    vi.setBackgroundResource(R.drawable.post_it_red);
 	    TextView scoreLimit = (TextView) vi.findViewById(R.id.pack_score_cost);
-	    scoreLimit.setTypeface(font);
+	    scoreLimit.setTypeface(_font);
 	    scoreLimit.setText(pack.getScoreLimit() + " pts required");
 
 	    TextView creditLimit = (TextView) vi.findViewById(R.id.pack_credit_cost);
 	    if (creditLimit != null) {
-		creditLimit.setTypeface(font);
+		creditLimit.setTypeface(_font);
 		creditLimit.setText(pack.getCreditLimit() + "");
 	    }
 	}
