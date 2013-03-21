@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="30dp"
-        android:text="17 pts"
         android:textColor="@color/black"
         android:textIsSelectable="false"
         android:textSize="20sp" />
@@ -23,7 +22,6 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="30dp"
         android:layout_toLeftOf="@+id/user_score"
-        android:text="100"
         android:textColor="@color/black"
         android:textIsSelectable="false"
         android:textSize="20sp" />
