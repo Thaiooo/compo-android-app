@@ -6,81 +6,81 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Quizz implements Serializable {
-	/**
+    /**
 	 */
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private long id;
-	private String name;
-	private Date date;
-	private int scoreHome;
-	private int scoreAway;
-	private Level level;
-	private int point;
-	private List<QuizzPlayer> quizzList = new ArrayList<QuizzPlayer>();
+    private long id;
+    private String name;
+    private Date date;
+    private int scoreHome;
+    private int scoreAway;
+    private Level level;
+    private int point;
+    private List<QuizzPlayer> quizzList = new ArrayList<QuizzPlayer>();
 
-	public long getId() {
-		return id;
-	}
+    public long getId() {
+	return id;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public void setId(long id) {
+	this.id = id;
+    }
 
-	public int getPoint() {
-		return point;
-	}
+    public int getPoint() {
+	return point;
+    }
 
-	public void setPoint(int point) {
-		this.point = point;
-	}
+    public void setPoint(int point) {
+	this.point = point;
+    }
 
-	public Level getLevel() {
-		return level;
-	}
+    public Level getLevel() {
+	return level;
+    }
 
-	public void setLevel(Level level) {
-		this.level = level;
-	}
+    public void setLevel(Level level) {
+	this.level = level;
+    }
 
-	public List<QuizzPlayer> getQuizzList() {
-		return quizzList;
-	}
+    public List<QuizzPlayer> getQuizzList() {
+	return quizzList;
+    }
 
-	public void setQuizzList(List<QuizzPlayer> quizzList) {
-		this.quizzList = quizzList;
-	}
+    public void setQuizzList(List<QuizzPlayer> quizzList) {
+	this.quizzList = quizzList;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+	return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+	this.name = name;
+    }
 
-	public Date getDate() {
-		return date;
-	}
+    public Date getDate() {
+	return date;
+    }
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+    public void setDate(Date date) {
+	this.date = date;
+    }
 
-	public int getScoreHome() {
-		return scoreHome;
-	}
+    public int getScoreHome() {
+	return scoreHome;
+    }
 
-	public void setScoreHome(int scoreHome) {
-		this.scoreHome = scoreHome;
-	}
+    public void setScoreHome(int scoreHome) {
+	this.scoreHome = scoreHome;
+    }
 
-	public int getScoreAway() {
-		return scoreAway;
-	}
+    public int getScoreAway() {
+	return scoreAway;
+    }
 
-	public void setScoreAway(int scoreAway) {
-		this.scoreAway = scoreAway;
-	}
+    public void setScoreAway(int scoreAway) {
+	this.scoreAway = scoreAway;
+    }
 
 }
