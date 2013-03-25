@@ -35,7 +35,7 @@ public class QuizzLevelFragment extends Fragment {
 	int levelIndex = args.getInt(EXTRA_MESSAGE_ARG);
 	Level level = Level.getLevel(levelIndex);
 
-	loadQuizz(level);
+	loadQuizz(_selectPack.getId(), level);
 
 	GridView gridview = (GridView) rootView.findViewById(R.id.quizzGrid);
 	gridview.setAdapter(new SelectQuizzAdapter(getActivity(), _quizzList));
@@ -54,8 +54,8 @@ public class QuizzLevelFragment extends Fragment {
 	return rootView;
     }
 
-    private void loadQuizz(Level aLevel) {
+    private void loadQuizz(long aPackId, Level aLevel) {
 	QuizzDao dao = new QuizzDao(getActivity());
-	_quizzList = dao.getAllQuizz(_selectPack.getId(), aLevel);
+	_quizzList = dao.getAllQuizz(aPackId, aLevel);
     }
 }
