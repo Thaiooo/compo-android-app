@@ -24,7 +24,6 @@ public class QuizzActivity extends Activity {
 	Intent intent = getIntent();
 
 	Quizz selectQuizz = (Quizz) intent.getSerializableExtra(QuizzLevelFragment.EXTRA_MESSAGE_QUIZZ);
-
 	_selectGame = (Pack) getIntent().getSerializableExtra(QuizzLevelFragment.EXTRA_MESSAGE_GAME);
 
 	quizzView.setQuizz(selectQuizz);

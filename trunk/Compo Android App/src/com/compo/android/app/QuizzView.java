@@ -14,7 +14,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.compo.android.app.model.Player;
 import com.compo.android.app.model.Quizz;
+import com.compo.android.app.model.QuizzPlayer;
 
 public class QuizzView extends View {
 
@@ -189,6 +191,12 @@ public class QuizzView extends View {
 	// =================================================================
 	// Equipe Domicile
 	// =================================================================
+	for (QuizzPlayer qp : quizz.getQuizzList()) {
+	    if (qp.isHome()) {
+		printHomePlayer(canvas, qp.getX(), qp.getY(), qp.getPlayer());
+	    }
+	}
+
 	/*
 	 * if (quizz.getEquipeDomicile() != null && quizz.getEquipeDomicile().getJoueurs() != null) { List<Player>
 	 * joueurs = quizz.getEquipeDomicile().getJoueurs(); for (Player j : joueurs) { printPlayerTeam1(canvas,
@@ -205,17 +213,32 @@ public class QuizzView extends View {
 	 */
     }
 
-    protected void printPlayerTeam1(Canvas canvas, float aXPercentPosition, float aYPercentPosition, String aName) {
+    protected void printHomePlayer(Canvas canvas, float aRealPositionX, float aRealPositionY, Player aName) {
 	int screenW = this.getWidth();
+	// -34 à 34
 	int terainW = _terrain.getBitmap().getWidth();
+	// 0 à 50
 	int terainH = _terrain.getBitmap().getHeight();
-	int lateralMarge = (screenW - terainW) / 2;
+	float lateralMarge = (screenW - terainW) / 2;
 
-	float x = terainW * aXPercentPosition - _playerBleu.getBitmap().getWidth() / 2 + lateralMarge;
-	float y = (terainH / 2) * aYPercentPosition + MARGE;
+	float metreX = terainW / 68;
+
+	float coordonneeX = 0;
+	if (aRealPositionX >= 0) {
+	    coordonneeX = aRealPositionX * metreX;
+	    coordonneeX += 34 * metreX;
+	} else {
+	    coordonneeX = (34 + aRealPositionX) * metreX;
+	}
+
+	float metreY = terainH / 100;
+	float coordonneeY = aRealPositionY * metreY;
+
+	float x = coordonneeX - _playerBleu.getBitmap().getWidth() / 2 + lateralMarge;
+	float y = coordonneeY + MARGE;
 	canvas.drawBitmap(_playerBleu.getBitmap(), x, y, null);
 	_paint.setColor(Color.BLACK);
-	canvas.drawText(aName, x, y + _playerBleu.getBitmap().getHeight() + 20, _paint);
+	canvas.drawText(aName.getName(), x, y + _playerBleu.getBitmap().getHeight() + 20, _paint);
     }
 
     protected void printPlayerTeam2(Canvas canvas, float aXPercentPosition, float aYPercentPosition, String aName) {
