@@ -4,15 +4,20 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.compo.android.app.model.Level;
+import com.compo.android.app.model.Player;
 import com.compo.android.app.model.Quizz;
+import com.compo.android.app.model.QuizzPlayer;
+import com.compo.android.app.model.Team;
 
 public class QuizzDao {
     private DataBaseHelper dataBaseHeleper;
@@ -25,56 +30,150 @@ public class QuizzDao {
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = dataBaseHeleper.getReadableDatabase();
 
-	// The columns to return
-	String[] projection = { TableConstant.QuizzTable._ID, TableConstant.QuizzTable.COLUMN_NAME,
-		TableConstant.QuizzTable.COLUMN_DATE, TableConstant.QuizzTable.COLUMN_LEVEL,
-		TableConstant.QuizzTable.COLUMN_POINT, TableConstant.QuizzTable.COLUMN_SCORE_AWAY,
-		TableConstant.QuizzTable.COLUMN_SCORE_HOME };
-
-	// The columns for the WHERE clause
-	String selection = TableConstant.QuizzTable.COLUMN_PACK_ID + " = ? AND "
-		+ TableConstant.QuizzTable.COLUMN_LEVEL + " = ?";
-	// The values for the WHERE clause
 	String[] selectionArgs = { String.valueOf(aPackId), aLevel.name() };
-	// Order
-	String sortOrder = TableConstant.QuizzTable.COLUMN_ORDER_NUMBER + " ASC";
-	// Group
-	String group = null;
-	// don't filter by row groups
-	String having = null;
-	// How you want the results sorted in the resulting Cursor
-	Cursor c = session.query(TableConstant.QuizzTable.TABLE_NAME, projection, selection, selectionArgs, group,
-		having, sortOrder);
+
+	StringBuffer req = new StringBuffer("select ");
+	// Index 0
+	req.append("q.");
+	req.append(TableConstant.QuizzTable._ID);
+	req.append(", ");
+	// Index 1
+	req.append("q.");
+	req.append(TableConstant.QuizzTable.COLUMN_NAME);
+	req.append(", ");
+	// Index 2
+	req.append("q.");
+	req.append(TableConstant.QuizzTable.COLUMN_LEVEL);
+	req.append(", ");
+	// Index 3
+	req.append("q.");
+	req.append(TableConstant.QuizzTable.COLUMN_DATE);
+	req.append(", ");
+	// Index 4
+	req.append("q.");
+	req.append(TableConstant.QuizzTable.COLUMN_POINT);
+	req.append(", ");
+	// Index 5
+	req.append("q.");
+	req.append(TableConstant.QuizzTable.COLUMN_SCORE_AWAY);
+	req.append(", ");
+	// Index 6
+	req.append("q.");
+	req.append(TableConstant.QuizzTable.COLUMN_SCORE_HOME);
+	req.append(", ");
+	// ---------------------------------------------------------------------------------
+	// Index 7
+	req.append("qp.");
+	req.append(TableConstant.QuizzPlayerTable._ID);
+	req.append(", ");
+	// Index 8
+	req.append("qp.");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_X);
+	req.append(", ");
+	// Index 9
+	req.append("qp.");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_Y);
+	req.append(", ");
+	// Index 10
+	req.append("qp.");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_HIDE);
+	req.append(", ");
+	// Index 11
+	req.append("qp.");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_HOME);
+	req.append(", ");
+	// ---------------------------------------------------------------------------------
+	// Index 12
+	req.append("qp.");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_TEAM_ID);
+	req.append(", ");
+	// Index 13
+	req.append("t.");
+	req.append(TableConstant.TeamTable.COLUMN_CODE);
+	req.append(", ");
+	// Index 14
+	req.append("t.");
+	req.append(TableConstant.TeamTable.COLUMN_NAME);
+	req.append(", ");
+	// ---------------------------------------------------------------------------------
+	// Index 15
+	req.append("qp.");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_PLAYER_ID);
+	req.append(", ");
+	// Index 16
+	req.append("p.");
+	req.append(TableConstant.PlayerTable.COLUMN_NAME);
+	req.append(" ");
+
+	req.append("from " + TableConstant.QuizzTable.TABLE_NAME + " q ");
+	req.append("left join " + TableConstant.QuizzPlayerTable.TABLE_NAME + " qp on q."
+		+ TableConstant.QuizzTable._ID + " = qp." + TableConstant.QuizzPlayerTable.COLUMN_QUIZZ_ID + " ");
+
+	req.append("left join " + TableConstant.TeamTable.TABLE_NAME + " t on qp."
+		+ TableConstant.QuizzPlayerTable.COLUMN_TEAM_ID + " = t." + TableConstant.TeamTable._ID + " ");
+
+	req.append("left join " + TableConstant.PlayerTable.TABLE_NAME + " p on qp."
+		+ TableConstant.QuizzPlayerTable.COLUMN_PLAYER_ID + " = p." + TableConstant.PlayerTable._ID + " ");
+
+	req.append("where q." + TableConstant.QuizzTable.COLUMN_PACK_ID + " = ? ");
+	req.append("and q." + TableConstant.QuizzTable.COLUMN_LEVEL + " = ? ");
+	req.append("order by q." + TableConstant.QuizzTable.COLUMN_ORDER_NUMBER + " asc ");
+
+	Cursor c = session.rawQuery(req.toString(), selectionArgs);
 
 	List<Quizz> l = new ArrayList<Quizz>();
+	Map<Long, Quizz> mapQuizz = new HashMap<Long, Quizz>();
+
 	while (c.moveToNext()) {
-	    long itemId = c.getLong(c.getColumnIndexOrThrow(TableConstant.QuizzTable._ID));
-	    String itemName = c.getString(c.getColumnIndexOrThrow(TableConstant.QuizzTable.COLUMN_NAME));
-	    String itemDate = c.getString(c.getColumnIndexOrThrow(TableConstant.QuizzTable.COLUMN_DATE));
-	    Level itemLevel = Level
-		    .valueOf(c.getString(c.getColumnIndexOrThrow(TableConstant.QuizzTable.COLUMN_LEVEL)));
-	    int itemPoint = c.getInt(c.getColumnIndexOrThrow(TableConstant.QuizzTable.COLUMN_POINT));
-	    int itemScoreAway = c.getInt(c.getColumnIndexOrThrow(TableConstant.QuizzTable.COLUMN_SCORE_AWAY));
-	    int itemScoreHome = c.getInt(c.getColumnIndexOrThrow(TableConstant.QuizzTable.COLUMN_SCORE_HOME));
+	    long quizzId = c.getLong(0);
 
-	    Quizz p = new Quizz();
-	    p.setId(itemId);
-	    p.setName(itemName);
+	    Quizz quizz = mapQuizz.get(quizzId);
+	    if (quizz == null) {
+		quizz = new Quizz();
+		String quizzName = c.getString(1);
+		Level quizzLevel = Level.valueOf(c.getString(2));
+		String quizzDate = c.getString(3);
+		int quizzPoint = c.getInt(4);
+		int quizzScoreAway = c.getInt(5);
+		int quizzScoreHome = c.getInt(6);
+		quizz.setId(quizzId);
+		quizz.setName(quizzName);
+		try {
+		    java.util.Date d = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE).parse(quizzDate);
+		    Date date = new Date(d.getTime());
+		    quizz.setDate(date);
+		} catch (ParseException e) {
+		    e.printStackTrace();
+		}
+		quizz.setLevel(quizzLevel);
+		quizz.setPoint(quizzPoint);
+		quizz.setScoreAway(quizzScoreAway);
+		quizz.setScoreHome(quizzScoreHome);
+		quizz.setQuizzList(new ArrayList<QuizzPlayer>());
 
-	    try {
-		java.util.Date d = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE).parse(itemDate);
-		Date date = new Date(d.getTime());
-		p.setDate(date);
-	    } catch (ParseException e) {
-		e.printStackTrace();
+		mapQuizz.put(quizzId, quizz);
+		l.add(quizz);
+	    } else {
+		QuizzPlayer quizzPlayer = new QuizzPlayer();
+		quizzPlayer.setId(c.getLong(7));
+		quizzPlayer.setX(c.getInt(8));
+		quizzPlayer.setY(c.getInt(9));
+		quizzPlayer.setHide(Boolean.parseBoolean(c.getString(10)));
+		quizzPlayer.setHome(Boolean.parseBoolean(c.getString(11)));
+
+		Team team = new Team();
+		team.setId(c.getLong(12));
+		team.setCode(c.getString(13));
+		team.setName(c.getString(14));
+		quizzPlayer.setTeam(team);
+
+		Player player = new Player();
+		player.setId(c.getLong(15));
+		player.setName(c.getString(16));
+		quizzPlayer.setPlayer(player);
+		
+		quizz.getQuizzList().add(quizzPlayer);
 	    }
-
-	    p.setLevel(itemLevel);
-	    p.setPoint(itemPoint);
-	    p.setScoreAway(itemScoreAway);
-	    p.setScoreHome(itemScoreHome);
-
-	    l.add(p);
 	}
 
 	dataBaseHeleper.close();
