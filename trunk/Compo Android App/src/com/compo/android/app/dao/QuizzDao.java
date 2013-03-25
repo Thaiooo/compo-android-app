@@ -151,6 +151,26 @@ public class QuizzDao {
 		quizz.setScoreHome(quizzScoreHome);
 		quizz.setQuizzList(new ArrayList<QuizzPlayer>());
 
+		QuizzPlayer quizzPlayer = new QuizzPlayer();
+		quizzPlayer.setId(c.getLong(7));
+		quizzPlayer.setX(c.getInt(8));
+		quizzPlayer.setY(c.getInt(9));
+		quizzPlayer.setHide(Boolean.parseBoolean(c.getString(10)));
+		quizzPlayer.setHome(Boolean.parseBoolean(c.getString(11)));
+
+		Team team = new Team();
+		team.setId(c.getLong(12));
+		team.setCode(c.getString(13));
+		team.setName(c.getString(14));
+		quizzPlayer.setTeam(team);
+
+		Player player = new Player();
+		player.setId(c.getLong(15));
+		player.setName(c.getString(16));
+		quizzPlayer.setPlayer(player);
+
+		quizz.getQuizzList().add(quizzPlayer);
+
 		mapQuizz.put(quizzId, quizz);
 		l.add(quizz);
 	    } else {
@@ -171,7 +191,7 @@ public class QuizzDao {
 		player.setId(c.getLong(15));
 		player.setName(c.getString(16));
 		quizzPlayer.setPlayer(player);
-		
+
 		quizz.getQuizzList().add(quizzPlayer);
 	    }
 	}
