@@ -11,6 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.compo.android.app.model.Quizz;
+import com.compo.android.app.model.QuizzPlayer;
+import com.compo.android.app.model.Team;
 
 public class SelectQuizzAdapter extends BaseAdapter {
     private static Typeface font;
@@ -46,9 +48,28 @@ public class SelectQuizzAdapter extends BaseAdapter {
 
 	Quizz quizz = quizzList.get(position);
 
-	TextView title = (TextView) vi.findViewById(R.id.quizz_name);
+	Team home = null;
+	Team away = null;
+	for (QuizzPlayer qp : quizz.getQuizzList()) {
+	    if (home != null && away != null) {
+		break;
+	    }
+	    if (qp.isHome()) {
+		home = qp.getTeam();
+	    } else {
+		away = qp.getTeam();
+	    }
+	}
+
+	TextView title = (TextView) vi.findViewById(R.id.quizz_title);
 	title.setTypeface(font);
-	title.setText(quizz.getName());
+	if (home != null && away != null) {
+	    title.setText(home.getName() + " - " + away.getName());
+	}
+	
+	TextView desc = (TextView) vi.findViewById(R.id.quizz_desc);
+	desc.setTypeface(font);
+	desc.setText(quizz.getName());
 
 	TextView score = (TextView) vi.findViewById(R.id.quizz_score);
 	score.setTypeface(font);
