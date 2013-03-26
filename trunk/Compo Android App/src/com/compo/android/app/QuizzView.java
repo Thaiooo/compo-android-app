@@ -20,6 +20,10 @@ import com.compo.android.app.model.QuizzPlayer;
 
 public class QuizzView extends View {
 
+    /** Field width in meter */
+    protected static final int FIELD_WIDTH = 68;
+    /** Field width in meter */
+    protected static final int START_REPERE = 34;
     protected static final int MARGE = 80;
     private static Typeface font;
 
@@ -199,65 +203,64 @@ public class QuizzView extends View {
 		printAwayPlayer(canvas, qp.getX(), qp.getY(), qp.getPlayer());
 	    }
 	}
-
-//	_paint.setColor(Color.BLACK);
-//	canvas.drawText("x", this.getWidth() /2, 200, _paint);
     }
 
     protected void printHomePlayer(Canvas canvas, float aRealPositionX, float aRealPositionY, Player aName) {
-	int screenW = this.getWidth();
-	// -34 à 34
-	int terainW = _terrain.getBitmap().getWidth();
-	// 0 à 50
-	int terainH = _terrain.getBitmap().getHeight();
-	float lateralMarge = (screenW - terainW) / 2;
+	double screenW = this.getWidth();
+	double terrainW = _terrain.getBitmap().getWidth();
+	double terainH = _terrain.getBitmap().getHeight();
+	double lateralMarge = (screenW - terrainW) / 2;
 
-	float metreX = terainW / 68;
-
-	float coordonneeX = 0;
+	double metreX = terrainW / FIELD_WIDTH;
+	double coordonneeX = 0;
 	if (aRealPositionX >= 0) {
 	    coordonneeX = aRealPositionX * metreX;
-	    coordonneeX += 34 * metreX;
+	    coordonneeX += START_REPERE * metreX;
 	} else {
-	    coordonneeX = (34 + aRealPositionX) * metreX;
+	    coordonneeX = (START_REPERE + aRealPositionX) * metreX;
 	}
 
-	float metreY = terainH / 100;
-	float coordonneeY = aRealPositionY * metreY;
+	double metreY = terainH / 100;
+	double coordonneeY = aRealPositionY * metreY;
 
-	float x = coordonneeX - _playerBleu.getBitmap().getWidth() / 2 + lateralMarge;
-	float y = coordonneeY + MARGE;
-	canvas.drawBitmap(_playerBleu.getBitmap(), x, y, null);
+	double x = coordonneeX - ((double) _playerBleu.getBitmap().getWidth() / 2) + lateralMarge;
+	double y = coordonneeY + MARGE;
+	canvas.drawBitmap(_playerBleu.getBitmap(), (float) x, (float) y, null);
+
+	double textWidth = _paint.measureText(aName.getName());
+	double textDecal = textWidth / 2;
+	double textX = coordonneeX + lateralMarge - textDecal;
 	_paint.setColor(Color.BLACK);
-	canvas.drawText(aName.getName(), x, y + _playerBleu.getBitmap().getHeight() + 20, _paint);
+	canvas.drawText(aName.getName(), (float) textX, (float) y + _playerBleu.getBitmap().getHeight() + 20, _paint);
     }
 
     protected void printAwayPlayer(Canvas canvas, float aRealPositionX, float aRealPositionY, Player aName) {
-	int screenW = this.getWidth();
-	// -34 à 34
-	int terainW = _terrain.getBitmap().getWidth();
-	// 0 à 50
-	int terainH = _terrain.getBitmap().getHeight();
-	int lateralMarge = (screenW - terainW) / 2;
+	double screenW = this.getWidth();
+	double terainW = _terrain.getBitmap().getWidth();
+	double terainH = _terrain.getBitmap().getHeight();
+	double lateralMarge = (screenW - terainW) / 2;
 
-	float metreX = terainW / 68;
-
-	float coordonneeX = 0;
+	double metreX = terainW / FIELD_WIDTH;
+	double coordonneeX = 0;
 	if (aRealPositionX <= 0) {
 	    coordonneeX = Math.abs(aRealPositionX) * metreX;
-	    coordonneeX += 34 * metreX;
+	    coordonneeX += START_REPERE * metreX;
 	} else {
-	    coordonneeX = (34 - aRealPositionX) * metreX;
+	    coordonneeX = (START_REPERE - aRealPositionX) * metreX;
 	}
 
-	float metreY = terainH / 100;
-	float coordonneeY = terainH - (aRealPositionY * metreY);
+	double metreY = terainH / 100;
+	double coordonneeY = terainH - (aRealPositionY * metreY);
 
-	float x = coordonneeX - _playerBleu.getBitmap().getWidth() / 2 + lateralMarge;
-	float y = coordonneeY - _playerBleu.getBitmap().getHeight() - 20 - MARGE;
-	canvas.drawBitmap(_playerRed.getBitmap(), x, y, null);
+	double x = coordonneeX - _playerBleu.getBitmap().getWidth() / 2 + lateralMarge;
+	double y = coordonneeY - _playerBleu.getBitmap().getHeight() - 20 - MARGE;
+	canvas.drawBitmap(_playerRed.getBitmap(), (float) x, (float) y, null);
+
+	double textWidth = _paint.measureText(aName.getName());
+	double textDecal = textWidth / 2;
+	double textX = coordonneeX + lateralMarge - textDecal;
 	_paint.setColor(Color.BLACK);
-	canvas.drawText(aName.getName(), x, y + _playerBleu.getBitmap().getHeight() + 20, _paint);
+	canvas.drawText(aName.getName(), (float) textX, (float) y + _playerBleu.getBitmap().getHeight() + 20, _paint);
     }
 
     @Override
