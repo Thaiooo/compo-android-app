@@ -1,9 +1,14 @@
 package com.compo.android.app;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
@@ -28,24 +33,24 @@ public class QuizzView extends View {
     private static Typeface font;
 
     protected Context _context;
-    protected BitmapDrawable _terrainRaw;
-    protected BitmapDrawable _terrain;
-    protected BitmapDrawable _playerBleuRaw;
-    protected BitmapDrawable _playerBleu;
-    protected BitmapDrawable _playerRedRaw;
-    protected BitmapDrawable _playerRed;
-    protected BitmapDrawable _coachRaw;
-    protected BitmapDrawable _coach;
-    protected BitmapDrawable _ballRaw;
-    protected BitmapDrawable _ball;
-    protected BitmapDrawable _ballRedRaw;
-    protected BitmapDrawable _ballRed;
-    protected BitmapDrawable _greenMappingRaw;
-    protected BitmapDrawable _greenMapping;
+    protected Bitmap _terrainRaw;
+    protected Bitmap _terrain;
+    protected Bitmap _playerHomeRaw;
+    protected Bitmap _playerHome;
+    protected Bitmap _playerAwayRaw;
+    protected Bitmap _playerAway;
+    protected Bitmap _coachRaw;
+    protected Bitmap _coach;
+    protected Bitmap _ballRaw;
+    protected Bitmap _ball;
+    protected Bitmap _ballRedRaw;
+    protected Bitmap _ballRed;
+    protected Bitmap _greenMappingRaw;
+    protected Bitmap _greenMapping;
     protected Paint _paint;
     protected Matrix _matrix;
     protected Matrix _matrixGreenMapping;
-    protected Quizz quizz;
+    protected Quizz _quizz;
 
     public QuizzView(Context context, AttributeSet attrs) {
 	super(context, attrs);
@@ -53,13 +58,11 @@ public class QuizzView extends View {
 
 	font = Typeface.createFromAsset(_context.getAssets(), "MyLuckyPenny.ttf");
 
-	_playerBleuRaw = (BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_bleu);
-	_playerRedRaw = (BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_red);
-	_coachRaw = (BitmapDrawable) _context.getResources().getDrawable(R.drawable.coach);
-	_terrainRaw = (BitmapDrawable) _context.getResources().getDrawable(R.drawable.football_field);
-	_greenMappingRaw = (BitmapDrawable) _context.getResources().getDrawable(R.drawable.green_mapping);
-	_ballRaw = (BitmapDrawable) _context.getResources().getDrawable(R.drawable.ball);
-	_ballRedRaw = (BitmapDrawable) _context.getResources().getDrawable(R.drawable.ball_red);
+	_coachRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.coach)).getBitmap();
+	_terrainRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.football_field)).getBitmap();
+	_greenMappingRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.green_mapping)).getBitmap();
+	_ballRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.ball)).getBitmap();
+	_ballRedRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.ball_red)).getBitmap();
 
 	float densityMultiplier = getContext().getResources().getDisplayMetrics().density;
 	_paint = new Paint();
@@ -67,11 +70,28 @@ public class QuizzView extends View {
 	_paint.setTypeface(font);
 
 	Intent intent = ((Activity) context).getIntent();
-	quizz = (Quizz) intent.getSerializableExtra(QuizzLevelFragment.EXTRA_MESSAGE_QUIZZ);
+	_quizz = (Quizz) intent.getSerializableExtra(QuizzLevelFragment.EXTRA_MESSAGE_QUIZZ);
+
+	_playerHomeRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_bleu)).getBitmap();
+	_playerAwayRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_white)).getBitmap();
+	// _playerHomeRaw = getBitmapFromAsset("player_bleu.png");
+	// _playerAwayRaw = getBitmapFromAsset("player_white.png");
 
 	_matrix = new Matrix();
 	_matrixGreenMapping = new Matrix();
 
+    }
+
+    private Bitmap getBitmapFromAsset(String strName) {
+	AssetManager assetManager = _context.getAssets();
+	InputStream istr = null;
+	try {
+	    istr = assetManager.open(strName);
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+	Bitmap bitmap = BitmapFactory.decodeStream(istr);
+	return bitmap;
     }
 
     protected BitmapDrawable scaleImage(BitmapDrawable srcTerrain, int destW, int destH) {
@@ -100,14 +120,14 @@ public class QuizzView extends View {
     }
 
     public void setQuizz(Quizz quizz) {
-	this.quizz = quizz;
+	this._quizz = quizz;
     }
 
     protected void setScaleMatrix() {
 	int screenW = this.getWidth();
 	int screenH = this.getHeight();
-	int terrainW = _terrainRaw.getBitmap().getWidth();
-	int terrainH = _terrainRaw.getBitmap().getHeight();
+	int terrainW = _terrainRaw.getWidth();
+	int terrainH = _terrainRaw.getHeight();
 
 	float scaleX = 1;
 	if (terrainW > screenW) {
@@ -127,8 +147,8 @@ public class QuizzView extends View {
 
 	// -----------------
 
-	int greenMappingW = _greenMappingRaw.getBitmap().getWidth();
-	int greenMappingH = _greenMappingRaw.getBitmap().getHeight();
+	int greenMappingW = _greenMappingRaw.getWidth();
+	int greenMappingH = _greenMappingRaw.getHeight();
 
 	scaleX = 1;
 	if (greenMappingW > screenW) {
@@ -144,61 +164,61 @@ public class QuizzView extends View {
 
     protected void scaleTerrain() {
 	if (_terrain == null) {
-	    Bitmap scaledBitmap = Bitmap.createBitmap(_terrainRaw.getBitmap(), 0, 0,
-		    _terrainRaw.getBitmap().getWidth(), _terrainRaw.getBitmap().getHeight(), _matrix, true);
-	    _terrain = new BitmapDrawable(scaledBitmap);
+	    Bitmap scaledBitmap = Bitmap.createBitmap(_terrainRaw, 0, 0, _terrainRaw.getWidth(),
+		    _terrainRaw.getHeight(), _matrix, true);
+	    _terrain = scaledBitmap;
 	}
     }
 
     protected void scaleGreenMapping() {
 	if (_greenMapping == null) {
-	    Bitmap scaledBitmap = Bitmap.createBitmap(_greenMappingRaw.getBitmap(), 0, 0, _greenMappingRaw.getBitmap()
-		    .getWidth(), _greenMappingRaw.getBitmap().getHeight(), _matrixGreenMapping, true);
-	    _greenMapping = new BitmapDrawable(scaledBitmap);
+	    Bitmap scaledBitmap = Bitmap.createBitmap(_greenMappingRaw, 0, 0, _greenMappingRaw.getWidth(),
+		    _greenMappingRaw.getHeight(), _matrixGreenMapping, true);
+	    _greenMapping = scaledBitmap;
 	}
     }
 
     protected void scalePlayerHome() {
-	if (_playerBleu == null) {
-	    Bitmap scaledBitmap = Bitmap.createBitmap(_playerBleuRaw.getBitmap(), 0, 0, _playerBleuRaw.getBitmap()
-		    .getWidth(), _playerBleuRaw.getBitmap().getHeight(), _matrix, true);
-	    _playerBleu = new BitmapDrawable(scaledBitmap);
+	if (_playerHome == null) {
+	    Bitmap scaledBitmap = Bitmap.createBitmap(_playerHomeRaw, 0, 0, _playerHomeRaw.getWidth(),
+		    _playerHomeRaw.getHeight(), _matrix, true);
+	    _playerHome = scaledBitmap;
 	}
     }
 
     protected void scalePlayerAway() {
-	if (_playerRed == null) {
-	    Bitmap scaledBitmap = Bitmap.createBitmap(_playerRedRaw.getBitmap(), 0, 0, _playerRedRaw.getBitmap()
-		    .getWidth(), _playerRedRaw.getBitmap().getHeight(), _matrix, true);
-	    _playerRed = new BitmapDrawable(scaledBitmap);
+	if (_playerAway == null) {
+	    Bitmap scaledBitmap = Bitmap.createBitmap(_playerAwayRaw, 0, 0, _playerAwayRaw.getWidth(),
+		    _playerAwayRaw.getHeight(), _matrix, true);
+	    _playerAway = scaledBitmap;
 	}
     }
 
     protected void scaleCoach() {
 	if (_coach == null) {
-	    Bitmap scaledBitmap = Bitmap.createBitmap(_coachRaw.getBitmap(), 0, 0, _coachRaw.getBitmap().getWidth(),
-		    _coachRaw.getBitmap().getHeight(), _matrix, true);
-	    _coach = new BitmapDrawable(scaledBitmap);
+	    Bitmap scaledBitmap = Bitmap.createBitmap(_coachRaw, 0, 0, _coachRaw.getWidth(), _coachRaw.getHeight(),
+		    _matrix, true);
+	    _coach = scaledBitmap;
 	}
     }
 
     protected void scaleBall() {
 	if (_ball == null) {
-	    Bitmap scaledBitmap = Bitmap.createBitmap(_ballRaw.getBitmap(), 0, 0, _ballRaw.getBitmap().getWidth(),
-		    _ballRaw.getBitmap().getHeight(), _matrix, true);
-	    _ball = new BitmapDrawable(scaledBitmap);
+	    Bitmap scaledBitmap = Bitmap.createBitmap(_ballRaw, 0, 0, _ballRaw.getWidth(), _ballRaw.getHeight(),
+		    _matrix, true);
+	    _ball = scaledBitmap;
 	}
 	if (_ballRed == null) {
-	    Bitmap scaledBitmap = Bitmap.createBitmap(_ballRedRaw.getBitmap(), 0, 0,
-		    _ballRedRaw.getBitmap().getWidth(), _ballRedRaw.getBitmap().getHeight(), _matrix, true);
-	    _ballRed = new BitmapDrawable(scaledBitmap);
+	    Bitmap scaledBitmap = Bitmap.createBitmap(_ballRedRaw, 0, 0, _ballRedRaw.getWidth(),
+		    _ballRedRaw.getHeight(), _matrix, true);
+	    _ballRed = scaledBitmap;
 	}
     }
 
     protected void printTerrain(Canvas canvas) {
-	canvas.drawBitmap(_greenMapping.getBitmap(), 0, 0, null);
-	int terrainX = (this.getWidth() - _terrain.getBitmap().getWidth()) / 2;
-	canvas.drawBitmap(_terrain.getBitmap(), terrainX, 0, null);
+	canvas.drawBitmap(_greenMapping, 0, 0, null);
+	int terrainX = (this.getWidth() - _terrain.getWidth()) / 2;
+	canvas.drawBitmap(_terrain, terrainX, 0, null);
     }
 
     @Override
@@ -221,7 +241,7 @@ public class QuizzView extends View {
 	// =================================================================
 	// Player
 	// =================================================================
-	for (QuizzPlayer qp : quizz.getQuizzList()) {
+	for (QuizzPlayer qp : _quizz.getQuizzList()) {
 	    if (qp.isCoach()) {
 		printCoach(canvas, qp);
 	    } else {
@@ -236,22 +256,22 @@ public class QuizzView extends View {
 	double textX = 10;
 	double textY;
 
-	textX = _coach.getBitmap().getWidth() + 15;
+	textX = _coach.getWidth() + 15;
 	if (qp.isHome()) {
 	    imageY = 10;
-	    textY = _coach.getBitmap().getHeight() + 10;
+	    textY = _coach.getHeight() + 10;
 	} else {
-	    imageY = this.getHeight() - _coach.getBitmap().getHeight() - 10;
+	    imageY = this.getHeight() - _coach.getHeight() - 10;
 	    textY = this.getHeight() - 10;
 	}
-	canvas.drawBitmap(_coach.getBitmap(), (float) imageX, (float) imageY, null);
+	canvas.drawBitmap(_coach, (float) imageX, (float) imageY, null);
 	canvas.drawText(qp.getPlayer().getName(), (float) textX, (float) textY, _paint);
     }
 
     protected void printPlayer(Canvas canvas, QuizzPlayer qp) {
 	double screenW = this.getWidth();
-	double terrainW = _terrain.getBitmap().getWidth();
-	double terainH = _terrain.getBitmap().getHeight();
+	double terrainW = _terrain.getWidth();
+	double terainH = _terrain.getHeight();
 	double lateralMarge = (screenW - terrainW) / 2;
 
 	double metreX = terrainW / FIELD_WIDTH;
@@ -260,7 +280,7 @@ public class QuizzView extends View {
 
 	double coordonneeX = 0;
 	if (qp.isHome()) {
-	    playerImg = _playerBleu.getBitmap();
+	    playerImg = _playerHome;
 	    if (qp.getX() >= 0) {
 		coordonneeX = qp.getX() * metreX;
 		coordonneeX += START_REPERE * metreX;
@@ -269,7 +289,7 @@ public class QuizzView extends View {
 	    }
 
 	} else {
-	    playerImg = _playerRed.getBitmap();
+	    playerImg = _playerAway;
 	    if (qp.getX() <= 0) {
 		coordonneeX = Math.abs(qp.getX()) * metreX;
 		coordonneeX += START_REPERE * metreX;
@@ -297,19 +317,19 @@ public class QuizzView extends View {
 	int ballNumber = 0;
 	if (qp.getGoal() > 0) {
 	    for (int i = 0; i < qp.getGoal(); i++) {
-		double ballX = playerX + playerImg.getWidth() - _ball.getBitmap().getWidth();
-		ballX += ballNumber * _ball.getBitmap().getWidth();
-		double ballY = playerY + playerImg.getHeight() - _ball.getBitmap().getHeight();
-		canvas.drawBitmap(_ball.getBitmap(), (float) ballX, (float) ballY, null);
+		double ballX = playerX + playerImg.getWidth() - _ball.getWidth();
+		ballX += ballNumber * _ball.getWidth();
+		double ballY = playerY + playerImg.getHeight() - _ball.getHeight();
+		canvas.drawBitmap(_ball, (float) ballX, (float) ballY, null);
 		ballNumber++;
 	    }
 	}
 	if (qp.getCsc() > 0) {
 	    for (int i = 0; i < qp.getCsc(); i++) {
-		double ballX = playerX + playerImg.getWidth() - _ballRed.getBitmap().getWidth();
-		ballX += ballNumber * _ball.getBitmap().getWidth();
-		double ballY = playerY + playerImg.getHeight() - _ballRed.getBitmap().getHeight();
-		canvas.drawBitmap(_ballRed.getBitmap(), (float) ballX, (float) ballY, null);
+		double ballX = playerX + playerImg.getWidth() - _ballRed.getWidth();
+		ballX += ballNumber * _ball.getWidth();
+		double ballY = playerY + playerImg.getHeight() - _ballRed.getHeight();
+		canvas.drawBitmap(_ballRed, (float) ballX, (float) ballY, null);
 		ballNumber++;
 	    }
 	}
@@ -325,16 +345,16 @@ public class QuizzView extends View {
     public boolean onTouchEvent(MotionEvent event) {
 	boolean b = super.onTouchEvent(event);
 	int screenW = this.getWidth();
-	int terainW = _terrain.getBitmap().getWidth();
-	int terainH = _terrain.getBitmap().getHeight();
+	int terainW = _terrain.getWidth();
+	int terainH = _terrain.getHeight();
 	int lateralMarge = (screenW - terainW) / 2;
 
 	/*
 	 * if (quizz.getEquipeDomicile() != null && quizz.getEquipeDomicile().getJoueurs() != null) { List<Player>
 	 * joueurs = quizz.getEquipeDomicile().getJoueurs(); for (Player j : joueurs) { float minX = terainW *
-	 * j.getPositionXPercent() - _playerBleu.getBitmap().getWidth() / 2 + lateralMarge; float maxX = minX +
-	 * _playerBleu.getBitmap().getWidth(); float minY = (terainH / 2) * j.getPositionYPercent() + MARGE; float maxY
-	 * = minY + _playerBleu.getBitmap().getHeight();
+	 * j.getPositionXPercent() - _playerBleu.getWidth() / 2 + lateralMarge; float maxX = minX +
+	 * _playerBleu.getWidth(); float minY = (terainH / 2) * j.getPositionYPercent() + MARGE; float maxY = minY +
+	 * _playerBleu.getHeight();
 	 * 
 	 * if (event.getX() >= minX && event.getX() <= maxX && event.getY() >= minY && event.getY() <= maxY) {
 	 * Toast.makeText(getContext(), j.getName(), Toast.LENGTH_SHORT).show();
