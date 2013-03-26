@@ -12,6 +12,7 @@ public class QuizzPlayer implements Serializable {
     private int y;
     private boolean hide;
     private boolean home;
+    private boolean coach;
     private Team team;
     private Player player;
 
@@ -69,6 +70,14 @@ public class QuizzPlayer implements Serializable {
 
     public void setHome(boolean home) {
 	this.home = home;
+    }
+
+    public boolean isCoach() {
+	return coach;
+    }
+
+    public void setCoach(boolean coach) {
+	this.coach = coach;
     }
 
 }

@@ -34,6 +34,8 @@ public class QuizzView extends View {
     protected BitmapDrawable _playerBleu;
     protected BitmapDrawable _playerRedRaw;
     protected BitmapDrawable _playerRed;
+    protected BitmapDrawable _coachRaw;
+    protected BitmapDrawable _coach;
     protected BitmapDrawable _greenMappingRaw;
     protected BitmapDrawable _greenMapping;
     protected Paint _paint;
@@ -49,6 +51,7 @@ public class QuizzView extends View {
 
 	_playerBleuRaw = (BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_bleu);
 	_playerRedRaw = (BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_red);
+	_coachRaw = (BitmapDrawable) _context.getResources().getDrawable(R.drawable.coach);
 	_terrainRaw = (BitmapDrawable) _context.getResources().getDrawable(R.drawable.football_field);
 	_greenMappingRaw = (BitmapDrawable) _context.getResources().getDrawable(R.drawable.green_mapping);
 
@@ -149,7 +152,7 @@ public class QuizzView extends View {
 	}
     }
 
-    protected void scalePlayerBleu() {
+    protected void scalePlayerHome() {
 	if (_playerBleu == null) {
 	    Bitmap scaledBitmap = Bitmap.createBitmap(_playerBleuRaw.getBitmap(), 0, 0, _playerBleuRaw.getBitmap()
 		    .getWidth(), _playerBleuRaw.getBitmap().getHeight(), _matrix, true);
@@ -157,11 +160,19 @@ public class QuizzView extends View {
 	}
     }
 
-    protected void scalePlayerRed() {
+    protected void scalePlayerAway() {
 	if (_playerRed == null) {
 	    Bitmap scaledBitmap = Bitmap.createBitmap(_playerRedRaw.getBitmap(), 0, 0, _playerRedRaw.getBitmap()
 		    .getWidth(), _playerRedRaw.getBitmap().getHeight(), _matrix, true);
 	    _playerRed = new BitmapDrawable(scaledBitmap);
+	}
+    }
+
+    protected void scaleCoach() {
+	if (_coach == null) {
+	    Bitmap scaledBitmap = Bitmap.createBitmap(_coachRaw.getBitmap(), 0, 0, _coachRaw.getBitmap().getWidth(),
+		    _coachRaw.getBitmap().getHeight(), _matrix, true);
+	    _coach = new BitmapDrawable(scaledBitmap);
 	}
     }
 
@@ -178,8 +189,9 @@ public class QuizzView extends View {
 	setScaleMatrix();
 	scaleTerrain();
 	scaleGreenMapping();
-	scalePlayerBleu();
-	scalePlayerRed();
+	scalePlayerHome();
+	scalePlayerAway();
+	scaleCoach();
 
 	// =================================================================
 	// Terrain
@@ -191,7 +203,14 @@ public class QuizzView extends View {
 	// =================================================================
 	for (QuizzPlayer qp : quizz.getQuizzList()) {
 	    if (qp.isHome()) {
-		printHomePlayer(canvas, qp.getX(), qp.getY(), qp.getPlayer());
+		if (qp.isCoach()) {
+		    canvas.drawBitmap(_coach.getBitmap(), 10, 10, null);
+		    canvas.drawText(qp.getPlayer().getName(), _coach.getBitmap().getWidth() + 15, _coach.getBitmap()
+			    .getHeight() + 10, _paint);
+
+		} else {
+		    printHomePlayer(canvas, qp.getX(), qp.getY(), qp.getPlayer());
+		}
 	    }
 	}
 
@@ -200,7 +219,14 @@ public class QuizzView extends View {
 	// =================================================================
 	for (QuizzPlayer qp : quizz.getQuizzList()) {
 	    if (!qp.isHome()) {
-		printAwayPlayer(canvas, qp.getX(), qp.getY(), qp.getPlayer());
+		if (qp.isCoach()) {
+		    canvas.drawBitmap(_coach.getBitmap(), 10, this.getHeight() - _coach.getBitmap().getHeight() - 10,
+			    null);
+		    canvas.drawText(qp.getPlayer().getName(), _coach.getBitmap().getWidth() + 15,
+			    this.getHeight() - 10, _paint);
+		} else {
+		    printAwayPlayer(canvas, qp.getX(), qp.getY(), qp.getPlayer());
+		}
 	    }
 	}
     }
