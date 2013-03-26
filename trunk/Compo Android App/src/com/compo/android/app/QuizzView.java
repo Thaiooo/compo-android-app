@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -14,7 +13,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.compo.android.app.model.Player;
 import com.compo.android.app.model.Quizz;
 import com.compo.android.app.model.QuizzPlayer;
 
@@ -22,6 +20,8 @@ public class QuizzView extends View {
 
     /** Field width in meter */
     protected static final int FIELD_WIDTH = 68;
+    /** Field width in meter */
+    protected static final int FIELD_HEIGHT = 100;
     /** Field width in meter */
     protected static final int START_REPERE = 34;
     protected static final int MARGE = 80;
@@ -36,6 +36,10 @@ public class QuizzView extends View {
     protected BitmapDrawable _playerRed;
     protected BitmapDrawable _coachRaw;
     protected BitmapDrawable _coach;
+    protected BitmapDrawable _ballRaw;
+    protected BitmapDrawable _ball;
+    protected BitmapDrawable _ballRedRaw;
+    protected BitmapDrawable _ballRed;
     protected BitmapDrawable _greenMappingRaw;
     protected BitmapDrawable _greenMapping;
     protected Paint _paint;
@@ -54,6 +58,8 @@ public class QuizzView extends View {
 	_coachRaw = (BitmapDrawable) _context.getResources().getDrawable(R.drawable.coach);
 	_terrainRaw = (BitmapDrawable) _context.getResources().getDrawable(R.drawable.football_field);
 	_greenMappingRaw = (BitmapDrawable) _context.getResources().getDrawable(R.drawable.green_mapping);
+	_ballRaw = (BitmapDrawable) _context.getResources().getDrawable(R.drawable.ball);
+	_ballRedRaw = (BitmapDrawable) _context.getResources().getDrawable(R.drawable.ball_red);
 
 	float densityMultiplier = getContext().getResources().getDisplayMetrics().density;
 	_paint = new Paint();
@@ -176,6 +182,19 @@ public class QuizzView extends View {
 	}
     }
 
+    protected void scaleBall() {
+	if (_ball == null) {
+	    Bitmap scaledBitmap = Bitmap.createBitmap(_ballRaw.getBitmap(), 0, 0, _ballRaw.getBitmap().getWidth(),
+		    _ballRaw.getBitmap().getHeight(), _matrix, true);
+	    _ball = new BitmapDrawable(scaledBitmap);
+	}
+	if (_ballRed == null) {
+	    Bitmap scaledBitmap = Bitmap.createBitmap(_ballRedRaw.getBitmap(), 0, 0,
+		    _ballRedRaw.getBitmap().getWidth(), _ballRedRaw.getBitmap().getHeight(), _matrix, true);
+	    _ballRed = new BitmapDrawable(scaledBitmap);
+	}
+    }
+
     protected void printTerrain(Canvas canvas) {
 	canvas.drawBitmap(_greenMapping.getBitmap(), 0, 0, null);
 	int terrainX = (this.getWidth() - _terrain.getBitmap().getWidth()) / 2;
@@ -192,6 +211,7 @@ public class QuizzView extends View {
 	scalePlayerHome();
 	scalePlayerAway();
 	scaleCoach();
+	scaleBall();
 
 	// =================================================================
 	// Terrain
@@ -199,94 +219,90 @@ public class QuizzView extends View {
 	printTerrain(canvas);
 
 	// =================================================================
-	// Equipe Domicile
+	// Player
 	// =================================================================
 	for (QuizzPlayer qp : quizz.getQuizzList()) {
-	    if (qp.isHome()) {
-		if (qp.isCoach()) {
-		    canvas.drawBitmap(_coach.getBitmap(), 10, 10, null);
-		    canvas.drawText(qp.getPlayer().getName(), _coach.getBitmap().getWidth() + 15, _coach.getBitmap()
-			    .getHeight() + 10, _paint);
-
-		} else {
-		    printHomePlayer(canvas, qp.getX(), qp.getY(), qp.getPlayer());
-		}
-	    }
-	}
-
-	// =================================================================
-	// Equipe ext
-	// =================================================================
-	for (QuizzPlayer qp : quizz.getQuizzList()) {
-	    if (!qp.isHome()) {
-		if (qp.isCoach()) {
-		    canvas.drawBitmap(_coach.getBitmap(), 10, this.getHeight() - _coach.getBitmap().getHeight() - 10,
-			    null);
-		    canvas.drawText(qp.getPlayer().getName(), _coach.getBitmap().getWidth() + 15,
-			    this.getHeight() - 10, _paint);
-		} else {
-		    printAwayPlayer(canvas, qp.getX(), qp.getY(), qp.getPlayer());
-		}
+	    if (qp.isCoach()) {
+		printCoach(canvas, qp);
+	    } else {
+		printPlayer(canvas, qp);
 	    }
 	}
     }
 
-    protected void printHomePlayer(Canvas canvas, float aRealPositionX, float aRealPositionY, Player aName) {
+    protected void printCoach(Canvas canvas, QuizzPlayer qp) {
+	double imageX = 10;
+	double imageY;
+	double textX = 10;
+	double textY;
+
+	textX = _coach.getBitmap().getWidth() + 15;
+	if (qp.isHome()) {
+	    imageY = 10;
+	    textY = _coach.getBitmap().getHeight() + 10;
+	} else {
+	    imageY = this.getHeight() - _coach.getBitmap().getHeight() - 10;
+	    textY = this.getHeight() - 10;
+	}
+	canvas.drawBitmap(_coach.getBitmap(), (float) imageX, (float) imageY, null);
+	canvas.drawText(qp.getPlayer().getName(), (float) textX, (float) textY, _paint);
+    }
+
+    protected void printPlayer(Canvas canvas, QuizzPlayer qp) {
 	double screenW = this.getWidth();
 	double terrainW = _terrain.getBitmap().getWidth();
 	double terainH = _terrain.getBitmap().getHeight();
 	double lateralMarge = (screenW - terrainW) / 2;
 
 	double metreX = terrainW / FIELD_WIDTH;
+	double metreY = terainH / FIELD_HEIGHT;
+	Bitmap playerImg;
+
 	double coordonneeX = 0;
-	if (aRealPositionX >= 0) {
-	    coordonneeX = aRealPositionX * metreX;
-	    coordonneeX += START_REPERE * metreX;
+	if (qp.isHome()) {
+	    playerImg = _playerBleu.getBitmap();
+	    if (qp.getX() >= 0) {
+		coordonneeX = qp.getX() * metreX;
+		coordonneeX += START_REPERE * metreX;
+	    } else {
+		coordonneeX = (START_REPERE + qp.getX()) * metreX;
+	    }
+
 	} else {
-	    coordonneeX = (START_REPERE + aRealPositionX) * metreX;
+	    playerImg = _playerRed.getBitmap();
+	    if (qp.getX() <= 0) {
+		coordonneeX = Math.abs(qp.getX()) * metreX;
+		coordonneeX += START_REPERE * metreX;
+	    } else {
+		coordonneeX = (START_REPERE - qp.getX()) * metreX;
+	    }
 	}
 
-	double metreY = terainH / 100;
-	double coordonneeY = aRealPositionY * metreY;
-
-	double x = coordonneeX - ((double) _playerBleu.getBitmap().getWidth() / 2) + lateralMarge;
-	double y = coordonneeY + MARGE;
-	canvas.drawBitmap(_playerBleu.getBitmap(), (float) x, (float) y, null);
-
-	double textWidth = _paint.measureText(aName.getName());
-	double textDecal = textWidth / 2;
-	double textX = coordonneeX + lateralMarge - textDecal;
-	_paint.setColor(Color.BLACK);
-	canvas.drawText(aName.getName(), (float) textX, (float) y + _playerBleu.getBitmap().getHeight() + 20, _paint);
-    }
-
-    protected void printAwayPlayer(Canvas canvas, float aRealPositionX, float aRealPositionY, Player aName) {
-	double screenW = this.getWidth();
-	double terainW = _terrain.getBitmap().getWidth();
-	double terainH = _terrain.getBitmap().getHeight();
-	double lateralMarge = (screenW - terainW) / 2;
-
-	double metreX = terainW / FIELD_WIDTH;
-	double coordonneeX = 0;
-	if (aRealPositionX <= 0) {
-	    coordonneeX = Math.abs(aRealPositionX) * metreX;
-	    coordonneeX += START_REPERE * metreX;
+	double coordonneeY;
+	if (qp.isHome()) {
+	    coordonneeY = qp.getY() * metreY;
 	} else {
-	    coordonneeX = (START_REPERE - aRealPositionX) * metreX;
+	    coordonneeY = terainH - (qp.getY() * metreY);
 	}
 
-	double metreY = terainH / 100;
-	double coordonneeY = terainH - (aRealPositionY * metreY);
+	double playerX = coordonneeX - ((double) playerImg.getWidth() / 2) + lateralMarge;
+	double playerY;
+	if (qp.isHome()) {
+	    playerY = coordonneeY + MARGE;
+	} else {
+	    playerY = coordonneeY - playerImg.getHeight() - 20 - MARGE;
+	}
+	canvas.drawBitmap(playerImg, (float) playerX, (float) playerY, null);
 
-	double x = coordonneeX - _playerBleu.getBitmap().getWidth() / 2 + lateralMarge;
-	double y = coordonneeY - _playerBleu.getBitmap().getHeight() - 20 - MARGE;
-	canvas.drawBitmap(_playerRed.getBitmap(), (float) x, (float) y, null);
+	double ballX = playerX + playerImg.getWidth() - _ball.getBitmap().getWidth();
+	double ballY = playerY + playerImg.getHeight() - _ball.getBitmap().getHeight();
+	canvas.drawBitmap(_ball.getBitmap(), (float) ballX, (float) ballY, null);
 
-	double textWidth = _paint.measureText(aName.getName());
+	double textWidth = _paint.measureText(qp.getPlayer().getName());
 	double textDecal = textWidth / 2;
 	double textX = coordonneeX + lateralMarge - textDecal;
-	_paint.setColor(Color.BLACK);
-	canvas.drawText(aName.getName(), (float) textX, (float) y + _playerBleu.getBitmap().getHeight() + 20, _paint);
+	double textY = playerY + playerImg.getHeight() + 20;
+	canvas.drawText(qp.getPlayer().getName(), (float) textX, (float) textY, _paint);
     }
 
     @Override
