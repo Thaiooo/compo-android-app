@@ -15,6 +15,8 @@ public class QuizzPlayer implements Serializable {
     private boolean coach;
     private Team team;
     private Player player;
+    private int goal;
+    private int csc;
 
     public long getId() {
 	return id;
@@ -78,6 +80,22 @@ public class QuizzPlayer implements Serializable {
 
     public void setCoach(boolean coach) {
 	this.coach = coach;
+    }
+
+    public int getGoal() {
+	return goal;
+    }
+
+    public void setGoal(int goal) {
+	this.goal = goal;
+    }
+
+    public int getCsc() {
+	return csc;
+    }
+
+    public void setCsc(int csc) {
+	this.csc = csc;
     }
 
 }

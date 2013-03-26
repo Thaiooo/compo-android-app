@@ -294,9 +294,25 @@ public class QuizzView extends View {
 	}
 	canvas.drawBitmap(playerImg, (float) playerX, (float) playerY, null);
 
-	double ballX = playerX + playerImg.getWidth() - _ball.getBitmap().getWidth();
-	double ballY = playerY + playerImg.getHeight() - _ball.getBitmap().getHeight();
-	canvas.drawBitmap(_ball.getBitmap(), (float) ballX, (float) ballY, null);
+	int ballNumber = 0;
+	if (qp.getGoal() > 0) {
+	    for (int i = 0; i < qp.getGoal(); i++) {
+		double ballX = playerX + playerImg.getWidth() - _ball.getBitmap().getWidth();
+		ballX += ballNumber * _ball.getBitmap().getWidth();
+		double ballY = playerY + playerImg.getHeight() - _ball.getBitmap().getHeight();
+		canvas.drawBitmap(_ball.getBitmap(), (float) ballX, (float) ballY, null);
+		ballNumber++;
+	    }
+	}
+	if (qp.getCsc() > 0) {
+	    for (int i = 0; i < qp.getCsc(); i++) {
+		double ballX = playerX + playerImg.getWidth() - _ballRed.getBitmap().getWidth();
+		ballX += ballNumber * _ball.getBitmap().getWidth();
+		double ballY = playerY + playerImg.getHeight() - _ballRed.getBitmap().getHeight();
+		canvas.drawBitmap(_ballRed.getBitmap(), (float) ballX, (float) ballY, null);
+		ballNumber++;
+	    }
+	}
 
 	double textWidth = _paint.measureText(qp.getPlayer().getName());
 	double textDecal = textWidth / 2;

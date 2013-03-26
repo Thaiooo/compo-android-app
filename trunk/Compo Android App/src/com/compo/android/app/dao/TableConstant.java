@@ -44,6 +44,8 @@ public class TableConstant {
 	public static final String COLUMN_COACH = "coach";
 	public static final String COLUMN_X = "x";
 	public static final String COLUMN_Y = "y";
+	public static final String COLUMN_CSC = "csc";
+	public static final String COLUMN_GOAL = "goal";
 	public static final String COLUMN_TEAM_ID = "team_id";
 	public static final String COLUMN_PLAYER_ID = "player_id";
     }
