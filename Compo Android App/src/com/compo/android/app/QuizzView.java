@@ -162,15 +162,9 @@ public class QuizzView extends View {
     }
 
     protected void printTerrain(Canvas canvas) {
-	// _paint.setStyle(Paint.Style.FILL);
-	// _paint.setColor(Color.rgb(24, 158, 73));
-	// canvas.drawRect(0, 0, this.getWidth(), this.getHeight(), _paint);
-
 	canvas.drawBitmap(_greenMapping.getBitmap(), 0, 0, null);
-
 	int terrainX = (this.getWidth() - _terrain.getBitmap().getWidth()) / 2;
 	canvas.drawBitmap(_terrain.getBitmap(), terrainX, 0, null);
-
     }
 
     @Override
@@ -197,20 +191,17 @@ public class QuizzView extends View {
 	    }
 	}
 
-	/*
-	 * if (quizz.getEquipeDomicile() != null && quizz.getEquipeDomicile().getJoueurs() != null) { List<Player>
-	 * joueurs = quizz.getEquipeDomicile().getJoueurs(); for (Player j : joueurs) { printPlayerTeam1(canvas,
-	 * j.getPositionXPercent(), j.getPositionYPercent(), j.getName()); } }
-	 */
-
 	// =================================================================
 	// Equipe ext
 	// =================================================================
-	/*
-	 * if (quizz.getEquipeExterieur() != null && quizz.getEquipeExterieur().getJoueurs() != null) { List<Player>
-	 * joueurs = quizz.getEquipeExterieur().getJoueurs(); for (Player j : joueurs) { printPlayerTeam2(canvas,
-	 * j.getPositionXPercent(), j.getPositionYPercent(), j.getName()); } }
-	 */
+	for (QuizzPlayer qp : quizz.getQuizzList()) {
+	    if (!qp.isHome()) {
+		printAwayPlayer(canvas, qp.getX(), qp.getY(), qp.getPlayer());
+	    }
+	}
+
+//	_paint.setColor(Color.BLACK);
+//	canvas.drawText("x", this.getWidth() /2, 200, _paint);
     }
 
     protected void printHomePlayer(Canvas canvas, float aRealPositionX, float aRealPositionY, Player aName) {
@@ -241,17 +232,32 @@ public class QuizzView extends View {
 	canvas.drawText(aName.getName(), x, y + _playerBleu.getBitmap().getHeight() + 20, _paint);
     }
 
-    protected void printPlayerTeam2(Canvas canvas, float aXPercentPosition, float aYPercentPosition, String aName) {
+    protected void printAwayPlayer(Canvas canvas, float aRealPositionX, float aRealPositionY, Player aName) {
 	int screenW = this.getWidth();
+	// -34 à 34
 	int terainW = _terrain.getBitmap().getWidth();
+	// 0 à 50
 	int terainH = _terrain.getBitmap().getHeight();
 	int lateralMarge = (screenW - terainW) / 2;
 
-	float x = terainW * aXPercentPosition - _playerBleu.getBitmap().getWidth() / 2 + lateralMarge;
-	float y = terainH - ((terainH / 2) * aYPercentPosition) - _playerBleu.getBitmap().getHeight() - MARGE;
+	float metreX = terainW / 68;
+
+	float coordonneeX = 0;
+	if (aRealPositionX <= 0) {
+	    coordonneeX = Math.abs(aRealPositionX) * metreX;
+	    coordonneeX += 34 * metreX;
+	} else {
+	    coordonneeX = (34 - aRealPositionX) * metreX;
+	}
+
+	float metreY = terainH / 100;
+	float coordonneeY = terainH - (aRealPositionY * metreY);
+
+	float x = coordonneeX - _playerBleu.getBitmap().getWidth() / 2 + lateralMarge;
+	float y = coordonneeY - _playerBleu.getBitmap().getHeight() - 20 - MARGE;
 	canvas.drawBitmap(_playerRed.getBitmap(), x, y, null);
 	_paint.setColor(Color.BLACK);
-	canvas.drawText(aName, x, y + _playerBleu.getBitmap().getHeight() + 20, _paint);
+	canvas.drawText(aName.getName(), x, y + _playerBleu.getBitmap().getHeight() + 20, _paint);
     }
 
     @Override
