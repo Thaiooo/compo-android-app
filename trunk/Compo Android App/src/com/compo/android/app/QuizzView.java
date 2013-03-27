@@ -384,12 +384,10 @@ public class QuizzView extends View {
 	    if (event.getX() >= playerXMin && event.getX() <= playerXMax && event.getY() >= playerYMin
 		    && event.getY() <= playerYMax) {
 
-		Player j = qp.getPlayer();
-		Toast.makeText(getContext(), j.getName(), Toast.LENGTH_SHORT).show();
-
-		// Intent intent = new Intent(_context, ResponseActivity.class);
-		// _context.startActivity(intent);
-
+		// Player j = qp.getPlayer();
+		// Toast.makeText(getContext(), j.getName(), Toast.LENGTH_SHORT).show();
+		ResponseDialog dialog = new ResponseDialog();
+		dialog.show(((QuizzActivity) _context).getSupportFragmentManager(), "responseDialog");
 		return b;
 	    }
 	}
