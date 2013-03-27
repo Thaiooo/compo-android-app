@@ -5,10 +5,12 @@
     <string name="menu_settings">Settings</string>
     <string name="button_play">Jouer</string>
     <string name="button_setting">Parmètres</string>
+    <string name="button_check">Valider</string>
     <string name="activity_setting">Parmètres</string>
     <string name="activity_select_pack">Selection Pack</string>
     <string name="activity_quizz">Composition</string>
     <string name="activity_select_quizz">Selection Quizz</string>
+    <string name="dialog_response">Who is the player</string>
 
     <dimen name="myFontSize">10sp</dimen>
 
