@@ -1,15 +1,15 @@
 package com.compo.android.app;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.widget.TextView;
 
 import com.compo.android.app.model.Quizz;
 import com.compo.android.app.model.QuizzPlayer;
 import com.compo.android.app.model.Team;
 
-public class QuizzActivity extends Activity {
+public class QuizzActivity extends FragmentActivity {
 
     // private Pack _selectGame;
 
