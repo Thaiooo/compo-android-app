@@ -2,6 +2,7 @@ package com.compo.android.app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.widget.TextView;
 
@@ -9,7 +10,7 @@ import com.compo.android.app.model.Quizz;
 import com.compo.android.app.model.QuizzPlayer;
 import com.compo.android.app.model.Team;
 
-public class QuizzActivity extends FragmentActivity {
+public class QuizzActivity extends FragmentActivity implements NoticeDialogListener {
 
     // private Pack _selectGame;
 
@@ -50,6 +51,17 @@ public class QuizzActivity extends FragmentActivity {
 	    teamAway.setText(away.getName() + " (" + selectQuizz.getScoreAway() + ")");
 	}
 
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+	System.out.println("Negative");
+
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+	System.out.println("Positive");
     }
 
 }
