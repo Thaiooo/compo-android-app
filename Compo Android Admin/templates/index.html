@@ -1,0 +1,7 @@
+{% if quizz_list %}
+	{% for quizz in quizz_list %}
+		<li><a href="/{{ quizz.id }}/"> {{ quizz.name }} </a></li>
+	{% endfor %}
+{% else %}
+	<p>No quizz are available !!!</p>
+{% endif %}
