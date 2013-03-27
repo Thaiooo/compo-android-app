@@ -17,7 +17,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
+import com.compo.android.app.model.Player;
 import com.compo.android.app.model.Quizz;
 import com.compo.android.app.model.QuizzPlayer;
 
@@ -271,47 +273,21 @@ public class QuizzView extends View {
     protected void printPlayer(Canvas canvas, QuizzPlayer qp) {
 	double screenW = this.getWidth();
 	double terrainW = _terrain.getWidth();
-	double terainH = _terrain.getHeight();
+	double terrainH = _terrain.getHeight();
 	double lateralMarge = (screenW - terrainW) / 2;
 
 	double metreX = terrainW / FIELD_WIDTH;
-	double metreY = terainH / FIELD_HEIGHT;
+	double metreY = terrainH / FIELD_HEIGHT;
 	Bitmap playerImg;
 
-	double coordonneeX = 0;
 	if (qp.isHome()) {
 	    playerImg = _playerHome;
-	    if (qp.getX() >= 0) {
-		coordonneeX = qp.getX() * metreX;
-		coordonneeX += START_REPERE * metreX;
-	    } else {
-		coordonneeX = (START_REPERE + qp.getX()) * metreX;
-	    }
-
 	} else {
 	    playerImg = _playerAway;
-	    if (qp.getX() <= 0) {
-		coordonneeX = Math.abs(qp.getX()) * metreX;
-		coordonneeX += START_REPERE * metreX;
-	    } else {
-		coordonneeX = (START_REPERE - qp.getX()) * metreX;
-	    }
 	}
 
-	double coordonneeY;
-	if (qp.isHome()) {
-	    coordonneeY = qp.getY() * metreY;
-	} else {
-	    coordonneeY = terainH - (qp.getY() * metreY);
-	}
-
-	double playerX = coordonneeX - ((double) playerImg.getWidth() / 2) + lateralMarge;
-	double playerY;
-	if (qp.isHome()) {
-	    playerY = coordonneeY + MARGE;
-	} else {
-	    playerY = coordonneeY - playerImg.getHeight() - 20 - MARGE;
-	}
+	double playerX = getPlayerX(qp, lateralMarge, metreX, playerImg);
+	double playerY = getPlayerY(qp, terrainH, metreY, playerImg);
 	canvas.drawBitmap(playerImg, (float) playerX, (float) playerY, null);
 
 	int ballNumber = 0;
@@ -336,33 +312,87 @@ public class QuizzView extends View {
 
 	double textWidth = _paint.measureText(qp.getPlayer().getName());
 	double textDecal = textWidth / 2;
-	double textX = coordonneeX + lateralMarge - textDecal;
+
+	double textX = playerX + ((double) playerImg.getWidth() / 2) - textDecal;
 	double textY = playerY + playerImg.getHeight() + 20;
 	canvas.drawText(qp.getPlayer().getName(), (float) textX, (float) textY, _paint);
+    }
+
+    protected double getPlayerX(QuizzPlayer aQuizzPlayer, double aLateralMarge, double aMetreX, Bitmap aPlayerImg) {
+	double coordonneeX = 0;
+	if (aQuizzPlayer.isHome()) {
+	    if (aQuizzPlayer.getX() >= 0) {
+		coordonneeX = aQuizzPlayer.getX() * aMetreX;
+		coordonneeX += START_REPERE * aMetreX;
+	    } else {
+		coordonneeX = (START_REPERE + aQuizzPlayer.getX()) * aMetreX;
+	    }
+	} else {
+
+	    if (aQuizzPlayer.getX() <= 0) {
+		coordonneeX = Math.abs(aQuizzPlayer.getX()) * aMetreX;
+		coordonneeX += START_REPERE * aMetreX;
+	    } else {
+		coordonneeX = (START_REPERE - aQuizzPlayer.getX()) * aMetreX;
+	    }
+	}
+	double playerX = coordonneeX - ((double) aPlayerImg.getWidth() / 2) + aLateralMarge;
+	return playerX;
+    }
+
+    protected double getPlayerY(QuizzPlayer aQuizzPlauer, double aTerainH, double aMetreY, Bitmap aPlayerImg) {
+	double coordonneeY;
+	if (aQuizzPlauer.isHome()) {
+	    coordonneeY = aQuizzPlauer.getY() * aMetreY;
+	} else {
+	    coordonneeY = aTerainH - (aQuizzPlauer.getY() * aMetreY);
+	}
+	double playerY;
+	if (aQuizzPlauer.isHome()) {
+	    playerY = coordonneeY + MARGE;
+	} else {
+	    playerY = coordonneeY - aPlayerImg.getHeight() - 20 - MARGE;
+	}
+	return playerY;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 	boolean b = super.onTouchEvent(event);
-	int screenW = this.getWidth();
-	int terainW = _terrain.getWidth();
-	int terainH = _terrain.getHeight();
-	int lateralMarge = (screenW - terainW) / 2;
+	double screenW = this.getWidth();
+	double terrainW = _terrain.getWidth();
+	double terrainH = _terrain.getHeight();
+	double lateralMarge = (screenW - terrainW) / 2;
+	double metreX = terrainW / FIELD_WIDTH;
+	double metreY = terrainH / FIELD_HEIGHT;
 
-	/*
-	 * if (quizz.getEquipeDomicile() != null && quizz.getEquipeDomicile().getJoueurs() != null) { List<Player>
-	 * joueurs = quizz.getEquipeDomicile().getJoueurs(); for (Player j : joueurs) { float minX = terainW *
-	 * j.getPositionXPercent() - _playerBleu.getWidth() / 2 + lateralMarge; float maxX = minX +
-	 * _playerBleu.getWidth(); float minY = (terainH / 2) * j.getPositionYPercent() + MARGE; float maxY = minY +
-	 * _playerBleu.getHeight();
-	 * 
-	 * if (event.getX() >= minX && event.getX() <= maxX && event.getY() >= minY && event.getY() <= maxY) {
-	 * Toast.makeText(getContext(), j.getName(), Toast.LENGTH_SHORT).show();
-	 * 
-	 * Intent intent = new Intent(_context, ResponseActivity.class); _context.startActivity(intent);
-	 * 
-	 * return b; } } }
-	 */
+	for (QuizzPlayer qp : _quizz.getQuizzList()) {
+
+	    Bitmap playerImg;
+	    if (qp.isHome()) {
+		playerImg = _playerHome;
+	    } else {
+		playerImg = _playerAway;
+	    }
+
+	    double playerXMin = getPlayerX(qp, lateralMarge, metreX, playerImg);
+	    double playerXMax = playerXMin + (double) playerImg.getWidth();
+
+	    double playerYMin = getPlayerY(qp, terrainH, metreY, playerImg);
+	    double playerYMax = playerYMin + playerImg.getHeight() + 20;
+
+	    if (event.getX() >= playerXMin && event.getX() <= playerXMax && event.getY() >= playerYMin
+		    && event.getY() <= playerYMax) {
+
+		Player j = qp.getPlayer();
+		Toast.makeText(getContext(), j.getName(), Toast.LENGTH_SHORT).show();
+
+		// Intent intent = new Intent(_context, ResponseActivity.class);
+		// _context.startActivity(intent);
+
+		return b;
+	    }
+	}
 
 	return b;
     }
