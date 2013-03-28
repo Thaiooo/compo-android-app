@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="@android:style/Theme.NoTitleBar"></style>
@@ -6,5 +6,9 @@
     <color name="black">#000000</color>
     <color name="blue">#0000FF</color>
     <color name="red">#DC143C</color>
+
+    <style name="DialogTheme" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 
 </resources>
