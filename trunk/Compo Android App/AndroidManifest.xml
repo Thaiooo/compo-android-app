@@ -32,7 +32,7 @@
         </activity>
         <activity
             android:name=".SettingActivity"
-            android:label="@string/activity_setting" >
+            android:theme="@style/DialogTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.compo.android.app.MainActivity" />
@@ -50,6 +50,13 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.compo.android.app.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ResponseActivity"
+            android:theme="@style/DialogTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.compo.android.app.ResponseActivity" />
         </activity>
     </application>
 
