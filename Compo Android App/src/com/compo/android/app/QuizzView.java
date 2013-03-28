@@ -17,9 +17,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
-import com.compo.android.app.model.Player;
 import com.compo.android.app.model.Quizz;
 import com.compo.android.app.model.QuizzPlayer;
 
@@ -384,10 +382,9 @@ public class QuizzView extends View {
 	    if (event.getX() >= playerXMin && event.getX() <= playerXMax && event.getY() >= playerYMin
 		    && event.getY() <= playerYMax) {
 
-		// Player j = qp.getPlayer();
-		// Toast.makeText(getContext(), j.getName(), Toast.LENGTH_SHORT).show();
-		ResponseDialog dialog = new ResponseDialog();
-		dialog.show(((QuizzActivity) _context).getSupportFragmentManager(), "responseDialog");
+		Intent intent = new Intent(getContext(), ResponseActivity.class);
+		getContext().startActivity(intent);
+
 		return b;
 	    }
 	}
