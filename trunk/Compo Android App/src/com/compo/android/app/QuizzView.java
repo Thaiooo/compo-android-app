@@ -1,14 +1,9 @@
 package com.compo.android.app;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
@@ -82,17 +77,17 @@ public class QuizzView extends View {
 
     }
 
-    private Bitmap getBitmapFromAsset(String strName) {
-	AssetManager assetManager = _context.getAssets();
-	InputStream istr = null;
-	try {
-	    istr = assetManager.open(strName);
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
-	Bitmap bitmap = BitmapFactory.decodeStream(istr);
-	return bitmap;
-    }
+    // private Bitmap getBitmapFromAsset(String strName) {
+    // AssetManager assetManager = _context.getAssets();
+    // InputStream istr = null;
+    // try {
+    // istr = assetManager.open(strName);
+    // } catch (IOException e) {
+    // e.printStackTrace();
+    // }
+    // Bitmap bitmap = BitmapFactory.decodeStream(istr);
+    // return bitmap;
+    // }
 
     protected BitmapDrawable scaleImage(BitmapDrawable srcTerrain, int destW, int destH) {
 	int terrainW = srcTerrain.getBitmap().getWidth();
@@ -150,14 +145,8 @@ public class QuizzView extends View {
 	int greenMappingW = _greenMappingRaw.getWidth();
 	int greenMappingH = _greenMappingRaw.getHeight();
 
-	scaleX = 1;
-	if (greenMappingW > screenW) {
-	    scaleX = (float) screenW / (float) greenMappingW;
-	}
-	scaleY = 1;
-	if (greenMappingH > screenH) {
-	    scaleY = (float) screenH / (float) greenMappingH;
-	}
+	scaleX = (float) screenW / (float) greenMappingW;
+	scaleY = (float) screenH / (float) greenMappingH;
 
 	_matrixGreenMapping.postScale(scaleX, scaleY);
     }
