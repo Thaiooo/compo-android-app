@@ -56,8 +56,11 @@ public class QuizzLevelFragment extends Fragment {
 	protected void onPostExecute(final List<Quizz> aQuizzList) {
 	    _gridview.setAdapter(new SelectQuizzAdapter(getActivity(), aQuizzList));
 	    _gridview.setOnItemClickListener(new OnItemClickListener() {
-		public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-		    Quizz selectQuizz = aQuizzList.get(position);
+		
+		@Override
+		public void onItemClick(AdapterView<?> parent, View v, int aPosition, long id) {
+		    
+		    Quizz selectQuizz = aQuizzList.get(aPosition);
 		    Intent intent = new Intent(getActivity(), QuizzActivity.class);
 		    intent.putExtra(EXTRA_MESSAGE_QUIZZ, selectQuizz);
 		    intent.putExtra(EXTRA_MESSAGE_GAME, _selectPack);

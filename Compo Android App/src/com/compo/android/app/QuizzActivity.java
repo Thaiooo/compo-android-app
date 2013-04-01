@@ -24,9 +24,6 @@ public class QuizzActivity extends FragmentActivity implements NoticeDialogListe
 	// _selectGame = (Pack) getIntent().getSerializableExtra(QuizzLevelFragment.EXTRA_MESSAGE_GAME);
 
 	QuizzView quizzView = (QuizzView) findViewById(R.id.quizz_view);
-	if (quizzView == null) {
-	    quizzView = (QuizzView) findViewById(R.id.quizz_view_land);
-	}
 
 	quizzView.setQuizz(selectQuizz);
 
