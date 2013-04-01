@@ -21,10 +21,12 @@ public class QuizzView extends View {
     /** Field width in meter */
     protected static final int FIELD_WIDTH = 68;
     /** Field width in meter */
-    protected static final int FIELD_HEIGHT = 100;
+    protected static final int FIELD_HEIGHT = 105;
     /** Field width in meter */
     protected static final int START_REPERE = 34;
-    protected static final int MARGE = 80;
+    /** Marge in meter */
+    protected static final int MARGE_METER = 5;
+    private static final int TEXT_HIGHT = 20;
     private static Typeface font;
 
     protected Context _context;
@@ -93,22 +95,22 @@ public class QuizzView extends View {
 	int terrainW = srcTerrain.getBitmap().getWidth();
 	int terrainH = srcTerrain.getBitmap().getHeight();
 
-	float scaleX = 1;
+	double scaleX = 1;
 	if (terrainW > destW) {
-	    scaleX = (float) destW / (float) terrainW;
+	    scaleX = (double) destW / (double) terrainW;
 	}
-	float scaleY = 1;
+	double scaleY = 1;
 	if (terrainH > destH) {
-	    scaleY = (float) destH / (float) terrainH;
+	    scaleY = (double) destH / (double) terrainH;
 	}
 
-	float scale = scaleX;
+	double scale = scaleX;
 	if (scaleY < scaleX) {
 	    scale = scaleY;
 	}
 
 	Matrix matrix = new Matrix();
-	matrix.postScale(scale, scale);
+	matrix.postScale((float) scale, (float) scale);
 
 	Bitmap scaledBitmap = Bitmap.createBitmap(srcTerrain.getBitmap(), 0, 0, terrainW, terrainH, matrix, true);
 	return new BitmapDrawable(scaledBitmap);
@@ -119,36 +121,40 @@ public class QuizzView extends View {
     }
 
     protected void setScaleMatrix() {
+
 	int screenW = this.getWidth();
 	int screenH = this.getHeight();
 	int terrainW = _terrainRaw.getWidth();
 	int terrainH = _terrainRaw.getHeight();
 
-	float scaleX = 1;
+	double metreY = terrainH / FIELD_HEIGHT;
+	double marge = metreY * MARGE_METER * 2;
+
+	double scaleX = 1;
 	if (terrainW > screenW) {
-	    scaleX = (float) screenW / (float) terrainW;
+	    scaleX = (double) screenW / (double) terrainW;
 	}
-	float scaleY = 1;
-	if (terrainH > screenH) {
-	    scaleY = (float) screenH / (float) terrainH;
+	double scaleY = 1;
+	if (terrainH + marge > screenH) {
+	    scaleY = (double) screenH / (double) (terrainH + marge);
 	}
 
-	float scale = scaleX;
+	double scale = scaleX;
 	if (scaleY < scaleX) {
 	    scale = scaleY;
 	}
 
-	_matrix.postScale(scale, scale);
+	_matrix.postScale((float) scale, (float) scale);
 
 	// -----------------
 
 	int greenMappingW = _greenMappingRaw.getWidth();
 	int greenMappingH = _greenMappingRaw.getHeight();
 
-	scaleX = (float) screenW / (float) greenMappingW;
-	scaleY = (float) screenH / (float) greenMappingH;
+	scaleX = (double) screenW / (double) greenMappingW;
+	scaleY = (double) screenH / (double) greenMappingH;
 
-	_matrixGreenMapping.postScale(scaleX, scaleY);
+	_matrixGreenMapping.postScale((float) scaleX, (float) scaleY);
     }
 
     protected void scaleTerrain() {
@@ -206,8 +212,12 @@ public class QuizzView extends View {
 
     protected void printTerrain(Canvas canvas) {
 	canvas.drawBitmap(_greenMapping, 0, 0, null);
+
+	double metreY = _terrain.getHeight() / FIELD_HEIGHT;
+	double d = +(metreY * 10);
+
 	int terrainX = (this.getWidth() - _terrain.getWidth()) / 2;
-	canvas.drawBitmap(_terrain, terrainX, 0, null);
+	canvas.drawBitmap(_terrain, terrainX, (int) (d / 2), null);
     }
 
     @Override
@@ -234,6 +244,7 @@ public class QuizzView extends View {
 	    if (qp.isCoach()) {
 		printCoach(canvas, qp);
 	    } else {
+		// if (qp.getPlayer().getId() == 1)
 		printPlayer(canvas, qp);
 	    }
 	}
@@ -301,27 +312,16 @@ public class QuizzView extends View {
 	double textDecal = textWidth / 2;
 
 	double textX = playerX + ((double) playerImg.getWidth() / 2) - textDecal;
-	double textY = playerY + playerImg.getHeight() + 20;
+	double textY = playerY + playerImg.getHeight() + TEXT_HIGHT;
 	canvas.drawText(qp.getPlayer().getName(), (float) textX, (float) textY, _paint);
     }
 
     protected double getPlayerX(QuizzPlayer aQuizzPlayer, double aLateralMarge, double aMetreX, Bitmap aPlayerImg) {
 	double coordonneeX = 0;
 	if (aQuizzPlayer.isHome()) {
-	    if (aQuizzPlayer.getX() >= 0) {
-		coordonneeX = aQuizzPlayer.getX() * aMetreX;
-		coordonneeX += START_REPERE * aMetreX;
-	    } else {
-		coordonneeX = (START_REPERE + aQuizzPlayer.getX()) * aMetreX;
-	    }
+	    coordonneeX = (START_REPERE + aQuizzPlayer.getX()) * aMetreX;
 	} else {
-
-	    if (aQuizzPlayer.getX() <= 0) {
-		coordonneeX = Math.abs(aQuizzPlayer.getX()) * aMetreX;
-		coordonneeX += START_REPERE * aMetreX;
-	    } else {
-		coordonneeX = (START_REPERE - aQuizzPlayer.getX()) * aMetreX;
-	    }
+	    coordonneeX = (START_REPERE - aQuizzPlayer.getX()) * aMetreX;
 	}
 	double playerX = coordonneeX - ((double) aPlayerImg.getWidth() / 2) + aLateralMarge;
 	return playerX;
@@ -334,11 +334,14 @@ public class QuizzView extends View {
 	} else {
 	    coordonneeY = aTerainH - (aQuizzPlauer.getY() * aMetreY);
 	}
-	double playerY;
+
+	double marge = aMetreY * MARGE_METER;
+	double playerY = marge + coordonneeY - aPlayerImg.getHeight() / 2;
 	if (aQuizzPlauer.isHome()) {
-	    playerY = coordonneeY + MARGE;
+	    playerY += aMetreY * 2.5;
 	} else {
-	    playerY = coordonneeY - aPlayerImg.getHeight() - 20 - MARGE;
+	    playerY -= TEXT_HIGHT;
+	    playerY -= aMetreY * 2.5;
 	}
 	return playerY;
     }
@@ -366,7 +369,7 @@ public class QuizzView extends View {
 	    double playerXMax = playerXMin + (double) playerImg.getWidth();
 
 	    double playerYMin = getPlayerY(qp, terrainH, metreY, playerImg);
-	    double playerYMax = playerYMin + playerImg.getHeight() + 20;
+	    double playerYMax = playerYMin + playerImg.getHeight() + TEXT_HIGHT;
 
 	    if (event.getX() >= playerXMin && event.getX() <= playerXMax && event.getY() >= playerYMin
 		    && event.getY() <= playerYMax) {
