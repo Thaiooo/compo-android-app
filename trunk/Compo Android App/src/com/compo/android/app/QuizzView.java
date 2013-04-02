@@ -26,7 +26,7 @@ public class QuizzView extends View {
     protected static final int START_REPERE = 34;
     /** Marge in meter */
     protected static final int MARGE_METER = 6;
-    private static final int TEXT_HIGHT = 20;
+    protected static final int TEXT_HIGHT = 20;
     private static Typeface font;
 
     protected Context _context;
@@ -261,14 +261,24 @@ public class QuizzView extends View {
 	canvas.drawText(qp.getPlayer().getName(), (float) textX, (float) textY, _paint);
     }
 
+    protected double getPixelPerMeterX(double terrainW) {
+	double metreX = terrainW / FIELD_WIDTH;
+	return metreX;
+    }
+
+    protected double getPixelPerMeterY(double terrainH) {
+	double metreY = terrainH / FIELD_HEIGHT;
+	return metreY;
+    }
+
     protected void printPlayer(Canvas canvas, QuizzPlayer qp) {
 	double screenW = this.getWidth();
 	double terrainW = _terrain.getWidth();
 	double terrainH = _terrain.getHeight();
 	double lateralMarge = (screenW - terrainW) / 2;
 
-	double metreX = terrainW / FIELD_WIDTH;
-	double metreY = terrainH / FIELD_HEIGHT;
+	double metreX = getPixelPerMeterX(terrainW);
+	double metreY = getPixelPerMeterY(terrainH);
 	Bitmap playerImg;
 
 	if (qp.isHome()) {
@@ -341,8 +351,8 @@ public class QuizzView extends View {
 	double terrainW = _terrain.getWidth();
 	double terrainH = _terrain.getHeight();
 	double lateralMarge = (screenW - terrainW) / 2;
-	double metreX = terrainW / FIELD_WIDTH;
-	double metreY = terrainH / FIELD_HEIGHT;
+	double metreX = getPixelPerMeterX(terrainW);
+	double metreY = getPixelPerMeterY(terrainH);
 
 	for (QuizzPlayer qp : _quizz.getQuizzList()) {
 

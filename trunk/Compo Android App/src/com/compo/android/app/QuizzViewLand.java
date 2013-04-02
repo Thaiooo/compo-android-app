@@ -1,12 +1,12 @@
 package com.compo.android.app;
 
-import com.compo.android.app.model.QuizzPlayer;
-
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
+
+import com.compo.android.app.model.QuizzPlayer;
 
 public class QuizzViewLand extends QuizzView {
 
@@ -18,54 +18,19 @@ public class QuizzViewLand extends QuizzView {
 		.getBitmap();
     }
 
-    protected void printPlayer(Canvas canvas, QuizzPlayer qp) {
-	double screenW = this.getWidth();
-	double terrainW = _terrain.getWidth();
-	double terrainH = _terrain.getHeight();
-	double lateralMarge = (screenW - terrainW) / 2;
-
+    @Override
+    protected double getPixelPerMeterX(double terrainW) {
 	double metreX = terrainW / FIELD_HEIGHT;
-	double metreY = terrainH / FIELD_WIDTH;
-	Bitmap playerImg;
-
-	if (qp.isHome()) {
-	    playerImg = _playerHome;
-	} else {
-	    playerImg = _playerAway;
-	}
-
-	double playerX = getPlayerX(qp, lateralMarge, metreX, playerImg);
-	double playerY = getPlayerY(qp, terrainH, metreY, playerImg);
-	canvas.drawBitmap(playerImg, (float) playerX, (float) playerY, null);
-
-	int ballNumber = 0;
-	if (qp.getGoal() > 0) {
-	    for (int i = 0; i < qp.getGoal(); i++) {
-		double ballX = playerX + playerImg.getWidth() - _ball.getWidth();
-		ballX += ballNumber * _ball.getWidth();
-		double ballY = playerY + playerImg.getHeight() - _ball.getHeight();
-		canvas.drawBitmap(_ball, (float) ballX, (float) ballY, null);
-		ballNumber++;
-	    }
-	}
-	if (qp.getCsc() > 0) {
-	    for (int i = 0; i < qp.getCsc(); i++) {
-		double ballX = playerX + playerImg.getWidth() - _ballRed.getWidth();
-		ballX += ballNumber * _ball.getWidth();
-		double ballY = playerY + playerImg.getHeight() - _ballRed.getHeight();
-		canvas.drawBitmap(_ballRed, (float) ballX, (float) ballY, null);
-		ballNumber++;
-	    }
-	}
-
-	double textWidth = _paint.measureText(qp.getPlayer().getName());
-	double textDecal = textWidth / 2;
-
-	double textX = playerX + ((double) playerImg.getWidth() / 2) - textDecal;
-	double textY = playerY + playerImg.getHeight() + 20;
-	canvas.drawText(qp.getPlayer().getName(), (float) textX, (float) textY, _paint);
+	return metreX;
     }
 
+    @Override
+    protected double getPixelPerMeterY(double terrainH) {
+	double metreY = terrainH / FIELD_WIDTH;
+	return metreY;
+    }
+
+    @Override
     protected double getPlayerX(QuizzPlayer aQuizzPlayer, double aLateralMarge, double aMetreX, Bitmap aPlayerImg) {
 	double coordonneeX = 0;
 	double marge = aMetreX * MARGE_METER;
@@ -79,6 +44,7 @@ public class QuizzViewLand extends QuizzView {
 	return coordonneeX;
     }
 
+    @Override
     protected double getPlayerY(QuizzPlayer aQuizzPlayer, double aTerainH, double aMetreY, Bitmap aPlayerImg) {
 	double coordonneeY = 0;
 	if (aQuizzPlayer.isHome()) {
@@ -88,6 +54,12 @@ public class QuizzViewLand extends QuizzView {
 	}
 	coordonneeY -= ((double) aPlayerImg.getHeight() / 2);
 	return coordonneeY;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+	boolean b = super.onTouchEvent(event);
+	return b;
     }
 
 }
