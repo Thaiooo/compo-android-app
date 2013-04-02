@@ -10,8 +10,6 @@ import android.util.AttributeSet;
 
 public class QuizzViewLand extends QuizzView {
 
-    protected static final int MARGE = 30;
-
     public QuizzViewLand(Context context, AttributeSet attrs) {
 	super(context, attrs);
 	_terrainRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.football_field_land))
@@ -70,16 +68,15 @@ public class QuizzViewLand extends QuizzView {
 
     protected double getPlayerX(QuizzPlayer aQuizzPlayer, double aLateralMarge, double aMetreX, Bitmap aPlayerImg) {
 	double coordonneeX = 0;
+	double marge = aMetreX * MARGE_METER;
 	if (aQuizzPlayer.isHome()) {
-	    coordonneeX = aQuizzPlayer.getY() * aMetreX;
-	    coordonneeX += aMetreX * 2.5d;
+	    coordonneeX = aQuizzPlayer.getY() * aMetreX + marge + aMetreX * 2.5d;
 	} else {
-	    coordonneeX = aMetreX * FIELD_HEIGHT - aQuizzPlayer.getY() * aMetreX;
-	    coordonneeX -= aMetreX * 2.5d;
+	    coordonneeX = aMetreX * FIELD_HEIGHT - aQuizzPlayer.getY() * aMetreX - marge - aMetreX * 2.5d;
 	}
-
-	double playerX = coordonneeX - ((double) aPlayerImg.getWidth() / 2) + aLateralMarge;
-	return playerX;
+	coordonneeX -= ((double) aPlayerImg.getWidth() / 2);
+	coordonneeX += aLateralMarge;
+	return coordonneeX;
     }
 
     protected double getPlayerY(QuizzPlayer aQuizzPlayer, double aTerainH, double aMetreY, Bitmap aPlayerImg) {
@@ -89,9 +86,8 @@ public class QuizzViewLand extends QuizzView {
 	} else {
 	    coordonneeY = (START_REPERE + aQuizzPlayer.getX()) * aMetreY;
 	}
-
-	double playerY = coordonneeY - ((double) aPlayerImg.getHeight() / 2);
-	return playerY;
+	coordonneeY -= ((double) aPlayerImg.getHeight() / 2);
+	return coordonneeY;
     }
 
 }

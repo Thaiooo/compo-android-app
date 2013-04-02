@@ -25,7 +25,7 @@ public class QuizzView extends View {
     /** Field width in meter */
     protected static final int START_REPERE = 34;
     /** Marge in meter */
-    protected static final int MARGE_METER = 5;
+    protected static final int MARGE_METER = 6;
     private static final int TEXT_HIGHT = 20;
     private static Typeface font;
 
@@ -127,16 +127,13 @@ public class QuizzView extends View {
 	int terrainW = _terrainRaw.getWidth();
 	int terrainH = _terrainRaw.getHeight();
 
-	double metreY = terrainH / FIELD_HEIGHT;
-	double marge = metreY * MARGE_METER * 2;
-
 	double scaleX = 1;
 	if (terrainW > screenW) {
 	    scaleX = (double) screenW / (double) terrainW;
 	}
 	double scaleY = 1;
-	if (terrainH + marge > screenH) {
-	    scaleY = (double) screenH / (double) (terrainH + marge);
+	if (terrainH > screenH) {
+	    scaleY = (double) screenH / (double) terrainH;
 	}
 
 	double scale = scaleX;
@@ -212,12 +209,8 @@ public class QuizzView extends View {
 
     protected void printTerrain(Canvas canvas) {
 	canvas.drawBitmap(_greenMapping, 0, 0, null);
-
-	double metreY = _terrain.getHeight() / FIELD_HEIGHT;
-	double d = +(metreY * 10);
-
 	int terrainX = (this.getWidth() - _terrain.getWidth()) / 2;
-	canvas.drawBitmap(_terrain, terrainX, (int) (d / 2), null);
+	canvas.drawBitmap(_terrain, terrainX, 0, null);
     }
 
     @Override
@@ -323,27 +316,22 @@ public class QuizzView extends View {
 	} else {
 	    coordonneeX = (START_REPERE - aQuizzPlayer.getX()) * aMetreX;
 	}
-	double playerX = coordonneeX - ((double) aPlayerImg.getWidth() / 2) + aLateralMarge;
-	return playerX;
+	coordonneeX -= ((double) aPlayerImg.getWidth() / 2);
+	coordonneeX += aLateralMarge;
+	return coordonneeX;
     }
 
     protected double getPlayerY(QuizzPlayer aQuizzPlauer, double aTerainH, double aMetreY, Bitmap aPlayerImg) {
 	double coordonneeY;
-	if (aQuizzPlauer.isHome()) {
-	    coordonneeY = aQuizzPlauer.getY() * aMetreY;
-	} else {
-	    coordonneeY = aTerainH - (aQuizzPlauer.getY() * aMetreY);
-	}
-
 	double marge = aMetreY * MARGE_METER;
-	double playerY = marge + coordonneeY - aPlayerImg.getHeight() / 2;
 	if (aQuizzPlauer.isHome()) {
-	    playerY += aMetreY * 2.5;
+	    coordonneeY = aQuizzPlauer.getY() * aMetreY + marge + aMetreY * 2.5;
 	} else {
-	    playerY -= TEXT_HIGHT;
-	    playerY -= aMetreY * 2.5;
+	    coordonneeY = aTerainH - (aQuizzPlauer.getY() * aMetreY) - marge - aMetreY * 2.5;
+	    coordonneeY -= TEXT_HIGHT;
 	}
-	return playerY;
+	coordonneeY -= aPlayerImg.getHeight() / 2;
+	return coordonneeY;
     }
 
     @Override
