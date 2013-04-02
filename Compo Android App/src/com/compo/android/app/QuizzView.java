@@ -49,6 +49,8 @@ public class QuizzView extends View {
     protected Matrix _matrixGreenMapping;
     protected Quizz _quizz;
 
+    protected boolean completed = false;
+
     public QuizzView(Context context, AttributeSet attrs) {
 	super(context, attrs);
 	_context = context;
@@ -76,7 +78,6 @@ public class QuizzView extends View {
 
 	_matrix = new Matrix();
 	_matrixGreenMapping = new Matrix();
-
     }
 
     // private Bitmap getBitmapFromAsset(String strName) {
@@ -217,6 +218,8 @@ public class QuizzView extends View {
     protected void onDraw(Canvas canvas) {
 	super.onDraw(canvas);
 
+	completed = false;
+
 	setScaleMatrix();
 	scaleTerrain();
 	scaleGreenMapping();
@@ -237,10 +240,11 @@ public class QuizzView extends View {
 	    if (qp.isCoach()) {
 		printCoach(canvas, qp);
 	    } else {
-		// if (qp.getPlayer().getId() == 1)
 		printPlayer(canvas, qp);
 	    }
 	}
+
+	completed = true;
     }
 
     protected void printCoach(Canvas canvas, QuizzPlayer qp) {
@@ -347,6 +351,9 @@ public class QuizzView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 	boolean b = super.onTouchEvent(event);
+	if (!completed) {
+	    return false;
+	}
 	double screenW = this.getWidth();
 	double terrainW = _terrain.getWidth();
 	double terrainH = _terrain.getHeight();
@@ -378,7 +385,7 @@ public class QuizzView extends View {
 		return b;
 	    }
 	}
-
 	return b;
     }
+
 }
