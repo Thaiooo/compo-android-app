@@ -32,7 +32,7 @@ public class QuizzLevelFragment extends Fragment {
 	final View rootView = inflater.inflate(R.layout.fragment_quizz_menu, container, false);
 
 	_gridview = (GridView) rootView.findViewById(R.id.quizzGrid);
-	_selectPack = (Pack) getActivity().getIntent().getSerializableExtra(SelectPackActivity.EXTRA_MESSAGE);
+	_selectPack = (Pack) getActivity().getIntent().getSerializableExtra(PackDetailsActivity.MESSAGE_SELECTED_PACK);
 
 	Bundle args = getArguments();
 	int levelIndex = args.getInt(EXTRA_MESSAGE_ARG);
@@ -56,10 +56,10 @@ public class QuizzLevelFragment extends Fragment {
 	protected void onPostExecute(final List<Quizz> aQuizzList) {
 	    _gridview.setAdapter(new SelectQuizzAdapter(getActivity(), aQuizzList));
 	    _gridview.setOnItemClickListener(new OnItemClickListener() {
-		
+
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int aPosition, long id) {
-		    
+
 		    Quizz selectQuizz = aQuizzList.get(aPosition);
 		    Intent intent = new Intent(getActivity(), QuizzActivity.class);
 		    intent.putExtra(EXTRA_MESSAGE_QUIZZ, selectQuizz);

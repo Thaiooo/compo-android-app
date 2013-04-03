@@ -16,10 +16,11 @@ import com.compo.android.app.dao.PackDao;
 import com.compo.android.app.dao.UserDao;
 import com.compo.android.app.model.Pack;
 import com.compo.android.app.model.User;
+import com.compo.android.app.utils.UserFactory;
 
 public class SelectPackActivity extends Activity {
 
-    public final static String EXTRA_MESSAGE = "com.compo.android.app.SelectGameActivity.MESSAGE";
+    public final static String MESSAGE_SELECTED_PACK = "com.compo.android.app.SelectGameActivity.MESSAGE1";
 
     private GridView _gridview;
     private TextView _userCredit;
@@ -43,6 +44,7 @@ public class SelectPackActivity extends Activity {
 	protected User doInBackground(Void... params) {
 	    UserDao dao = new UserDao(SelectPackActivity.this);
 	    User u = dao.getUser();
+	    UserFactory.getInstance().setUser(u);
 	    return u;
 	}
 
@@ -66,20 +68,10 @@ public class SelectPackActivity extends Activity {
 	    _gridview.setAdapter(new SelectPackAdapter(SelectPackActivity.this, aPacks));
 	    _gridview.setOnItemClickListener(new OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-
 		    Pack selectPack = aPacks.get(position);
-		    if (selectPack.isLock()) {
-			Intent intent = new Intent(SelectPackActivity.this, PackDetailsActivity.class);
-			intent.putExtra(EXTRA_MESSAGE, selectPack);
-			startActivity(intent);
-
-		    } else {
-			Intent intent = new Intent(SelectPackActivity.this, SelectQuizzActivity.class);
-			intent.putExtra(EXTRA_MESSAGE, selectPack);
-			startActivity(intent);
-
-		    }
-
+		    Intent intent = new Intent(SelectPackActivity.this, PackDetailsActivity.class);
+		    intent.putExtra(MESSAGE_SELECTED_PACK, selectPack);
+		    startActivity(intent);
 		}
 	    });
 
