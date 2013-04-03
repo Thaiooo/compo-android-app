@@ -47,7 +47,6 @@ public class QuizzActivity extends FragmentActivity implements NoticeDialogListe
 	    TextView teamAway = (TextView) findViewById(R.id.team_away);
 	    teamAway.setText(away.getName() + " (" + selectQuizz.getScoreAway() + ")");
 	}
-
     }
 
     @Override
