@@ -52,12 +52,9 @@ public class SelectPackAdapter extends BaseAdapter {
 	name.setTypeface(_font);
 	name.setText(pack.getName());
 
-	TextView desciption = (TextView) vi.findViewById(R.id.pack_description);
-	desciption.setTypeface(_font);
-	desciption.setText(pack.getDescription());
-
 	TextView score = (TextView) vi.findViewById(R.id.pack_score);
-	ImageView image = (ImageView) vi.findViewById(R.id.image_coins);
+	ImageView imageCredit = (ImageView) vi.findViewById(R.id.image_coins);
+	ImageView imageLock = (ImageView) vi.findViewById(R.id.image_lock);
 	TextView scoreLimit = (TextView) vi.findViewById(R.id.pack_score_cost);
 	TextView creditLimit = (TextView) vi.findViewById(R.id.pack_credit_cost);
 	if (!pack.isLock()) {
@@ -67,7 +64,8 @@ public class SelectPackAdapter extends BaseAdapter {
 	    score.setTypeface(_font);
 	    score.setText("0/20");
 
-	    image.setVisibility(View.INVISIBLE);
+	    imageCredit.setVisibility(View.INVISIBLE);
+	    imageLock.setVisibility(View.INVISIBLE);
 
 	    scoreLimit.setVisibility(View.INVISIBLE);
 
@@ -77,7 +75,8 @@ public class SelectPackAdapter extends BaseAdapter {
 	    vi.setBackgroundResource(R.drawable.post_it_red);
 	    score.setVisibility(View.INVISIBLE);
 
-	    image.setVisibility(View.VISIBLE);
+	    imageCredit.setVisibility(View.VISIBLE);
+	    imageLock.setVisibility(View.VISIBLE);
 
 	    scoreLimit.setVisibility(View.VISIBLE);
 	    scoreLimit.setTypeface(_font);
