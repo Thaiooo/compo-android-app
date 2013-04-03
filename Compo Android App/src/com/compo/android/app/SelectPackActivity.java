@@ -70,12 +70,17 @@ public class SelectPackActivity extends Activity {
 
 		    Pack selectPack = aPacks.get(position);
 		    if (selectPack.isLock()) {
-			Toast.makeText(SelectPackActivity.this, "Ce pack est bloqué", Toast.LENGTH_SHORT).show();
-			return;
+			Intent intent = new Intent(SelectPackActivity.this, PackDetailsActivity.class);
+			intent.putExtra(EXTRA_MESSAGE, selectPack);
+			startActivity(intent);
+
+		    } else {
+			Intent intent = new Intent(SelectPackActivity.this, SelectQuizzActivity.class);
+			intent.putExtra(EXTRA_MESSAGE, selectPack);
+			startActivity(intent);
+
 		    }
-		    Intent intent = new Intent(SelectPackActivity.this, SelectQuizzActivity.class);
-		    intent.putExtra(EXTRA_MESSAGE, selectPack);
-		    startActivity(intent);
+
 		}
 	    });
 
