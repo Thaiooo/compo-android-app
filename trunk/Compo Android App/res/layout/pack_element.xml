@@ -9,30 +9,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:textColor="@color/black"
         android:textIsSelectable="false"
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/pack_description"
+        android:id="@+id/pack_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/pack_name"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/black"
-        android:textIsSelectable="false"
-        android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/pack_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pack_description"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:text="dd"
         android:textColor="@color/blue"
         android:textIsSelectable="false"
         android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/image_lock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pack_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/lock"
+        android:textColor="@color/blue" />
 
     <ImageView
         android:id="@+id/image_coins"
