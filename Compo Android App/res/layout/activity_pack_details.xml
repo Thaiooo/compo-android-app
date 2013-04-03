@@ -2,8 +2,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/theme1_background_dialog"
-    tools:context=".SettingActivity" 
-    android:gravity="center_horizontal">
+    android:background="@drawable/theme1_background_dialog" >
+
+    <TextView
+        android:id="@+id/pack_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:textIsSelectable="false"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/pack_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pack_name"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:textIsSelectable="false"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/button_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pack_description"
+        android:layout_centerHorizontal="true"
+        android:onClick="submit"
+        android:layout_marginTop="40dp"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>
