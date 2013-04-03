@@ -38,6 +38,13 @@
                 android:value="com.compo.android.app.MainActivity" />
         </activity>
         <activity
+            android:name=".PackDetailsActivity"
+            android:theme="@style/DialogTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.compo.android.app.PackDetailsActivity" />
+        </activity>
+        <activity
             android:name=".SelectQuizzActivity"
             android:label="@string/activity_select_quizz" >
             <meta-data
