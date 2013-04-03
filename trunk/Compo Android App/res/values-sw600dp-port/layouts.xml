@@ -20,4 +20,4 @@
 
     <item name="activity_select_pack" type="layout">@layout/activity_select_pack_two_col</item>
 
-</resources><!-- END_INCLUDE(all) -->
+</resources> <!-- END_INCLUDE(all) -->
