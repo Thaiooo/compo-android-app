@@ -56,24 +56,36 @@ public class SelectPackAdapter extends BaseAdapter {
 	desciption.setTypeface(_font);
 	desciption.setText(pack.getDescription());
 
+	TextView score = (TextView) vi.findViewById(R.id.pack_score);
+	ImageView image = (ImageView) vi.findViewById(R.id.image_coins);
+	TextView scoreLimit = (TextView) vi.findViewById(R.id.pack_score_cost);
+	TextView creditLimit = (TextView) vi.findViewById(R.id.pack_credit_cost);
 	if (!pack.isLock()) {
-	    TextView score = (TextView) vi.findViewById(R.id.pack_score);
+	    vi.setBackgroundResource(R.drawable.post_it);
+
+	    score.setVisibility(View.VISIBLE);
 	    score.setTypeface(_font);
 	    score.setText("0/20");
 
-	    ImageView image = (ImageView) vi.findViewById(R.id.image_coins);
 	    image.setVisibility(View.INVISIBLE);
+
+	    scoreLimit.setVisibility(View.INVISIBLE);
+
+	    creditLimit.setVisibility(View.INVISIBLE);
+
 	} else {
 	    vi.setBackgroundResource(R.drawable.post_it_red);
-	    TextView scoreLimit = (TextView) vi.findViewById(R.id.pack_score_cost);
+	    score.setVisibility(View.INVISIBLE);
+
+	    image.setVisibility(View.VISIBLE);
+
+	    scoreLimit.setVisibility(View.VISIBLE);
 	    scoreLimit.setTypeface(_font);
 	    scoreLimit.setText(pack.getScoreLimit() + " pts required");
 
-	    TextView creditLimit = (TextView) vi.findViewById(R.id.pack_credit_cost);
-	    if (creditLimit != null) {
-		creditLimit.setTypeface(_font);
-		creditLimit.setText(pack.getCreditLimit() + "");
-	    }
+	    creditLimit.setVisibility(View.VISIBLE);
+	    creditLimit.setTypeface(_font);
+	    creditLimit.setText(pack.getCreditLimit() + "");
 	}
 
 	return vi;
