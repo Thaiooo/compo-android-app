@@ -1,32 +1,56 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/theme1_background_main"
-    tools:context=".MainActivity" >
+    android:layout_height="match_parent" >
 
-    <Button
-        android:id="@+id/button_play"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button_setting"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:onClick="play"
-        android:text="@string/button_play"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+    <include
+        android:id="@+id/score_bar"
+        layout="@layout/score_bar" />
 
-    <Button
-        android:id="@+id/button_setting"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:onClick="setting"
-        android:text="@string/button_setting"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/score_bar"
+        android:background="@drawable/theme1_background_main" >
+
+        <Button
+            android:id="@+id/button_play"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button_store"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:drawableLeft="@drawable/interrogation"
+            android:onClick="play"
+            android:text="@string/button_play"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_store"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button_setting"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:drawableLeft="@drawable/coins"
+            android:onClick="store"
+            android:text="@string/button_store"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_setting"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:drawableLeft="@drawable/setting"
+            android:onClick="setting"
+            android:text="@string/button_setting"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
 </RelativeLayout>
