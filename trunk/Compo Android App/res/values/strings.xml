@@ -6,6 +6,7 @@
     <string name="button_play">Jouer</string>
     <string name="button_setting">Parmètres</string>
     <string name="button_check">Valider</string>
+    <string name="button_store">Plus de crédit!</string>
     <string name="button_cancel">Annuler</string>
     <string name="activity_setting">Parmètres</string>
     <string name="activity_select_pack">Selection Pack</string>

@@ -13,7 +13,6 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.compo.android.app.dao.PackDao;
-import com.compo.android.app.dao.UserDao;
 import com.compo.android.app.model.Pack;
 import com.compo.android.app.model.User;
 import com.compo.android.app.utils.UserFactory;
@@ -39,19 +38,13 @@ public class SelectPackActivity extends Activity {
 	new LoadPackTask().execute();
     }
 
-    private class LoadUserTask extends AsyncTask<Void, Void, User> {
+    private class LoadUserTask extends AsyncTask<Void, Void, Void> {
 	@Override
-	protected User doInBackground(Void... params) {
-	    UserDao dao = new UserDao(SelectPackActivity.this);
-	    User u = dao.getUser();
-	    UserFactory.getInstance().setUser(u);
-	    return u;
-	}
-
-	@Override
-	protected void onPostExecute(User anUser) {
-	    _userCredit.setText(anUser.getCredit() + "");
-	    _userPoint.setText(anUser.getPoint() + " pts");
+	protected Void doInBackground(Void... params) {
+	    User u = UserFactory.getInstance().getUser();
+	    _userCredit.setText(u.getCredit() + "");
+	    _userPoint.setText(u.getPoint() + " pts");
+	    return null;
 	}
     }
 
