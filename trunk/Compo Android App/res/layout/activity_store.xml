@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/theme1_background_dialog"
+    android:gravity="center_horizontal" >
+
+    <TextView
+        android:id="@+id/store_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Obtenez des crédits!"
+        android:textColor="@color/black"
+        android:textIsSelectable="false"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/button_credit_25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/store_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="25 crédits"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:width="300dp" />
+
+    <Button
+        android:id="@+id/button_credit_100"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_credit_25"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="100 crédits"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:width="300dp" />
+
+    <Button
+        android:id="@+id/button_credit_500"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_credit_100"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="500 crédits"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:width="300dp" />
+
+</RelativeLayout>

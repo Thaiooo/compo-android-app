@@ -35,7 +35,14 @@
             android:theme="@style/DialogTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.compo.android.app.MainActivity" />
+                android:value="com.compo.android.app.SettingActivity" />
+        </activity>
+        <activity
+            android:name=".StoreActivity"
+            android:theme="@style/DialogTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.compo.android.app.StoreActivity" />
         </activity>
         <activity
             android:name=".PackDetailsActivity"
