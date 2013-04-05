@@ -72,6 +72,8 @@ public class MainActivity extends Activity {
     }
 
     public void store(View view) {
+	Intent intent = new Intent(MainActivity.this, StoreActivity.class);
+	startActivity(intent);
     }
 
     public void setting(View view) {
