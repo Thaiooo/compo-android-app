@@ -1,0 +1,36 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <include
+        android:id="@+id/score_bar"
+        layout="@layout/score_bar" />
+
+    <RelativeLayout
+        android:id="@+id/title_page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/score_bar"
+        android:background="@drawable/theme1_background_main_haut" >
+
+        <TextView
+            android:id="@+id/activity_theme_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_select_theme"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:textIsSelectable="false"
+            android:textSize="40dp" />
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title_page"
+        android:background="@drawable/theme1_background_main_bas" >
+    </android.support.v4.view.ViewPager>
+
+</RelativeLayout>

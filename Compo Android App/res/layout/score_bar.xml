@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 
-    android:background="@drawable/theme1_background_head">
+    android:background="@drawable/theme1_background_transparent">
 
     <TextView
         android:id="@+id/user_point"
@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="30dp"
-        android:textColor="@color/black"
+        android:textColor="@android:color/white"
         android:textIsSelectable="false"
         android:textSize="20sp" />
 
@@ -22,7 +22,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="30dp"
         android:layout_toLeftOf="@+id/user_point"
-        android:textColor="@color/black"
+        android:textColor="@android:color/white"
         android:textIsSelectable="false"
         android:textSize="20sp" />
 
