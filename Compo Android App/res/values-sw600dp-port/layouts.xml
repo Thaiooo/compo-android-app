@@ -20,5 +20,6 @@
 
     <item name="activity_select_pack" type="layout">@layout/activity_select_pack_two_col</item>
     <item name="activity_select_theme" type="layout">@layout/activity_select_theme_600dp</item>
+    <item name="activity_main" type="layout">@layout/activity_main_600dp</item>
 
 </resources> <!-- END_INCLUDE(all) -->
