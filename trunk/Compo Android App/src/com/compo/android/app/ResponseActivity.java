@@ -19,7 +19,7 @@ public class ResponseActivity extends Activity {
 	EditText edit = (EditText) findViewById(R.id.edit_response);
 
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(getAssets(), "MyLuckyPenny.ttf");
+	    _font = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
 	}
 	edit.setTypeface(_font);
     }

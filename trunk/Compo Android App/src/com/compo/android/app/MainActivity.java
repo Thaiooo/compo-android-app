@@ -21,8 +21,11 @@ import com.compo.android.app.utils.UserFactory;
 public class MainActivity extends Activity {
 
     private static Typeface _font;
+    private static Typeface _fontTitle;
     private TextView _userCredit;
     private TextView _userPoint;
+    private TextView _titlePart1;
+    private TextView _titlePart2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,9 @@ public class MainActivity extends Activity {
 
 	_userCredit = (TextView) findViewById(R.id.user_credit);
 	_userPoint = (TextView) findViewById(R.id.user_point);
+	_titlePart1 = (TextView) findViewById(R.id.titre_part1);
+	_titlePart2 = (TextView) findViewById(R.id.titre_part2);
+
 	Button buttonPlay = (Button) findViewById(R.id.button_play);
 	Button buttonStore = (Button) findViewById(R.id.button_store);
 	Button buttonSetting = (Button) findViewById(R.id.button_setting);
@@ -41,6 +47,14 @@ public class MainActivity extends Activity {
 	buttonPlay.setTypeface(_font);
 	buttonStore.setTypeface(_font);
 	buttonSetting.setTypeface(_font);
+
+	if (_fontTitle == null) {
+	    // Eraser.ttf
+	    // HVD_Peace.ttf
+	    _fontTitle = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
+	}
+	_titlePart1.setTypeface(_fontTitle);
+	_titlePart2.setTypeface(_fontTitle);
 
 	DataBaseHelper myDbHelper = new DataBaseHelper(this);
 
@@ -66,9 +80,9 @@ public class MainActivity extends Activity {
     }
 
     public void play(View view) {
-	Intent intent = new Intent(MainActivity.this, SelectPackActivity.class);
+	Intent intent = new Intent(MainActivity.this, SelectThemeActivity.class);
 	startActivity(intent);
-
+	overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     public void store(View view) {
