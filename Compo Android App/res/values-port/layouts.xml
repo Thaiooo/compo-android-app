@@ -19,5 +19,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item name="activity_quizz" type="layout">@layout/activity_quizz_port</item>
+    <item name="activity_select_theme" type="layout">@layout/activity_select_theme_small</item>
 
 </resources> <!-- END_INCLUDE(all) -->
