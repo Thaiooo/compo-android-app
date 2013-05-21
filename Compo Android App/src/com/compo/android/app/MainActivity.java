@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_main_small);
+	setContentView(R.layout.activity_main);
 
 	_userCredit = (TextView) findViewById(R.id.user_credit);
 	_userPoint = (TextView) findViewById(R.id.user_point);
