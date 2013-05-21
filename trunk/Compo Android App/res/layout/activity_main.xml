@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/theme1_background" >
 
     <include
         android:id="@+id/score_bar"
@@ -11,16 +12,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/score_bar"
-        android:background="@drawable/theme1_background_main" >
+        android:background="@drawable/theme1_cadre" >
+
+        <TextView
+            android:id="@+id/titre_part1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30sp"
+            android:text="@string/app_name_part1"
+            android:textColor="@android:color/white"
+            android:textSize="60sp" />
+
+        <TextView
+            android:id="@+id/titre_part2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titre_part1"
+            android:layout_centerHorizontal="true"
+            android:text="@string/app_name_part2"
+            android:textColor="@android:color/white"
+            android:textSize="60sp" />
 
         <Button
             android:id="@+id/button_play"
             style="@style/sticky_green_btn"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/button_store"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_centerHorizontal="true"
             android:onClick="play"
             android:text="@string/button_play"
             android:textSize="24sp"
@@ -29,11 +50,10 @@
         <Button
             android:id="@+id/button_store"
             style="@style/sticky_yellow_btn"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
             android:onClick="store"
             android:text="@string/button_store"
             android:textSize="24sp"
@@ -42,11 +62,10 @@
         <Button
             android:id="@+id/button_setting"
             style="@style/sticky_blue_btn"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/button_store"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_centerHorizontal="true"
             android:onClick="setting"
             android:text="@string/button_setting"
             android:textSize="24sp"
