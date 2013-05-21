@@ -37,11 +37,12 @@
 
         <Button
             android:id="@+id/button_play"
-            style="@style/sticky_green_btn"
+            style="@style/paper_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/button_store"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="10sp"
             android:onClick="play"
             android:text="@string/button_play"
             android:textSize="24sp"
@@ -49,11 +50,12 @@
 
         <Button
             android:id="@+id/button_store"
-            style="@style/sticky_yellow_btn"
+            style="@style/paper_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:layout_marginTop="10sp"
             android:onClick="store"
             android:text="@string/button_store"
             android:textSize="24sp"
@@ -61,11 +63,12 @@
 
         <Button
             android:id="@+id/button_setting"
-            style="@style/sticky_blue_btn"
+            style="@style/paper_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/button_store"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="10sp"
             android:onClick="setting"
             android:text="@string/button_setting"
             android:textSize="24sp"
