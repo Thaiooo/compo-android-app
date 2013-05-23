@@ -20,6 +20,6 @@
 
     <item name="activity_quizz" type="layout">@layout/activity_quizz_land</item>
     <item name="activity_select_theme" type="layout">@layout/activity_select_theme_small</item>
-    <item name="activity_main" type="layout">@layout/activity_main_small</item>
+    <item name="activity_main" type="layout">@layout/activity_main_normal</item>
 
 </resources><!-- END_INCLUDE(all) -->
