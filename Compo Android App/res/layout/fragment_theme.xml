@@ -17,6 +17,6 @@
         android:layout_centerHorizontal="true"
         android:textColor="@color/black"
         android:textIsSelectable="false"
-        android:textSize="24sp" />
+        android:textSize="@dimen/theme_name_font_size" />
 
 </RelativeLayout>
