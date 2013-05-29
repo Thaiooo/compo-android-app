@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="main_title_font_size">30dp</dimen>
+    <dimen name="main_title_margin_top">30dp</dimen>
+    <dimen name="main_button_font_size">24dp</dimen>
+
+    <dimen name="theme_title_font_size">25dp</dimen>
+    <dimen name="theme_name_font_size">30dp</dimen>
+</resources>
