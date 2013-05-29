@@ -2,7 +2,17 @@
     <dimen name="main_title_font_size">60dp</dimen>
     <dimen name="main_title_margin_top">30dp</dimen>
     <dimen name="main_button_font_size">40dp</dimen>
+    <dimen name="main_button_play_width">180dp</dimen>
+    <dimen name="main_button_store_width">320dp</dimen>
+    <dimen name="main_button_setting_width">260dp</dimen>
+
+    <dimen name="score_font_size">20dp</dimen>
 
     <dimen name="theme_title_font_size">50dp</dimen>
     <dimen name="theme_name_font_size">30dp</dimen>
+
+    <dimen name="store_title_font_size">40dp</dimen>
+    <dimen name="store_button_font_size">40dp</dimen>
+    <dimen name="store_button_width">300dp</dimen>
+
 </resources>
