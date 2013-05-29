@@ -22,7 +22,7 @@
             android:layout_centerHorizontal="true"
             android:textColor="@color/black"
             android:textIsSelectable="false"
-            android:textSize="40dp" />
+            android:textSize="@dimen/theme_title_font_size" />
     </RelativeLayout>
 
     <android.support.v4.view.ViewPager
