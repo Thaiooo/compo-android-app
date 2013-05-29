@@ -17,10 +17,18 @@
         <item name="android:background">@drawable/sticky_green_btn</item>
     </style>
 
-     <style name="paper_btn" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/paper_btn</item>
+    <style name="paper_post_it_bleu_btn" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/paper_post_it_bleu_btn</item>
     </style>
-    
+
+    <style name="paper_post_it_orange_btn" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/paper_post_it_orange_btn</item>
+    </style>
+
+    <style name="paper_post_it_green_btn" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/paper_post_it_green_btn</item>
+    </style>
+
     <style name="sticky_blue_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/sticky_blue_btn</item>
     </style>

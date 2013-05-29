@@ -1,54 +1,56 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/theme1_background_dialog"
-    android:gravity="center_horizontal" >
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/theme1_background_dialog"
+                android:gravity="center_horizontal">
 
     <TextView
-        android:id="@+id/store_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Obtenez des crédits!"
-        android:textColor="@color/black"
-        android:textIsSelectable="false"
-        android:textSize="24sp" />
+            android:id="@+id/store_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/store.title"
+            android:textColor="@android:color/black"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/store_title_font_size"/>
 
     <Button
-        android:id="@+id/button_credit_25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/store_title"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="25 crédits"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:width="300dp" />
+            android:id="@+id/button_credit_25"
+            style="@style/paper_post_it_bleu_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/store_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/store.pack.a"
+            android:textSize="@dimen/store_button_font_size"
+            android:textStyle="bold"
+            android:width="@dimen/store_button_width"/>
 
     <Button
-        android:id="@+id/button_credit_100"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button_credit_25"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:text="100 crédits"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:width="300dp" />
+            android:id="@+id/button_credit_100"
+            style="@style/paper_post_it_orange_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_credit_25"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="@string/store.pack.b"
+            android:textSize="@dimen/store_button_font_size"
+            android:textStyle="bold"
+            android:width="@dimen/store_button_width"/>
 
     <Button
-        android:id="@+id/button_credit_500"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button_credit_100"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:text="500 crédits"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:width="300dp" />
+            android:id="@+id/button_credit_500"
+            style="@style/paper_post_it_green_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_credit_100"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="@string/store.pack.c"
+            android:textSize="@dimen/store_button_font_size"
+            android:textStyle="bold"
+            android:width="@dimen/store_button_width"/>
 
 </RelativeLayout>

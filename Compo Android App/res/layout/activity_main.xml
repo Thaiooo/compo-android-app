@@ -37,7 +37,7 @@
 
         <Button
                 android:id="@+id/button_play"
-                style="@style/paper_btn"
+                style="@style/paper_post_it_bleu_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/button_store"
@@ -46,11 +46,12 @@
                 android:onClick="play"
                 android:text="@string/button_play"
                 android:textSize="@dimen/main_button_font_size"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:width="@dimen/main_button_play_width"/>
 
         <Button
                 android:id="@+id/button_store"
-                style="@style/paper_btn"
+                style="@style/paper_post_it_green_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -59,11 +60,12 @@
                 android:onClick="store"
                 android:text="@string/button_store"
                 android:textSize="@dimen/main_button_font_size"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:width="@dimen/main_button_store_width"/>
 
         <Button
                 android:id="@+id/button_setting"
-                style="@style/paper_btn"
+                style="@style/paper_post_it_orange_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/button_store"
@@ -72,7 +74,8 @@
                 android:onClick="setting"
                 android:text="@string/button_setting"
                 android:textSize="@dimen/main_button_font_size"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:width="@dimen/main_button_setting_width"/>
     </RelativeLayout>
 
 </RelativeLayout>

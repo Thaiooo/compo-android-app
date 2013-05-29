@@ -15,6 +15,10 @@
     <string name="activity_quizz">Composition</string>
     <string name="activity_select_quizz">Selection Quizz</string>
     <string name="dialog_response">Who is the player</string>
+    <string name="store.title">Obtenez des crédits!</string>
+    <string name="store.pack.a">25 crédits</string>
+    <string name="store.pack.b">100 crédits</string>
+    <string name="store.pack.c">500 crédits</string>
 
     <dimen name="myFontSize">10sp</dimen>
 
