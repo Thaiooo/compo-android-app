@@ -19,6 +19,7 @@
     <string name="store.pack.a">25 crédits</string>
     <string name="store.pack.b">100 crédits</string>
     <string name="store.pack.c">500 crédits</string>
+    <string name="setting.title">Paramètres</string>
 
     <dimen name="myFontSize">10sp</dimen>
 

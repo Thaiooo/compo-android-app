@@ -16,7 +16,7 @@
 
     <Button
             android:id="@+id/button_credit_25"
-            style="@style/paper_post_it_bleu_btn"
+            style="@style/paper_post_it_purple_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/store_title"
@@ -42,7 +42,7 @@
 
     <Button
             android:id="@+id/button_credit_500"
-            style="@style/paper_post_it_green_btn"
+            style="@style/paper_post_it_yellow_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/button_credit_100"

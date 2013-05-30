@@ -65,7 +65,7 @@
 
         <Button
                 android:id="@+id/button_setting"
-                style="@style/paper_post_it_orange_btn"
+                style="@style/paper_post_it_red_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/button_store"
