@@ -1,9 +1,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/theme1_background_dialog"
-    tools:context=".SettingActivity" 
-    android:gravity="center_horizontal">
+                android:layout_width="@dimen/setting_dialog_width"
+                android:layout_height="wrap_content"
+                android:background="@drawable/theme1_background_dialog"
+                android:gravity="center_horizontal">
+
+    <TextView
+            android:id="@+id/store_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/setting.title"
+            android:textColor="@android:color/black"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/setting_title_font_size"/>
+
+    <Button
+            android:id="@+id/button_flag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/flag_fr"
+            android:layout_below="@+id/store_title"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:onClick="changeLanguage"/>
+
+    <Button
+            android:id="@+id/button_sound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_flag"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/sound"
+            android:onClick="changeSound"/>
 
 </RelativeLayout>
