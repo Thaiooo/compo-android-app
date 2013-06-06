@@ -1,22 +1,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/theme1_background_theme">
 
     <ImageView
-        android:id="@+id/theme_image_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true" />
+            android:id="@+id/theme_image_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="top"/>
 
     <TextView
-        android:id="@+id/theme_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/theme_image_id"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/black"
-        android:textIsSelectable="false"
-        android:textSize="@dimen/theme_name_font_size" />
+            android:id="@+id/theme_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/theme_image_id"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/black"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/theme_name_font_size"/>
 
 </RelativeLayout>

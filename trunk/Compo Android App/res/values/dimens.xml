@@ -9,7 +9,9 @@
     <dimen name="score_font_size">20dp</dimen>
 
     <dimen name="theme_title_font_size">25dp</dimen>
-    <dimen name="theme_name_font_size">20dp</dimen>
+    <dimen name="theme_name_font_size">15dp</dimen>
+    <dimen name="theme_image_margin_top">25dp</dimen>
+    <dimen name="theme_image_height">250dp</dimen>
 
     <dimen name="store_title_font_size">24dp</dimen>
     <dimen name="store_button_font_size">24dp</dimen>

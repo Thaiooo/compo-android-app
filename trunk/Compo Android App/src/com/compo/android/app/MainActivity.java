@@ -23,8 +23,7 @@ public class MainActivity extends Activity {
     private static Typeface _fontTitle;
     private TextView _userCredit;
     private TextView _userPoint;
-    private TextView _titlePart1;
-    private TextView _titlePart2;
+    private TextView _appTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +32,7 @@ public class MainActivity extends Activity {
 
         _userCredit = (TextView) findViewById(R.id.user_credit);
         _userPoint = (TextView) findViewById(R.id.user_point);
-        _titlePart1 = (TextView) findViewById(R.id.titre_part1);
-        _titlePart2 = (TextView) findViewById(R.id.titre_part2);
+        _appTitle = (TextView) findViewById(R.id.app_titre);
 
         Button buttonPlay = (Button) findViewById(R.id.button_play);
         Button buttonStore = (Button) findViewById(R.id.button_store);
@@ -53,8 +51,7 @@ public class MainActivity extends Activity {
             // HVD_Peace.ttf
             _fontTitle = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
         }
-        _titlePart1.setTypeface(_fontTitle);
-        _titlePart2.setTypeface(_fontTitle);
+        _appTitle.setTypeface(_fontTitle);
 
         DataBaseHelper myDbHelper = new DataBaseHelper(this);
 
