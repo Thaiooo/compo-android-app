@@ -16,7 +16,7 @@ import java.util.List;
 
 public class SelectThemeActivity extends FragmentActivity {
 
-    private static Typeface _font;
+    private static Typeface _fontTitle;
     private ViewPager _mViewPager;
     private TextView _userCredit;
     private TextView _userPoint;
@@ -26,15 +26,15 @@ public class SelectThemeActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_theme);
 
-        if (_font == null) {
-            _font = Typeface.createFromAsset(getAssets(), "MyLuckyPenny.ttf");
+        if (_fontTitle == null) {
+            _fontTitle = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
         }
 
         _userCredit = (TextView) findViewById(R.id.user_credit);
         _userPoint = (TextView) findViewById(R.id.user_point);
         _mViewPager = (ViewPager) findViewById(R.id.pager);
         _activity_theme_title = (TextView) findViewById(R.id.activity_theme_title);
-        _activity_theme_title.setTypeface(_font);
+        _activity_theme_title.setTypeface(_fontTitle);
 
         new LoadUserTask().execute();
         new LoadThemeTask().execute();
