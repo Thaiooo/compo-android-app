@@ -11,18 +11,18 @@ public class UserFactory {
     }
 
     public static UserFactory getInstance() {
-	if (instance == null) {
-	    instance = new UserFactory();
-	}
-	return instance;
+        if (instance == null) {
+            instance = new UserFactory();
+        }
+        return instance;
     }
 
     public User getUser() {
-	return user;
+        return user;
     }
 
     public void setUser(User anUser) {
-	user = anUser;
+        user = anUser;
     }
 
 }

@@ -12,16 +12,16 @@ public class ResponseActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	requestWindowFeature(Window.FEATURE_NO_TITLE);
-	setContentView(R.layout.activity_response);
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_response);
 
-	EditText edit = (EditText) findViewById(R.id.edit_response);
+        EditText edit = (EditText) findViewById(R.id.edit_response);
 
-	if (_font == null) {
-	    _font = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
-	}
-	edit.setTypeface(_font);
+        if (_font == null) {
+            _font = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
+        }
+        edit.setTypeface(_font);
     }
 
 }

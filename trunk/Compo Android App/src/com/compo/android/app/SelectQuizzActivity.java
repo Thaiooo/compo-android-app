@@ -16,28 +16,28 @@ public class SelectQuizzActivity extends FragmentActivity {
     private TextView _userPoint;
 
     public void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_select_quizz);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_select_quizz);
 
-	_userCredit = (TextView) findViewById(R.id.user_credit);
-	_userPoint = (TextView) findViewById(R.id.user_point);
-	_mViewPager = (ViewPager) findViewById(R.id.pager);
+        _userCredit = (TextView) findViewById(R.id.user_credit);
+        _userPoint = (TextView) findViewById(R.id.user_point);
+        _mViewPager = (ViewPager) findViewById(R.id.pager);
 
-	SelectQuizzLevelAdapter collectionQuizzLevelPagerAdapter = new SelectQuizzLevelAdapter(
-		getSupportFragmentManager());
-	_mViewPager.setAdapter(collectionQuizzLevelPagerAdapter);
+        SelectQuizzLevelAdapter collectionQuizzLevelPagerAdapter = new SelectQuizzLevelAdapter(
+                getSupportFragmentManager());
+        _mViewPager.setAdapter(collectionQuizzLevelPagerAdapter);
 
-	new LoadUserTask().execute();
+        new LoadUserTask().execute();
     }
 
     private class LoadUserTask extends AsyncTask<Void, Void, Void> {
-	@Override
-	protected Void doInBackground(Void... params) {
-	    User u = UserFactory.getInstance().getUser();
-	    _userCredit.setText(u.getCredit() + "");
-	    _userPoint.setText(u.getPoint() + " pts");
-	    return null;
-	}
+        @Override
+        protected Void doInBackground(Void... params) {
+            User u = UserFactory.getInstance().getUser();
+            _userCredit.setText(u.getCredit() + "");
+            _userPoint.setText(u.getPoint() + " pts");
+            return null;
+        }
 
     }
 

@@ -11,17 +11,17 @@ public enum Level {
     int index;
 
     Level(int anIndex) {
-	index = anIndex;
+        index = anIndex;
     }
 
     public static Level getLevel(int anIndex) {
-	switch (anIndex) {
-	case 0:
-	    return EASY;
-	case 1:
-	    return INTERMEDIATE;
-	default:
-	    return HARD;
-	}
+        switch (anIndex) {
+            case 0:
+                return EASY;
+            case 1:
+                return INTERMEDIATE;
+            default:
+                return HARD;
+        }
     }
 }

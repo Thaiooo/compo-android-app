@@ -1,7 +1,5 @@
 package com.compo.android.app;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -17,6 +15,8 @@ import com.compo.android.app.model.Pack;
 import com.compo.android.app.model.User;
 import com.compo.android.app.utils.UserFactory;
 
+import java.util.List;
+
 public class SelectPackActivity extends Activity {
 
     public final static String MESSAGE_SELECTED_PACK = "com.compo.android.app.SelectGameActivity.MESSAGE1";
@@ -27,48 +27,48 @@ public class SelectPackActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_select_pack);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_select_pack);
 
-	_userCredit = (TextView) findViewById(R.id.user_credit);
-	_userPoint = (TextView) findViewById(R.id.user_point);
-	_gridview = (GridView) findViewById(R.id.gridview);
+        _userCredit = (TextView) findViewById(R.id.user_credit);
+        _userPoint = (TextView) findViewById(R.id.user_point);
+        _gridview = (GridView) findViewById(R.id.gridview);
 
-	new LoadUserTask().execute();
-	new LoadPackTask().execute();
+        new LoadUserTask().execute();
+        new LoadPackTask().execute();
     }
 
     private class LoadUserTask extends AsyncTask<Void, Void, Void> {
-	@Override
-	protected Void doInBackground(Void... params) {
-	    User u = UserFactory.getInstance().getUser();
-	    _userCredit.setText(u.getCredit() + "");
-	    _userPoint.setText(u.getPoint() + " pts");
-	    return null;
-	}
+        @Override
+        protected Void doInBackground(Void... params) {
+            User u = UserFactory.getInstance().getUser();
+            _userCredit.setText(u.getCredit() + "");
+            _userPoint.setText(u.getPoint() + " pts");
+            return null;
+        }
     }
 
     private class LoadPackTask extends AsyncTask<Void, Void, List<Pack>> {
-	@Override
-	protected List<Pack> doInBackground(Void... params) {
-	    PackDao dao = new PackDao(SelectPackActivity.this);
-	    List<Pack> gamePacks = dao.getAllPack();
-	    return gamePacks;
-	}
+        @Override
+        protected List<Pack> doInBackground(Void... params) {
+            PackDao dao = new PackDao(SelectPackActivity.this);
+            List<Pack> gamePacks = dao.getAllPack();
+            return gamePacks;
+        }
 
-	@Override
-	protected void onPostExecute(final List<Pack> aPacks) {
-	    _gridview.setAdapter(new SelectPackAdapter(SelectPackActivity.this, aPacks));
-	    _gridview.setOnItemClickListener(new OnItemClickListener() {
-		public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-		    Pack selectPack = aPacks.get(position);
-		    Intent intent = new Intent(SelectPackActivity.this, PackDetailsActivity.class);
-		    intent.putExtra(MESSAGE_SELECTED_PACK, selectPack);
-		    startActivity(intent);
-		}
-	    });
+        @Override
+        protected void onPostExecute(final List<Pack> aPacks) {
+            _gridview.setAdapter(new SelectPackAdapter(SelectPackActivity.this, aPacks));
+            _gridview.setOnItemClickListener(new OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                    Pack selectPack = aPacks.get(position);
+                    Intent intent = new Intent(SelectPackActivity.this, PackDetailsActivity.class);
+                    intent.putExtra(MESSAGE_SELECTED_PACK, selectPack);
+                    startActivity(intent);
+                }
+            });
 
-	}
+        }
     }
 
 }

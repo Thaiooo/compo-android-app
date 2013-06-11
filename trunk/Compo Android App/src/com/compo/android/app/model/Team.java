@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Team implements Serializable {
 
     /**
-	 */
+     */
     private static final long serialVersionUID = 1L;
 
     private Long id;
@@ -13,27 +13,27 @@ public class Team implements Serializable {
     private String code;
 
     public Long getId() {
-	return id;
+        return id;
     }
 
     public void setId(Long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public void setName(String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public String getCode() {
-	return code;
+        return code;
     }
 
     public void setCode(String code) {
-	this.code = code;
+        this.code = code;
     }
 
 }

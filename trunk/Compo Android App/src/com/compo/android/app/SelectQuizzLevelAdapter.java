@@ -8,33 +8,33 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 public class SelectQuizzLevelAdapter extends FragmentStatePagerAdapter {
 
     public SelectQuizzLevelAdapter(FragmentManager fm) {
-	super(fm);
+        super(fm);
     }
 
     @Override
     public Fragment getItem(int i) {
-	Fragment fragment = new QuizzLevelFragment();
-	Bundle args = new Bundle();
-	args.putInt(QuizzLevelFragment.EXTRA_MESSAGE_ARG, i);
-	fragment.setArguments(args);
-	return fragment;
+        Fragment fragment = new QuizzLevelFragment();
+        Bundle args = new Bundle();
+        args.putInt(QuizzLevelFragment.EXTRA_MESSAGE_ARG, i);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
     public int getCount() {
-	return 3;
+        return 3;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-	switch (position) {
-	case 0:
-	    return "Simple";
-	case 1:
-	    return "Intermédiaire";
+        switch (position) {
+            case 0:
+                return "Simple";
+            case 1:
+                return "Intermï¿½diaire";
 
-	default:
-	    return "Difficile";
-	}
+            default:
+                return "Difficile";
+        }
     }
 }
