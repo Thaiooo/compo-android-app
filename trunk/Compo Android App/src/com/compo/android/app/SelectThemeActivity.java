@@ -60,7 +60,7 @@ public class SelectThemeActivity extends FragmentActivity {
 
         @Override
         protected void onPostExecute(final List<Theme> aThemes) {
-            SelectThemeLevelAdapter collectionThemeLevelPagerAdapter = new SelectThemeLevelAdapter(
+            SelectThemeAdapter collectionThemeLevelPagerAdapter = new SelectThemeAdapter(
                     getSupportFragmentManager(), aThemes);
             _mViewPager.setAdapter(collectionThemeLevelPagerAdapter);
         }
