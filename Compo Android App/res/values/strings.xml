@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">Legendary\nStarting 11</string>
+    <string name="app_name">Legendary Starting 11</string>
+    <string name="main_title">Legendary\nStarting 11</string>
     <string name="menu_settings">Settings</string>
     <string name="button_play">Jouer</string>
     <string name="button_setting">Parmètres</string>
