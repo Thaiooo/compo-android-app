@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Pack implements Serializable {
     /**
-	 */
+     */
     private static final long serialVersionUID = 1L;
 
     private long id;
@@ -18,59 +18,59 @@ public class Pack implements Serializable {
     private List<Quizz> quizzList = new ArrayList<Quizz>();
 
     public boolean isLock() {
-	return lock;
+        return lock;
     }
 
     public void setLock(boolean lock) {
-	this.lock = lock;
+        this.lock = lock;
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public void setName(String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public String getDescription() {
-	return description;
+        return description;
     }
 
     public void setDescription(String description) {
-	this.description = description;
+        this.description = description;
     }
 
     public List<Quizz> getQuizzList() {
-	return quizzList;
+        return quizzList;
     }
 
     public void setQuizzList(List<Quizz> quizzList) {
-	this.quizzList = quizzList;
+        this.quizzList = quizzList;
     }
 
     public long getId() {
-	return id;
+        return id;
     }
 
     public void setId(long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public int getScoreLimit() {
-	return scoreLimit;
+        return scoreLimit;
     }
 
     public void setScoreLimit(int scoreLimit) {
-	this.scoreLimit = scoreLimit;
+        this.scoreLimit = scoreLimit;
     }
 
     public int getCreditLimit() {
-	return creditLimit;
+        return creditLimit;
     }
 
     public void setCreditLimit(int creditLimit) {
-	this.creditLimit = creditLimit;
+        this.creditLimit = creditLimit;
     }
 
 }

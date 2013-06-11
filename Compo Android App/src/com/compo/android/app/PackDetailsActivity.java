@@ -19,45 +19,45 @@ public class PackDetailsActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
-	requestWindowFeature(Window.FEATURE_NO_TITLE);
-	setContentView(R.layout.activity_pack_details);
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_pack_details);
 
-	if (_font == null) {
-	    _font = Typeface.createFromAsset(getAssets(), "MyLuckyPenny.ttf");
-	}
+        if (_font == null) {
+            _font = Typeface.createFromAsset(getAssets(), "MyLuckyPenny.ttf");
+        }
 
-	Intent intent = getIntent();
-	_selectPack = (Pack) intent.getSerializableExtra(SelectPackActivity.MESSAGE_SELECTED_PACK);
+        Intent intent = getIntent();
+        _selectPack = (Pack) intent.getSerializableExtra(SelectPackActivity.MESSAGE_SELECTED_PACK);
 
-	TextView name = (TextView) findViewById(R.id.pack_name);
-	name.setTypeface(_font);
-	name.setText(_selectPack.getName());
+        TextView name = (TextView) findViewById(R.id.pack_name);
+        name.setTypeface(_font);
+        name.setText(_selectPack.getName());
 
-	TextView desciption = (TextView) findViewById(R.id.pack_description);
-	desciption.setTypeface(_font);
-	desciption.setText(_selectPack.getDescription());
+        TextView desciption = (TextView) findViewById(R.id.pack_description);
+        desciption.setTypeface(_font);
+        desciption.setText(_selectPack.getDescription());
 
-	Button buttonSubmit = (Button) findViewById(R.id.button_submit);
-	buttonSubmit.setTypeface(_font);
-	if (_selectPack.isLock()) {
-	    buttonSubmit.setText("L'obtenir pour " + _selectPack.getCreditLimit() + " crédit ?");
-	} else {
-	    buttonSubmit.setText("Jouer!");
-	}
+        Button buttonSubmit = (Button) findViewById(R.id.button_submit);
+        buttonSubmit.setTypeface(_font);
+        if (_selectPack.isLock()) {
+            buttonSubmit.setText("L'obtenir pour " + _selectPack.getCreditLimit() + " crï¿½dit ?");
+        } else {
+            buttonSubmit.setText("Jouer!");
+        }
 
     }
 
     public void submit(View view) {
-	Intent intent;
-	if (_selectPack.isLock()) {
+        Intent intent;
+        if (_selectPack.isLock()) {
 
-	} else {
-	    intent = new Intent(PackDetailsActivity.this, SelectQuizzActivity.class);
-	    intent.putExtra(MESSAGE_SELECTED_PACK, _selectPack);
-	    startActivity(intent);
-	    this.finish();
-	}
+        } else {
+            intent = new Intent(PackDetailsActivity.this, SelectQuizzActivity.class);
+            intent.putExtra(MESSAGE_SELECTED_PACK, _selectPack);
+            startActivity(intent);
+            this.finish();
+        }
 
     }
 

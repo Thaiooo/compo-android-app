@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Theme implements Serializable {
     /**
-   	 */
+     */
     private static final long serialVersionUID = 1L;
 
     private long id;
@@ -15,35 +15,35 @@ public class Theme implements Serializable {
     private List<Pack> packList = new ArrayList<Pack>();
 
     public long getId() {
-	return id;
+        return id;
     }
 
     public void setId(long id) {
-	this.id = id;
+        this.id = id;
     }
 
     public String getCode() {
-	return code;
+        return code;
     }
 
     public void setCode(String code) {
-	this.code = code;
+        this.code = code;
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public void setName(String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public List<Pack> getPackList() {
-	return packList;
+        return packList;
     }
 
     public void setPackList(List<Pack> packList) {
-	this.packList = packList;
+        this.packList = packList;
     }
 
 }
