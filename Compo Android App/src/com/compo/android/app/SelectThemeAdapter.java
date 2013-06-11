@@ -9,11 +9,11 @@ import com.compo.android.app.model.Theme;
 
 import java.util.List;
 
-public class SelectThemeLevelAdapter extends FragmentStatePagerAdapter {
+public class SelectThemeAdapter extends FragmentStatePagerAdapter {
 
     private List<Theme> _themes;
 
-    public SelectThemeLevelAdapter(FragmentManager fm, List<Theme> aThemes) {
+    public SelectThemeAdapter(FragmentManager fm, List<Theme> aThemes) {
         super(fm);
         _themes = aThemes;
     }
