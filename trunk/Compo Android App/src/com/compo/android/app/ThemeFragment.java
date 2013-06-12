@@ -1,5 +1,6 @@
 package com.compo.android.app;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,12 +12,13 @@ import android.widget.TextView;
 
 import com.compo.android.app.model.Theme;
 
-public class ThemeLevelFragment extends Fragment {
+public class ThemeFragment extends Fragment {
 
-    public static final String EXTRA_MESSAGE_ARG = "com.compo.android.app.ThemeLevelFragment.MESSAGE.ARG";
+    public static final String EXTRA_MESSAGE_ARG = "com.compo.android.app.ThemeFragment.MESSAGE.ARG";
     private static Typeface _font;
     private TextView _themeName;
     private ImageView _themeImage;
+    private Theme _currentTheme;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,16 +32,28 @@ public class ThemeLevelFragment extends Fragment {
         _themeImage = (ImageView) rootView.findViewById(R.id.theme_image_id);
 
         Bundle args = getArguments();
-        Theme theme = (Theme) args.getSerializable(EXTRA_MESSAGE_ARG);
-        _themeName.setText(theme.getName());
+        _currentTheme = (Theme) args.getSerializable(EXTRA_MESSAGE_ARG);
+        _themeName.setText(_currentTheme.getName());
         _themeName.setTypeface(_font);
 
-        int id = getResources().getIdentifier(theme.getCode(), "drawable", getActivity().getPackageName());
+        int id = getResources().getIdentifier(_currentTheme.getCode(), "drawable", getActivity().getPackageName());
         if (id != 0) {
             _themeImage.setImageResource(id);
         } else {
             _themeImage.setImageResource(R.drawable.world_cup);
         }
+
+        rootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SelectPackActivity.class);
+                intent.putExtra(EXTRA_MESSAGE_ARG, _currentTheme);
+                startActivity(intent);
+                getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        }
+        );
+
 
         return rootView;
     }

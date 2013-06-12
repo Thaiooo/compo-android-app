@@ -20,9 +20,9 @@ public class SelectThemeAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
-        Fragment fragment = new ThemeLevelFragment();
+        Fragment fragment = new ThemeFragment();
         Bundle args = new Bundle();
-        args.putSerializable(ThemeLevelFragment.EXTRA_MESSAGE_ARG, _themes.get(i));
+        args.putSerializable(ThemeFragment.EXTRA_MESSAGE_ARG, _themes.get(i));
         fragment.setArguments(args);
         return fragment;
     }
