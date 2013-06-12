@@ -1,29 +1,57 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/theme1_background">
 
     <include
-        android:id="@+id/score_bar"
-        layout="@layout/score_bar" />
+            android:id="@+id/score_bar"
+            layout="@layout/score_bar"/>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/score_bar"
-        android:background="@drawable/theme1_background_main" >
-
-        <android.support.v4.view.PagerTitleStrip
-            android:id="@+id/pager_title_strip"
+    <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="#aaaaaa"
-            android:paddingBottom="20dp"
-            android:paddingTop="20dp"
-            android:textColor="#000000"
-            android:textSize="30sp" />
-    </android.support.v4.view.ViewPager>
+            android:layout_height="match_parent"
+            android:layout_below="@+id/score_bar"
+            android:background="@drawable/theme1_cadre">
+
+        <TextView
+                android:id="@+id/theme_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Theme"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:textColor="@android:color/white"
+                android:textIsSelectable="false"
+                android:layout_marginTop="@dimen/main_title_margin_top"
+                android:textSize="@dimen/theme_title_font_size"
+                android:layout_alignParentEnd="false"/>
+
+        <TextView
+                android:id="@+id/pack_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pack"
+                android:textColor="@android:color/white"
+                android:textIsSelectable="false"
+                android:textSize="@dimen/theme_title_font_size"
+                android:layout_below="@+id/theme_name"
+                android:layout_centerHorizontal="true"/>
+
+        <GridView
+                android:id="@+id/quizzGrid"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:columnWidth="200dp"
+                android:gravity="center"
+                android:horizontalSpacing="0dp"
+                android:numColumns="auto_fit"
+                android:stretchMode="columnWidth"
+                android:layout_below="@+id/pack_name"
+                android:verticalSpacing="0dp"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>
+
+
+

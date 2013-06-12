@@ -48,7 +48,7 @@ public class QuizzLevelFragment extends Fragment {
         @Override
         protected List<Quizz> doInBackground(Object... params) {
             QuizzDao dao = new QuizzDao(getActivity());
-            List<Quizz> _quizzList = dao.getAllQuizz(((Pack) params[0]).getId(), (Level) params[1]);
+            List<Quizz> _quizzList = dao.getAllQuizz(((Pack) params[0]).getId());
             return _quizzList;
         }
 
