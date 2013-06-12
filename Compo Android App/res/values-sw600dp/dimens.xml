@@ -13,6 +13,10 @@
     <dimen name="theme_image_margin_top">130dp</dimen>
     <dimen name="theme_image_height">300dp</dimen>
 
+    <dimen name="pack_image_margin_top">130dp</dimen>
+    <dimen name="pack_image_height">300dp</dimen>
+    <dimen name="pack_name_font_size">30dp</dimen>
+
     <dimen name="store_title_font_size">40dp</dimen>
     <dimen name="store_button_font_size">40dp</dimen>
     <dimen name="store_button_width">300dp</dimen>

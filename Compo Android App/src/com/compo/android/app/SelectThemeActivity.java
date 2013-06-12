@@ -54,8 +54,8 @@ public class SelectThemeActivity extends FragmentActivity {
         @Override
         protected List<Theme> doInBackground(Void... params) {
             ThemeDao dao = new ThemeDao(SelectThemeActivity.this);
-            List<Theme> gamePacks = dao.getAllTheme();
-            return gamePacks;
+            List<Theme> themes = dao.getAllTheme();
+            return themes;
         }
 
         @Override

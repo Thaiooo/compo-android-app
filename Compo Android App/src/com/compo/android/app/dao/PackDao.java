@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.compo.android.app.model.Pack;
+import com.compo.android.app.model.Theme;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class PackDao {
         dataBaseHeleper = new DataBaseHelper(context);
     }
 
-    public List<Pack> getAllPack() {
+    public List<Pack> findPacks(Theme aTheme) {
         dataBaseHeleper.openDataBase();
         SQLiteDatabase session = dataBaseHeleper.getReadableDatabase();
 
@@ -27,7 +28,7 @@ public class PackDao {
                 TableConstant.PackTable.COLUMN_CREDIT_LIMIT};
 
         // The columns for the WHERE clause
-        String selection = null;
+        String selection = TableConstant.PackTable.COLUMN_THEME_ID + " = " + aTheme.getId();
         // The values for the WHERE clause
         String[] selectionArgs = null;
         // Order

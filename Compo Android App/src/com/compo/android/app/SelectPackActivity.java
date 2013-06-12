@@ -1,38 +1,49 @@
 package com.compo.android.app;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.widget.TextView;
 
 import com.compo.android.app.dao.PackDao;
 import com.compo.android.app.model.Pack;
+import com.compo.android.app.model.Theme;
 import com.compo.android.app.model.User;
 import com.compo.android.app.utils.UserFactory;
 
 import java.util.List;
 
-public class SelectPackActivity extends Activity {
+public class SelectPackActivity extends FragmentActivity {
 
     public final static String MESSAGE_SELECTED_PACK = "com.compo.android.app.SelectGameActivity.MESSAGE1";
-
-    private GridView _gridview;
+    private static Typeface _fontTitle;
+    private ViewPager _mViewPager;
     private TextView _userCredit;
     private TextView _userPoint;
+    private TextView _themeName;
+    private Theme _selectTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_pack);
 
+        if (_fontTitle == null) {
+            _fontTitle = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
+        }
+
+        Intent intent = getIntent();
+        _selectTheme = (Theme) intent.getSerializableExtra(ThemeFragment.EXTRA_MESSAGE_ARG);
+
         _userCredit = (TextView) findViewById(R.id.user_credit);
         _userPoint = (TextView) findViewById(R.id.user_point);
-        _gridview = (GridView) findViewById(R.id.gridview);
+        _mViewPager = (ViewPager) findViewById(R.id.pager);
+        _themeName = (TextView) findViewById(R.id.theme_name);
+        _themeName.setTypeface(_fontTitle);
+        _themeName.setText(_selectTheme.getName());
 
         new LoadUserTask().execute();
         new LoadPackTask().execute();
@@ -52,22 +63,15 @@ public class SelectPackActivity extends Activity {
         @Override
         protected List<Pack> doInBackground(Void... params) {
             PackDao dao = new PackDao(SelectPackActivity.this);
-            List<Pack> gamePacks = dao.getAllPack();
+            List<Pack> gamePacks = dao.findPacks(_selectTheme);
             return gamePacks;
         }
 
         @Override
         protected void onPostExecute(final List<Pack> aPacks) {
-            _gridview.setAdapter(new SelectPackAdapter(SelectPackActivity.this, aPacks));
-            _gridview.setOnItemClickListener(new OnItemClickListener() {
-                public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                    Pack selectPack = aPacks.get(position);
-                    Intent intent = new Intent(SelectPackActivity.this, PackDetailsActivity.class);
-                    intent.putExtra(MESSAGE_SELECTED_PACK, selectPack);
-                    startActivity(intent);
-                }
-            });
-
+            SelectPackAdapter collectionPacksPagerAdapter = new SelectPackAdapter(
+                    getSupportFragmentManager(), aPacks);
+            _mViewPager.setAdapter(collectionPacksPagerAdapter);
         }
     }
 
