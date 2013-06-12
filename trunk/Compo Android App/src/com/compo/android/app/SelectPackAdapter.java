@@ -12,10 +12,12 @@ import java.util.List;
 
 public class SelectPackAdapter extends FragmentStatePagerAdapter {
 
+    private Theme _theme;
     private List<Pack> _packs;
 
-    public SelectPackAdapter(FragmentManager fm, List<Pack> aPacks) {
+    public SelectPackAdapter(FragmentManager fm, Theme aTheme, List<Pack> aPacks) {
         super(fm);
+        _theme = aTheme;
         _packs = aPacks;
     }
 
@@ -23,7 +25,8 @@ public class SelectPackAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int i) {
         Fragment fragment = new PackFragment();
         Bundle args = new Bundle();
-        args.putSerializable(PackFragment.EXTRA_MESSAGE_ARG, _packs.get(i));
+        args.putSerializable(PackFragment.EXTRA_MESSAGE_THEME, _theme);
+        args.putSerializable(PackFragment.EXTRA_MESSAGE_PACK, _packs.get(i));
         fragment.setArguments(args);
         return fragment;
     }

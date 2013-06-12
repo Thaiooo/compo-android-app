@@ -70,7 +70,7 @@ public class SelectPackActivity extends FragmentActivity {
         @Override
         protected void onPostExecute(final List<Pack> aPacks) {
             SelectPackAdapter collectionPacksPagerAdapter = new SelectPackAdapter(
-                    getSupportFragmentManager(), aPacks);
+                    getSupportFragmentManager(), _selectTheme, aPacks);
             _mViewPager.setAdapter(collectionPacksPagerAdapter);
         }
     }

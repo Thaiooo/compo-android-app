@@ -26,11 +26,11 @@ public class QuizzDao {
         dataBaseHeleper = new DataBaseHelper(context);
     }
 
-    public List<Quizz> getAllQuizz(long aPackId, Level aLevel) {
+    public List<Quizz> getAllQuizz(long aPackId) {
         dataBaseHeleper.openDataBase();
         SQLiteDatabase session = dataBaseHeleper.getReadableDatabase();
 
-        String[] selectionArgs = {String.valueOf(aPackId), aLevel.name()};
+        String[] selectionArgs = {String.valueOf(aPackId)};
 
         StringBuffer req = new StringBuffer("select ");
         // Index 0
@@ -128,7 +128,6 @@ public class QuizzDao {
                 + TableConstant.QuizzPlayerTable.COLUMN_PLAYER_ID + " = p." + TableConstant.PlayerTable._ID + " ");
 
         req.append("where q." + TableConstant.QuizzTable.COLUMN_PACK_ID + " = ? ");
-        req.append("and q." + TableConstant.QuizzTable.COLUMN_LEVEL + " = ? ");
         req.append("order by q." + TableConstant.QuizzTable.COLUMN_ORDER_NUMBER + " asc ");
 
         Cursor c = session.rawQuery(req.toString(), selectionArgs);
