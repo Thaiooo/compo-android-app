@@ -41,7 +41,7 @@
                 android:id="@+id/quizzGrid"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:columnWidth="200dp"
+
                 android:gravity="center"
                 android:horizontalSpacing="0dp"
                 android:numColumns="auto_fit"

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/post_it">
+
+    <TextView
+            android:id="@+id/quizz_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/quizz_post_it_content_margin_top"
+            android:textIsSelectable="false"
+            android:textSize="20sp"/>
+
+    <TextView
+            android:id="@+id/quizz_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/quizz_title"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:textIsSelectable="false"/>
+
+    <TextView
+            android:id="@+id/quizz_score_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/quizz_desc"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:textIsSelectable="false"/>
+
+    <TextView
+            android:id="@+id/quizz_score_away"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/quizz_score_home"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:textIsSelectable="false"/>
+
+    <ImageView
+            android:id="@+id/ball"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ball_0_5"
+            android:layout_marginTop="@dimen/quizz_post_it_ball_margin_top"
+            android:layout_below="@+id/quizz_score_away"
+            android:layout_centerHorizontal="true"
+            />
+
+</RelativeLayout>

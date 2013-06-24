@@ -48,6 +48,7 @@ public class TableConstant {
         public static final String TABLE_NAME = "quizz_player";
         public static final String COLUMN_QUIZZ_ID = "quizz_id";
         public static final String COLUMN_HIDE = "hide";
+        public static final String COLUMN_DISCOVERED = "discovered";
         public static final String COLUMN_HOME = "home";
         public static final String COLUMN_COACH = "coach";
         public static final String COLUMN_X = "x";
