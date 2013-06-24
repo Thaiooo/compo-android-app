@@ -11,15 +11,26 @@
             android:textColor="@android:color/black"
             android:textIsSelectable="false"
             android:layout_gravity="top"
+            android:text="Hello"
             android:textSize="@dimen/pack_name_font_size"/>
 
     <ImageView
-            android:id="@+id/pack_image_id"
+            android:id="@+id/lock_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/lock"
+            android:layout_below="@+id/pack_name"
+            android:layout_centerHorizontal="true"/>
+
+    <TextView
+            android:id="@+id/progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/lock"
-            android:layout_below="@id/pack_name"
-            />
+            android:textColor="@android:color/black"
+            android:textIsSelectable="false"
+            android:layout_below="@+id/pack_name"
+            android:text="Progress"
+            android:textSize="@dimen/pack_name_font_size"/>
 
 </RelativeLayout>

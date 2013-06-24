@@ -24,7 +24,7 @@ public class QuizzActivity extends FragmentActivity {
         setContentView(R.layout.activity_quizz);
 
         Intent intent = getIntent();
-        Quizz selectQuizz = (Quizz) intent.getSerializableExtra(QuizzLevelFragment.EXTRA_MESSAGE_QUIZZ);
+        Quizz selectQuizz = (Quizz) intent.getSerializableExtra(SelectQuizzActivity.EXTRA_MESSAGE_QUIZZ);
         // _selectGame = (Pack) getIntent().getSerializableExtra(QuizzLevelFragment.EXTRA_MESSAGE_GAME);
 
         _userCredit = (TextView) findViewById(R.id.user_credit);
@@ -46,13 +46,18 @@ public class QuizzActivity extends FragmentActivity {
                 away = qp.getTeam();
             }
         }
+
+        TextView teamHome = (TextView) findViewById(R.id.team_home);
         if (home != null) {
-            TextView teamHome = (TextView) findViewById(R.id.team_home);
             teamHome.setText(home.getName() + " (" + selectQuizz.getScoreHome() + ")");
+        } else {
+            teamHome.setText("");
         }
+        TextView teamAway = (TextView) findViewById(R.id.team_away);
         if (away != null) {
-            TextView teamAway = (TextView) findViewById(R.id.team_away);
             teamAway.setText(away.getName() + " (" + selectQuizz.getScoreAway() + ")");
+        } else {
+            teamAway.setText("");
         }
     }
 

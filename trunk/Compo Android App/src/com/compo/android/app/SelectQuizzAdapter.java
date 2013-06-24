@@ -43,7 +43,7 @@ public class SelectQuizzAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi = convertView;
         if (convertView == null) {
-            vi = inflater.inflate(R.layout.quizz_element, null);
+            vi = inflater.inflate(R.layout.fragment_quizz, null);
         }
 
         Quizz quizz = quizzList.get(position);
@@ -63,24 +63,23 @@ public class SelectQuizzAdapter extends BaseAdapter {
 
         TextView title = (TextView) vi.findViewById(R.id.quizz_title);
         title.setTypeface(font);
-        if (home != null && away != null) {
-            title.setText(home.getName() + " - " + away.getName());
-        }
+        title.setText("Match " + (position + 1));
 
         TextView desc = (TextView) vi.findViewById(R.id.quizz_desc);
         desc.setTypeface(font);
         desc.setText(quizz.getName());
 
-        TextView score = (TextView) vi.findViewById(R.id.quizz_score);
-        score.setTypeface(font);
-        score.setText(quizz.getScoreHome() + " - " + quizz.getScoreAway());
+        if (home != null) {
+            TextView scoreHome = (TextView) vi.findViewById(R.id.quizz_score_home);
+            scoreHome.setTypeface(font);
+            scoreHome.setText(home.getName() + " : " + quizz.getScoreHome());
+        }
 
-        // ImageView image = (ImageView) vi.findViewById(R.id.quizz_image);
-        // if (quizz.isSuccess()) {
-        // image.setImageResource(R.drawable.theme1_background_pack);
-        // } else {
-        // image.setImageResource(R.drawable.quizz);
-        // }
+        if (away != null) {
+            TextView scoreAway = (TextView) vi.findViewById(R.id.quizz_score_away);
+            scoreAway.setTypeface(font);
+            scoreAway.setText(away.getName() + " : " + quizz.getScoreAway());
+        }
 
         return vi;
     }

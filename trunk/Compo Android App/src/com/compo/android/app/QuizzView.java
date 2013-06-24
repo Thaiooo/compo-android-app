@@ -36,7 +36,6 @@ public class QuizzView extends View {
     protected static final int MARGE_METER = 6;
     protected static final int TEXT_HIGHT = 20;
     private static Typeface font;
-
     protected Context _context;
     protected Bitmap _terrainRaw;
     protected Bitmap _terrain;
@@ -52,11 +51,12 @@ public class QuizzView extends View {
     protected Bitmap _ballRed;
     protected Bitmap _greenMappingRaw;
     protected Bitmap _greenMapping;
+    protected Bitmap _start;
+    protected Bitmap _cercle;
     protected Paint _paint;
     protected Matrix _matrix;
     protected Matrix _matrixGreenMapping;
     protected Quizz _quizz;
-
     protected boolean completed = false;
 
     public QuizzView(Context context, AttributeSet attrs) {
@@ -70,6 +70,8 @@ public class QuizzView extends View {
         _greenMappingRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.green_mapping)).getBitmap();
         _ballRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.ball)).getBitmap();
         _ballRedRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.ball_red)).getBitmap();
+        _start = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.start)).getBitmap();
+        _cercle = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.cercle)).getBitmap();
 
         float densityMultiplier = getContext().getResources().getDisplayMetrics().density;
         _paint = new Paint();
@@ -77,7 +79,7 @@ public class QuizzView extends View {
         _paint.setTypeface(font);
 
         Intent intent = ((Activity) context).getIntent();
-        _quizz = (Quizz) intent.getSerializableExtra(QuizzLevelFragment.EXTRA_MESSAGE_QUIZZ);
+        _quizz = (Quizz) intent.getSerializableExtra(SelectQuizzActivity.EXTRA_MESSAGE_QUIZZ);
 
         _playerHomeRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_bleu)).getBitmap();
         _playerAwayRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_white)).getBitmap();
@@ -301,7 +303,23 @@ public class QuizzView extends View {
 
         double playerX = getPlayerX(qp, lateralMarge, metreX, playerImg);
         double playerY = getPlayerY(qp, terrainH, metreY, playerImg);
-        canvas.drawBitmap(playerImg, (float) playerX, (float) playerY, null);
+        if (qp.isHide()) {
+            Bitmap backImg;
+            if (qp.isDiscovered()) {
+                backImg = _start;
+            } else {
+                backImg = _cercle;
+            }
+            double backImgX = getPlayerX(qp, lateralMarge, metreX, backImg);
+            double backImgY = getPlayerY(qp, terrainH, metreY, backImg);
+            canvas.drawBitmap(backImg, (float) backImgX, (float) backImgY, null);
+
+            if (qp.isDiscovered()) {
+                canvas.drawBitmap(playerImg, (float) playerX, (float) playerY, null);
+            }
+        } else {
+            canvas.drawBitmap(playerImg, (float) playerX, (float) playerY, null);
+        }
 
         int ballNumber = 0;
         if (qp.getGoal() > 0) {
@@ -323,12 +341,14 @@ public class QuizzView extends View {
             }
         }
 
-        double textWidth = _paint.measureText(qp.getPlayer().getName());
-        double textDecal = textWidth / 2;
+        if (!qp.isHide() || qp.isDiscovered()) {
+            double textWidth = _paint.measureText(qp.getPlayer().getName());
+            double textDecal = textWidth / 2;
 
-        double textX = playerX + ((double) playerImg.getWidth() / 2) - textDecal;
-        double textY = playerY + playerImg.getHeight() + TEXT_HIGHT;
-        canvas.drawText(qp.getPlayer().getName(), (float) textX, (float) textY, _paint);
+            double textX = playerX + ((double) playerImg.getWidth() / 2) - textDecal;
+            double textY = playerY + playerImg.getHeight() + TEXT_HIGHT;
+            canvas.drawText(qp.getPlayer().getName(), (float) textX, (float) textY, _paint);
+        }
     }
 
     protected double getPlayerX(QuizzPlayer aQuizzPlayer, double aLateralMarge, double aMetreX, Bitmap aPlayerImg) {
@@ -371,18 +391,16 @@ public class QuizzView extends View {
 
         for (QuizzPlayer qp : _quizz.getQuizzList()) {
 
-            Bitmap playerImg;
-            if (qp.isHome()) {
-                playerImg = _playerHome;
-            } else {
-                playerImg = _playerAway;
+            if (!qp.isHide() || qp.isDiscovered()) {
+                continue;
             }
 
-            double playerXMin = getPlayerX(qp, lateralMarge, metreX, playerImg);
-            double playerXMax = playerXMin + (double) playerImg.getWidth();
+            Bitmap img = _cercle;
+            double playerXMin = getPlayerX(qp, lateralMarge, metreX, img);
+            double playerXMax = playerXMin + (double) img.getWidth();
 
-            double playerYMin = getPlayerY(qp, terrainH, metreY, playerImg);
-            double playerYMax = playerYMin + playerImg.getHeight() + TEXT_HIGHT;
+            double playerYMin = getPlayerY(qp, terrainH, metreY, img);
+            double playerYMax = playerYMin + img.getHeight() + TEXT_HIGHT;
 
             if (event.getX() >= playerXMin && event.getX() <= playerXMax && event.getY() >= playerYMin
                     && event.getY() <= playerYMax) {

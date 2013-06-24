@@ -8,6 +8,13 @@
 
     <dimen name="score_font_size">20dp</dimen>
 
+    <dimen name="store_title_font_size">40dp</dimen>
+    <dimen name="store_button_font_size">40dp</dimen>
+    <dimen name="store_button_width">300dp</dimen>
+
+    <dimen name="setting_title_font_size">40dp</dimen>
+    <dimen name="setting_dialog_width">400dp</dimen>
+
     <dimen name="theme_title_font_size">50dp</dimen>
     <dimen name="theme_name_font_size">30dp</dimen>
     <dimen name="theme_image_margin_top">130dp</dimen>
@@ -17,11 +24,7 @@
     <dimen name="pack_image_height">300dp</dimen>
     <dimen name="pack_name_font_size">30dp</dimen>
 
-    <dimen name="store_title_font_size">40dp</dimen>
-    <dimen name="store_button_font_size">40dp</dimen>
-    <dimen name="store_button_width">300dp</dimen>
-
-    <dimen name="setting_title_font_size">40dp</dimen>
-    <dimen name="setting_dialog_width">400dp</dimen>
+    <dimen name="quizz_post_it_content_margin_top">20dp</dimen>
+    <dimen name="quizz_post_it_ball_margin_top">10dp</dimen>
 
 </resources>

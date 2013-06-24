@@ -6,11 +6,11 @@ public class QuizzPlayer implements Serializable {
     /**
      */
     private static final long serialVersionUID = 1L;
-
     private long id;
     private int x;
     private int y;
     private boolean hide;
+    private boolean discovered;
     private boolean home;
     private boolean coach;
     private Team team;
@@ -98,4 +98,11 @@ public class QuizzPlayer implements Serializable {
         this.csc = csc;
     }
 
+    public boolean isDiscovered() {
+        return discovered;
+    }
+
+    public void setDiscovered(boolean discovered) {
+        this.discovered = discovered;
+    }
 }

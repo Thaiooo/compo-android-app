@@ -94,25 +94,29 @@ public class QuizzDao {
         req.append("qp.");
         req.append(TableConstant.QuizzPlayerTable.COLUMN_GOAL);
         req.append(", ");
-        // ---------------------------------------------------------------------------------
         // Index 15
+        req.append("qp.");
+        req.append(TableConstant.QuizzPlayerTable.COLUMN_DISCOVERED);
+        req.append(", ");
+        // ---------------------------------------------------------------------------------
+        // Index 16
         req.append("qp.");
         req.append(TableConstant.QuizzPlayerTable.COLUMN_TEAM_ID);
         req.append(", ");
-        // Index 16
+        // Index 17
         req.append("t.");
         req.append(TableConstant.TeamTable.COLUMN_CODE);
         req.append(", ");
-        // Index 17
+        // Index 18
         req.append("t.");
         req.append(TableConstant.TeamTable.COLUMN_NAME);
         req.append(", ");
         // ---------------------------------------------------------------------------------
-        // Index 18
+        // Index 19
         req.append("qp.");
         req.append(TableConstant.QuizzPlayerTable.COLUMN_PLAYER_ID);
         req.append(", ");
-        // Index 19
+        // Index 20
         req.append("p.");
         req.append(TableConstant.PlayerTable.COLUMN_NAME);
         req.append(" ");
@@ -172,16 +176,17 @@ public class QuizzDao {
                     quizzPlayer.setCoach(Boolean.parseBoolean(c.getString(12)));
                     quizzPlayer.setCsc(c.getInt(13));
                     quizzPlayer.setGoal(c.getInt(14));
+                    quizzPlayer.setDiscovered(Boolean.parseBoolean(c.getString(15)));
 
                     Team team = new Team();
-                    team.setId(c.getLong(15));
-                    team.setCode(c.getString(16));
-                    team.setName(c.getString(17));
+                    team.setId(c.getLong(16));
+                    team.setCode(c.getString(17));
+                    team.setName(c.getString(18));
                     quizzPlayer.setTeam(team);
 
                     Player player = new Player();
-                    player.setId(c.getLong(18));
-                    player.setName(c.getString(19));
+                    player.setId(c.getLong(19));
+                    player.setName(c.getString(20));
                     quizzPlayer.setPlayer(player);
 
                     quizz.getQuizzList().add(quizzPlayer);
@@ -200,16 +205,17 @@ public class QuizzDao {
                     quizzPlayer.setCoach(Boolean.parseBoolean(c.getString(12)));
                     quizzPlayer.setCsc(c.getInt(13));
                     quizzPlayer.setGoal(c.getInt(14));
+                    quizzPlayer.setDiscovered(Boolean.parseBoolean(c.getString(15)));
 
                     Team team = new Team();
-                    team.setId(c.getLong(15));
-                    team.setCode(c.getString(16));
-                    team.setName(c.getString(17));
+                    team.setId(c.getLong(16));
+                    team.setCode(c.getString(17));
+                    team.setName(c.getString(18));
                     quizzPlayer.setTeam(team);
 
                     Player player = new Player();
-                    player.setId(c.getLong(18));
-                    player.setName(c.getString(19));
+                    player.setId(c.getLong(19));
+                    player.setName(c.getString(20));
                     quizzPlayer.setPlayer(player);
 
                     quizz.getQuizzList().add(quizzPlayer);

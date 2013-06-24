@@ -19,7 +19,8 @@ public class PackFragment extends Fragment {
     public static final String EXTRA_MESSAGE_THEME = "com.compo.android.app.PackFragment.MESSAGE.THEME";
     private static Typeface _font;
     private TextView _packName;
-    private ImageView _packImage;
+    private TextView _progress;
+    private ImageView _lockImage;
     private Theme _currentTheme;
     private Pack _currentPack;
 
@@ -31,23 +32,27 @@ public class PackFragment extends Fragment {
             _font = Typeface.createFromAsset(getActivity().getAssets(), "MyLuckyPenny.ttf");
         }
 
-        _packName = (TextView) rootView.findViewById(R.id.pack_name);
-        _packImage = (ImageView) rootView.findViewById(R.id.pack_image_id);
-
         Bundle args = getArguments();
         _currentTheme = (Theme) args.getSerializable(EXTRA_MESSAGE_THEME);
         _currentPack = (Pack) args.getSerializable(EXTRA_MESSAGE_PACK);
+
+        _packName = (TextView) rootView.findViewById(R.id.pack_name);
+        _lockImage = (ImageView) rootView.findViewById(R.id.lock_image);
+        _progress = (TextView) rootView.findViewById(R.id.progress);
+
         _packName.setText(_currentPack.getName());
         _packName.setTypeface(_font);
 
-        /*
-        int id = getResources().getIdentifier(_currentTheme.getCode(), "drawable", getActivity().getPackageName());
-        if (id != 0) {
-            _packImage.setImageResource(id);
+        _progress.setTypeface(_font);
+
+        if (!_currentPack.isLock()) {
+            _lockImage.setVisibility(View.INVISIBLE);
+            _progress.setVisibility(View.VISIBLE);
+            _progress.setText("0/" + _currentPack.getQuizzList().size());
         } else {
-            _packImage.setImageResource(R.drawable.world_cup);
+            _lockImage.setVisibility(View.VISIBLE);
+            _progress.setVisibility(View.INVISIBLE);
         }
-        */
 
         rootView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +65,6 @@ public class PackFragment extends Fragment {
             }
         }
         );
-
 
         return rootView;
     }

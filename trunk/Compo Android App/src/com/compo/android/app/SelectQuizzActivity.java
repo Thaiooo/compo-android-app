@@ -96,6 +96,7 @@ public class SelectQuizzActivity extends FragmentActivity {
                     intent.putExtra(EXTRA_MESSAGE_QUIZZ, selectQuizz);
                     intent.putExtra(EXTRA_MESSAGE_GAME, _selectPack);
                     startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
             });
         }
