@@ -14,10 +14,9 @@
             android:debuggable="true"
             android:icon="@drawable/ic_launcher"
             android:theme="@style/AppTheme">
-        <activity android:name="com.compo.android.app.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -47,7 +46,7 @@
                 android:theme="@style/DialogTheme">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.compo.android.app.StoreActivity"/>
+                    android:value="com.compo.android.app.MainActivity"/>
         </activity>
         <activity
                 android:name=".PackDetailsActivity"
