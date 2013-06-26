@@ -20,34 +20,37 @@ public class ResponseActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_response);
+	super.onCreate(savedInstanceState);
+	requestWindowFeature(Window.FEATURE_NO_TITLE);
+	setContentView(R.layout.activity_response);
 
-        Intent intent = getIntent();
-        currentQuizz = (QuizzPlayer) intent.getSerializableExtra(EXTRA_MESSAGE_ARG);
+	Intent intent = getIntent();
+	currentQuizz = (QuizzPlayer) intent.getSerializableExtra(EXTRA_MESSAGE_ARG);
 
-        edit = (EditText) findViewById(R.id.edit_response);
-        edit.setText(currentQuizz.getPlayer().getName());
+	edit = (EditText) findViewById(R.id.edit_response);
+	edit.setText(currentQuizz.getPlayer().getName());
 
-        if (_font == null) {
-            _font = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
-        }
-        edit.setTypeface(_font);
+	if (_font == null) {
+	    _font = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
+	}
+	edit.setTypeface(_font);
     }
 
     public void check(View view) {
-        String response = edit.getText().toString().trim();
-        if (response.equals(currentQuizz.getPlayer().getName())) {
-            currentQuizz.setDiscovered(true);
-            Intent newIntent = new Intent();
-            newIntent.putExtra("Selected", "Yess");
-            setResult(RESULT_OK, newIntent);
-            finish();
-        } else {
-            Log.v(TAG, "Nooo");
-        }
+	String response = edit.getText().toString().trim();
+	if (response.equals(currentQuizz.getPlayer().getName())) {
+	    currentQuizz.setDiscovered(true);
 
+	    // QuizzPlayerDao dao = new QuizzPlayerDao(ResponseActivity.this);
+	    // dao.save(currentQuizz);
+
+	    Intent newIntent = new Intent();
+	    newIntent.putExtra("Selected", currentQuizz);
+	    setResult(RESULT_OK, newIntent);
+	    finish();
+	} else {
+	    Log.v(TAG, "Error !!!");
+	}
 
     }
 }
