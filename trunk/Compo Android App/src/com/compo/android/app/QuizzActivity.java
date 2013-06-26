@@ -15,7 +15,7 @@ import com.compo.android.app.utils.UserFactory;
 
 public class QuizzActivity extends FragmentActivity {
 
-    private static final String TAG = QuizzActivity.class.getName();
+    // private static final String TAG = QuizzActivity.class.getName();
     // private Pack _selectGame;
     private TextView _userCredit;
     private TextView _userPoint;
@@ -23,68 +23,68 @@ public class QuizzActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quizz);
+	super.onCreate(savedInstanceState);
+	setContentView(R.layout.activity_quizz);
 
-        Intent intent = getIntent();
-        Quizz selectQuizz = (Quizz) intent.getSerializableExtra(SelectQuizzActivity.EXTRA_MESSAGE_QUIZZ);
-        // _selectGame = (Pack) getIntent().getSerializableExtra(QuizzLevelFragment.EXTRA_MESSAGE_GAME);
+	Intent intent = getIntent();
+	Quizz selectQuizz = (Quizz) intent.getSerializableExtra(SelectQuizzActivity.EXTRA_MESSAGE_QUIZZ);
+	// _selectGame = (Pack) getIntent().getSerializableExtra(QuizzLevelFragment.EXTRA_MESSAGE_GAME);
 
-        _userCredit = (TextView) findViewById(R.id.user_credit);
-        _userPoint = (TextView) findViewById(R.id.user_point);
-        quizzView = (QuizzView) findViewById(R.id.quizz_view);
-        quizzView.setQuizz(selectQuizz);
+	_userCredit = (TextView) findViewById(R.id.user_credit);
+	_userPoint = (TextView) findViewById(R.id.user_point);
+	quizzView = (QuizzView) findViewById(R.id.quizz_view);
+	quizzView.setQuizz(selectQuizz);
 
-        new LoadUserTask().execute();
+	new LoadUserTask().execute();
 
-        Team home = null;
-        Team away = null;
-        for (QuizzPlayer qp : selectQuizz.getQuizzList()) {
-            if (home != null && away != null) {
-                break;
-            }
-            if (qp.isHome()) {
-                home = qp.getTeam();
-            } else {
-                away = qp.getTeam();
-            }
-        }
+	Team home = null;
+	Team away = null;
+	for (QuizzPlayer qp : selectQuizz.getQuizzList()) {
+	    if (home != null && away != null) {
+		break;
+	    }
+	    if (qp.isHome()) {
+		home = qp.getTeam();
+	    } else {
+		away = qp.getTeam();
+	    }
+	}
 
-        TextView teamHome = (TextView) findViewById(R.id.team_home);
-        if (home != null) {
-            teamHome.setText(home.getName() + " (" + selectQuizz.getScoreHome() + ")");
-        } else {
-            teamHome.setText("");
-        }
-        TextView teamAway = (TextView) findViewById(R.id.team_away);
-        if (away != null) {
-            teamAway.setText(away.getName() + " (" + selectQuizz.getScoreAway() + ")");
-        } else {
-            teamAway.setText("");
-        }
+	TextView teamHome = (TextView) findViewById(R.id.team_home);
+	if (home != null) {
+	    teamHome.setText(home.getName() + " (" + selectQuizz.getScoreHome() + ")");
+	} else {
+	    teamHome.setText("");
+	}
+	TextView teamAway = (TextView) findViewById(R.id.team_away);
+	if (away != null) {
+	    teamAway.setText(away.getName() + " (" + selectQuizz.getScoreAway() + ")");
+	} else {
+	    teamAway.setText("");
+	}
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case 1:
-                if (resultCode == RESULT_OK) {
-                    String name = data.getStringExtra("Selected");
-                    quizzView.refreshDrawableState();
-                    Toast.makeText(this, "You have selected : " + " " + name, Toast.LENGTH_LONG).show();
-                    break;
-                }
-        }
+	switch (requestCode) {
+	case 1:
+	    if (resultCode == RESULT_OK) {
+		QuizzPlayer qp = (QuizzPlayer) data.getSerializableExtra("Selected");
+		quizzView.invalidate();
+		Toast.makeText(this, "You have found " + " " + qp.getPlayer().getName(), Toast.LENGTH_LONG).show();
+		break;
+	    }
+	}
     }
 
     private class LoadUserTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... params) {
-            User u = UserFactory.getInstance().getUser();
-            _userCredit.setText(u.getCredit() + "");
-            _userPoint.setText(u.getPoint() + " pts");
-            return null;
-        }
+	@Override
+	protected Void doInBackground(Void... params) {
+	    User u = UserFactory.getInstance().getUser();
+	    _userCredit.setText(u.getCredit() + "");
+	    _userPoint.setText(u.getPoint() + " pts");
+	    return null;
+	}
 
     }
 }
