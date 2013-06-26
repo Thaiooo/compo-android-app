@@ -23,7 +23,7 @@
                 android:textColor="@android:color/white"
                 android:textIsSelectable="false"
                 android:textSize="@dimen/theme_title_font_size"
-                android:layout_alignParentEnd="false"/>
+                android:layout_alignParentBottom="false"/>
 
         <android.support.v4.view.ViewPager
                 android:id="@+id/pager"

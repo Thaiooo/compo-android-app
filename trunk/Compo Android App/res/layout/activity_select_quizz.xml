@@ -24,7 +24,7 @@
                 android:textIsSelectable="false"
                 android:layout_marginTop="@dimen/main_title_margin_top"
                 android:textSize="@dimen/theme_title_font_size"
-                android:layout_alignParentEnd="false"/>
+                android:layout_alignParentBottom="false"/>
 
         <TextView
                 android:id="@+id/pack_name"
