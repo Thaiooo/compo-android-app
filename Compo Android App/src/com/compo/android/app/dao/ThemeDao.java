@@ -13,54 +13,59 @@ public class ThemeDao {
     private DataBaseHelper dataBaseHeleper;
 
     public ThemeDao(Context context) {
-        dataBaseHeleper = new DataBaseHelper(context);
+	dataBaseHeleper = new DataBaseHelper(context);
     }
 
     public List<Theme> getAllTheme() {
-        dataBaseHeleper.openDataBase();
-        SQLiteDatabase session = dataBaseHeleper.getReadableDatabase();
+	List<Theme> l = new ArrayList<Theme>();
 
-        // The columns to return
-        String[] projection = {TableConstant.ThemeTable._ID, TableConstant.ThemeTable.COLUMN_ORDER_NUMBER,
-                TableConstant.ThemeTable.COLUMN_CODE, TableConstant.ThemeTable.COLUMN_NAME};
+	dataBaseHeleper.openDataBase();
+	SQLiteDatabase session = null;
+	session = dataBaseHeleper.getReadableDatabase();
+	Cursor c = null;
+	try {
 
-        // The columns for the WHERE clause
-        String selection = null;
-        // The values for the WHERE clause
-        String[] selectionArgs = null;
-        // Order
-        String sortOrder = TableConstant.ThemeTable.COLUMN_ORDER_NUMBER + " ASC";
-        // Group
-        String group = null;
-        // don't filter by row groups
-        String having = null;
-        // How you want the results sorted in the resulting Cursor
-        Cursor c = session.query(TableConstant.ThemeTable.TABLE_NAME, projection, selection, selectionArgs, group,
-                having, sortOrder);
+	    // The columns to return
+	    String[] projection = { TableConstant.ThemeTable._ID, TableConstant.ThemeTable.COLUMN_ORDER_NUMBER,
+		    TableConstant.ThemeTable.COLUMN_CODE, TableConstant.ThemeTable.COLUMN_NAME };
 
-        List<Theme> l = new ArrayList<Theme>();
+	    // The columns for the WHERE clause
+	    String selection = null;
+	    // The values for the WHERE clause
+	    String[] selectionArgs = null;
+	    // Order
+	    String sortOrder = TableConstant.ThemeTable.COLUMN_ORDER_NUMBER + " ASC";
+	    // Group
+	    String group = null;
+	    // don't filter by row groups
+	    String having = null;
+	    // How you want the results sorted in the resulting Cursor
+	    c = session.query(TableConstant.ThemeTable.TABLE_NAME, projection, selection, selectionArgs, group, having,
+		    sortOrder);
 
-        try {
-            while (c.moveToNext()) {
-                long itemId = c.getLong(c.getColumnIndexOrThrow(TableConstant.ThemeTable._ID));
-                String itemName = c.getString(c.getColumnIndexOrThrow(TableConstant.ThemeTable.COLUMN_NAME));
-                String itemCode = c.getString(c.getColumnIndexOrThrow(TableConstant.ThemeTable.COLUMN_CODE));
+	    while (c.moveToNext()) {
+		long itemId = c.getLong(c.getColumnIndexOrThrow(TableConstant.ThemeTable._ID));
+		String itemName = c.getString(c.getColumnIndexOrThrow(TableConstant.ThemeTable.COLUMN_NAME));
+		String itemCode = c.getString(c.getColumnIndexOrThrow(TableConstant.ThemeTable.COLUMN_CODE));
 
-                Theme p = new Theme();
-                p.setId(itemId);
-                p.setName(itemName);
-                p.setCode(itemCode);
+		Theme p = new Theme();
+		p.setId(itemId);
+		p.setName(itemName);
+		p.setCode(itemCode);
 
-                l.add(p);
-            }
-        } finally {
-            if (c != null) {
-                c.close();
-            }
-            session.close();
-            dataBaseHeleper.close();
-        }
+		l.add(p);
+	    }
+	} finally {
+	    if (c != null) {
+		c.close();
+	    }
+	    if (session != null) {
+		session.close();
+	    }
 
-        return l;
+	    dataBaseHeleper.close();
+	}
+
+	return l;
     }
 }
