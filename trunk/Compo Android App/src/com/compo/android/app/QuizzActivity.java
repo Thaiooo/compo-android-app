@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.compo.android.app.model.Quizz;
 import com.compo.android.app.model.QuizzPlayer;
@@ -14,9 +15,11 @@ import com.compo.android.app.utils.UserFactory;
 
 public class QuizzActivity extends FragmentActivity {
 
+    private static final String TAG = QuizzActivity.class.getName();
     // private Pack _selectGame;
     private TextView _userCredit;
     private TextView _userPoint;
+    private QuizzView quizzView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +32,7 @@ public class QuizzActivity extends FragmentActivity {
 
         _userCredit = (TextView) findViewById(R.id.user_credit);
         _userPoint = (TextView) findViewById(R.id.user_point);
-        QuizzView quizzView = (QuizzView) findViewById(R.id.quizz_view);
+        quizzView = (QuizzView) findViewById(R.id.quizz_view);
         quizzView.setQuizz(selectQuizz);
 
         new LoadUserTask().execute();
@@ -58,6 +61,19 @@ public class QuizzActivity extends FragmentActivity {
             teamAway.setText(away.getName() + " (" + selectQuizz.getScoreAway() + ")");
         } else {
             teamAway.setText("");
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    String name = data.getStringExtra("Selected");
+                    quizzView.refreshDrawableState();
+                    Toast.makeText(this, "You have selected : " + " " + name, Toast.LENGTH_LONG).show();
+                    break;
+                }
         }
     }
 

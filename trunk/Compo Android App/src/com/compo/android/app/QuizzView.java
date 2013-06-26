@@ -10,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -17,7 +18,6 @@ import com.compo.android.app.model.Quizz;
 import com.compo.android.app.model.QuizzPlayer;
 
 public class QuizzView extends View {
-
     /**
      * Field width in meter
      */
@@ -35,6 +35,7 @@ public class QuizzView extends View {
      */
     protected static final int MARGE_METER = 6;
     protected static final int TEXT_HIGHT = 20;
+    private static final String TAG = QuizzView.class.getName();
     private static Typeface font;
     protected Context _context;
     protected Bitmap _terrainRaw;
@@ -378,6 +379,9 @@ public class QuizzView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Log.v(TAG, "Hello");
+
+
         boolean b = super.onTouchEvent(event);
         if (!completed) {
             return false;
@@ -406,7 +410,8 @@ public class QuizzView extends View {
                     && event.getY() <= playerYMax) {
 
                 Intent intent = new Intent(getContext(), ResponseActivity.class);
-                getContext().startActivity(intent);
+                intent.putExtra(ResponseActivity.EXTRA_MESSAGE_ARG, qp);
+                ((QuizzActivity) getContext()).startActivityForResult(intent, 1);
 
                 return b;
             }
