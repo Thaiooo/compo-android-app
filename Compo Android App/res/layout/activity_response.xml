@@ -1,17 +1,32 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/ardoise"
-    android:orientation="horizontal" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ardoise">
 
+    <!--
+    style="@style/transparent_edit_text"
+    -->
     <EditText
-        android:id="@+id/edit_response"
-        style="@style/transparent_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:textColor="@android:color/white"
-        android:textSize="24sp" />
+            android:id="@+id/edit_response"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:lines="1"
+            android:singleLine="true"
+            android:maxLength="15"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            />
 
-</LinearLayout>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Valider"
+            android:id="@+id/button"
+            android:layout_below="@+id/edit_response"
+            android:layout_gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:onClick="check"/>
+
+</RelativeLayout>
