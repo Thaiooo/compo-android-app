@@ -15,7 +15,7 @@ public class Pack implements Serializable {
     private boolean lock;
     private int scoreLimit;
     private int creditLimit;
-    private List<Quizz> quizzList = new ArrayList<Quizz>();
+    private List<Match> quizzList = new ArrayList<Match>();
 
     public boolean isLock() {
         return lock;
@@ -41,11 +41,11 @@ public class Pack implements Serializable {
         this.description = description;
     }
 
-    public List<Quizz> getQuizzList() {
+    public List<Match> getQuizzList() {
         return quizzList;
     }
 
-    public void setQuizzList(List<Quizz> quizzList) {
+    public void setQuizzList(List<Match> quizzList) {
         this.quizzList = quizzList;
     }
 

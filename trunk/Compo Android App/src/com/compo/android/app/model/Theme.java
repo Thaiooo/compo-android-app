@@ -12,7 +12,7 @@ public class Theme implements Serializable {
     private long id;
     private String name;
     private String code;
-    private List<Pack> packList = new ArrayList<Pack>();
+    private List<Pack> packs = new ArrayList<Pack>();
 
     public long getId() {
         return id;
@@ -38,12 +38,12 @@ public class Theme implements Serializable {
         this.name = name;
     }
 
-    public List<Pack> getPackList() {
-        return packList;
+    public List<Pack> getPacks() {
+        return packs;
     }
 
-    public void setPackList(List<Pack> packList) {
-        this.packList = packList;
+    public void setPacks(List<Pack> packList) {
+        this.packs = packList;
     }
 
 }
