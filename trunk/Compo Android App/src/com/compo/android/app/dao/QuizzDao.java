@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.compo.android.app.model.Level;
 import com.compo.android.app.model.Player;
-import com.compo.android.app.model.Quizz;
+import com.compo.android.app.model.Match;
 import com.compo.android.app.model.QuizzPlayer;
 import com.compo.android.app.model.Team;
 
@@ -26,8 +26,8 @@ public class QuizzDao {
 	dataBaseHeleper = new DataBaseHelper(context);
     }
 
-    public List<Quizz> getAllQuizz(long aPackId) {
-	List<Quizz> l = new ArrayList<Quizz>();
+    public List<Match> getAllQuizz(long aPackId) {
+	List<Match> l = new ArrayList<Match>();
 
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = null;
@@ -140,14 +140,14 @@ public class QuizzDao {
 
 	    c = session.rawQuery(req.toString(), selectionArgs);
 
-	    Map<Long, Quizz> mapQuizz = new HashMap<Long, Quizz>();
+	    Map<Long, Match> mapQuizz = new HashMap<Long, Match>();
 
 	    while (c.moveToNext()) {
 		long quizzId = c.getLong(0);
 
-		Quizz quizz = mapQuizz.get(quizzId);
+		Match quizz = mapQuizz.get(quizzId);
 		if (quizz == null) {
-		    quizz = new Quizz();
+		    quizz = new Match();
 		    String quizzName = c.getString(1);
 		    Level quizzLevel = Level.valueOf(c.getString(2));
 		    String quizzDate = c.getString(3);
@@ -167,7 +167,7 @@ public class QuizzDao {
 		    quizz.setPoint(quizzPoint);
 		    quizz.setScoreAway(quizzScoreAway);
 		    quizz.setScoreHome(quizzScoreHome);
-		    quizz.setQuizzList(new ArrayList<QuizzPlayer>());
+		    quizz.setQuizzs(new ArrayList<QuizzPlayer>());
 
 		    if (c.getLong(7) != 0) {
 			QuizzPlayer quizzPlayer = new QuizzPlayer();
@@ -192,7 +192,7 @@ public class QuizzDao {
 			player.setName(c.getString(20));
 			quizzPlayer.setPlayer(player);
 
-			quizz.getQuizzList().add(quizzPlayer);
+			quizz.getQuizzs().add(quizzPlayer);
 		    }
 		    mapQuizz.put(quizzId, quizz);
 
@@ -221,7 +221,7 @@ public class QuizzDao {
 			player.setName(c.getString(20));
 			quizzPlayer.setPlayer(player);
 
-			quizz.getQuizzList().add(quizzPlayer);
+			quizz.getQuizzs().add(quizzPlayer);
 		    }
 		}
 	    }
