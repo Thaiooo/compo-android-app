@@ -10,14 +10,14 @@ public class Play implements Serializable {
     private long id;
     private long time;
     private boolean success;
-    private Quizz quizz;
+    private Match quizz;
     private User user;
 
-    public Quizz getQuizz() {
+    public Match getQuizz() {
         return quizz;
     }
 
-    public void setQuizz(Quizz quizz) {
+    public void setQuizz(Match quizz) {
         this.quizz = quizz;
     }
 

@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Quizz implements Serializable {
+public class Match implements Serializable {
     /**
      */
     private static final long serialVersionUID = 1L;
@@ -17,70 +17,70 @@ public class Quizz implements Serializable {
     private int scoreAway;
     private Level level;
     private int point;
-    private List<QuizzPlayer> quizzList = new ArrayList<QuizzPlayer>();
+    private List<QuizzPlayer> quizzs = new ArrayList<QuizzPlayer>();
 
     public long getId() {
-        return id;
+	return id;
     }
 
     public void setId(long id) {
-        this.id = id;
+	this.id = id;
     }
 
     public int getPoint() {
-        return point;
+	return point;
     }
 
     public void setPoint(int point) {
-        this.point = point;
+	this.point = point;
     }
 
     public Level getLevel() {
-        return level;
+	return level;
     }
 
     public void setLevel(Level level) {
-        this.level = level;
+	this.level = level;
     }
 
-    public List<QuizzPlayer> getQuizzList() {
-        return quizzList;
+    public List<QuizzPlayer> getQuizzs() {
+	return quizzs;
     }
 
-    public void setQuizzList(List<QuizzPlayer> quizzList) {
-        this.quizzList = quizzList;
+    public void setQuizzs(List<QuizzPlayer> quizzList) {
+	this.quizzs = quizzList;
     }
 
     public String getName() {
-        return name;
+	return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+	this.name = name;
     }
 
     public Date getDate() {
-        return date;
+	return date;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+	this.date = date;
     }
 
     public int getScoreHome() {
-        return scoreHome;
+	return scoreHome;
     }
 
     public void setScoreHome(int scoreHome) {
-        this.scoreHome = scoreHome;
+	this.scoreHome = scoreHome;
     }
 
     public int getScoreAway() {
-        return scoreAway;
+	return scoreAway;
     }
 
     public void setScoreAway(int scoreAway) {
-        this.scoreAway = scoreAway;
+	this.scoreAway = scoreAway;
     }
 
 }
