@@ -14,7 +14,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.compo.android.app.model.Quizz;
+import com.compo.android.app.model.Match;
 import com.compo.android.app.model.QuizzPlayer;
 
 public class QuizzView extends View {
@@ -57,7 +57,7 @@ public class QuizzView extends View {
     protected Paint _paint;
     protected Matrix _matrix;
     protected Matrix _matrixGreenMapping;
-    protected Quizz _quizz;
+    protected Match _quizz;
     protected boolean completed = false;
 
     public QuizzView(Context context, AttributeSet attrs) {
@@ -80,7 +80,7 @@ public class QuizzView extends View {
 	_paint.setTypeface(font);
 
 	Intent intent = ((Activity) context).getIntent();
-	_quizz = (Quizz) intent.getSerializableExtra(SelectQuizzActivity.EXTRA_MESSAGE_QUIZZ);
+	_quizz = (Match) intent.getSerializableExtra(SelectMatchActivity.EXTRA_MESSAGE_QUIZZ);
 
 	_playerHomeRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_bleu)).getBitmap();
 	_playerAwayRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_white)).getBitmap();
@@ -128,7 +128,7 @@ public class QuizzView extends View {
 	return new BitmapDrawable(scaledBitmap);
     }
 
-    public void setQuizz(Quizz quizz) {
+    public void setQuizz(Match quizz) {
 	this._quizz = quizz;
     }
 
@@ -250,7 +250,7 @@ public class QuizzView extends View {
 	// =================================================================
 	// Player
 	// =================================================================
-	for (QuizzPlayer qp : _quizz.getQuizzList()) {
+	for (QuizzPlayer qp : _quizz.getQuizzs()) {
 	    if (qp.isCoach()) {
 		printCoach(canvas, qp);
 	    } else {
@@ -395,7 +395,7 @@ public class QuizzView extends View {
 	double metreX = getPixelPerMeterX(terrainW);
 	double metreY = getPixelPerMeterY(terrainH);
 
-	for (QuizzPlayer qp : _quizz.getQuizzList()) {
+	for (QuizzPlayer qp : _quizz.getQuizzs()) {
 
 	    if (!qp.isHide() || qp.isDiscovered()) {
 		continue;

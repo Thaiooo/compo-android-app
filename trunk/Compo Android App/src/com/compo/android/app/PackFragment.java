@@ -57,7 +57,7 @@ public class PackFragment extends Fragment {
         rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SelectQuizzActivity.class);
+                Intent intent = new Intent(getActivity(), SelectMatchActivity.class);
                 intent.putExtra(EXTRA_MESSAGE_THEME, _currentTheme);
                 intent.putExtra(EXTRA_MESSAGE_PACK, _currentPack);
                 startActivity(intent);

@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.compo.android.app.model.Quizz;
+import com.compo.android.app.model.Match;
 import com.compo.android.app.model.QuizzPlayer;
 import com.compo.android.app.model.Team;
 import com.compo.android.app.model.User;
@@ -27,7 +27,7 @@ public class QuizzActivity extends FragmentActivity {
 	setContentView(R.layout.activity_quizz);
 
 	Intent intent = getIntent();
-	Quizz selectQuizz = (Quizz) intent.getSerializableExtra(SelectQuizzActivity.EXTRA_MESSAGE_QUIZZ);
+	Match selectQuizz = (Match) intent.getSerializableExtra(SelectMatchActivity.EXTRA_MESSAGE_QUIZZ);
 	// _selectGame = (Pack) getIntent().getSerializableExtra(QuizzLevelFragment.EXTRA_MESSAGE_GAME);
 
 	_userCredit = (TextView) findViewById(R.id.user_credit);
@@ -39,7 +39,7 @@ public class QuizzActivity extends FragmentActivity {
 
 	Team home = null;
 	Team away = null;
-	for (QuizzPlayer qp : selectQuizz.getQuizzList()) {
+	for (QuizzPlayer qp : selectQuizz.getQuizzs()) {
 	    if (home != null && away != null) {
 		break;
 	    }
