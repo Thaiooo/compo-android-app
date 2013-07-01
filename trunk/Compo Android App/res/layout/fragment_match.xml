@@ -5,38 +5,38 @@
                 android:background="@drawable/post_it">
 
     <TextView
-            android:id="@+id/quizz_title"
+            android:id="@+id/match_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:textColor="@color/black"
-            android:layout_marginTop="@dimen/quizz_post_it_content_margin_top"
+            android:layout_marginTop="@dimen/match_post_it_content_margin_top"
             android:textIsSelectable="false"
             android:textSize="20sp"/>
 
     <TextView
-            android:id="@+id/quizz_desc"
+            android:id="@+id/match_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/quizz_title"
+            android:layout_below="@+id/match_title"
             android:layout_centerHorizontal="true"
             android:textColor="@color/black"
             android:textIsSelectable="false"/>
 
     <TextView
-            android:id="@+id/quizz_score_home"
+            android:id="@+id/match_score_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/quizz_desc"
+            android:layout_below="@+id/match_desc"
             android:layout_centerHorizontal="true"
             android:textColor="@color/black"
             android:textIsSelectable="false"/>
 
     <TextView
-            android:id="@+id/quizz_score_away"
+            android:id="@+id/match_score_away"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/quizz_score_home"
+            android:layout_below="@+id/match_score_home"
             android:layout_centerHorizontal="true"
             android:textColor="@color/black"
             android:textIsSelectable="false"/>
@@ -46,8 +46,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ball_0_5"
-            android:layout_marginTop="@dimen/quizz_post_it_ball_margin_top"
-            android:layout_below="@+id/quizz_score_away"
+            android:layout_marginTop="@dimen/match_post_it_ball_margin_top"
+            android:layout_below="@+id/match_score_away"
             android:layout_centerHorizontal="true"
             />
 
