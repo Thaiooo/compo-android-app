@@ -53,7 +53,7 @@ public class PackDetailsActivity extends Activity {
         if (_selectPack.isLock()) {
 
         } else {
-            intent = new Intent(PackDetailsActivity.this, SelectQuizzActivity.class);
+            intent = new Intent(PackDetailsActivity.this, SelectMatchActivity.class);
             intent.putExtra(MESSAGE_SELECTED_PACK, _selectPack);
             startActivity(intent);
             this.finish();

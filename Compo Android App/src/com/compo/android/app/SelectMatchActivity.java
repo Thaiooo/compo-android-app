@@ -12,14 +12,14 @@ import android.widget.TextView;
 
 import com.compo.android.app.dao.QuizzDao;
 import com.compo.android.app.model.Pack;
-import com.compo.android.app.model.Quizz;
+import com.compo.android.app.model.Match;
 import com.compo.android.app.model.Theme;
 import com.compo.android.app.model.User;
 import com.compo.android.app.utils.UserFactory;
 
 import java.util.List;
 
-public class SelectQuizzActivity extends FragmentActivity {
+public class SelectMatchActivity extends FragmentActivity {
 
     public static final String EXTRA_MESSAGE_ARG = "com.compo.android.app.QuizzLevelFragment.MESSAGE.ARG";
     public static final String EXTRA_MESSAGE_QUIZZ = "com.compo.android.app.QuizzLevelFragment.MESSAGE.QUIZZ";
@@ -36,7 +36,7 @@ public class SelectQuizzActivity extends FragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_quizz);
+        setContentView(R.layout.activity_select_match);
 
         if (_fontTitle == null) {
             _fontTitle = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
@@ -76,23 +76,23 @@ public class SelectQuizzActivity extends FragmentActivity {
 
     }
 
-    private class LoadQuizzTask extends AsyncTask<Object, Void, List<Quizz>> {
+    private class LoadQuizzTask extends AsyncTask<Object, Void, List<Match>> {
         @Override
-        protected List<Quizz> doInBackground(Object... params) {
-            QuizzDao dao = new QuizzDao(SelectQuizzActivity.this);
-            List<Quizz> quizzList = dao.getAllQuizz(((Pack) params[0]).getId());
+        protected List<Match> doInBackground(Object... params) {
+            QuizzDao dao = new QuizzDao(SelectMatchActivity.this);
+            List<Match> quizzList = dao.getAllQuizz(((Pack) params[0]).getId());
             return quizzList;
         }
 
         @Override
-        protected void onPostExecute(final List<Quizz> aQuizzList) {
-            _gridview.setAdapter(new SelectQuizzAdapter(SelectQuizzActivity.this, aQuizzList));
+        protected void onPostExecute(final List<Match> aQuizzList) {
+            _gridview.setAdapter(new SelectMatchAdapter(SelectMatchActivity.this, aQuizzList));
             _gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 @Override
                 public void onItemClick(AdapterView<?> parent, View v, int aPosition, long id) {
-                    Quizz selectQuizz = aQuizzList.get(aPosition);
-                    Intent intent = new Intent(SelectQuizzActivity.this, QuizzActivity.class);
+                    Match selectQuizz = aQuizzList.get(aPosition);
+                    Intent intent = new Intent(SelectMatchActivity.this, QuizzActivity.class);
                     intent.putExtra(EXTRA_MESSAGE_QUIZZ, selectQuizz);
                     intent.putExtra(EXTRA_MESSAGE_GAME, _selectPack);
                     startActivity(intent);

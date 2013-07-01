@@ -1,5 +1,7 @@
 package com.compo.android.app;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -38,7 +40,15 @@ public class ResponseActivity extends Activity {
 
     public void check(View view) {
 	String response = edit.getText().toString().trim();
-	if (response.equals(currentQuizz.getPlayer().getName())) {
+	response = StringUtils.lowerCase(response);
+
+	String playerName = currentQuizz.getPlayer().getName();
+	playerName = StringUtils.lowerCase(playerName);
+
+	double distance = StringUtils.getLevenshteinDistance(response, playerName);
+	double percent = 100 - (distance / (double) response.length() * 100);
+
+	if (percent == 100) {
 	    currentQuizz.setDiscovered(true);
 
 	    // QuizzPlayerDao dao = new QuizzPlayerDao(ResponseActivity.this);
