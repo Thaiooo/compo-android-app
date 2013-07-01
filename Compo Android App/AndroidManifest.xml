@@ -56,8 +56,8 @@
                     android:value="com.compo.android.app.PackDetailsActivity"/>
         </activity>
         <activity
-                android:name=".SelectQuizzActivity"
-                android:label="@string/activity_select_quizz">
+                android:name=".SelectMatchActivity"
+                android:label="@string/activity_select_match">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.compo.android.app.MainActivity"/>
