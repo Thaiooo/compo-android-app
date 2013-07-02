@@ -18,6 +18,7 @@ public class ResponseActivity extends Activity {
     private static final String TAG = ResponseActivity.class.getName();
     private static Typeface _font;
     private EditText edit;
+    private EditText _matching;
     private QuizzPlayer currentQuizz;
 
     @Override
@@ -31,6 +32,8 @@ public class ResponseActivity extends Activity {
 
 	edit = (EditText) findViewById(R.id.edit_response);
 	edit.setText(currentQuizz.getPlayer().getName());
+
+	_matching = (EditText) findViewById(R.id.matching);
 
 	if (_font == null) {
 	    _font = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
@@ -60,6 +63,7 @@ public class ResponseActivity extends Activity {
 	    finish();
 	} else {
 	    Log.v(TAG, "Error !!!");
+	    _matching.setText(Integer.toString((int) percent) + " %");
 	}
 
     }
