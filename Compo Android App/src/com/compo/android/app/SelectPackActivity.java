@@ -28,51 +28,53 @@ public class SelectPackActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_pack);
+	super.onCreate(savedInstanceState);
+	setContentView(R.layout.activity_select_pack);
 
-        if (_fontTitle == null) {
-            _fontTitle = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
-        }
+	if (_fontTitle == null) {
+	    _fontTitle = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
+	}
 
-        Intent intent = getIntent();
-        _selectTheme = (Theme) intent.getSerializableExtra(ThemeFragment.EXTRA_MESSAGE_ARG);
+	Intent intent = getIntent();
+	_selectTheme = (Theme) intent.getSerializableExtra(ThemeFragment.EXTRA_MESSAGE_ARG);
 
-        _userCredit = (TextView) findViewById(R.id.user_credit);
-        _userPoint = (TextView) findViewById(R.id.user_point);
-        _mViewPager = (ViewPager) findViewById(R.id.pager);
-        _themeName = (TextView) findViewById(R.id.theme_name);
-        _themeName.setTypeface(_fontTitle);
-        _themeName.setText(_selectTheme.getName());
+	_userCredit = (TextView) findViewById(R.id.user_credit);
+	_userPoint = (TextView) findViewById(R.id.user_point);
+	_mViewPager = (ViewPager) findViewById(R.id.pager);
+	_themeName = (TextView) findViewById(R.id.theme_name);
+	_themeName.setTypeface(_fontTitle);
+	_themeName.setText(_selectTheme.getName());
 
-        new LoadUserTask().execute();
-        new LoadPackTask().execute();
+	new LoadUserTask().execute();
+	new LoadPackTask().execute();
     }
 
     private class LoadUserTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... params) {
-            User u = UserFactory.getInstance().getUser();
-            _userCredit.setText(u.getCredit() + "");
-            _userPoint.setText(u.getPoint() + " pts");
-            return null;
-        }
+	@Override
+	protected Void doInBackground(Void... params) {
+	    User u = UserFactory.getInstance().getUser();
+	    if (u != null) {
+		_userCredit.setText(u.getCredit() + "");
+		_userPoint.setText(u.getPoint() + " pts");
+	    }
+	    return null;
+	}
     }
 
     private class LoadPackTask extends AsyncTask<Void, Void, List<Pack>> {
-        @Override
-        protected List<Pack> doInBackground(Void... params) {
-            PackDao dao = new PackDao(SelectPackActivity.this);
-            List<Pack> gamePacks = dao.findPacks(_selectTheme);
-            return gamePacks;
-        }
+	@Override
+	protected List<Pack> doInBackground(Void... params) {
+	    PackDao dao = new PackDao(SelectPackActivity.this);
+	    List<Pack> gamePacks = dao.findPacks(_selectTheme);
+	    return gamePacks;
+	}
 
-        @Override
-        protected void onPostExecute(final List<Pack> aPacks) {
-            SelectPackAdapter collectionPacksPagerAdapter = new SelectPackAdapter(
-                    getSupportFragmentManager(), _selectTheme, aPacks);
-            _mViewPager.setAdapter(collectionPacksPagerAdapter);
-        }
+	@Override
+	protected void onPostExecute(final List<Pack> aPacks) {
+	    SelectPackAdapter collectionPacksPagerAdapter = new SelectPackAdapter(getSupportFragmentManager(),
+		    _selectTheme, aPacks);
+	    _mViewPager.setAdapter(collectionPacksPagerAdapter);
+	}
     }
 
 }
