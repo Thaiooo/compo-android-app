@@ -50,13 +50,10 @@ public class QuizzView extends View {
     protected Bitmap _ball;
     protected Bitmap _ballRedRaw;
     protected Bitmap _ballRed;
-    protected Bitmap _greenMappingRaw;
-    protected Bitmap _greenMapping;
     protected Bitmap _start;
     protected Bitmap _cercle;
     protected Paint _paint;
     protected Matrix _matrix;
-    protected Matrix _matrixGreenMapping;
     protected Match _quizz;
     protected boolean completed = false;
 
@@ -68,7 +65,6 @@ public class QuizzView extends View {
 
 	_coachRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.coach)).getBitmap();
 	_terrainRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.football_field)).getBitmap();
-	_greenMappingRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.green_mapping)).getBitmap();
 	_ballRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.ball)).getBitmap();
 	_ballRedRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.ball_red)).getBitmap();
 	_start = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.start)).getBitmap();
@@ -84,11 +80,8 @@ public class QuizzView extends View {
 
 	_playerHomeRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_bleu)).getBitmap();
 	_playerAwayRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_white)).getBitmap();
-	// _playerHomeRaw = getBitmapFromAsset("player_bleu.png");
-	// _playerAwayRaw = getBitmapFromAsset("player_white.png");
 
 	_matrix = new Matrix();
-	_matrixGreenMapping = new Matrix();
     }
 
     // private Bitmap getBitmapFromAsset(String strName) {
@@ -154,16 +147,6 @@ public class QuizzView extends View {
 	}
 
 	_matrix.postScale((float) scale, (float) scale);
-
-	// -----------------
-
-	int greenMappingW = _greenMappingRaw.getWidth();
-	int greenMappingH = _greenMappingRaw.getHeight();
-
-	scaleX = (double) screenW / (double) greenMappingW;
-	scaleY = (double) screenH / (double) greenMappingH;
-
-	_matrixGreenMapping.postScale((float) scaleX, (float) scaleY);
     }
 
     protected void scaleTerrain() {
@@ -171,14 +154,6 @@ public class QuizzView extends View {
 	    Bitmap scaledBitmap = Bitmap.createBitmap(_terrainRaw, 0, 0, _terrainRaw.getWidth(),
 		    _terrainRaw.getHeight(), _matrix, true);
 	    _terrain = scaledBitmap;
-	}
-    }
-
-    protected void scaleGreenMapping() {
-	if (_greenMapping == null) {
-	    Bitmap scaledBitmap = Bitmap.createBitmap(_greenMappingRaw, 0, 0, _greenMappingRaw.getWidth(),
-		    _greenMappingRaw.getHeight(), _matrixGreenMapping, true);
-	    _greenMapping = scaledBitmap;
 	}
     }
 
@@ -220,7 +195,6 @@ public class QuizzView extends View {
     }
 
     protected void printTerrain(Canvas canvas) {
-	canvas.drawBitmap(_greenMapping, 0, 0, null);
 	int terrainX = (this.getWidth() - _terrain.getWidth()) / 2;
 	canvas.drawBitmap(_terrain, terrainX, 0, null);
     }
@@ -236,7 +210,6 @@ public class QuizzView extends View {
 
 	setScaleMatrix();
 	scaleTerrain();
-	scaleGreenMapping();
 	scalePlayerHome();
 	scalePlayerAway();
 	scaleCoach();
