@@ -14,6 +14,7 @@ public class QuizzPlayerDao {
     }
 
     public void save(QuizzPlayer o) {
+	/*
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = null;
 	try {
@@ -32,6 +33,7 @@ public class QuizzPlayerDao {
 
 	    dataBaseHeleper.close();
 	}
+	*/
     }
 
 }

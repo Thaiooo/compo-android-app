@@ -1,15 +1,5 @@
 package com.compo.android.app.dao;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-
-import com.compo.android.app.model.Level;
-import com.compo.android.app.model.Player;
-import com.compo.android.app.model.Match;
-import com.compo.android.app.model.QuizzPlayer;
-import com.compo.android.app.model.Team;
-
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -19,10 +9,19 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class QuizzDao {
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.compo.android.app.model.Match;
+import com.compo.android.app.model.Player;
+import com.compo.android.app.model.QuizzPlayer;
+import com.compo.android.app.model.Team;
+
+public class MatchDao {
     private DataBaseHelper dataBaseHeleper;
 
-    public QuizzDao(Context context) {
+    public MatchDao(Context context) {
 	dataBaseHeleper = new DataBaseHelper(context);
     }
 
@@ -39,95 +38,87 @@ public class QuizzDao {
 	    StringBuffer req = new StringBuffer("select ");
 	    // Index 0
 	    req.append("q.");
-	    req.append(TableConstant.QuizzTable._ID);
+	    req.append(TableConstant.MatchTable._ID);
 	    req.append(", ");
 	    // Index 1
 	    req.append("q.");
-	    req.append(TableConstant.QuizzTable.COLUMN_NAME);
+	    req.append(TableConstant.MatchTable.COLUMN_NAME);
 	    req.append(", ");
 	    // Index 2
 	    req.append("q.");
-	    req.append(TableConstant.QuizzTable.COLUMN_LEVEL);
+	    req.append(TableConstant.MatchTable.COLUMN_DATE);
 	    req.append(", ");
 	    // Index 3
 	    req.append("q.");
-	    req.append(TableConstant.QuizzTable.COLUMN_DATE);
+	    req.append(TableConstant.MatchTable.COLUMN_POINT);
 	    req.append(", ");
 	    // Index 4
 	    req.append("q.");
-	    req.append(TableConstant.QuizzTable.COLUMN_POINT);
+	    req.append(TableConstant.MatchTable.COLUMN_SCORE_AWAY);
 	    req.append(", ");
 	    // Index 5
 	    req.append("q.");
-	    req.append(TableConstant.QuizzTable.COLUMN_SCORE_AWAY);
-	    req.append(", ");
-	    // Index 6
-	    req.append("q.");
-	    req.append(TableConstant.QuizzTable.COLUMN_SCORE_HOME);
+	    req.append(TableConstant.MatchTable.COLUMN_SCORE_HOME);
 	    req.append(", ");
 	    // ---------------------------------------------------------------------------------
-	    // Index 7
+	    // Index 6
 	    req.append("qp.");
 	    req.append(TableConstant.QuizzPlayerTable._ID);
 	    req.append(", ");
-	    // Index 8
+	    // Index 7
 	    req.append("qp.");
 	    req.append(TableConstant.QuizzPlayerTable.COLUMN_X);
 	    req.append(", ");
-	    // Index 9
+	    // Index 8
 	    req.append("qp.");
 	    req.append(TableConstant.QuizzPlayerTable.COLUMN_Y);
 	    req.append(", ");
-	    // Index 10
+	    // Index 9
 	    req.append("qp.");
 	    req.append(TableConstant.QuizzPlayerTable.COLUMN_HIDE);
 	    req.append(", ");
-	    // Index 11
+	    // Index 10
 	    req.append("qp.");
 	    req.append(TableConstant.QuizzPlayerTable.COLUMN_HOME);
 	    req.append(", ");
-	    // Index 12
+	    // Index 11
 	    req.append("qp.");
 	    req.append(TableConstant.QuizzPlayerTable.COLUMN_COACH);
 	    req.append(", ");
-	    // Index 13
+	    // Index 12
 	    req.append("qp.");
 	    req.append(TableConstant.QuizzPlayerTable.COLUMN_CSC);
 	    req.append(", ");
-	    // Index 14
+	    // Index 13
 	    req.append("qp.");
 	    req.append(TableConstant.QuizzPlayerTable.COLUMN_GOAL);
 	    req.append(", ");
-	    // Index 15
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_DISCOVERED);
-	    req.append(", ");
 	    // ---------------------------------------------------------------------------------
-	    // Index 16
+	    // Index 14
 	    req.append("qp.");
 	    req.append(TableConstant.QuizzPlayerTable.COLUMN_TEAM_ID);
 	    req.append(", ");
-	    // Index 17
+	    // Index 15
 	    req.append("t.");
 	    req.append(TableConstant.TeamTable.COLUMN_CODE);
 	    req.append(", ");
-	    // Index 18
+	    // Index 16
 	    req.append("t.");
 	    req.append(TableConstant.TeamTable.COLUMN_NAME);
 	    req.append(", ");
 	    // ---------------------------------------------------------------------------------
-	    // Index 19
+	    // Index 17
 	    req.append("qp.");
 	    req.append(TableConstant.QuizzPlayerTable.COLUMN_PLAYER_ID);
 	    req.append(", ");
-	    // Index 20
+	    // Index 18
 	    req.append("p.");
 	    req.append(TableConstant.PlayerTable.COLUMN_NAME);
 	    req.append(" ");
 
-	    req.append("from " + TableConstant.QuizzTable.TABLE_NAME + " q ");
+	    req.append("from " + TableConstant.MatchTable.TABLE_NAME + " q ");
 	    req.append("left join " + TableConstant.QuizzPlayerTable.TABLE_NAME + " qp on q."
-		    + TableConstant.QuizzTable._ID + " = qp." + TableConstant.QuizzPlayerTable.COLUMN_QUIZZ_ID + " ");
+		    + TableConstant.MatchTable._ID + " = qp." + TableConstant.QuizzPlayerTable.COLUMN_QUIZZ_ID + " ");
 
 	    req.append("left join " + TableConstant.TeamTable.TABLE_NAME + " t on qp."
 		    + TableConstant.QuizzPlayerTable.COLUMN_TEAM_ID + " = t." + TableConstant.TeamTable._ID + " ");
@@ -135,93 +126,122 @@ public class QuizzDao {
 	    req.append("left join " + TableConstant.PlayerTable.TABLE_NAME + " p on qp."
 		    + TableConstant.QuizzPlayerTable.COLUMN_PLAYER_ID + " = p." + TableConstant.PlayerTable._ID + " ");
 
-	    req.append("where q." + TableConstant.QuizzTable.COLUMN_PACK_ID + " = ? ");
-	    req.append("order by q." + TableConstant.QuizzTable.COLUMN_ORDER_NUMBER + " asc ");
+	    req.append("where q." + TableConstant.MatchTable.COLUMN_PACK_ID + " = ? ");
+	    req.append("order by q." + TableConstant.MatchTable.COLUMN_ORDER_NUMBER + " asc ");
 
 	    c = session.rawQuery(req.toString(), selectionArgs);
 
 	    Map<Long, Match> mapQuizz = new HashMap<Long, Match>();
 
 	    while (c.moveToNext()) {
-		long quizzId = c.getLong(0);
+		int index = 0;
+		long quizzId = c.getLong(index);
+		Match match = mapQuizz.get(quizzId);
+		
+		index++;
+		if (match == null) {
+		    match = new Match();
 
-		Match quizz = mapQuizz.get(quizzId);
-		if (quizz == null) {
-		    quizz = new Match();
-		    String quizzName = c.getString(1);
-		    Level quizzLevel = Level.valueOf(c.getString(2));
-		    String quizzDate = c.getString(3);
-		    int quizzPoint = c.getInt(4);
-		    int quizzScoreAway = c.getInt(5);
-		    int quizzScoreHome = c.getInt(6);
-		    quizz.setId(quizzId);
-		    quizz.setName(quizzName);
+		    String quizzName = c.getString(index);
+		    index++;
+		    String quizzDate = c.getString(index);
+		    index++;
+		    int quizzPoint = c.getInt(index);
+		    index++;
+		    int quizzScoreAway = c.getInt(index);
+		    index++;
+		    int quizzScoreHome = c.getInt(index);
+		    match.setId(quizzId);
+		    match.setName(quizzName);
 		    try {
 			java.util.Date d = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE).parse(quizzDate);
 			Date date = new Date(d.getTime());
-			quizz.setDate(date);
+			match.setDate(date);
 		    } catch (ParseException e) {
 			e.printStackTrace();
 		    }
-		    quizz.setLevel(quizzLevel);
-		    quizz.setPoint(quizzPoint);
-		    quizz.setScoreAway(quizzScoreAway);
-		    quizz.setScoreHome(quizzScoreHome);
-		    quizz.setQuizzs(new ArrayList<QuizzPlayer>());
+		    match.setPoint(quizzPoint);
+		    match.setScoreAway(quizzScoreAway);
+		    match.setScoreHome(quizzScoreHome);
+		    match.setQuizzs(new ArrayList<QuizzPlayer>());
 
-		    if (c.getLong(7) != 0) {
+		    index++;
+		    if (c.getLong(index) != 0) {
 			QuizzPlayer quizzPlayer = new QuizzPlayer();
-			quizzPlayer.setId(c.getLong(7));
-			quizzPlayer.setX(c.getInt(8));
-			quizzPlayer.setY(c.getInt(9));
-			quizzPlayer.setHide(Boolean.parseBoolean(c.getString(10)));
-			quizzPlayer.setHome(Boolean.parseBoolean(c.getString(11)));
-			quizzPlayer.setCoach(Boolean.parseBoolean(c.getString(12)));
-			quizzPlayer.setCsc(c.getInt(13));
-			quizzPlayer.setGoal(c.getInt(14));
-			quizzPlayer.setDiscovered(Boolean.parseBoolean(c.getString(15)));
+			quizzPlayer.setId(c.getLong(index));
+			index++;
+			quizzPlayer.setX(c.getInt(index));
+			index++;
+			quizzPlayer.setY(c.getInt(index));
+			index++;
+			quizzPlayer.setHide(Boolean.parseBoolean(c.getString(index)));
+			index++;
+			quizzPlayer.setHome(Boolean.parseBoolean(c.getString(index)));
+			index++;
+			quizzPlayer.setCoach(Boolean.parseBoolean(c.getString(index)));
+			index++;
+			quizzPlayer.setCsc(c.getInt(index));
+			index++;
+			quizzPlayer.setGoal(c.getInt(index));
 
 			Team team = new Team();
-			team.setId(c.getLong(16));
-			team.setCode(c.getString(17));
-			team.setName(c.getString(18));
+			index++;
+			team.setId(c.getLong(index));
+			index++;
+			team.setCode(c.getString(index));
+			index++;
+			team.setName(c.getString(index));
 			quizzPlayer.setTeam(team);
 
 			Player player = new Player();
-			player.setId(c.getLong(19));
-			player.setName(c.getString(20));
+			index++;
+			player.setId(c.getLong(index));
+			index++;
+			player.setName(c.getString(index));
 			quizzPlayer.setPlayer(player);
 
-			quizz.getQuizzs().add(quizzPlayer);
+			match.getQuizzs().add(quizzPlayer);
 		    }
-		    mapQuizz.put(quizzId, quizz);
+		    mapQuizz.put(quizzId, match);
 
-		    l.add(quizz);
+		    l.add(match);
 		} else {
-		    if (c.getLong(7) != 0) {
+		    index = 6;
+		    if (c.getLong(index) != 0) {
 			QuizzPlayer quizzPlayer = new QuizzPlayer();
-			quizzPlayer.setId(c.getLong(7));
-			quizzPlayer.setX(c.getInt(8));
-			quizzPlayer.setY(c.getInt(9));
-			quizzPlayer.setHide(Boolean.parseBoolean(c.getString(10)));
-			quizzPlayer.setHome(Boolean.parseBoolean(c.getString(11)));
-			quizzPlayer.setCoach(Boolean.parseBoolean(c.getString(12)));
-			quizzPlayer.setCsc(c.getInt(13));
-			quizzPlayer.setGoal(c.getInt(14));
-			quizzPlayer.setDiscovered(Boolean.parseBoolean(c.getString(15)));
+			quizzPlayer.setId(c.getLong(index));
+			index++;
+			quizzPlayer.setX(c.getInt(index));
+			index++;
+			quizzPlayer.setY(c.getInt(index));
+			index++;
+			quizzPlayer.setHide(Boolean.parseBoolean(c.getString(index)));
+			index++;
+			quizzPlayer.setHome(Boolean.parseBoolean(c.getString(index)));
+			index++;
+			quizzPlayer.setCoach(Boolean.parseBoolean(c.getString(index)));
+			index++;
+			quizzPlayer.setCsc(c.getInt(index));
+			index++;
+			quizzPlayer.setGoal(c.getInt(index));
 
 			Team team = new Team();
-			team.setId(c.getLong(16));
-			team.setCode(c.getString(17));
-			team.setName(c.getString(18));
+			index++;
+			team.setId(c.getLong(index));
+			index++;
+			team.setCode(c.getString(index));
+			index++;
+			team.setName(c.getString(index));
 			quizzPlayer.setTeam(team);
 
 			Player player = new Player();
-			player.setId(c.getLong(19));
-			player.setName(c.getString(20));
+			index++;
+			player.setId(c.getLong(index));
+			index++;
+			player.setName(c.getString(index));
 			quizzPlayer.setPlayer(player);
 
-			quizz.getQuizzs().add(quizzPlayer);
+			match.getQuizzs().add(quizzPlayer);
 		    }
 		}
 	    }
