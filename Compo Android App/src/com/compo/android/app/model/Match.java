@@ -15,7 +15,6 @@ public class Match implements Serializable {
     private Date date;
     private int scoreHome;
     private int scoreAway;
-    private Level level;
     private int point;
     private List<QuizzPlayer> quizzs = new ArrayList<QuizzPlayer>();
 
@@ -33,14 +32,6 @@ public class Match implements Serializable {
 
     public void setPoint(int point) {
 	this.point = point;
-    }
-
-    public Level getLevel() {
-	return level;
-    }
-
-    public void setLevel(Level level) {
-	this.level = level;
     }
 
     public List<QuizzPlayer> getQuizzs() {
