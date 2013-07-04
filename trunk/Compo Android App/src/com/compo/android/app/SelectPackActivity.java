@@ -52,7 +52,7 @@ public class SelectPackActivity extends FragmentActivity {
     private class LoadUserTask extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected Void doInBackground(Void... params) {
-	    User u = UserFactory.getInstance().getUser();
+	    User u = UserFactory.getInstance().getUser(SelectPackActivity.this);
 	    if (u != null) {
 		_userCredit.setText(u.getCredit() + "");
 		_userPoint.setText(u.getPoint() + " pts");
@@ -65,8 +65,8 @@ public class SelectPackActivity extends FragmentActivity {
 	@Override
 	protected List<Pack> doInBackground(Void... params) {
 	    PackDao dao = new PackDao(SelectPackActivity.this);
-	    List<Pack> gamePacks = dao.findPacks(_selectTheme);
-	    return gamePacks;
+	    List<Pack> packs = dao.findPacks(_selectTheme);
+	    return packs;
 	}
 
 	@Override

@@ -1,5 +1,9 @@
 package com.compo.android.app;
 
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -15,9 +19,13 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.compo.android.app.model.Match;
+import com.compo.android.app.model.Play;
 import com.compo.android.app.model.QuizzPlayer;
 
 public class QuizzView extends View {
+
+    private static final String TAG = QuizzView.class.getName();
+
     /**
      * Field width in meter
      */
@@ -34,9 +42,12 @@ public class QuizzView extends View {
      * Marge in meter
      */
     protected static final int MARGE_METER = 6;
+    /**
+     */
     protected static final int TEXT_HIGHT = 20;
-    private static final String TAG = QuizzView.class.getName();
+
     private static Typeface font;
+
     protected Context _context;
     protected Bitmap _terrainRaw;
     protected Bitmap _terrain;
@@ -54,8 +65,10 @@ public class QuizzView extends View {
     protected Bitmap _cercle;
     protected Paint _paint;
     protected Matrix _matrix;
-    protected Match _quizz;
-    protected boolean completed = false;
+    protected boolean _completed = false;
+
+    protected Match _selectedMatch;
+    protected Map<Long, Play> _mapQuizzToPlay;
 
     public QuizzView(Context context, AttributeSet attrs) {
 	super(context, attrs);
@@ -76,7 +89,7 @@ public class QuizzView extends View {
 	_paint.setTypeface(font);
 
 	Intent intent = ((Activity) context).getIntent();
-	_quizz = (Match) intent.getSerializableExtra(SelectMatchActivity.EXTRA_MESSAGE_QUIZZ);
+	_selectedMatch = (Match) intent.getSerializableExtra(SelectMatchActivity.EXTRA_MESSAGE_QUIZZ);
 
 	_playerHomeRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_bleu)).getBitmap();
 	_playerAwayRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_white)).getBitmap();
@@ -122,7 +135,11 @@ public class QuizzView extends View {
     }
 
     public void setQuizz(Match quizz) {
-	this._quizz = quizz;
+	this._selectedMatch = quizz;
+    }
+
+    public void setMapQuizzToPlay(Map<Long, Play> aMapQuizzToPlay) {
+	this._mapQuizzToPlay = aMapQuizzToPlay;
     }
 
     protected void setScaleMatrix() {
@@ -206,7 +223,7 @@ public class QuizzView extends View {
 
 	super.onDraw(canvas);
 
-	completed = false;
+	_completed = false;
 
 	setScaleMatrix();
 	scaleTerrain();
@@ -223,7 +240,7 @@ public class QuizzView extends View {
 	// =================================================================
 	// Player
 	// =================================================================
-	for (QuizzPlayer qp : _quizz.getQuizzs()) {
+	for (QuizzPlayer qp : _selectedMatch.getQuizzs()) {
 	    if (qp.isCoach()) {
 		printCoach(canvas, qp);
 	    } else {
@@ -231,7 +248,7 @@ public class QuizzView extends View {
 	    }
 	}
 
-	completed = true;
+	_completed = true;
     }
 
     protected void printCoach(Canvas canvas, QuizzPlayer qp) {
@@ -262,6 +279,15 @@ public class QuizzView extends View {
 	return metreY;
     }
 
+    private boolean isDiscovered(QuizzPlayer qp) {
+	Play play = _mapQuizzToPlay.get(qp.getId());
+	if (play != null && StringUtils.equalsIgnoreCase(play.getResponse(), qp.getPlayer().getName())) {
+	    return true;
+	} else {
+	    return false;
+	}
+    }
+
     protected void printPlayer(Canvas canvas, QuizzPlayer qp) {
 	double screenW = this.getWidth();
 	double terrainW = _terrain.getWidth();
@@ -282,7 +308,8 @@ public class QuizzView extends View {
 	double playerY = getPlayerY(qp, terrainH, metreY, playerImg);
 	if (qp.isHide()) {
 	    Bitmap backImg;
-	    if (qp.isDiscovered()) {
+
+	    if (isDiscovered(qp)) {
 		backImg = _start;
 	    } else {
 		backImg = _cercle;
@@ -291,7 +318,7 @@ public class QuizzView extends View {
 	    double backImgY = getPlayerY(qp, terrainH, metreY, backImg);
 	    canvas.drawBitmap(backImg, (float) backImgX, (float) backImgY, null);
 
-	    if (qp.isDiscovered()) {
+	    if (isDiscovered(qp)) {
 		canvas.drawBitmap(playerImg, (float) playerX, (float) playerY, null);
 	    }
 	} else {
@@ -318,7 +345,7 @@ public class QuizzView extends View {
 	    }
 	}
 
-	if (!qp.isHide() || qp.isDiscovered()) {
+	if (!qp.isHide() || isDiscovered(qp)) {
 	    double textWidth = _paint.measureText(qp.getPlayer().getName());
 	    double textDecal = textWidth / 2;
 
@@ -358,7 +385,7 @@ public class QuizzView extends View {
 	Log.v(TAG, "Hello");
 
 	boolean b = super.onTouchEvent(event);
-	if (!completed) {
+	if (!_completed) {
 	    return false;
 	}
 	double screenW = this.getWidth();
@@ -368,9 +395,9 @@ public class QuizzView extends View {
 	double metreX = getPixelPerMeterX(terrainW);
 	double metreY = getPixelPerMeterY(terrainH);
 
-	for (QuizzPlayer qp : _quizz.getQuizzs()) {
+	for (QuizzPlayer qp : _selectedMatch.getQuizzs()) {
 
-	    if (!qp.isHide() || qp.isDiscovered()) {
+	    if (!qp.isHide() || isDiscovered(qp)) {
 		continue;
 	    }
 
@@ -385,7 +412,8 @@ public class QuizzView extends View {
 		    && event.getY() <= playerYMax) {
 
 		Intent intent = new Intent(getContext(), ResponseActivity.class);
-		intent.putExtra(ResponseActivity.EXTRA_MESSAGE_ARG, qp);
+		intent.putExtra(ResponseActivity.EXTRA_MESSAGE_QUIZZ, qp);
+		intent.putExtra(ResponseActivity.EXTRA_MESSAGE_PLAY, _mapQuizzToPlay.get(qp.getId()));
 		((QuizzActivity) getContext()).startActivityForResult(intent, 1);
 
 		return b;

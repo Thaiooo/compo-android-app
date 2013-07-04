@@ -7,17 +7,18 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.compo.android.app.dao.DataBaseHelper;
-import com.compo.android.app.dao.UserDao;
 import com.compo.android.app.model.User;
 import com.compo.android.app.utils.UserFactory;
 
 public class MainActivity extends Activity {
+    private static final String TAG = MainActivity.class.getName();
 
     private static Typeface _font;
     private static Typeface _fontTitle;
@@ -87,9 +88,11 @@ public class MainActivity extends Activity {
     private class LoadUserTask extends AsyncTask<Void, Void, User> {
 	@Override
 	protected User doInBackground(Void... params) {
-	    UserDao dao = new UserDao(MainActivity.this);
-	    User u = dao.getUser();
-	    UserFactory.getInstance().setUser(u);
+	    User u = UserFactory.getInstance().getUser(MainActivity.this);
+	    if (u == null) {
+		Log.e(TAG, "No user found");
+		// TODO: Il faut aficcher une alerte?
+	    }
 	    return u;
 	}
 

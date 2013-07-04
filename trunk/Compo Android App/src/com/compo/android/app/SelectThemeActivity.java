@@ -43,7 +43,7 @@ public class SelectThemeActivity extends FragmentActivity {
     private class LoadUserTask extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected Void doInBackground(Void... params) {
-	    User u = UserFactory.getInstance().getUser();
+	    User u = UserFactory.getInstance().getUser(SelectThemeActivity.this);
 	    _userCredit.setText(u.getCredit() + "");
 	    _userPoint.setText(u.getPoint() + " pts");
 	    return null;
