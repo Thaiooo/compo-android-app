@@ -1,28 +1,34 @@
 package com.compo.android.app.utils;
 
+import android.content.Context;
+
+import com.compo.android.app.dao.UserDao;
 import com.compo.android.app.model.User;
 
 public class UserFactory {
 
-    private static UserFactory instance;
-    private User user;
+    private static UserFactory _instance;
+    private User _user;
 
     private UserFactory() {
     }
 
     public static UserFactory getInstance() {
-        if (instance == null) {
-            instance = new UserFactory();
-        }
-        return instance;
+	if (_instance == null) {
+	    _instance = new UserFactory();
+	}
+	return _instance;
     }
 
-    public User getUser() {
-        return user;
+    public User getUser(Context aContext) {
+	if (null == _user) {
+	    UserDao dao = new UserDao(aContext);
+	    _user = dao.getUser();
+	}
+	return _user;
     }
 
-    public void setUser(User anUser) {
-        user = anUser;
+    public void updateUser() {
     }
 
 }
