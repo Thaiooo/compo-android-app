@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 
 from compo_manager import views
 
@@ -18,5 +18,9 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     
     url(r'^$', views.index, name='index'),
-    url(r'^(?P<quizz_id>\d+)/$', views.lineup, name='lineup')
+
+    #Theme manager
+    url(r'^theme/create/$', views.create_theme, name="create-theme"),
+    url(r'^theme/$', views.index_theme, name="index-theme"),
+    
 )

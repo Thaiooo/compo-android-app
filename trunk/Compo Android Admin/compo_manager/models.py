@@ -1,11 +1,14 @@
 from django.db import models
+from django.forms.models import ModelForm
 
+#********************* Models ***********************
 class Theme(models.Model):
     code = models.CharField(max_length=100)
     name = models.CharField(max_length=250)
     
     def __unicode__(self):
         return self.name
+
 
 class Pack(models.Model):
     name = models.CharField(max_length=100)
@@ -16,7 +19,8 @@ class Pack(models.Model):
     
     def __unicode__(self):
         return self.name
-
+    
+    
 class Team(models.Model):
     name = models.CharField(max_length=100)
     code = models.CharField(max_length=10)
@@ -24,11 +28,13 @@ class Team(models.Model):
     def __unicode__(self):
         return self.name
     
+        
 class Player(models.Model):
     name = models.CharField(max_length=100)         
 
     def __unicode__(self):
         return self.name
+
 
 class QuizzPlayer(models.Model):
     x = models.FloatField()
@@ -41,6 +47,10 @@ class QuizzPlayer(models.Model):
     earn_credit = models.IntegerField()
     team = models.ForeignKey(Team)
     player = models.ForeignKey(Player)
+
+    def __unicode__(self):
+        return self.player.name + ' (' + self.x + ', ' + self.y + ')' 
+
 
 class Quizz(models.Model):
     score_home = models.IntegerField()
@@ -55,21 +65,11 @@ class Quizz(models.Model):
     
     def __unicode__(self):
         return self.name
-    
-class User(models.Model):
-    name = models.CharField(max_length=100)
-    point = models.IntegerField()
-    credit = models.IntegerField()
-    overall_time = models.IntegerField()
-    
-    def __unicode__(self):
-        return self.name
-    
-class Play(models.Model):
-    time = models.IntegerField()
-    quizz = models.ForeignKey(Quizz)
-    user = models.ForeignKey(User)
-    
-    
 
+   
+#********************* Forms *********************** 
+class ThemeForm(ModelForm):
+     
+    class Meta:
+        model = Theme 
     
