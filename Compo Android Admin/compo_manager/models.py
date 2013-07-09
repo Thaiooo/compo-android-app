@@ -77,4 +77,9 @@ class PackForm(ModelForm):
     
     class Meta:
         model = Pack
+        
+class TeamForm(ModelForm):
+    
+    class Meta:
+        model = Team
     

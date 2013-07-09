@@ -1,15 +1,18 @@
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.template.context import RequestContext
-from compo_manager.models import ThemeForm, Theme, PackForm, Pack
+from compo_manager.models import ThemeForm, Theme, PackForm, Pack, TeamForm,\
+    Team
 from django.shortcuts import render_to_response, get_object_or_404
 
-# View functions
+# Main index
 def index(request):
     template = loader.get_template('index.html')
     context = RequestContext(request)
     return HttpResponse(template.render(context))
 
+
+# Theme views
 def create_theme(request):
     if request.method == 'POST':
         form = ThemeForm(request.POST)
@@ -47,7 +50,7 @@ def index_theme(request):
 
 
 
-
+# Pack views
 def create_pack(request):
     if request.method == 'POST':
         form = PackForm(request.POST)
@@ -81,4 +84,42 @@ def index_pack(request):
     packs = Pack.objects.all()
     template = loader.get_template('index_pack.html')
     context = RequestContext(request, {'packs':packs})
+    return HttpResponse(template.render(context))
+
+
+
+# Team views
+def create_team(request):
+    if request.method == 'POST':
+        form = TeamForm(request.POST)
+        if form.is_valid():    
+            form.save()
+            return HttpResponseRedirect('/team')
+    else:
+        form = TeamForm() 
+        variables = RequestContext(request, {'form':form})
+        return render_to_response('create_team.html', variables)
+
+def update_team(request, team_id):
+    team = get_object_or_404(Pack, id=team_id)
+    form = TeamForm(request.POST, instance=team)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/team')
+    else:
+        form = TeamForm(instance=team) 
+        variables = RequestContext(request, {'form':form, 'team_id':team_id})
+    
+    return render_to_response('create_team.html', variables)
+
+def delete_team(request, team_id):
+    team = get_object_or_404(Team, id=team_id)
+    team.delete()
+    
+    return HttpResponseRedirect('/team')
+
+def index_team(request):
+    teams = Team.objects.all()
+    template = loader.get_template('index_team.html')
+    context = RequestContext(request, {'teams':teams})
     return HttpResponse(template.render(context))
