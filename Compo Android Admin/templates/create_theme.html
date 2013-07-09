@@ -1,4 +1,13 @@
-<form action="/theme/" method="post">{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Submit" />
-</form>
+{% if theme_id %}
+	<form action="/theme/update/{{ theme_id }}/" method="post">{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Submit" />
+	</form>
+	<a href='/theme/delete/{{ theme_id }}/'>Delete</a>
+{% else %}
+	<form action="/theme/create/" method="post">{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Submit" />
+	</form>
+{% endif %}
+<a href='/theme/'>Back</a>
