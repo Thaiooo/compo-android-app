@@ -1,0 +1,5 @@
+{% for team in teams %}
+	<li><a href='/team/update/{{ team.id }}'>{{ team.name }}</a></li>
+{% endfor %}
+<li><a href = '/team/create/'>New...</a></li>
+<li><a href = '/'>Back</a></li>

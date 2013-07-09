@@ -30,4 +30,10 @@ urlpatterns = patterns('',
     url(r'^pack/update/(?P<pack_id>\d+)/$', views.update_pack, name="update-pack"),
     url(r'^pack/delete/(?P<pack_id>\d+)/$', views.delete_pack, name="delete-pack"),
     url(r'^pack/$', views.index_pack, name="index-pack"),
+    
+    #Team manager
+    url(r'^team/create/$', views.create_team, name="create-team"),
+    url(r'^team/update/(?P<team_id>\d+)/$', views.update_team, name="update-team"),
+    url(r'^team/delete/(?P<team_id>\d+)/$', views.delete_team, name="delete-team"),
+    url(r'^team/$', views.index_team, name="index-team"),
 )

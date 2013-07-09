@@ -1,0 +1,13 @@
+{% if team_id %}
+	<form action="/team/update/{{ team_id }}/" method="post">{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Submit" />
+	</form>
+	<a href='/team/delete/{{ team_id }}/'>Delete</a>
+{% else %}
+	<form action="/team/create/" method="post">{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Submit" />
+	</form>
+{% endif %}
+<a href='/team/'>Back</a>
