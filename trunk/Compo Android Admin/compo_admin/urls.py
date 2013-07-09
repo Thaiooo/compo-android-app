@@ -21,6 +21,13 @@ urlpatterns = patterns('',
 
     #Theme manager
     url(r'^theme/create/$', views.create_theme, name="create-theme"),
+    url(r'^theme/update/(?P<theme_id>\d+)/$', views.update_theme, name="update-theme"),
+    url(r'^theme/delete/(?P<theme_id>\d+)/$', views.delete_theme, name="delete-theme"),
     url(r'^theme/$', views.index_theme, name="index-theme"),
     
+    #Pack manager
+    url(r'^pack/create/$', views.create_pack, name="create-pack"),
+    url(r'^pack/update/(?P<pack_id>\d+)/$', views.update_pack, name="update-pack"),
+    url(r'^pack/delete/(?P<pack_id>\d+)/$', views.delete_pack, name="delete-pack"),
+    url(r'^pack/$', views.index_pack, name="index-pack"),
 )

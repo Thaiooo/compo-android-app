@@ -49,7 +49,7 @@ class QuizzPlayer(models.Model):
     player = models.ForeignKey(Player)
 
     def __unicode__(self):
-        return self.player.name + ' (' + self.x + ', ' + self.y + ')' 
+        return self.player.name
 
 
 class Quizz(models.Model):
@@ -72,4 +72,9 @@ class ThemeForm(ModelForm):
      
     class Meta:
         model = Theme 
+        
+class PackForm(ModelForm):
+    
+    class Meta:
+        model = Pack
     

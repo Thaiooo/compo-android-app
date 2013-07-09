@@ -1,0 +1,5 @@
+{% for pack in packs %}
+	<li><a href='/pack/update/{{ pack.id }}'>{{ pack.name }}</a></li>
+{% endfor %}
+<li><a href = '/pack/create/'>New...</a></li>
+<li><a href = '/'>Back</a></li>
