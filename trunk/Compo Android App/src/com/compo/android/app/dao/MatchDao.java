@@ -50,20 +50,20 @@ public class MatchDao {
 	    req.append(", ");
 	    // Index 3
 	    req.append("q.");
-	    req.append(TableConstant.MatchTable.COLUMN_POINT);
-	    req.append(", ");
-	    // Index 4
-	    req.append("q.");
 	    req.append(TableConstant.MatchTable.COLUMN_SCORE_AWAY);
 	    req.append(", ");
-	    // Index 5
+	    // Index 4
 	    req.append("q.");
 	    req.append(TableConstant.MatchTable.COLUMN_SCORE_HOME);
 	    req.append(", ");
 	    // ---------------------------------------------------------------------------------
-	    // Index 6
+	    // Index 5
 	    req.append("qp.");
 	    req.append(TableConstant.QuizzPlayerTable._ID);
+	    req.append(", ");
+	    // Index 6
+	    req.append("qp.");
+	    req.append(TableConstant.QuizzPlayerTable.COLUMN_EARN_CREDIT);
 	    req.append(", ");
 	    // Index 7
 	    req.append("qp.");
@@ -137,7 +137,7 @@ public class MatchDao {
 		int index = 0;
 		long quizzId = c.getLong(index);
 		Match match = mapQuizz.get(quizzId);
-		
+
 		index++;
 		if (match == null) {
 		    match = new Match();
@@ -145,8 +145,6 @@ public class MatchDao {
 		    String quizzName = c.getString(index);
 		    index++;
 		    String quizzDate = c.getString(index);
-		    index++;
-		    int quizzPoint = c.getInt(index);
 		    index++;
 		    int quizzScoreAway = c.getInt(index);
 		    index++;
@@ -160,7 +158,6 @@ public class MatchDao {
 		    } catch (ParseException e) {
 			e.printStackTrace();
 		    }
-		    match.setPoint(quizzPoint);
 		    match.setScoreAway(quizzScoreAway);
 		    match.setScoreHome(quizzScoreHome);
 		    match.setQuizzs(new ArrayList<QuizzPlayer>());
@@ -169,6 +166,8 @@ public class MatchDao {
 		    if (c.getLong(index) != 0) {
 			QuizzPlayer quizzPlayer = new QuizzPlayer();
 			quizzPlayer.setId(c.getLong(index));
+			index++;
+			quizzPlayer.setEarnCredit(c.getInt(index));
 			index++;
 			quizzPlayer.setX(c.getInt(index));
 			index++;
@@ -206,10 +205,12 @@ public class MatchDao {
 
 		    l.add(match);
 		} else {
-		    index = 6;
+		    index = 5;
 		    if (c.getLong(index) != 0) {
 			QuizzPlayer quizzPlayer = new QuizzPlayer();
 			quizzPlayer.setId(c.getLong(index));
+			index++;
+			quizzPlayer.setEarnCredit(c.getInt(index));
 			index++;
 			quizzPlayer.setX(c.getInt(index));
 			index++;

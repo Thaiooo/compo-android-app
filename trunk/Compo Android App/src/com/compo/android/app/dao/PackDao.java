@@ -28,8 +28,7 @@ public class PackDao {
 	    // The columns to return
 	    String[] projection = { TableConstant.PackTable._ID, TableConstant.PackTable.COLUMN_ORDER_NUMBER,
 		    TableConstant.PackTable.COLUMN_NAME, TableConstant.PackTable.COLUMN_DESCRIPTION,
-		    TableConstant.PackTable.COLUMN_LOCK, TableConstant.PackTable.COLUMN_SCORE_LIMIT,
-		    TableConstant.PackTable.COLUMN_CREDIT_LIMIT };
+		    TableConstant.PackTable.COLUMN_LOCK, TableConstant.PackTable.COLUMN_CREDIT_LIMIT };
 
 	    // The columns for the WHERE clause
 	    String selection = TableConstant.PackTable.COLUMN_THEME_ID + " = " + aTheme.getId();
@@ -51,7 +50,6 @@ public class PackDao {
 		String itemDesc = c.getString(c.getColumnIndexOrThrow(TableConstant.PackTable.COLUMN_DESCRIPTION));
 		String itemLock = c.getString(c.getColumnIndexOrThrow(TableConstant.PackTable.COLUMN_LOCK));
 		int itemCreditLimit = c.getInt(c.getColumnIndexOrThrow(TableConstant.PackTable.COLUMN_CREDIT_LIMIT));
-		int itemScoreLimit = c.getInt(c.getColumnIndexOrThrow(TableConstant.PackTable.COLUMN_SCORE_LIMIT));
 
 		Pack p = new Pack();
 		p.setId(itemId);
@@ -59,7 +57,6 @@ public class PackDao {
 		p.setDescription(itemDesc);
 		p.setLock(Boolean.valueOf(itemLock));
 		p.setCreditLimit(itemCreditLimit);
-		p.setScoreLimit(itemScoreLimit);
 
 		l.add(p);
 	    }
