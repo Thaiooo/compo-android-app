@@ -19,7 +19,6 @@ public class TableConstant {
 	public static final String COLUMN_NAME = "name";
 	public static final String COLUMN_DESCRIPTION = "description";
 	public static final String COLUMN_LOCK = "lock";
-	public static final String COLUMN_SCORE_LIMIT = "score_limit";
 	public static final String COLUMN_CREDIT_LIMIT = "credit_limit";
 	public static final String COLUMN_ORDER_NUMBER = "order_number";
 	public static final String COLUMN_THEME_ID = "theme_id";
@@ -38,7 +37,6 @@ public class TableConstant {
 	public static final String COLUMN_DATE = "date";
 	public static final String COLUMN_SCORE_HOME = "score_home";
 	public static final String COLUMN_SCORE_AWAY = "score_away";
-	public static final String COLUMN_POINT = "point";
 	public static final String COLUMN_ORDER_NUMBER = "order_number";
 	public static final String COLUMN_PACK_ID = "pack_id";
     }
@@ -63,6 +61,7 @@ public class TableConstant {
 	public static final String COLUMN_GOAL = "goal";
 	public static final String COLUMN_TEAM_ID = "team_id";
 	public static final String COLUMN_PLAYER_ID = "player_id";
+	public static final String COLUMN_EARN_CREDIT = "earn_credit";
     }
 
     public static class TeamTable implements BaseColumns {

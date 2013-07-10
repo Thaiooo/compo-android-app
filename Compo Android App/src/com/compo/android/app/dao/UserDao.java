@@ -1,5 +1,6 @@
 package com.compo.android.app.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,6 +12,28 @@ public class UserDao {
 
     public UserDao(Context context) {
 	dataBaseHeleper = new DataBaseHelper(context);
+    }
+
+    public void save(User o) {
+	dataBaseHeleper.openDataBase();
+	SQLiteDatabase session = null;
+	try {
+	    session = dataBaseHeleper.getWritableDatabase();
+
+	    ContentValues values = new ContentValues();
+	    values.put(TableConstant.UserTable.COLUMN_CREDIT, o.getCredit());
+	    values.put(TableConstant.UserTable.COLUMN_POINT, o.getPoint());
+
+	    session.update(TableConstant.UserTable.TABLE_NAME, values, TableConstant.UserTable._ID + " = ?",
+		    new String[] { String.valueOf(o.getId()) });
+
+	} finally {
+	    if (session != null) {
+		session.close();
+	    }
+
+	    dataBaseHeleper.close();
+	}
     }
 
     public User getUser() {
