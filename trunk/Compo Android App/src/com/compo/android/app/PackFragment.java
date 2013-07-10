@@ -52,22 +52,22 @@ public class PackFragment extends Fragment {
 	if (!_currentPack.isLock()) {
 	    _lockImage.setVisibility(View.INVISIBLE);
 	    _progress.setVisibility(View.VISIBLE);
-	    _progress.setText("0/" + _currentPack.getQuizzList().size());
+	    _progress.setText("0/" + _currentPack.getMatchs().size());
+
+	    _contentView.setOnClickListener(new View.OnClickListener() {
+		@Override
+		public void onClick(View view) {
+		    Intent intent = new Intent(getActivity(), SelectMatchActivity.class);
+		    intent.putExtra(EXTRA_MESSAGE_THEME, _currentTheme);
+		    intent.putExtra(EXTRA_MESSAGE_PACK, _currentPack);
+		    startActivity(intent);
+		    getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+		}
+	    });
 	} else {
 	    _lockImage.setVisibility(View.VISIBLE);
 	    _progress.setVisibility(View.INVISIBLE);
 	}
-
-	_contentView.setOnClickListener(new View.OnClickListener() {
-	    @Override
-	    public void onClick(View view) {
-		Intent intent = new Intent(getActivity(), SelectMatchActivity.class);
-		intent.putExtra(EXTRA_MESSAGE_THEME, _currentTheme);
-		intent.putExtra(EXTRA_MESSAGE_PACK, _currentPack);
-		startActivity(intent);
-		getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-	    }
-	});
 
 	return rootView;
     }

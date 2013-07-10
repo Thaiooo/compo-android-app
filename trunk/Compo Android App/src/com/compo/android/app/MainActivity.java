@@ -91,7 +91,7 @@ public class MainActivity extends Activity {
 	    User u = UserFactory.getInstance().getUser(MainActivity.this);
 	    if (u == null) {
 		Log.e(TAG, "No user found");
-		// TODO: Il faut aficcher une alerte?
+		// TODO: Il faut afficher une alerte?
 	    }
 	    return u;
 	}
