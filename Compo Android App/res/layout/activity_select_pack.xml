@@ -1,42 +1,37 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/theme1_background">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/theme1_background" >
 
     <include
-            android:id="@+id/score_bar"
-            layout="@layout/score_bar"/>
+        android:id="@+id/score_bar"
+        layout="@layout/score_bar" />
 
     <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/score_bar"
-            android:background="@drawable/theme1_cadre">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/score_bar"
+        android:background="@drawable/theme1_cadre" >
 
         <TextView
-                android:id="@+id/theme_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/main_title_margin_top"
-                android:textColor="@android:color/white"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/theme_title_font_size"
-                android:layout_alignParentBottom="false"/>
+            android:id="@+id/theme_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/main_title_margin_top"
+            android:textColor="@android:color/white"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/theme_title_font_size" />
 
         <android.support.v4.view.ViewPager
-                android:id="@+id/pager"
-                android:layout_marginTop="@dimen/pack_image_margin_top"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/pack_image_height"
-                android:layout_below="@+id/theme_name"
-                >
+            android:id="@+id/pager"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/pack_image_height"
+            android:layout_below="@+id/theme_name"
+            android:layout_marginTop="@dimen/pack_image_margin_top" >
         </android.support.v4.view.ViewPager>
-
     </RelativeLayout>
 
 </RelativeLayout>
-
-
-
