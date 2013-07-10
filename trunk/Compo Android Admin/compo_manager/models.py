@@ -18,7 +18,7 @@ class Pack(models.Model):
     theme = models.ForeignKey(Theme)
     
     def __unicode__(self):
-        return self.name
+        return self.name + ' ' + self.theme.name
     
     
 class Team(models.Model):
@@ -52,12 +52,11 @@ class QuizzPlayer(models.Model):
         return self.player.name
 
 
-class Quizz(models.Model):
+class Match(models.Model):
     score_home = models.IntegerField()
     score_away = models.IntegerField()
     name = models.CharField(max_length=100)
     date = models.DateField()
-    level = models.CharField(max_length=15)
     pack = models.ForeignKey(Pack)
     is_valid = models.BooleanField()
     update_time = models.DateTimeField()

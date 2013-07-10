@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, url
 
 from compo_manager import views
+from compo_manager.forms import MatchFormPackStep1, MatchFormTeamsStep2,\
+    MatchFormFieldsStep3
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -36,4 +38,9 @@ urlpatterns = patterns('',
     url(r'^team/update/(?P<team_id>\d+)/$', views.update_team, name="update-team"),
     url(r'^team/delete/(?P<team_id>\d+)/$', views.delete_team, name="delete-team"),
     url(r'^team/$', views.index_team, name="index-team"),
+    
+    #Match manager
+    url(r'^match/create/$', views.MatchWizard.as_view([MatchFormPackStep1, MatchFormTeamsStep2, MatchFormFieldsStep3]), name="create-match"),
+    url(r'^match/$', views.index_match, name="index-match"),
+    
 )
