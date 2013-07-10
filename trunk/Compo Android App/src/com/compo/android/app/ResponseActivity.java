@@ -15,13 +15,15 @@ import android.widget.EditText;
 import com.compo.android.app.dao.PlayDao;
 import com.compo.android.app.model.Play;
 import com.compo.android.app.model.QuizzPlayer;
+import com.compo.android.app.model.User;
 import com.compo.android.app.utils.UserFactory;
 
 public class ResponseActivity extends Activity {
+    // private static final String TAG = ResponseActivity.class.getName();
+
     public static final String EXTRA_MESSAGE_QUIZZ = "com.compo.android.app.ResponseActivity.MESSAGE.QUIZZ";
     public static final String EXTRA_MESSAGE_PLAY = "com.compo.android.app.ResponseActivity.MESSAGE.PLAY";
 
-    private static final String TAG = ResponseActivity.class.getName();
     private static Typeface _font;
     private EditText edit;
     private EditText _matching;
@@ -61,20 +63,42 @@ public class ResponseActivity extends Activity {
 	double distance = StringUtils.getLevenshteinDistance(response, playerName);
 	double percent = 100 - (distance / (double) response.length() * 100);
 
+	PlayDao dao = new PlayDao(ResponseActivity.this);
+	Intent newIntent = new Intent();
 	if (percent == 100) {
-	    // QuizzPlayerDao dao = new QuizzPlayerDao(ResponseActivity.this);
-	    // dao.save(currentQuizz);
+	    // =========================================
+	    // TODO Ceci dans etre dans une transaction
+	    // =========================================
 
-	    Intent newIntent = new Intent();
-	    newIntent.putExtra("Selected", _currentQuizz);
+	    // MAJ du user
+	    User user = UserFactory.getInstance().getUser(ResponseActivity.this);
+	    user.setPoint(user.getPoint() + 1);
+	    user.setCredit(user.getCredit() + _currentQuizz.getEarnCredit());
+	    UserFactory.getInstance().updateUser(ResponseActivity.this);
+
+	    // MAJ du play
+	    if (_currentPlay == null) {
+		_currentPlay = new Play();
+		_currentPlay.setQuizzId(_currentQuizz.getId());
+		_currentPlay.setUserId(UserFactory.getInstance().getUser(ResponseActivity.this).getId());
+	    }
+	    _currentPlay.setResponse(response);
+	    _currentPlay.setDateTime(new Date());
+
+	    if (_currentPlay.getId() == 0) {
+		dao.add(_currentPlay);
+	    } else {
+		dao.update(_currentPlay);
+	    }
+
+	    newIntent.putExtra(QuizzActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
 	    setResult(RESULT_OK, newIntent);
 	    finish();
 	} else {
 	    _matching.setText(Integer.toString((int) percent) + " %");
 
-	    PlayDao dao = new PlayDao(ResponseActivity.this);
 	    if (_currentPlay == null) {
-		Play _currentPlay = new Play();
+		_currentPlay = new Play();
 		_currentPlay.setDateTime(new Date());
 		_currentPlay.setQuizzId(_currentQuizz.getId());
 		_currentPlay.setUserId(UserFactory.getInstance().getUser(ResponseActivity.this).getId());
@@ -87,10 +111,8 @@ public class ResponseActivity extends Activity {
 		dao.update(_currentPlay);
 	    }
 
-	    Intent newIntent = new Intent();
-	    newIntent.putExtra("Selected", _currentPlay);
+	    newIntent.putExtra(QuizzActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
 	    setResult(RESULT_CANCELED, newIntent);
-
 	}
 
     }

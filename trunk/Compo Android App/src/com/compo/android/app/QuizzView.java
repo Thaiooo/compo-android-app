@@ -414,7 +414,7 @@ public class QuizzView extends View {
 		Intent intent = new Intent(getContext(), ResponseActivity.class);
 		intent.putExtra(ResponseActivity.EXTRA_MESSAGE_QUIZZ, qp);
 		intent.putExtra(ResponseActivity.EXTRA_MESSAGE_PLAY, _mapQuizzToPlay.get(qp.getId()));
-		((QuizzActivity) getContext()).startActivityForResult(intent, 1);
+		((QuizzActivity) getContext()).startActivityForResult(intent, QuizzActivity.EXTRA_MESSAGE_REQUEST_CODE);
 
 		return b;
 	    }
