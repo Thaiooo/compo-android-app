@@ -28,7 +28,9 @@ public class UserFactory {
 	return _user;
     }
 
-    public void updateUser() {
+    public void updateUser(Context aContext) {
+	UserDao dao = new UserDao(aContext);
+	dao.save(_user);
     }
 
 }
