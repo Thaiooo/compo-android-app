@@ -21,6 +21,9 @@ public class QuizzActivity extends FragmentActivity {
 
     // private static final String TAG = QuizzActivity.class.getName();
 
+    public static final String EXTRA_MESSAGE_RESULT = "com.compo.android.app.QuizzActivity.MESSAGE.RESULT";
+    public static final int EXTRA_MESSAGE_REQUEST_CODE = 1;
+
     private TextView _userCredit;
     private TextView _userPoint;
     private QuizzView _quizzView;
@@ -75,20 +78,23 @@ public class QuizzActivity extends FragmentActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	if (data == null) {
+	    return;
+	}
+	Play play = (Play) data.getSerializableExtra(QuizzActivity.EXTRA_MESSAGE_RESULT);
+
 	switch (requestCode) {
-	case 1:
+	case EXTRA_MESSAGE_REQUEST_CODE:
+
+	    _mapQuizzToPlay.put(play.getQuizzId(), play);
+	    _quizzView.setMapQuizzToPlay(_mapQuizzToPlay);
+
 	    if (resultCode == RESULT_OK) {
-		QuizzPlayer qp = (QuizzPlayer) data.getSerializableExtra("Selected");
 		_quizzView.invalidate();
-		Toast.makeText(this, "You have found " + " " + qp.getPlayer().getName(), Toast.LENGTH_LONG).show();
-		break;
-	    } else {
-		if (data == null) {
-		    break;
-		}
-		Play play = (Play) data.getSerializableExtra("Selected");
-		_mapQuizzToPlay.put(play.getQuizzId(), play);
-		_quizzView.setMapQuizzToPlay(_mapQuizzToPlay);
+		User u = UserFactory.getInstance().getUser(QuizzActivity.this);
+		_userCredit.setText(u.getCredit() + "");
+		_userPoint.setText(u.getPoint() + " pts");
+		Toast.makeText(this, "You have found " + " " + play.getResponse(), Toast.LENGTH_LONG).show();
 		break;
 	    }
 	}

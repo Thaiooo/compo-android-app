@@ -25,6 +25,7 @@ public class PackFragment extends Fragment {
     private ImageView _lockImage;
     private Theme _currentTheme;
     private Pack _currentPack;
+    private View _contentView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class PackFragment extends Fragment {
 	_packName = (TextView) rootView.findViewById(R.id.pack_name);
 	_lockImage = (ImageView) rootView.findViewById(R.id.lock_image);
 	_progress = (TextView) rootView.findViewById(R.id.progress);
+	_contentView = (View) rootView.findViewById(R.id.pack_content_layout_id);
 
 	_packName.setText(_currentPack.getName());
 	_packName.setTypeface(_font);
@@ -56,7 +58,7 @@ public class PackFragment extends Fragment {
 	    _progress.setVisibility(View.INVISIBLE);
 	}
 
-	rootView.setOnClickListener(new View.OnClickListener() {
+	_contentView.setOnClickListener(new View.OnClickListener() {
 	    @Override
 	    public void onClick(View view) {
 		Intent intent = new Intent(getActivity(), SelectMatchActivity.class);
