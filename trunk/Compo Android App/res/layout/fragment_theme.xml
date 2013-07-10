@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/theme1_background_theme" >
@@ -6,8 +6,7 @@
     <RelativeLayout
         android:id="@+id/theme_content_layout_id"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_centerHorizontal="true" >
+        android:layout_height="fill_parent" >
 
         <ImageView
             android:id="@+id/theme_image_id"
@@ -27,4 +26,4 @@
             android:textSize="@dimen/theme_name_font_size" />
     </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>
