@@ -20,9 +20,9 @@
     <dimen name="theme_image_margin_top">25dp</dimen>
     <dimen name="theme_image_height">250dp</dimen>
     
+    <dimen name="pack_name_font_size">15dp</dimen>
     <dimen name="pack_image_margin_top">25dp</dimen>
     <dimen name="pack_image_height">250dp</dimen>
-    <dimen name="pack_name_font_size">15dp</dimen>
 
     <dimen name="match_image_margin_top">25dp</dimen>
     <dimen name="match_image_height">250dp</dimen>
