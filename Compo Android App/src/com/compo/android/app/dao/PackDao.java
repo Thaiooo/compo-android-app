@@ -79,12 +79,14 @@ public class PackDao {
 	    req.append(" ");
 
 	    req.append("from " + TableConstant.PackTable.TABLE_NAME + " p ");
-	    req.append("inner join " + TableConstant.MatchTable.TABLE_NAME + " m on m."
+	    req.append("left join " + TableConstant.MatchTable.TABLE_NAME + " m on m."
 		    + TableConstant.MatchTable.COLUMN_PACK_ID + " = p." + TableConstant.PackTable._ID + " ");
 
 	    req.append("where p." + TableConstant.PackTable.COLUMN_THEME_ID + " = ? ");
 	    req.append("order by p." + TableConstant.PackTable.COLUMN_ORDER_NUMBER + " asc ");
+	    req.append(", m." + TableConstant.MatchTable.COLUMN_ORDER_NUMBER + " asc ");
 
+	    
 	    c = session.rawQuery(req.toString(), selectionArgs);
 
 	    Map<Long, Pack> mapPack = new HashMap<Long, Pack>();
