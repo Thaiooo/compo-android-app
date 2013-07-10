@@ -16,6 +16,7 @@ public class QuizzPlayer implements Serializable {
     private Player player;
     private int goal;
     private int csc;
+    private int earnCredit;
 
     public long getId() {
 	return id;
@@ -23,6 +24,14 @@ public class QuizzPlayer implements Serializable {
 
     public void setId(long id) {
 	this.id = id;
+    }
+
+    public int getEarnCredit() {
+	return earnCredit;
+    }
+
+    public void setEarnCredit(int earnCredit) {
+	this.earnCredit = earnCredit;
     }
 
     public Team getTeam() {
