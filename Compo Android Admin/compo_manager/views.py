@@ -2,8 +2,9 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.template.context import RequestContext
 from compo_manager.models import ThemeForm, Theme, PackForm, Pack, TeamForm,\
-    Team
+    Team, Match
 from django.shortcuts import render_to_response, get_object_or_404
+from django.contrib.formtools.wizard.views import SessionWizardView
 
 # Main index
 def index(request):
@@ -101,7 +102,7 @@ def create_team(request):
         return render_to_response('create_team.html', variables)
 
 def update_team(request, team_id):
-    team = get_object_or_404(Pack, id=team_id)
+    team = get_object_or_404(Team, id=team_id)
     form = TeamForm(request.POST, instance=team)
     if form.is_valid():
         form.save()
@@ -115,11 +116,30 @@ def update_team(request, team_id):
 def delete_team(request, team_id):
     team = get_object_or_404(Team, id=team_id)
     team.delete()
-    
     return HttpResponseRedirect('/team')
 
 def index_team(request):
     teams = Team.objects.all()
     template = loader.get_template('index_team.html')
     context = RequestContext(request, {'teams':teams})
+    return HttpResponse(template.render(context))
+
+
+
+# Match views
+class MatchWizard(SessionWizardView):
+    
+    template_name = 'create_match.html'
+    
+    def done(self, form_list, **kwargs):
+        
+        for form in form_list:
+            pass
+        
+        return HttpResponseRedirect('/match')
+    
+def index_match(request):
+    matchs = Match.objects.all()
+    template = loader.get_template('index_match.html')
+    context = RequestContext(request, {'matchs':matchs})
     return HttpResponse(template.render(context))
