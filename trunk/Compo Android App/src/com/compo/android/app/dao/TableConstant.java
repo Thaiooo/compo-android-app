@@ -74,4 +74,10 @@ public class TableConstant {
 	public static final String TABLE_NAME = "player";
 	public static final String COLUMN_NAME = "name";
     }
+
+    public static class PackProgressTable implements BaseColumns {
+	public static final String TABLE_NAME = "pack_progress";
+	public static final String COLUMN_MATCH = "match";
+	public static final String COLUMN_PACK_ID = "pack_id";
+    }
 }
