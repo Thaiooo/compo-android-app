@@ -9,12 +9,15 @@ import android.support.v4.view.ViewPager;
 import android.widget.TextView;
 
 import com.compo.android.app.dao.PackDao;
+import com.compo.android.app.dao.PackProgressDao;
 import com.compo.android.app.model.Pack;
+import com.compo.android.app.model.PackProgress;
 import com.compo.android.app.model.Theme;
 import com.compo.android.app.model.User;
 import com.compo.android.app.utils.UserFactory;
 
 import java.util.List;
+import java.util.Map;
 
 public class SelectPackActivity extends FragmentActivity {
 
@@ -25,6 +28,7 @@ public class SelectPackActivity extends FragmentActivity {
     private TextView _userPoint;
     private TextView _themeName;
     private Theme _selectTheme;
+    private Map<Long, PackProgress> _mapPackToProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,15 +68,19 @@ public class SelectPackActivity extends FragmentActivity {
     private class LoadPackTask extends AsyncTask<Void, Void, List<Pack>> {
 	@Override
 	protected List<Pack> doInBackground(Void... params) {
-	    PackDao dao = new PackDao(SelectPackActivity.this);
-	    List<Pack> packs = dao.findPacks(_selectTheme);
+	    PackDao packDao = new PackDao(SelectPackActivity.this);
+	    List<Pack> packs = packDao.findPacks(_selectTheme);
+
+	    PackProgressDao packProgressDao = new PackProgressDao(SelectPackActivity.this);
+	    _mapPackToProgress = packProgressDao.getAllPackProgress(_selectTheme.getId());
+
 	    return packs;
 	}
 
 	@Override
 	protected void onPostExecute(final List<Pack> aPacks) {
 	    SelectPackAdapter collectionPacksPagerAdapter = new SelectPackAdapter(getSupportFragmentManager(),
-		    _selectTheme, aPacks);
+		    _selectTheme, aPacks, _mapPackToProgress);
 	    _mViewPager.setAdapter(collectionPacksPagerAdapter);
 	}
     }

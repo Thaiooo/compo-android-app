@@ -11,12 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.compo.android.app.model.Pack;
+import com.compo.android.app.model.PackProgress;
 import com.compo.android.app.model.Theme;
 
 public class PackFragment extends Fragment {
 
     public static final String EXTRA_MESSAGE_PACK = "com.compo.android.app.PackFragment.MESSAGE.PACK";
     public static final String EXTRA_MESSAGE_THEME = "com.compo.android.app.PackFragment.MESSAGE.THEME";
+    public static final String EXTRA_MESSAGE_PACK_PROGRESS = "com.compo.android.app.PackFragment.MESSAGE.PACK_PROGRESS";
 
     private static Typeface _font;
 
@@ -25,6 +27,8 @@ public class PackFragment extends Fragment {
     private ImageView _lockImage;
     private Theme _currentTheme;
     private Pack _currentPack;
+    private PackProgress _currentPackProgress;
+
     private View _contentView;
 
     @Override
@@ -38,6 +42,7 @@ public class PackFragment extends Fragment {
 	Bundle args = getArguments();
 	_currentTheme = (Theme) args.getSerializable(EXTRA_MESSAGE_THEME);
 	_currentPack = (Pack) args.getSerializable(EXTRA_MESSAGE_PACK);
+	_currentPackProgress = (PackProgress) args.getSerializable(EXTRA_MESSAGE_PACK_PROGRESS);
 
 	_packName = (TextView) rootView.findViewById(R.id.pack_name);
 	_lockImage = (ImageView) rootView.findViewById(R.id.lock_image);
@@ -52,7 +57,11 @@ public class PackFragment extends Fragment {
 	if (!_currentPack.isLock()) {
 	    _lockImage.setVisibility(View.INVISIBLE);
 	    _progress.setVisibility(View.VISIBLE);
-	    _progress.setText("0/" + _currentPack.getMatchs().size());
+	    int progress = 0;
+	    if (_currentPackProgress != null) {
+		progress = _currentPackProgress.getMatch();
+	    }
+	    _progress.setText(progress + "/" + _currentPack.getMatchs().size());
 
 	    _contentView.setOnClickListener(new View.OnClickListener() {
 		@Override
