@@ -5,6 +5,11 @@ from compo_manager.models import ThemeForm, Theme, PackForm, Pack, TeamForm,\
     Team, Match
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.formtools.wizard.views import SessionWizardView
+import datetime
+from django.core.files.storage import FileSystemStorage
+from compo_admin import settings
+from compo_manager import services
+from compo_manager.services import QuizzPlayerListServices
 
 # Main index
 def index(request):
@@ -22,8 +27,9 @@ def create_theme(request):
             return HttpResponseRedirect('/theme')
     else:
         form = ThemeForm() 
-        variables = RequestContext(request, {'form':form})
-        return render_to_response('create_theme.html', variables)
+    
+    variables = RequestContext(request, {'form':form})
+    return render_to_response('create_theme.html', variables)
 
 def update_theme(request, theme_id):
     theme = get_object_or_404(Theme, id=theme_id)
@@ -33,8 +39,8 @@ def update_theme(request, theme_id):
         return HttpResponseRedirect('/theme')
     else:
         form = ThemeForm(instance=theme) 
-        variables = RequestContext(request, {'form':form, 'theme_id':theme_id})
-    
+        
+    variables = RequestContext(request, {'form':form, 'theme_id':theme_id})
     return render_to_response('create_theme.html', variables)
 
 def delete_theme(request, theme_id):
@@ -60,8 +66,9 @@ def create_pack(request):
             return HttpResponseRedirect('/pack')
     else:
         form = PackForm() 
-        variables = RequestContext(request, {'form':form})
-        return render_to_response('create_pack.html', variables)
+        
+    variables = RequestContext(request, {'form':form})    
+    return render_to_response('create_pack.html', variables)
 
 def update_pack(request, pack_id):
     pack = get_object_or_404(Pack, id=pack_id)
@@ -71,8 +78,8 @@ def update_pack(request, pack_id):
         return HttpResponseRedirect('/pack')
     else:
         form = PackForm(instance=pack) 
-        variables = RequestContext(request, {'form':form, 'pack_id':pack_id})
-    
+        
+    variables = RequestContext(request, {'form':form, 'pack_id':pack_id})
     return render_to_response('create_pack.html', variables)
 
 def delete_pack(request, pack_id):
@@ -98,8 +105,9 @@ def create_team(request):
             return HttpResponseRedirect('/team')
     else:
         form = TeamForm() 
-        variables = RequestContext(request, {'form':form})
-        return render_to_response('create_team.html', variables)
+        
+    variables = RequestContext(request, {'form':form})
+    return render_to_response('create_team.html', variables)
 
 def update_team(request, team_id):
     team = get_object_or_404(Team, id=team_id)
@@ -109,8 +117,8 @@ def update_team(request, team_id):
         return HttpResponseRedirect('/team')
     else:
         form = TeamForm(instance=team) 
-        variables = RequestContext(request, {'form':form, 'team_id':team_id})
-    
+        
+    variables = RequestContext(request, {'form':form, 'team_id':team_id})
     return render_to_response('create_team.html', variables)
 
 def delete_team(request, team_id):
@@ -130,11 +138,38 @@ def index_team(request):
 class MatchWizard(SessionWizardView):
     
     template_name = 'create_match.html'
+    file_storage = FileSystemStorage(location=settings.MEDIA_ROOT)
     
     def done(self, form_list, **kwargs):
         
-        for form in form_list:
-            pass
+        teams_form = form_list[0]
+        
+        if teams_form.is_valid():
+            home_team = teams_form.cleaned_data['home_team']
+            away_team = teams_form.cleaned_data['away_team']
+        
+        
+        file_form = form_list[1]
+            
+        if file_form.is_valid():
+            compo_file = file_form.cleaned_data['file']
+        
+        service = QuizzPlayerListServices() 
+        
+        service.get_quizzplayers_from_file(compo_file, home_team, away_team)
+        
+        match_form = form_list[2]
+        
+        match = Match()
+        match.is_valid = False
+        match.update_time = datetime.datetime.now()
+        
+        if match_form.is_valid():
+            match.name = match_form.cleaned_data['name']
+            match.date = match_form.cleaned_data['date']
+            match.score_away = match_form.cleaned_data['score_away']
+            match.score_home = match_form.cleaned_data['score_home']
+            match.pack = match_form.cleaned_data['pack']
         
         return HttpResponseRedirect('/match')
     

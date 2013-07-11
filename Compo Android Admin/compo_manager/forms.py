@@ -1,20 +1,21 @@
 from django.forms.forms import Form
 from django.forms.models import ModelChoiceField, ModelForm
-from compo_manager.models import Pack, Team, Match
+from compo_manager.models import Team, Match
+from django.forms.fields import FileField
 
-class MatchFormPackStep1(Form):
-    pack = ModelChoiceField(queryset=Pack.objects.all())
-
-    
-class MatchFormTeamsStep2(Form):
+class MatchFormTeamsStep1(Form):
     home_team = ModelChoiceField(queryset=Team.objects.all())
     away_team = ModelChoiceField(queryset=Team.objects.all())
 
     
-class MatchFormFieldsStep3(ModelForm):
+class MatchFormUploadQuizzPlayersStep2(Form):
+    file = FileField()
+
+    
+class MatchFormMatchStep3(ModelForm):
     
     class Meta:
         model = Match
-        fields = ('score_home', 'score_away', 'name', 'date')
+        fields = ('score_home', 'score_away', 'name', 'date', 'pack')
 
 

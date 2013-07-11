@@ -1,8 +1,8 @@
 from django.conf.urls import patterns, url
 
 from compo_manager import views
-from compo_manager.forms import MatchFormPackStep1, MatchFormTeamsStep2,\
-    MatchFormFieldsStep3
+from compo_manager.forms import MatchFormTeamsStep1, MatchFormUploadQuizzPlayersStep2,\
+    MatchFormMatchStep3
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -40,7 +40,7 @@ urlpatterns = patterns('',
     url(r'^team/$', views.index_team, name="index-team"),
     
     #Match manager
-    url(r'^match/create/$', views.MatchWizard.as_view([MatchFormPackStep1, MatchFormTeamsStep2, MatchFormFieldsStep3]), name="create-match"),
+    url(r'^match/create/$', views.MatchWizard.as_view([MatchFormTeamsStep1, MatchFormUploadQuizzPlayersStep2, MatchFormMatchStep3]), name="create-match"),
     url(r'^match/$', views.index_match, name="index-match"),
     
 )
