@@ -91,6 +91,8 @@ public class ResponseActivity extends Activity {
 		dao.update(_currentPlay);
 	    }
 
+	    // TODO MAJ du pack progress
+
 	    newIntent.putExtra(QuizzActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
 	    setResult(RESULT_OK, newIntent);
 	    finish();
