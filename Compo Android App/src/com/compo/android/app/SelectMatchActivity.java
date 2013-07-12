@@ -1,6 +1,7 @@
 package com.compo.android.app;
 
 import java.util.List;
+import java.util.Map;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -13,8 +14,10 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.compo.android.app.dao.MatchDao;
+import com.compo.android.app.dao.PlayDao;
 import com.compo.android.app.model.Match;
 import com.compo.android.app.model.Pack;
+import com.compo.android.app.model.Play;
 import com.compo.android.app.model.Theme;
 import com.compo.android.app.model.User;
 import com.compo.android.app.utils.UserFactory;
@@ -34,6 +37,7 @@ public class SelectMatchActivity extends FragmentActivity {
     private GridView _gridview;
     private Theme _selectTheme;
     private Pack _selectPack;
+    private Map<Long, Play> _mapQuizzToPlay;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,17 +89,22 @@ public class SelectMatchActivity extends FragmentActivity {
 	protected List<Match> doInBackground(Object... params) {
 	    MatchDao dao = new MatchDao(SelectMatchActivity.this);
 	    List<Match> quizzList = dao.getAllQuizz(((Pack) params[0]).getId());
+
+	    PlayDao playDao = new PlayDao(SelectMatchActivity.this);
+	    User u = UserFactory.getInstance().getUser(SelectMatchActivity.this);
+	    _mapQuizzToPlay = playDao.getAllPlay(u.getId());
+
 	    return quizzList;
 	}
 
 	@Override
-	protected void onPostExecute(final List<Match> aQuizzList) {
-	    _gridview.setAdapter(new SelectMatchAdapter(SelectMatchActivity.this, aQuizzList));
+	protected void onPostExecute(final List<Match> aMatchList) {
+	    _gridview.setAdapter(new SelectMatchAdapter(SelectMatchActivity.this, aMatchList, _mapQuizzToPlay));
 	    _gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int aPosition, long id) {
-		    Match selectQuizz = aQuizzList.get(aPosition);
+		    Match selectQuizz = aMatchList.get(aPosition);
 		    Intent intent = new Intent(SelectMatchActivity.this, QuizzActivity.class);
 		    intent.putExtra(EXTRA_MESSAGE_QUIZZ, selectQuizz);
 		    intent.putExtra(EXTRA_MESSAGE_GAME, _selectPack);
