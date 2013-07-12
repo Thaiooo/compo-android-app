@@ -69,6 +69,8 @@ public class QuizzView extends View {
 
     protected Match _selectedMatch;
     protected Map<Long, Play> _mapQuizzToPlay;
+    protected int _nbCorrectResponse = 0;
+    protected int _nbQuizz = 0;
 
     public QuizzView(Context context, AttributeSet attrs) {
 	super(context, attrs);
@@ -241,6 +243,17 @@ public class QuizzView extends View {
 	// Player
 	// =================================================================
 	for (QuizzPlayer qp : _selectedMatch.getQuizzs()) {
+	    if (qp.isHide()) {
+		_nbQuizz++;
+	    }
+
+	    Play play = _mapQuizzToPlay.get(qp.getId());
+	    if (play != null) {
+		if (StringUtils.equalsIgnoreCase(qp.getPlayer().getName(), play.getResponse())) {
+		    _nbCorrectResponse++;
+		}
+	    }
+
 	    if (qp.isCoach()) {
 		printCoach(canvas, qp);
 	    } else {
@@ -412,6 +425,13 @@ public class QuizzView extends View {
 		    && event.getY() <= playerYMax) {
 
 		Intent intent = new Intent(getContext(), ResponseActivity.class);
+		// Envoyer le nombre du quizz du match
+		intent.putExtra(ResponseActivity.EXTRA_MESSAGE_QUIZZ_SIZE, _nbQuizz);
+		// Envoyer le nombre de quizz trouvé du macth
+		intent.putExtra(ResponseActivity.EXTRA_MESSAGE_RESPONSE_SIZE, _nbCorrectResponse);
+		// Envoyer l'id du match
+		intent.putExtra(ResponseActivity.EXTRA_MESSAGE_MATCH_ID, _selectedMatch.getId());
+
 		intent.putExtra(ResponseActivity.EXTRA_MESSAGE_QUIZZ, qp);
 		intent.putExtra(ResponseActivity.EXTRA_MESSAGE_PLAY, _mapQuizzToPlay.get(qp.getId()));
 		((QuizzActivity) getContext()).startActivityForResult(intent, QuizzActivity.EXTRA_MESSAGE_REQUEST_CODE);

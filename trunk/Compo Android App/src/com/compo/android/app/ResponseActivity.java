@@ -21,14 +21,20 @@ import com.compo.android.app.utils.UserFactory;
 public class ResponseActivity extends Activity {
     // private static final String TAG = ResponseActivity.class.getName();
 
+    public static final String EXTRA_MESSAGE_QUIZZ_SIZE = "com.compo.android.app.ResponseActivity.MESSAGE.QUIZZ.SIZE";
+    public static final String EXTRA_MESSAGE_RESPONSE_SIZE = "com.compo.android.app.ResponseActivity.MESSAGE.RESPONSE.SIZE";
     public static final String EXTRA_MESSAGE_QUIZZ = "com.compo.android.app.ResponseActivity.MESSAGE.QUIZZ";
     public static final String EXTRA_MESSAGE_PLAY = "com.compo.android.app.ResponseActivity.MESSAGE.PLAY";
+    public static final String EXTRA_MESSAGE_MATCH_ID = "com.compo.android.app.ResponseActivity.MESSAGE.MATCH.ID";
 
     private static Typeface _font;
     private EditText edit;
     private EditText _matching;
     private QuizzPlayer _currentQuizz;
     private Play _currentPlay;
+    private Long _matchId;
+    private Integer _nbCorrectResponse;
+    private Integer _nbQuizz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,9 @@ public class ResponseActivity extends Activity {
 	Intent intent = getIntent();
 	_currentQuizz = (QuizzPlayer) intent.getSerializableExtra(EXTRA_MESSAGE_QUIZZ);
 	_currentPlay = (Play) intent.getSerializableExtra(EXTRA_MESSAGE_PLAY);
+	_matchId = (Long) intent.getSerializableExtra(EXTRA_MESSAGE_MATCH_ID);
+	_nbCorrectResponse = (Integer) intent.getSerializableExtra(EXTRA_MESSAGE_RESPONSE_SIZE);
+	_nbQuizz = (Integer) intent.getSerializableExtra(EXTRA_MESSAGE_QUIZZ_SIZE);
 
 	edit = (EditText) findViewById(R.id.edit_response);
 	if (_currentPlay != null) {
@@ -65,6 +74,9 @@ public class ResponseActivity extends Activity {
 
 	PlayDao dao = new PlayDao(ResponseActivity.this);
 	Intent newIntent = new Intent();
+	System.out.println("NB QUIZZ=====>" + _nbQuizz);
+	System.out.println("NB RESPONSE=====>" + _nbCorrectResponse);
+
 	if (percent == 100) {
 	    // =========================================
 	    // TODO Ceci dans etre dans une transaction
