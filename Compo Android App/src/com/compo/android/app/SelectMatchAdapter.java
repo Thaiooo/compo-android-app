@@ -116,4 +116,9 @@ public class SelectMatchAdapter extends BaseAdapter {
 
 	return vi;
     }
+
+    public void setMapQuizzToPlay(Map<Long, Play> _mapQuizzToPlay) {
+	this._mapQuizzToPlay = _mapQuizzToPlay;
+    }
+
 }

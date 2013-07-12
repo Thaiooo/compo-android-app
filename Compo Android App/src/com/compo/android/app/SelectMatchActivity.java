@@ -27,6 +27,7 @@ public class SelectMatchActivity extends FragmentActivity {
     public static final String EXTRA_MESSAGE_ARG = "com.compo.android.app.QuizzLevelFragment.MESSAGE.ARG";
     public static final String EXTRA_MESSAGE_QUIZZ = "com.compo.android.app.QuizzLevelFragment.MESSAGE.QUIZZ";
     public static final String EXTRA_MESSAGE_GAME = "com.compo.android.app.QuizzLevelFragment.MESSAGE.GAME";
+    public static final int EXTRA_MESSAGE_REQUEST_CODE = 1;
 
     private static Typeface _fontTitle;
 
@@ -38,6 +39,7 @@ public class SelectMatchActivity extends FragmentActivity {
     private Theme _selectTheme;
     private Pack _selectPack;
     private Map<Long, Play> _mapQuizzToPlay;
+    private SelectMatchAdapter _selSelectMatchAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,15 @@ public class SelectMatchActivity extends FragmentActivity {
 	new LoadMatchTask().execute(params);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	PlayDao playDao = new PlayDao(SelectMatchActivity.this);
+	User u = UserFactory.getInstance().getUser(SelectMatchActivity.this);
+	_mapQuizzToPlay = playDao.getAllPlay(u.getId());
+	_selSelectMatchAdapter.setMapQuizzToPlay(_mapQuizzToPlay);
+	_selSelectMatchAdapter.notifyDataSetInvalidated();
+    }
+
     private class LoadUserTask extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected Void doInBackground(Void... params) {
@@ -93,13 +104,13 @@ public class SelectMatchActivity extends FragmentActivity {
 	    PlayDao playDao = new PlayDao(SelectMatchActivity.this);
 	    User u = UserFactory.getInstance().getUser(SelectMatchActivity.this);
 	    _mapQuizzToPlay = playDao.getAllPlay(u.getId());
-
 	    return quizzList;
 	}
 
 	@Override
 	protected void onPostExecute(final List<Match> aMatchList) {
-	    _gridview.setAdapter(new SelectMatchAdapter(SelectMatchActivity.this, aMatchList, _mapQuizzToPlay));
+	    _selSelectMatchAdapter = new SelectMatchAdapter(SelectMatchActivity.this, aMatchList, _mapQuizzToPlay);
+	    _gridview.setAdapter(_selSelectMatchAdapter);
 	    _gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 		@Override
@@ -108,7 +119,9 @@ public class SelectMatchActivity extends FragmentActivity {
 		    Intent intent = new Intent(SelectMatchActivity.this, QuizzActivity.class);
 		    intent.putExtra(EXTRA_MESSAGE_QUIZZ, selectQuizz);
 		    intent.putExtra(EXTRA_MESSAGE_GAME, _selectPack);
-		    startActivity(intent);
+		    // startActivity(intent);
+		    startActivityForResult(intent, SelectMatchActivity.EXTRA_MESSAGE_REQUEST_CODE);
+
 		    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 		}
 	    });
