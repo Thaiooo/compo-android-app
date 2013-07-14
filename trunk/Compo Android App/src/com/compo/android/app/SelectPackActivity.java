@@ -28,6 +28,7 @@ public class SelectPackActivity extends FragmentActivity {
     private TextView _userPoint;
     private TextView _themeName;
     private Theme _selectTheme;
+    private SelectPackAdapter _collectionPacksPagerAdapter;
     private Map<Long, PackProgress> _mapPackToProgress;
 
     @Override
@@ -53,6 +54,19 @@ public class SelectPackActivity extends FragmentActivity {
 	new LoadPackTask().execute();
     }
 
+    @Override
+    protected void onRestart() {
+	super.onRestart();
+	PackProgressDao packProgressDao = new PackProgressDao(SelectPackActivity.this);
+	_mapPackToProgress = packProgressDao.getAllPackProgress(_selectTheme.getId());
+
+	System.out.println("====>" + _mapPackToProgress);
+
+	_collectionPacksPagerAdapter.setMapPackToProgress(_mapPackToProgress);
+	// _collectionPacksPagerAdapter.notifyAll();
+	// TODO A tester
+    }
+
     private class LoadUserTask extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected Void doInBackground(Void... params) {
@@ -73,15 +87,16 @@ public class SelectPackActivity extends FragmentActivity {
 
 	    PackProgressDao packProgressDao = new PackProgressDao(SelectPackActivity.this);
 	    _mapPackToProgress = packProgressDao.getAllPackProgress(_selectTheme.getId());
+	    System.out.println("====>" + _mapPackToProgress);
 
 	    return packs;
 	}
 
 	@Override
 	protected void onPostExecute(final List<Pack> aPacks) {
-	    SelectPackAdapter collectionPacksPagerAdapter = new SelectPackAdapter(getSupportFragmentManager(),
-		    _selectTheme, aPacks, _mapPackToProgress);
-	    _mViewPager.setAdapter(collectionPacksPagerAdapter);
+	    _collectionPacksPagerAdapter = new SelectPackAdapter(getSupportFragmentManager(), _selectTheme, aPacks,
+		    _mapPackToProgress);
+	    _mViewPager.setAdapter(_collectionPacksPagerAdapter);
 	}
     }
 
