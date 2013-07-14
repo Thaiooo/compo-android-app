@@ -26,6 +26,10 @@ public class SelectPackAdapter extends FragmentStatePagerAdapter {
 	_mapPackToProgress = aMapPackToProgress;
     }
 
+    public void setMapPackToProgress(Map<Long, PackProgress> aMapPackToProgress) {
+	_mapPackToProgress = aMapPackToProgress;
+    }
+
     @Override
     public Fragment getItem(int i) {
 	Fragment fragment = new PackFragment();
