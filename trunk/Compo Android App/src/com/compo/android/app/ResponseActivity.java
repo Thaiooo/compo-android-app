@@ -12,7 +12,11 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 
+import com.compo.android.app.dao.PackDao;
+import com.compo.android.app.dao.PackProgressDao;
 import com.compo.android.app.dao.PlayDao;
+import com.compo.android.app.model.Pack;
+import com.compo.android.app.model.PackProgress;
 import com.compo.android.app.model.Play;
 import com.compo.android.app.model.QuizzPlayer;
 import com.compo.android.app.model.User;
@@ -30,6 +34,7 @@ public class ResponseActivity extends Activity {
     private static Typeface _font;
     private EditText edit;
     private EditText _matching;
+    private Pack _currentPack;
     private QuizzPlayer _currentQuizz;
     private Play _currentPlay;
     private Long _matchId;
@@ -48,6 +53,9 @@ public class ResponseActivity extends Activity {
 	_matchId = (Long) intent.getSerializableExtra(EXTRA_MESSAGE_MATCH_ID);
 	_nbCorrectResponse = (Integer) intent.getSerializableExtra(EXTRA_MESSAGE_RESPONSE_SIZE);
 	_nbQuizz = (Integer) intent.getSerializableExtra(EXTRA_MESSAGE_QUIZZ_SIZE);
+
+	PackDao packDao = new PackDao(this);
+	_currentPack = packDao.findPackByMatch(_matchId);
 
 	edit = (EditText) findViewById(R.id.edit_response);
 	if (_currentPlay != null) {
@@ -103,7 +111,20 @@ public class ResponseActivity extends Activity {
 		dao.update(_currentPlay);
 	    }
 
-	    // TODO MAJ du pack progress
+	    // MAJ du pack progress
+	    if (_nbQuizz == _nbCorrectResponse + 1) {
+		PackProgressDao packProgressDao = new PackProgressDao(ResponseActivity.this);
+		PackProgress progress = packProgressDao.find(_currentPack);
+		if (progress == null) {
+		    progress = new PackProgress();
+		    progress.setMatch(1);
+		    progress.setPack(_currentPack);
+		    packProgressDao.add(progress);
+		} else {
+		    progress.setMatch(progress.getMatch() + 1);
+		    packProgressDao.update(progress);
+		}
+	    }
 
 	    newIntent.putExtra(QuizzActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
 	    setResult(RESULT_OK, newIntent);
