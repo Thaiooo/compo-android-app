@@ -242,6 +242,8 @@ public class QuizzView extends View {
 	// =================================================================
 	// Player
 	// =================================================================
+	_nbCorrectResponse = 0;
+	_nbQuizz = 0;
 	for (QuizzPlayer qp : _selectedMatch.getQuizzs()) {
 	    if (qp.isHide()) {
 		_nbQuizz++;
