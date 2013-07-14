@@ -27,7 +27,6 @@ public class SelectMatchActivity extends FragmentActivity {
     public static final String EXTRA_MESSAGE_ARG = "com.compo.android.app.QuizzLevelFragment.MESSAGE.ARG";
     public static final String EXTRA_MESSAGE_QUIZZ = "com.compo.android.app.QuizzLevelFragment.MESSAGE.QUIZZ";
     public static final String EXTRA_MESSAGE_GAME = "com.compo.android.app.QuizzLevelFragment.MESSAGE.GAME";
-    public static final int EXTRA_MESSAGE_REQUEST_CODE = 1;
 
     private static Typeface _fontTitle;
 
@@ -74,7 +73,8 @@ public class SelectMatchActivity extends FragmentActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onRestart() {
+	super.onRestart();
 	PlayDao playDao = new PlayDao(SelectMatchActivity.this);
 	User u = UserFactory.getInstance().getUser(SelectMatchActivity.this);
 	_mapQuizzToPlay = playDao.getAllPlay(u.getId());
@@ -119,8 +119,7 @@ public class SelectMatchActivity extends FragmentActivity {
 		    Intent intent = new Intent(SelectMatchActivity.this, QuizzActivity.class);
 		    intent.putExtra(EXTRA_MESSAGE_QUIZZ, selectQuizz);
 		    intent.putExtra(EXTRA_MESSAGE_GAME, _selectPack);
-		    // startActivity(intent);
-		    startActivityForResult(intent, SelectMatchActivity.EXTRA_MESSAGE_REQUEST_CODE);
+		    startActivity(intent);
 
 		    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 		}
