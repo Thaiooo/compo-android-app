@@ -8,7 +8,7 @@ public class PackProgress implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private long id;
-    private Theme theme;
+    private Pack pack;
     private int match;
 
     public long getId() {
@@ -19,12 +19,12 @@ public class PackProgress implements Serializable {
 	this.id = id;
     }
 
-    public Theme getTheme() {
-	return theme;
+    public Pack getPack() {
+	return pack;
     }
 
-    public void setTheme(Theme theme) {
-	this.theme = theme;
+    public void setPack(Pack pack) {
+	this.pack = pack;
     }
 
     public int getMatch() {
