@@ -3,10 +3,12 @@ package com.compo.android.app.dao;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.compo.android.app.model.Pack;
 import com.compo.android.app.model.PackProgress;
 
 public class PackProgressDao {
@@ -75,5 +77,102 @@ public class PackProgressDao {
 	}
 
 	return map;
+    }
+
+    public PackProgress find(Pack aPack) {
+	dataBaseHeleper.openDataBase();
+	SQLiteDatabase session = null;
+	Cursor c = null;
+	PackProgress progress = null;
+	try {
+	    session = dataBaseHeleper.getReadableDatabase();
+	    String[] selectionArgs = { String.valueOf(aPack.getId()) };
+
+	    StringBuffer req = new StringBuffer("select ");
+	    // Index 0
+	    req.append("p.");
+	    req.append(TableConstant.PackProgressTable._ID);
+	    req.append(", ");
+	    // Index 1
+	    req.append("p.");
+	    req.append(TableConstant.PackProgressTable.COLUMN_MATCH);
+	    req.append(", ");
+	    // Index 2
+	    req.append("p.");
+	    req.append(TableConstant.PackProgressTable.COLUMN_PACK_ID);
+	    req.append(" ");
+
+	    req.append("from " + TableConstant.PackProgressTable.TABLE_NAME + " p ");
+	    req.append("where p." + TableConstant.PackProgressTable.COLUMN_PACK_ID + " = ? ");
+
+	    c = session.rawQuery(req.toString(), selectionArgs);
+
+	    while (c.moveToNext()) {
+		progress = new PackProgress();
+
+		int index = 0;
+		long progressId = c.getLong(index);
+		index++;
+		int progressMatch = c.getInt(index);
+
+		progress.setId(progressId);
+		progress.setMatch(progressMatch);
+
+	    }
+	} finally {
+	    if (c != null) {
+		c.close();
+	    }
+	    if (session != null) {
+		session.close();
+	    }
+	    dataBaseHeleper.close();
+	}
+
+	return progress;
+    }
+
+    public void update(PackProgress aProgress) {
+	dataBaseHeleper.openDataBase();
+	SQLiteDatabase session = null;
+	try {
+	    session = dataBaseHeleper.getWritableDatabase();
+
+	    ContentValues values = new ContentValues();
+	    values.put(TableConstant.PackProgressTable.COLUMN_MATCH, aProgress.getMatch());
+
+	    session.update(TableConstant.PackProgressTable.TABLE_NAME, values, TableConstant.PackProgressTable._ID
+		    + " = ?", new String[] { String.valueOf(aProgress.getId()) });
+
+	} finally {
+	    if (session != null) {
+		session.close();
+	    }
+
+	    dataBaseHeleper.close();
+	}
+
+    }
+
+    public void add(PackProgress aProgress) {
+	dataBaseHeleper.openDataBase();
+	SQLiteDatabase session = null;
+	try {
+	    session = dataBaseHeleper.getWritableDatabase();
+
+	    ContentValues values = new ContentValues();
+	    values.put(TableConstant.PackProgressTable.COLUMN_MATCH, aProgress.getMatch());
+	    values.put(TableConstant.PackProgressTable.COLUMN_PACK_ID, aProgress.getPack().getId());
+
+	    session.insert(TableConstant.PackProgressTable.TABLE_NAME, null, values);
+
+	} finally {
+	    if (session != null) {
+		session.close();
+	    }
+
+	    dataBaseHeleper.close();
+	}
+
     }
 }
