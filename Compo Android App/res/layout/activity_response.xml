@@ -1,39 +1,53 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
-    android:layout_height="wrap_content"
+    android:layout_height="220dp"
     android:background="@drawable/ardoise" >
 
     <!-- style="@style/transparent_edit_text" -->
 
     <EditText
         android:id="@+id/edit_response"
+        style="@style/transparent_edit_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
+        android:layout_margin="10dp"
         android:lines="1"
         android:maxLength="15"
         android:singleLine="true"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textSize="24sp" />
 
-    <EditText
-        android:id="@+id/matching"
+    <ImageView
+        android:id="@+id/matching_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edit_response"
-        android:layout_gravity="center_horizontal"
-        android:layout_toLeftOf="@+id/button"
-        android:ems="10" />
+        android:layout_centerHorizontal="true" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_cancel"
+        style="@style/craie_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/matching"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
+        android:onClick="cancel"
+        android:text="CANCEL"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/button_check"
+        style="@style/craie_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
         android:onClick="check"
-        android:text="Valider" />
+        android:text="VALIDER"
+        android:textColor="@android:color/white" />
 
 </RelativeLayout>
