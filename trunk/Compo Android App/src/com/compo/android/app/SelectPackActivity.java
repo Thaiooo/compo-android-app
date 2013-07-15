@@ -63,8 +63,10 @@ public class SelectPackActivity extends FragmentActivity {
 	System.out.println("====>" + _mapPackToProgress);
 
 	_collectionPacksPagerAdapter.setMapPackToProgress(_mapPackToProgress);
+	// _collectionPacksPagerAdapter.getItem(0).getFragmentManager().;
 	// _collectionPacksPagerAdapter.notifyAll();
 	// TODO A tester
+	_mViewPager.invalidate();
     }
 
     private class LoadUserTask extends AsyncTask<Void, Void, Void> {

@@ -107,9 +107,9 @@ public class SelectMatchAdapter extends BaseAdapter {
 	for (int i = 0; i < nbQuizz; i++) {
 	    ImageView ball = new ImageView(_ballListLayout.getContext());
 	    if (nbResponse > i) {
-		ball.setImageResource(R.drawable.ball_red);
+		ball.setImageResource(R.drawable.ball_unlock);
 	    } else {
-		ball.setImageResource(R.drawable.ball);
+		ball.setImageResource(R.drawable.ball_lock);
 	    }
 	    _ballListLayout.addView(ball);
 	}
