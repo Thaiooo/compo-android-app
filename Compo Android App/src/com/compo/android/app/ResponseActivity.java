@@ -10,7 +10,9 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.compo.android.app.dao.PackDao;
 import com.compo.android.app.dao.PackProgressDao;
@@ -33,7 +35,7 @@ public class ResponseActivity extends Activity {
 
     private static Typeface _font;
     private EditText edit;
-    private EditText _matching;
+    private ImageView _matching;
     private Pack _currentPack;
     private QuizzPlayer _currentQuizz;
     private Play _currentPlay;
@@ -62,12 +64,21 @@ public class ResponseActivity extends Activity {
 	    edit.setText(_currentPlay.getResponse());
 	}
 
-	_matching = (EditText) findViewById(R.id.matching);
+	_matching = (ImageView) findViewById(R.id.matching_image);
 
 	if (_font == null) {
 	    _font = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
 	}
 	edit.setTypeface(_font);
+
+	Button cancel = (Button) findViewById(R.id.button_cancel);
+	cancel.setTypeface(_font);
+	Button check = (Button) findViewById(R.id.button_check);
+	check.setTypeface(_font);
+    }
+
+    public void cancel(View view) {
+	finish();
     }
 
     public void check(View view) {
@@ -130,7 +141,11 @@ public class ResponseActivity extends Activity {
 	    setResult(RESULT_OK, newIntent);
 	    finish();
 	} else {
-	    _matching.setText(Integer.toString((int) percent) + " %");
+	    if (percent >= 50) {
+		_matching.setImageResource(R.drawable.approx_response);
+	    } else {
+		_matching.setImageResource(R.drawable.error_response);
+	    }
 
 	    if (_currentPlay == null) {
 		_currentPlay = new Play();
