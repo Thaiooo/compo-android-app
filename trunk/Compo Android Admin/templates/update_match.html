@@ -1,0 +1,15 @@
+{% block content %}
+<div class="field">
+  
+  <img src="terrain.jpg" width="100%" height="100%">
+  
+  {% for quizzplayer in match.quizz_players %}
+  
+  	<div id="{{ quizzplayer.id }}" class="player" style="top: {{ quizzplayer.x}}px; left: {{quizzplayer.y}}px;">
+      <img src="medias/green.png">
+      <div class="nom">Thomas Price (1)</div>
+  	</div>
+  {% endfor %}
+  
+</div>
+{% endblock %}

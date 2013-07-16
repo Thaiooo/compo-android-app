@@ -8,7 +8,8 @@ from django.contrib.formtools.wizard.views import SessionWizardView
 import datetime
 from django.core.files.storage import FileSystemStorage
 from compo_admin import settings
-from compo_manager.services import QuizzPlayerListServices
+from compo_manager.services import QuizzPlayerListServices,\
+    MatchDisplayerService
 
 # Main index
 def index(request):
@@ -140,6 +141,7 @@ class MatchWizard(SessionWizardView):
     file_storage = FileSystemStorage(location=settings.MEDIA_ROOT)
     
     def done(self, form_list, **kwargs):
+        match = Match()
         
         teams_form = form_list[0]
         
@@ -154,23 +156,43 @@ class MatchWizard(SessionWizardView):
             compo_file = file_form.cleaned_data['file']
         
         service = QuizzPlayerListServices() 
+        service.insert_unknown_players = True
         
         quizzplayers = service.get_quizzplayers_from_file(compo_file, home_team, away_team)
         
         match_form = form_list[2]
         
-        match = Match()
-        match.is_valid = False
-        match.update_time = datetime.datetime.now()
-        
         if match_form.is_valid():
+            match.is_valid = False
+            match.update_time = datetime.datetime.now()
             match.name = match_form.cleaned_data['name']
             match.date = match_form.cleaned_data['date']
             match.score_away = match_form.cleaned_data['score_away']
             match.score_home = match_form.cleaned_data['score_home']
             match.pack = match_form.cleaned_data['pack']
-        
+            
+            match.save()
+            
+            match.quizz_players = quizzplayers
+            
         return HttpResponseRedirect('/match')
+
+def update_match(request, match_id):
+    match = get_object_or_404(Match, id=match_id)
+    
+    service = MatchDisplayerService() 
+    
+    match_displayer = service.get_match_displayer(match)
+    
+    variables = RequestContext(request, {'match':match_displayer})
+    return render_to_response('update_match.html', variables)
+    
+    
+def delete_match(request, match_id):
+    match = get_object_or_404(Match, id=match_id)
+    match.delete()
+    return HttpResponseRedirect('/match')
+    
     
 def index_match(request):
     matchs = Match.objects.all()

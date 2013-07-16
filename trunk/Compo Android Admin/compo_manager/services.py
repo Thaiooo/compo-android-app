@@ -62,7 +62,7 @@ class QuizzPlayerListServices:
         cpt = 0
         # Check the file
         for line in compo_file:
-            splitted_line = line.split(SEPARATOR)
+            splitted_line = line.strip('\n\r').split(SEPARATOR)
             is_valid = self.__process_line_checking(splitted_line)
             
             if is_valid:
@@ -216,6 +216,31 @@ class QuizzPlayerListServices:
             quizzplayer.is_coach = False
             
         return quizzplayer
-            
-            
+
+
+class QuizzPlayerDisplayer():
+    pass
+
+
+class MatchDisplayer():
+    
+    def __init__(self, match):
+        
+        self.id = match.id
+        
+        self.score_away = match.score_away
+        
+        self.score_home = match.score_home
+        
+        self.name = match.name
+        
+        self.date = match.date
+        
+        
+
+
+class MatchDisplayerService():
+    
+    def get_match_displayer(self, match):    
+        pass
         

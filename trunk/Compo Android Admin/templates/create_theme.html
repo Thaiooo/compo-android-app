@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
 {% if theme_id %}
 	<form action="/theme/update/{{ theme_id }}/" method="post">{% csrf_token %}
 	{{ form.as_p }}
@@ -11,3 +14,4 @@
 	</form>
 {% endif %}
 <a href='/theme/'>Back</a>
+{% endblock %}

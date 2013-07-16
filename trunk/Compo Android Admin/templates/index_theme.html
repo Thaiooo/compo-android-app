@@ -1,5 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
 {% for theme in themes %}
 	<li><a href='/theme/update/{{ theme.id }}'>{{ theme.name }}</a></li>
 {% endfor %}
 <li><a href = '/theme/create/'>New...</a></li>
 <li><a href = '/'>Back</a></li>
+{% endblock %}

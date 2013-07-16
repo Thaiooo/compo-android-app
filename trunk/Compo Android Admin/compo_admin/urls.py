@@ -41,6 +41,8 @@ urlpatterns = patterns('',
     
     #Match manager
     url(r'^match/create/$', views.MatchWizard.as_view([MatchFormTeamsStep1, MatchFormUploadQuizzPlayersStep2, MatchFormMatchStep3]), name="create-match"),
+    url(r'^match/update/(?P<match_id>\d+)/$', views.update_match, name="update-match"),
+    url(r'^match/delete/(?P<match_id>\d+)/$', views.delete_match, name="delete-match"),
     url(r'^match/$', views.index_match, name="index-match"),
     
 )
