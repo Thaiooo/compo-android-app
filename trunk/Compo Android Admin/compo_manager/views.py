@@ -8,7 +8,6 @@ from django.contrib.formtools.wizard.views import SessionWizardView
 import datetime
 from django.core.files.storage import FileSystemStorage
 from compo_admin import settings
-from compo_manager import services
 from compo_manager.services import QuizzPlayerListServices
 
 # Main index
@@ -156,7 +155,7 @@ class MatchWizard(SessionWizardView):
         
         service = QuizzPlayerListServices() 
         
-        service.get_quizzplayers_from_file(compo_file, home_team, away_team)
+        quizzplayers = service.get_quizzplayers_from_file(compo_file, home_team, away_team)
         
         match_form = form_list[2]
         
