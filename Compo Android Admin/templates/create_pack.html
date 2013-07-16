@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
 {% if pack_id %}
 	<form action="/pack/update/{{ pack_id }}/" method="post">{% csrf_token %}
 	{{ form.as_p }}
@@ -11,3 +14,4 @@
 	</form>
 {% endif %}
 <a href='/pack/'>Back</a>
+{% endblock %}
