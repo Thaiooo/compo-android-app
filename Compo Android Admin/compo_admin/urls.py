@@ -3,6 +3,7 @@ from django.conf.urls import patterns, url
 from compo_manager import views
 from compo_manager.forms import MatchFormTeamsStep1, MatchFormUploadQuizzPlayersStep2,\
     MatchFormMatchStep3
+from compo_admin import settings
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -44,5 +45,8 @@ urlpatterns = patterns('',
     url(r'^match/update/(?P<match_id>\d+)/$', views.update_match, name="update-match"),
     url(r'^match/delete/(?P<match_id>\d+)/$', views.delete_match, name="delete-match"),
     url(r'^match/$', views.index_match, name="index-match"),
+    
+    # Pictures
+    url(r'^medias/(?P<path>.*)$', 'django.views.static.serve', {'document_root' : settings.MEDIA_ROOT}),
     
 )

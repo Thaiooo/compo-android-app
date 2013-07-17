@@ -184,7 +184,7 @@ def update_match(request, match_id):
     
     match_displayer = service.get_match_displayer(match)
     
-    variables = RequestContext(request, {'match':match_displayer})
+    variables = RequestContext(request, {'match_displayer':match_displayer})
     return render_to_response('update_match.html', variables)
     
     

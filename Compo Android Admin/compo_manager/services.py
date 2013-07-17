@@ -170,7 +170,7 @@ class QuizzPlayerListServices:
                 quizzplayer = self.__get_quizzplayer(p, team, position)
                 
                 if position != 'C':
-                    current_x = (range_x[0]+range_x[1])*.5+cpt*distance_x*.5
+                    current_x = (range_x[0] + range_x[1])*.5 + cpt*distance_x*.5
                 
                     if team_name == 'HOME':
                         current_x = -current_x
@@ -179,6 +179,12 @@ class QuizzPlayerListServices:
                     quizzplayer.y = current_y
                 
                     cpt = cpt + 1
+                
+                # Compute the is home ?
+                if team_name == 'HOME':
+                    quizzplayer.is_home = True
+                else:
+                    quizzplayer.is_home = False
                 
                 quizzplayer.save()
                 
@@ -219,7 +225,28 @@ class QuizzPlayerListServices:
 
 
 class QuizzPlayerDisplayer():
-    pass
+    
+    def __init__(self, quizzplayer):
+        
+        self.id = quizzplayer.id
+        
+        self.x = int((quizzplayer.x + MAX_X)*10 - 25)
+        
+        self.y = int(quizzplayer.y*10 - 12)
+        
+        self.is_hide = quizzplayer.is_hide
+        
+        self.is_home = quizzplayer.is_home
+        
+        self.is_coach = quizzplayer.is_coach
+        
+        self.goals = quizzplayer.goals
+        
+        self.og = quizzplayer.og
+        
+        self.earn_credit = quizzplayer.earn_credit
+        
+        self.name = quizzplayer.player.name
 
 
 class MatchDisplayer():
@@ -236,11 +263,15 @@ class MatchDisplayer():
         
         self.date = match.date
         
-        
-
+        self.quizzplayer_displayer = []
+        for quizzplayer in match.quizz_players.all():
+            quizzplayer_displayer = QuizzPlayerDisplayer(quizzplayer)
+            self.quizzplayer_displayer.append(quizzplayer_displayer)
 
 class MatchDisplayerService():
     
     def get_match_displayer(self, match):    
-        pass
+        match_displayer = MatchDisplayer(match)
+        
+        return match_displayer
         
