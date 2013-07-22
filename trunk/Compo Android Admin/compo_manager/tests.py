@@ -36,7 +36,7 @@ class QuizzPlayerListServiceTestCase(TestCase):
                            'AWAY;Khedira;MD;C',
                            'AWAY;_Schweinsteiger;MD;C',
                            'AWAY;Muller*;F;R',
-                           'AWAY;_Ozil;MO;C',
+                           'AWAY;_Ozil;MD;C',
                            'AWAY;Podolski;F;L',
                            'AWAY;Klose**;S;C',
                            'AWAY;Low;C;C',
@@ -49,7 +49,7 @@ class QuizzPlayerListServiceTestCase(TestCase):
         quizzplayer_list = service.get_quizzplayers_from_file(self.compo_file, self.home_team, self.away_team)
         
         for p in quizzplayer_list:
-            print ('%s (%i, %i)'%(p.player.name, p.x, p.y))
+            print ('%s\t%i\t%i'%(p.player.name, p.x, p.y))
         
         self.assertEqual(len(quizzplayer_list), 24, None)
         

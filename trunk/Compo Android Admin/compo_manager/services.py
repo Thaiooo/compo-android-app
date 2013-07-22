@@ -88,7 +88,7 @@ class QuizzPlayerListServices:
         
         for player_name in self.unknown_player_list:
             player = Player()
-            player.name = player_name
+            player.name = player_name.upper()
             player.save()
     
     
@@ -120,7 +120,7 @@ class QuizzPlayerListServices:
     
     def __fill_position_map(self, line):
         current_key = line[TEAM] + MAP_SEP + line[POSITION] + MAP_SEP + line[SIDE]
-        current_name = line[NAME]
+        current_name = line[NAME].upper()
         
         if current_key in self.field_map:
             self.field_map[current_key].append(current_name)
@@ -130,7 +130,7 @@ class QuizzPlayerListServices:
         
     
     def __get_player_name(self, name):
-        return name.replace(HIDDEN_PLAYER, '').replace(GOAL_PLAYER, '').replace(OG_PLAYER, '')
+        return name.replace(HIDDEN_PLAYER, '').replace(GOAL_PLAYER, '').replace(OG_PLAYER, '').upper()
     
     
     def __compute_quizzplayers(self, home_team, away_team):
@@ -157,9 +157,25 @@ class QuizzPlayerListServices:
             
             # Compute the x-coordinate
             players_nb = len(player_list)
-            range_x = POSITION_X[side]
-            distance_x = int((range_x[1]-range_x[0])/players_nb)
+            range_x = list(POSITION_X[side])
             
+            if players_nb > 2:
+                pass
+            
+            i=0
+            while i < players_nb:
+                mid_s = []
+                j=0
+                while j < (len(range_x) - 1):
+                    mid_s.append(int(.5*(range_x[j] + range_x[j+1])))
+                    j=j+1
+                
+                for v in mid_s:
+                    range_x.append(v)
+                    
+                range_x.sort()
+                i=i+1
+                
             cpt=0
             for p in player_list:
                 
@@ -170,7 +186,7 @@ class QuizzPlayerListServices:
                 quizzplayer = self.__get_quizzplayer(p, team, position)
                 
                 if position != 'C':
-                    current_x = (range_x[0] + range_x[1])*.5 + cpt*distance_x*.5
+                    current_x = mid_s[cpt]
                 
                     if team_name == 'HOME':
                         current_x = -current_x
