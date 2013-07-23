@@ -15,7 +15,12 @@
       		<img src="{{ MEDIA_URL }}/green.png">
       	{% endif %}
       
-      <div class="name">{{ quizzplayer_displayer.name }}</div>
+      {% if quizzplayer_displayer.is_hide%}
+      	<div class="name">({{ quizzplayer_displayer.name }})</div>
+      {% else %}
+      	<div class="name">{{ quizzplayer_displayer.name }}</div>
+      {% endif %}
+      
   	</div>
   {% endfor %}
   	<a href='/match/delete/{{ match_displayer.id }}/'>Delete</a>  

@@ -190,6 +190,10 @@ def update_match(request, match_id):
     
 def delete_match(request, match_id):
     match = get_object_or_404(Match, id=match_id)
+    
+    for quizzplayer in match.quizz_players.all():
+        quizzplayer.delete()
+    
     match.delete()
     return HttpResponseRedirect('/match')
     
