@@ -157,26 +157,24 @@ class QuizzPlayerListServices:
             
             # Compute the x-coordinate
             players_nb = len(player_list)
-            range_x = list(POSITION_X[side])
+            range_x = POSITION_X[side]
+            mid = int((range_x[0]+range_x[1])/2)
+            x_s = []
             
-            if players_nb > 2:
-                pass
+            if players_nb%2 != 0:
+                x_s.append(mid)
             
-            i=0
-            while i < players_nb:
-                mid_s = []
-                j=0
-                while j < (len(range_x) - 1):
-                    mid_s.append(int(.5*(range_x[j] + range_x[j+1])))
-                    j=j+1
-                
-                for v in mid_s:
-                    range_x.append(v)
-                    
-                range_x.sort()
-                i=i+1
-                
-            cpt=0
+            cpt=1
+            x_min = range_x[0]
+            x_max = 0
+            while cpt < players_nb:
+                mid = int((x_min+x_max)/2)
+                x_s.append(mid)
+                x_s.append(-mid)
+                x_min = mid
+                cpt = cpt + 1
+            
+            cpt = 0
             for p in player_list:
                 
                 team = away_team
@@ -186,15 +184,13 @@ class QuizzPlayerListServices:
                 quizzplayer = self.__get_quizzplayer(p, team, position)
                 
                 if position != 'C':
-                    current_x = mid_s[cpt]
+                    current_x = x_s[cpt]
                 
                     if team_name == 'HOME':
                         current_x = -current_x
                 
                     quizzplayer.x = current_x
                     quizzplayer.y = current_y
-                
-                    cpt = cpt + 1
                 
                 # Compute the is home ?
                 if team_name == 'HOME':
@@ -205,6 +201,8 @@ class QuizzPlayerListServices:
                 quizzplayer.save()
                 
                 result.append(quizzplayer)
+                
+                cpt = cpt + 1
             
         return result
                 
@@ -246,9 +244,16 @@ class QuizzPlayerDisplayer():
         
         self.id = quizzplayer.id
         
-        self.x = int((quizzplayer.x + MAX_X)*10 - 25)
-        
-        self.y = int(quizzplayer.y*10 - 12)
+        if not quizzplayer.is_coach:
+            self.x = int((quizzplayer.x + MAX_X)*10 - 25)
+            self.y = int(quizzplayer.y*10 - 12)
+        else:
+            if quizzplayer.is_home:
+                self.x = 0
+                self.y = 0
+            else:
+                self.x = 680
+                self.y = 1000
         
         self.is_hide = quizzplayer.is_hide
         
