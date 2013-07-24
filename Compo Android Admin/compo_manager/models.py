@@ -81,4 +81,9 @@ class TeamForm(ModelForm):
     
     class Meta:
         model = Team
+        
+class PlayerForm(ModelForm):
+    
+    class Meta:
+        model = Player
     

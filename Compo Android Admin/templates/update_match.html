@@ -23,7 +23,10 @@
       
   	</div>
   {% endfor %}
-  	<a href='/match/delete/{{ match_displayer.id }}/'>Delete</a>  
+  	<a href='/match/delete/{{ match_displayer.id }}/'>Delete</a> 
+  	{% if not match_displayer.is_valid %}
+  		<a href='/match/validate/{{ match_displayer.id }}/'>Validate</a>
+  	{% endif %}   
 	<a href='/match/'>Back</a>
 </div>
 {% endblock %}

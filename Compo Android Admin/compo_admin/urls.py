@@ -40,10 +40,17 @@ urlpatterns = patterns('',
     url(r'^team/delete/(?P<team_id>\d+)/$', views.delete_team, name="delete-team"),
     url(r'^team/$', views.index_team, name="index-team"),
     
+    #Theme manager
+    url(r'^player/create/$', views.create_player, name="create-player"),
+    url(r'^player/update/(?P<player_id>\d+)/$', views.update_player, name="update-player"),
+    url(r'^player/delete/(?P<player_id>\d+)/$', views.delete_player, name="delete-player"),
+    url(r'^player/$', views.index_player, name="index-player"),
+    
     #Match manager
     url(r'^match/create/$', views.MatchWizard.as_view([MatchFormTeamsStep1, MatchFormUploadQuizzPlayersStep2, MatchFormMatchStep3]), name="create-match"),
     url(r'^match/update/(?P<match_id>\d+)/$', views.update_match, name="update-match"),
     url(r'^match/delete/(?P<match_id>\d+)/$', views.delete_match, name="delete-match"),
+    url(r'^match/validate/(?P<match_id>\d+)/$', views.validate_match, name="validate-match"),
     url(r'^match/$', views.index_match, name="index-match"),
     
     # Pictures
