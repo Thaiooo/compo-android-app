@@ -284,6 +284,8 @@ class MatchDisplayer():
         
         self.date = match.date
         
+        self.is_valid = match.is_valid
+        
         self.quizzplayer_displayer = []
         for quizzplayer in match.quizz_players.all():
             quizzplayer_displayer = QuizzPlayerDisplayer(quizzplayer)

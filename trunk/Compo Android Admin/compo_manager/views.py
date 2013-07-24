@@ -2,7 +2,7 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.template.context import RequestContext
 from compo_manager.models import ThemeForm, Theme, PackForm, Pack, TeamForm,\
-    Team, Match
+    Team, Match, PlayerForm, Player
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.formtools.wizard.views import SessionWizardView
 import datetime
@@ -133,6 +133,45 @@ def index_team(request):
     return HttpResponse(template.render(context))
 
 
+# Team views
+def create_player(request):
+    if request.method == 'POST':
+        form = PlayerForm(request.POST)
+        if form.is_valid():    
+            form.save()
+            return HttpResponseRedirect('/player')
+    else:
+        form = PlayerForm() 
+        
+    variables = RequestContext(request, {'form':form})
+    return render_to_response('create_player.html', variables)
+
+
+def update_player(request, player_id):
+    player = get_object_or_404(Player, id=player_id)
+    form = PlayerForm(request.POST, instance=player)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/player')
+    else:
+        form = PlayerForm(instance=player) 
+        
+    variables = RequestContext(request, {'form':form, 'player_id':player_id})
+    return render_to_response('create_player.html', variables)
+
+
+def delete_player(request, player_id):
+    player = get_object_or_404(Player, id=player_id)
+    player.delete()
+    return HttpResponseRedirect('/player')
+
+
+def index_player(request):
+    players = Player.objects.order_by('name')
+    template = loader.get_template('index_player.html')
+    context = RequestContext(request, {'players':players})
+    return HttpResponse(template.render(context))
+
 
 # Match views
 class MatchWizard(SessionWizardView):
@@ -186,7 +225,14 @@ def update_match(request, match_id):
     
     variables = RequestContext(request, {'match_displayer':match_displayer})
     return render_to_response('update_match.html', variables)
+
+
+def validate_match(request, match_id):
+    match = get_object_or_404(Match, id=match_id)
+    match.is_valid = True
+    match.save()
     
+    return HttpResponseRedirect('/match')
     
 def delete_match(request, match_id):
     match = get_object_or_404(Match, id=match_id)
@@ -199,7 +245,7 @@ def delete_match(request, match_id):
     
     
 def index_match(request):
-    matchs = Match.objects.all()
+    matchs = Match.objects.order_by('is_valid')
     template = loader.get_template('index_match.html')
     context = RequestContext(request, {'matchs':matchs})
     return HttpResponse(template.render(context))

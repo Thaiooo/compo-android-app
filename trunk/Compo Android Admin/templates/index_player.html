@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for player in players %}
+	<li><a href='/player/update/{{ player.id }}'>{{ player.name }}</a></li>
+{% endfor %}
+<li><a href = '/player/create/'>New...</a></li>
+<li><a href = '/'>Back</a></li>
+{% endblock %}

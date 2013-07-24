@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if player_id %}
+	<form action="/player/update/{{ player_id }}/" method="post">{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Submit" />
+	</form>
+	<a href='/player/delete/{{ player_id }}/'>Delete</a>
+{% else %}
+	<form action="/player/create/" method="post">{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Submit" />
+	</form>
+{% endif %}
+<a href='/player/'>Back</a>
+{% endblock %}
