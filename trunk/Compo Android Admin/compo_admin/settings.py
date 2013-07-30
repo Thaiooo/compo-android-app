@@ -1,27 +1,35 @@
 # Django settings for compo_admin project.
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
+    ('Julien Bernard', 'julien.bernard@yahoo.fr')
 )
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-#         'NAME': 'C:\\workspaceCompo\\compo_admin\\sqlite.db',                      # Or path to database file if using sqlite3.
-#         'NAME': '/home/julien/workspace/compo_admin/sqlite.db',                      # Or path to database file if using sqlite3.
-        'NAME': 'compoadmin_db',
-        # The following settings are not used with sqlite3:
-        'USER': '74169',
-        'PASSWORD': 'free35*tk',
-        'HOST': 'mysql2.alwaysdata.com',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
-    }
-}
+if DEBUG:
+
+	DATABASES = {
+    	'default': {
+        	'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+         	'NAME': 'C:\\workspaceCompo\\compo_admin\\sqlite.db',                      # Or path to database file if using sqlite3.
+    	 }
+	}
+
+else:
+	DATABASES = {
+    	'default': {
+        	'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        	'NAME': 'compoadmin_db',
+         	'USER': '74169',
+          	'PASSWORD': 'free35*tk',
+           	'HOST': 'mysql2.alwaysdata.com',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        	'PORT': '',                      # Set to empty string for default.
+    	 }
+	}
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -110,14 +118,21 @@ ROOT_URLCONF = 'compo_admin.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'compo_admin.wsgi.application'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-#     "C:/workspaceCompo/compo_admin/templates"
-#     "/home/julien/workspace/compo_admin/templates"
-    '/home/compoadmin/www/templates'
-)
+if DEBUG:
+	TEMPLATE_DIRS = (
+    	# Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+     # Always use forward slashes, even on Windows.
+     # Don't forget to use absolute paths, not relative paths.
+     	'C:/workspaceCompo/compo_admin/templates'
+#     	"/home/julien/workspace/compo_admin/templates"
+	)
+else:
+	TEMPLATE_DIRS = (
+    	# Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+     # Always use forward slashes, even on Windows.
+     # Don't forget to use absolute paths, not relative paths.
+    	'/home/compoadmin/www/templates'
+	)	
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -128,7 +143,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.formtools',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+#     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'compo_manager',

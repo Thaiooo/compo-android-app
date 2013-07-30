@@ -18,9 +18,11 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+#     url(r'^admin/', include(admin.site.urls)),
     
-    url(r'^$', views.index, name='index'),
+#     url(r'^$', views.index, name='index'),
+
+    url(r'^$', 'django.contrib.auth.views.login'),
 
     #Theme manager
     url(r'^theme/create/$', views.create_theme, name="create-theme"),
