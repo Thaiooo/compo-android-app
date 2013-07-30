@@ -53,7 +53,6 @@ urlpatterns = patterns('',
     url(r'^match/validate/(?P<match_id>\d+)/$', views.validate_match, name="validate-match"),
     url(r'^match/$', views.index_match, name="index-match"),
     
-    # Pictures
+    #Medias
     url(r'^medias/(?P<path>.*)$', 'django.views.static.serve', {'document_root' : settings.MEDIA_ROOT}),
-    
 )
