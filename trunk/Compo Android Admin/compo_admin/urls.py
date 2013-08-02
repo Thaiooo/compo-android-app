@@ -1,9 +1,10 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
 
 from compo_manager import views
 from compo_manager.forms import MatchFormTeamsStep1, MatchFormUploadQuizzPlayersStep2,\
     MatchFormMatchStep3
 from compo_admin import settings
+from django.contrib import admin
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -18,11 +19,9 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-#     url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
     
-#     url(r'^$', views.index, name='index'),
-
-    url(r'^$', 'django.contrib.auth.views.login'),
+    url(r'^$', views.index, name='index'),
 
     #Theme manager
     url(r'^theme/create/$', views.create_theme, name="create-theme"),
