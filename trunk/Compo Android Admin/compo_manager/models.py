@@ -3,16 +3,16 @@ from django.forms.models import ModelForm
 
 #********************* Models ***********************
 class Theme(models.Model):
-    code = models.CharField(max_length=100)
-    name = models.CharField(max_length=250)
+    code = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=250, unique=True)
     
     def __unicode__(self):
         return self.name
 
 
 class Pack(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.CharField(max_length=250)
+    name = models.CharField(max_length=100, unique=True)
+    description = models.CharField(max_length=250, null=True)
     lock = models.BooleanField()
     credit_limit = models.IntegerField()
     theme = models.ForeignKey(Theme)
@@ -22,8 +22,8 @@ class Pack(models.Model):
     
     
 class Team(models.Model):
-    name = models.CharField(max_length=100)
-    code = models.CharField(max_length=10)
+    name = models.CharField(max_length=100, unique=True)
+    code = models.CharField(max_length=10, unique=True)
     
     def __unicode__(self):
         return self.name
@@ -55,7 +55,7 @@ class QuizzPlayer(models.Model):
 class Match(models.Model):
     score_home = models.IntegerField()
     score_away = models.IntegerField()
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     date = models.DateField()
     pack = models.ForeignKey(Pack)
     is_valid = models.BooleanField()
@@ -70,7 +70,9 @@ class Match(models.Model):
 class ThemeForm(ModelForm):
      
     class Meta:
-        model = Theme 
+        model = Theme
+        
+        fields = ('name',) 
         
 class PackForm(ModelForm):
     
@@ -82,8 +84,4 @@ class TeamForm(ModelForm):
     class Meta:
         model = Team
         
-class PlayerForm(ModelForm):
-    
-    class Meta:
-        model = Player
-    
+        fields = ('name',)
