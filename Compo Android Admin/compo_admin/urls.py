@@ -22,6 +22,9 @@ urlpatterns = patterns('',
     
     url(r'^$', views.index, name='index'),
 
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
+
     #Theme manager
     url(r'^theme/create/$', views.create_theme, name="create-theme"),
     url(r'^theme/update/(?P<theme_id>\d+)/$', views.update_theme, name="update-theme"),
@@ -39,12 +42,6 @@ urlpatterns = patterns('',
     url(r'^team/update/(?P<team_id>\d+)/$', views.update_team, name="update-team"),
     url(r'^team/delete/(?P<team_id>\d+)/$', views.delete_team, name="delete-team"),
     url(r'^team/$', views.index_team, name="index-team"),
-    
-    #Theme manager
-    url(r'^player/create/$', views.create_player, name="create-player"),
-    url(r'^player/update/(?P<player_id>\d+)/$', views.update_player, name="update-player"),
-    url(r'^player/delete/(?P<player_id>\d+)/$', views.delete_player, name="delete-player"),
-    url(r'^player/$', views.index_player, name="index-player"),
     
     #Match manager
     url(r'^match/create/$', views.MatchWizard.as_view([MatchFormTeamsStep1, MatchFormUploadQuizzPlayersStep2, MatchFormMatchStep3]), name="create-match"),

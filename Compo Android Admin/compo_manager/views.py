@@ -2,7 +2,7 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.template.context import RequestContext
 from compo_manager.models import ThemeForm, Theme, PackForm, Pack, TeamForm,\
-    Team, Match, PlayerForm, Player
+    Team, Match
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.formtools.wizard.views import SessionWizardView
 import datetime
@@ -10,20 +10,30 @@ from django.core.files.storage import FileSystemStorage
 from compo_admin import settings
 from compo_manager.services import QuizzPlayerListServices,\
     MatchDisplayerService
+from django.contrib.auth.decorators import login_required
 
 # Main index
+@login_required(redirect_field_name='/accounts/login')
 def index(request):
     template = loader.get_template('index.html')
     context = RequestContext(request)
     return HttpResponse(template.render(context))
 
-
 # Theme views
+@login_required(redirect_field_name='/accounts/login')
 def create_theme(request):
     if request.method == 'POST':
         form = ThemeForm(request.POST)
-        if form.is_valid():    
-            form.save()
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            code = name.replace(' ','').upper()
+            
+            theme = Theme()
+            theme.name = name
+            theme.code = code
+                
+            theme.save()
+            
             return HttpResponseRedirect('/theme')
     else:
         form = ThemeForm() 
@@ -31,23 +41,34 @@ def create_theme(request):
     variables = RequestContext(request, {'form':form})
     return render_to_response('create_theme.html', variables)
 
+@login_required(redirect_field_name='/accounts/login')
 def update_theme(request, theme_id):
     theme = get_object_or_404(Theme, id=theme_id)
     form = ThemeForm(request.POST, instance=theme)
+    
     if form.is_valid():
-        form.save()
-        return HttpResponseRedirect('/theme')
+            name = form.cleaned_data['name']
+            code = name.replace(' ','').upper()
+            
+            theme.name = name
+            theme.code = code
+            
+            theme.save()
+            
+            return HttpResponseRedirect('/theme')
     else:
         form = ThemeForm(instance=theme) 
         
     variables = RequestContext(request, {'form':form, 'theme_id':theme_id})
     return render_to_response('create_theme.html', variables)
 
+@login_required(redirect_field_name='/accounts/login')
 def delete_theme(request, theme_id):
     theme = get_object_or_404(Theme, id=theme_id)
     theme.delete()
     
     return HttpResponseRedirect('/theme')
+
 
 def index_theme(request):
     themes = Theme.objects.all()
@@ -56,8 +77,8 @@ def index_theme(request):
     return HttpResponse(template.render(context))
 
 
-
 # Pack views
+@login_required(redirect_field_name='/accounts/login')
 def create_pack(request):
     if request.method == 'POST':
         form = PackForm(request.POST)
@@ -70,6 +91,7 @@ def create_pack(request):
     variables = RequestContext(request, {'form':form})    
     return render_to_response('create_pack.html', variables)
 
+@login_required(redirect_field_name='/accounts/login')
 def update_pack(request, pack_id):
     pack = get_object_or_404(Pack, id=pack_id)
     form = PackForm(request.POST, instance=pack)
@@ -82,11 +104,13 @@ def update_pack(request, pack_id):
     variables = RequestContext(request, {'form':form, 'pack_id':pack_id})
     return render_to_response('create_pack.html', variables)
 
+@login_required(redirect_field_name='/accounts/login')
 def delete_pack(request, pack_id):
     pack = get_object_or_404(Pack, id=pack_id)
     pack.delete()
     
     return HttpResponseRedirect('/pack')
+
 
 def index_pack(request):
     packs = Pack.objects.all()
@@ -97,11 +121,20 @@ def index_pack(request):
 
 
 # Team views
+@login_required(redirect_field_name='/accounts/login')
 def create_team(request):
     if request.method == 'POST':
         form = TeamForm(request.POST)
         if form.is_valid():    
-            form.save()
+            name = form.cleaned_data['name']
+            code = name.replace(' ','').upper()
+            
+            team = Team()
+            team.name = name
+            team.code = code
+            
+            team.save()
+            
             return HttpResponseRedirect('/team')
     else:
         form = TeamForm() 
@@ -109,11 +142,19 @@ def create_team(request):
     variables = RequestContext(request, {'form':form})
     return render_to_response('create_team.html', variables)
 
+@login_required(redirect_field_name='/accounts/login')
 def update_team(request, team_id):
     team = get_object_or_404(Team, id=team_id)
     form = TeamForm(request.POST, instance=team)
     if form.is_valid():
-        form.save()
+        name = form.cleaned_data['name']
+        code = name.replace(' ','').upper()
+            
+        team.name = name
+        team.code = code
+            
+        team.save()
+        
         return HttpResponseRedirect('/team')
     else:
         form = TeamForm(instance=team) 
@@ -121,6 +162,7 @@ def update_team(request, team_id):
     variables = RequestContext(request, {'form':form, 'team_id':team_id})
     return render_to_response('create_team.html', variables)
 
+@login_required(redirect_field_name='/accounts/login')
 def delete_team(request, team_id):
     team = get_object_or_404(Team, id=team_id)
     team.delete()
@@ -133,52 +175,13 @@ def index_team(request):
     return HttpResponse(template.render(context))
 
 
-# Team views
-def create_player(request):
-    if request.method == 'POST':
-        form = PlayerForm(request.POST)
-        if form.is_valid():    
-            form.save()
-            return HttpResponseRedirect('/player')
-    else:
-        form = PlayerForm() 
-        
-    variables = RequestContext(request, {'form':form})
-    return render_to_response('create_player.html', variables)
-
-
-def update_player(request, player_id):
-    player = get_object_or_404(Player, id=player_id)
-    form = PlayerForm(request.POST, instance=player)
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect('/player')
-    else:
-        form = PlayerForm(instance=player) 
-        
-    variables = RequestContext(request, {'form':form, 'player_id':player_id})
-    return render_to_response('create_player.html', variables)
-
-
-def delete_player(request, player_id):
-    player = get_object_or_404(Player, id=player_id)
-    player.delete()
-    return HttpResponseRedirect('/player')
-
-
-def index_player(request):
-    players = Player.objects.order_by('name')
-    template = loader.get_template('index_player.html')
-    context = RequestContext(request, {'players':players})
-    return HttpResponse(template.render(context))
-
-
 # Match views
 class MatchWizard(SessionWizardView):
     
     template_name = 'create_match.html'
     file_storage = FileSystemStorage(location=settings.MEDIA_ROOT)
     
+    @login_required(redirect_field_name='/accounts/login')
     def done(self, form_list, **kwargs):
         match = Match()
         
@@ -216,6 +219,7 @@ class MatchWizard(SessionWizardView):
             
         return HttpResponseRedirect('/match')
 
+@login_required(redirect_field_name='/accounts/login')
 def update_match(request, match_id):
     match = get_object_or_404(Match, id=match_id)
     
@@ -226,14 +230,15 @@ def update_match(request, match_id):
     variables = RequestContext(request, {'match_displayer':match_displayer})
     return render_to_response('update_match.html', variables)
 
-
+@login_required(redirect_field_name='/accounts/login')
 def validate_match(request, match_id):
     match = get_object_or_404(Match, id=match_id)
     match.is_valid = True
     match.save()
     
     return HttpResponseRedirect('/match')
-    
+
+@login_required(redirect_field_name='/')    
 def delete_match(request, match_id):
     match = get_object_or_404(Match, id=match_id)
     
