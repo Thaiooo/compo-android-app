@@ -70,6 +70,7 @@ def delete_theme(request, theme_id):
     return HttpResponseRedirect('/theme')
 
 
+@login_required(redirect_field_name='/accounts/login')
 def index_theme(request):
     themes = Theme.objects.all()
     template = loader.get_template('index_theme.html')
@@ -112,6 +113,7 @@ def delete_pack(request, pack_id):
     return HttpResponseRedirect('/pack')
 
 
+@login_required(redirect_field_name='/accounts/login')
 def index_pack(request):
     packs = Pack.objects.all()
     template = loader.get_template('index_pack.html')
@@ -168,6 +170,7 @@ def delete_team(request, team_id):
     team.delete()
     return HttpResponseRedirect('/team')
 
+@login_required(redirect_field_name='/accounts/login')
 def index_team(request):
     teams = Team.objects.all()
     template = loader.get_template('index_team.html')
@@ -181,8 +184,8 @@ class MatchWizard(SessionWizardView):
     template_name = 'create_match.html'
     file_storage = FileSystemStorage(location=settings.MEDIA_ROOT)
     
-    @login_required(redirect_field_name='/accounts/login')
     def done(self, form_list, **kwargs):
+        
         match = Match()
         
         teams_form = form_list[0]
@@ -232,9 +235,11 @@ def update_match(request, match_id):
 
 @login_required(redirect_field_name='/accounts/login')
 def validate_match(request, match_id):
-    match = get_object_or_404(Match, id=match_id)
-    match.is_valid = True
-    match.save()
+    
+    if request.user.has_perm('compo_manager.validate'):
+        match = get_object_or_404(Match, id=match_id)
+        match.is_valid = True
+        match.save()
     
     return HttpResponseRedirect('/match')
 
@@ -248,7 +253,7 @@ def delete_match(request, match_id):
     match.delete()
     return HttpResponseRedirect('/match')
     
-    
+@login_required(redirect_field_name='/accounts/login')    
 def index_match(request):
     matchs = Match.objects.order_by('is_valid')
     template = loader.get_template('index_match.html')

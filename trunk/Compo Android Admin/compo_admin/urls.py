@@ -5,6 +5,7 @@ from compo_manager.forms import MatchFormTeamsStep1, MatchFormUploadQuizzPlayers
     MatchFormMatchStep3
 from compo_admin import settings
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 
 # Uncomment the next two lines to enable the admin:
 admin.autodiscover()
@@ -24,6 +25,7 @@ urlpatterns = patterns('',
 
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
+    url(r'^accounts/password/$', 'django.contrib.auth.views.password_change', {'post_change_redirect':'/'}),
 
     #Theme manager
     url(r'^theme/create/$', views.create_theme, name="create-theme"),
@@ -44,7 +46,7 @@ urlpatterns = patterns('',
     url(r'^team/$', views.index_team, name="index-team"),
     
     #Match manager
-    url(r'^match/create/$', views.MatchWizard.as_view([MatchFormTeamsStep1, MatchFormUploadQuizzPlayersStep2, MatchFormMatchStep3]), name="create-match"),
+    url(r'^match/create/$', login_required(views.MatchWizard.as_view([MatchFormTeamsStep1, MatchFormUploadQuizzPlayersStep2, MatchFormMatchStep3])), name="create-match"),
     url(r'^match/update/(?P<match_id>\d+)/$', views.update_match, name="update-match"),
     url(r'^match/delete/(?P<match_id>\d+)/$', views.delete_match, name="delete-match"),
     url(r'^match/validate/(?P<match_id>\d+)/$', views.validate_match, name="validate-match"),
