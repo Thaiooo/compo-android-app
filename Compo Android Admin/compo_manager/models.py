@@ -53,6 +53,11 @@ class QuizzPlayer(models.Model):
 
 
 class Match(models.Model):
+    
+    class Meta:
+        permissions = (('validate', 'Can validate a match'))
+        
+        
     score_home = models.IntegerField()
     score_away = models.IntegerField()
     name = models.CharField(max_length=100, unique=True)
