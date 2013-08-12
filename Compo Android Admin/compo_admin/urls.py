@@ -23,6 +23,8 @@ urlpatterns = patterns('',
     
     url(r'^$', views.index, name='index'),
 
+    url(r'^user/$', views.create_user, name="create-user"),
+
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
     url(r'^accounts/password/$', 'django.contrib.auth.views.password_change', {'post_change_redirect':'/'}),

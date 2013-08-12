@@ -10,7 +10,12 @@ from django.core.files.storage import FileSystemStorage
 from compo_admin import settings
 from compo_manager.services import QuizzPlayerListServices,\
     MatchDisplayerService
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required,\
+    user_passes_test
+from django.contrib.auth.forms import UserCreationForm
+
+def superuser_check(user):
+    return user.is_superuser
 
 # Main index
 @login_required(redirect_field_name='/accounts/login')
@@ -18,6 +23,23 @@ def index(request):
     template = loader.get_template('index.html')
     context = RequestContext(request)
     return HttpResponse(template.render(context))
+
+
+@login_required(redirect_field_name='/accounts/login')
+@user_passes_test(superuser_check)
+def create_user(request):
+    
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/user')
+    else:
+        form = UserCreationForm()
+            
+    variables = RequestContext(request, {'form':form})
+    return render_to_response('create_user.html', variables)
 
 # Theme views
 @login_required(redirect_field_name='/accounts/login')
@@ -234,6 +256,7 @@ def update_match(request, match_id):
     return render_to_response('update_match.html', variables)
 
 @login_required(redirect_field_name='/accounts/login')
+@permission_required(perm='compo_manager.validate')
 def validate_match(request, match_id):
     
     if request.user.has_perm('compo_manager.validate'):
