@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Legendary Starting 11</string>
     <string name="main_title">Legendary\nStarting 11</string>
+    <string name="logo_desc">Legendary Starting Eleven</string>
     <string name="menu_settings">Settings</string>
-    <string name="button_play">Jouer</string>
-    <string name="button_setting">Parmètres</string>
+    <string name="button_play">Play</string>
+    <string name="button_setting">Settings</string>
     <string name="button_check">Valider</string>
-    <string name="button_store">Plus de crédit!</string>
+    <string name="button_store">More credit!</string>
     <string name="button_cancel">Annuler</string>
     <string name="activity_setting">Parmètres</string>
     <string name="activity_select_theme">Theme</string>
@@ -19,6 +21,8 @@
     <string name="store.pack.b">100 crédits</string>
     <string name="store.pack.c">500 crédits</string>
     <string name="setting.title">Paramètres</string>
+    <string name="setting.erase.data.confirm">Voulez vous supprimer toutes les données?</string>
+    <string name="button_validate">Valider</string>
 
     <dimen name="myFontSize">10sp</dimen>
 
