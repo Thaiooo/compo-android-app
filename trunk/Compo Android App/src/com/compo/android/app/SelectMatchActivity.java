@@ -72,6 +72,12 @@ public class SelectMatchActivity extends FragmentActivity {
 	new LoadMatchTask().execute(params);
     }
 
+    public void home(View view) {
+	Intent intent = new Intent(this, MainActivity.class);
+	startActivity(intent);
+	overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
     @Override
     protected void onRestart() {
 	super.onRestart();

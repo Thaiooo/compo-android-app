@@ -20,11 +20,11 @@ import com.compo.android.app.utils.UserFactory;
 public class MainActivity extends Activity {
     private static final String TAG = MainActivity.class.getName();
 
+    public static final int EXTRA_MESSAGE_REQUEST_CODE = 1;
+
     private static Typeface _font;
-    private static Typeface _fontTitle;
     private TextView _userCredit;
     private TextView _userPoint;
-    private TextView _appTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,6 @@ public class MainActivity extends Activity {
 
 	_userCredit = (TextView) findViewById(R.id.user_credit);
 	_userPoint = (TextView) findViewById(R.id.user_point);
-	_appTitle = (TextView) findViewById(R.id.app_titre);
 
 	Button buttonPlay = (Button) findViewById(R.id.button_play);
 	Button buttonStore = (Button) findViewById(R.id.button_store);
@@ -45,13 +44,6 @@ public class MainActivity extends Activity {
 	buttonPlay.setTypeface(_font);
 	buttonStore.setTypeface(_font);
 	buttonSetting.setTypeface(_font);
-
-	if (_fontTitle == null) {
-	    // Eraser.ttf
-	    // HVD_Peace.ttf
-	    _fontTitle = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
-	}
-	_appTitle.setTypeface(_fontTitle);
 
 	DataBaseHelper myDbHelper = new DataBaseHelper(this);
 
@@ -69,6 +61,12 @@ public class MainActivity extends Activity {
 	return false;
     }
 
+    @Override
+    protected void onRestart() {
+	super.onRestart();
+	new LoadUserTask().execute();
+    }
+
     public void play(View view) {
 	Intent intent = new Intent(MainActivity.this, SelectThemeActivity.class);
 	startActivity(intent);
@@ -77,12 +75,21 @@ public class MainActivity extends Activity {
 
     public void store(View view) {
 	Intent intent = new Intent(MainActivity.this, StoreActivity.class);
-	startActivity(intent);
+	startActivityForResult(intent, EXTRA_MESSAGE_REQUEST_CODE);
     }
 
     public void setting(View view) {
 	Intent intent = new Intent(MainActivity.this, SettingActivity.class);
-	startActivity(intent);
+	startActivityForResult(intent, EXTRA_MESSAGE_REQUEST_CODE);
+    }
+
+    public void home(View view) {
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	new LoadUserTask().execute();
     }
 
     private class LoadUserTask extends AsyncTask<Void, Void, User> {
