@@ -20,6 +20,58 @@ public class PlayDao {
 	dataBaseHeleper = new DataBaseHelper(context);
     }
 
+    public void eraseAll() {
+	dataBaseHeleper.openDataBase();
+	SQLiteDatabase session = null;
+	Cursor c = null;
+	try {
+	    session = dataBaseHeleper.getReadableDatabase();
+	    String where = null;
+	    String[] whereArgs = {};
+	    session.delete(TableConstant.PlayTable.TABLE_NAME, where, whereArgs);
+
+	} finally {
+	    if (c != null) {
+		c.close();
+	    }
+	    if (session != null) {
+		session.close();
+	    }
+	    dataBaseHeleper.close();
+	}
+
+    }
+
+    public int count() {
+	dataBaseHeleper.openDataBase();
+	SQLiteDatabase session = null;
+	Cursor c = null;
+	int result = 0;
+	try {
+	    session = dataBaseHeleper.getReadableDatabase();
+	    String[] selectionArgs = {};
+
+	    StringBuffer req = new StringBuffer("select count(*) from ");
+	    req.append(TableConstant.PlayTable.TABLE_NAME);
+
+	    c = session.rawQuery(req.toString(), selectionArgs);
+
+	    while (c.moveToNext()) {
+		result = c.getInt(0);
+	    }
+	} finally {
+	    if (c != null) {
+		c.close();
+	    }
+	    if (session != null) {
+		session.close();
+	    }
+	    dataBaseHeleper.close();
+	}
+
+	return result;
+    }
+
     public void update(Play o) {
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = null;

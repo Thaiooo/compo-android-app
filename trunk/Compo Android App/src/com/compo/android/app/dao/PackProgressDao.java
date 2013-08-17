@@ -18,6 +18,28 @@ public class PackProgressDao {
 	dataBaseHeleper = new DataBaseHelper(context);
     }
 
+    public void eraseAll() {
+	dataBaseHeleper.openDataBase();
+	SQLiteDatabase session = null;
+	Cursor c = null;
+	try {
+	    session = dataBaseHeleper.getReadableDatabase();
+	    String where = null;
+	    String[] whereArgs = {};
+	    session.delete(TableConstant.PackProgressTable.TABLE_NAME, where, whereArgs);
+
+	} finally {
+	    if (c != null) {
+		c.close();
+	    }
+	    if (session != null) {
+		session.close();
+	    }
+	    dataBaseHeleper.close();
+	}
+
+    }
+
     public Map<Long, PackProgress> getAllPackProgress(long aThemeId) {
 	Map<Long, PackProgress> map = new HashMap<Long, PackProgress>();
 
