@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.widget.TextView;
 
 import com.compo.android.app.dao.PackDao;
@@ -67,6 +68,12 @@ public class SelectPackActivity extends FragmentActivity {
 	// _collectionPacksPagerAdapter.notifyAll();
 	// TODO A tester
 	_mViewPager.invalidate();
+    }
+
+    public void home(View view) {
+	Intent intent = new Intent(this, MainActivity.class);
+	startActivity(intent);
+	overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     private class LoadUserTask extends AsyncTask<Void, Void, Void> {

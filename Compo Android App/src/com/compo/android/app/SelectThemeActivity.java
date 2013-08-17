@@ -2,11 +2,13 @@ package com.compo.android.app;
 
 import java.util.List;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.widget.TextView;
 
 import com.compo.android.app.dao.ThemeDao;
@@ -48,6 +50,12 @@ public class SelectThemeActivity extends FragmentActivity {
 	    _userPoint.setText(u.getPoint() + " pts");
 	    return null;
 	}
+    }
+
+    public void home(View view) {
+	Intent intent = new Intent(this, MainActivity.class);
+	startActivity(intent);
+	overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     private class LoadThemeTask extends AsyncTask<Void, Void, List<Theme>> {

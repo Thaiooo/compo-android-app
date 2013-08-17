@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,6 +75,12 @@ public class QuizzActivity extends FragmentActivity {
 	} else {
 	    teamAway.setText("");
 	}
+    }
+
+    public void home(View view) {
+	Intent intent = new Intent(this, MainActivity.class);
+	startActivity(intent);
+	overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     @Override
