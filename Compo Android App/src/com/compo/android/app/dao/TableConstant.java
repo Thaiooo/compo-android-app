@@ -29,6 +29,7 @@ public class TableConstant {
 	public static final String COLUMN_CREDIT = "credit";
 	public static final String COLUMN_POINT = "point";
 	public static final String COLUMN_OVERALL_TIME = "overall_time";
+	public static final String COLUMN_SOUND = "sound";
     }
 
     public static class MatchTable implements BaseColumns {

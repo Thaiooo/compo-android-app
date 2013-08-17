@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.compo.android.app.model.User;
+import com.compo.android.app.model.User.Sound;
 
 public class UserDao {
     private DataBaseHelper dataBaseHeleper;
@@ -23,6 +24,7 @@ public class UserDao {
 	    ContentValues values = new ContentValues();
 	    values.put(TableConstant.UserTable.COLUMN_CREDIT, o.getCredit());
 	    values.put(TableConstant.UserTable.COLUMN_POINT, o.getPoint());
+	    values.put(TableConstant.UserTable.COLUMN_SOUND, o.getSound().name());
 
 	    session.update(TableConstant.UserTable.TABLE_NAME, values, TableConstant.UserTable._ID + " = ?",
 		    new String[] { String.valueOf(o.getId()) });
@@ -47,7 +49,8 @@ public class UserDao {
 
 	    // The columns to return
 	    String[] projection = { TableConstant.UserTable._ID, TableConstant.UserTable.COLUMN_CREDIT,
-		    TableConstant.UserTable.COLUMN_POINT, TableConstant.UserTable.COLUMN_OVERALL_TIME };
+		    TableConstant.UserTable.COLUMN_POINT, TableConstant.UserTable.COLUMN_OVERALL_TIME,
+		    TableConstant.UserTable.COLUMN_SOUND };
 
 	    // The columns for the WHERE clause
 	    String selection = null;
@@ -70,11 +73,13 @@ public class UserDao {
 		Integer itemCredit = c.getInt(c.getColumnIndexOrThrow(TableConstant.UserTable.COLUMN_CREDIT));
 		Integer itemPoint = c.getInt(c.getColumnIndexOrThrow(TableConstant.UserTable.COLUMN_POINT));
 		Long itemOverallTime = c.getLong(c.getColumnIndexOrThrow(TableConstant.UserTable.COLUMN_OVERALL_TIME));
+		Sound sound = Sound.valueOf(c.getString(c.getColumnIndexOrThrow(TableConstant.UserTable.COLUMN_SOUND)));
 
 		u.setId(itemId);
 		u.setCredit(itemCredit);
 		u.setPoint(itemPoint);
 		u.setOverallTime(itemOverallTime);
+		u.setSound(sound);
 	    }
 	} finally {
 	    if (c != null) {
