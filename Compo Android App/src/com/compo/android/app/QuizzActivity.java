@@ -5,8 +5,6 @@ import java.util.Map;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +16,7 @@ import com.compo.android.app.model.Team;
 import com.compo.android.app.model.User;
 import com.compo.android.app.utils.UserFactory;
 
-public class QuizzActivity extends FragmentActivity {
+public class QuizzActivity extends AbstractLSEFragmentActivity {
 
     // private static final String TAG = QuizzActivity.class.getName();
 
@@ -75,12 +73,6 @@ public class QuizzActivity extends FragmentActivity {
 	} else {
 	    teamAway.setText("");
 	}
-    }
-
-    public void home(View view) {
-	Intent intent = new Intent(this, MainActivity.class);
-	startActivity(intent);
-	overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     @Override

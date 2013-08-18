@@ -2,13 +2,10 @@ package com.compo.android.app;
 
 import java.util.List;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.widget.TextView;
 
 import com.compo.android.app.dao.ThemeDao;
@@ -16,7 +13,7 @@ import com.compo.android.app.model.Theme;
 import com.compo.android.app.model.User;
 import com.compo.android.app.utils.UserFactory;
 
-public class SelectThemeActivity extends FragmentActivity {
+public class SelectThemeActivity extends AbstractLSEFragmentActivity {
 
     private static Typeface _fontTitle;
     private ViewPager _mViewPager;
@@ -50,12 +47,6 @@ public class SelectThemeActivity extends FragmentActivity {
 	    _userPoint.setText(u.getPoint() + " pts");
 	    return null;
 	}
-    }
-
-    public void home(View view) {
-	Intent intent = new Intent(this, MainActivity.class);
-	startActivity(intent);
-	overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     private class LoadThemeTask extends AsyncTask<Void, Void, List<Theme>> {

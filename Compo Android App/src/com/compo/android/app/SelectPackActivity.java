@@ -1,12 +1,13 @@
 package com.compo.android.app;
 
+import java.util.List;
+import java.util.Map;
+
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.widget.TextView;
 
 import com.compo.android.app.dao.PackDao;
@@ -17,10 +18,7 @@ import com.compo.android.app.model.Theme;
 import com.compo.android.app.model.User;
 import com.compo.android.app.utils.UserFactory;
 
-import java.util.List;
-import java.util.Map;
-
-public class SelectPackActivity extends FragmentActivity {
+public class SelectPackActivity extends AbstractLSEFragmentActivity {
 
     public final static String MESSAGE_SELECTED_PACK = "com.compo.android.app.SelectGameActivity.MESSAGE1";
     private static Typeface _fontTitle;
@@ -68,12 +66,6 @@ public class SelectPackActivity extends FragmentActivity {
 	// _collectionPacksPagerAdapter.notifyAll();
 	// TODO A tester
 	_mViewPager.invalidate();
-    }
-
-    public void home(View view) {
-	Intent intent = new Intent(this, MainActivity.class);
-	startActivity(intent);
-	overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     private class LoadUserTask extends AsyncTask<Void, Void, Void> {

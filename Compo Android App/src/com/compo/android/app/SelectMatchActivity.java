@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -22,7 +21,7 @@ import com.compo.android.app.model.Theme;
 import com.compo.android.app.model.User;
 import com.compo.android.app.utils.UserFactory;
 
-public class SelectMatchActivity extends FragmentActivity {
+public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 
     public static final String EXTRA_MESSAGE_ARG = "com.compo.android.app.QuizzLevelFragment.MESSAGE.ARG";
     public static final String EXTRA_MESSAGE_QUIZZ = "com.compo.android.app.QuizzLevelFragment.MESSAGE.QUIZZ";
@@ -70,12 +69,6 @@ public class SelectMatchActivity extends FragmentActivity {
 
 	Object[] params = { _selectPack };
 	new LoadMatchTask().execute(params);
-    }
-
-    public void home(View view) {
-	Intent intent = new Intent(this, MainActivity.class);
-	startActivity(intent);
-	overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     @Override
