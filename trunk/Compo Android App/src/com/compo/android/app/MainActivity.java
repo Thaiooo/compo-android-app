@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.compo.android.app.dao.DataBaseHelper;
@@ -30,6 +31,11 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_main);
+
+	ImageView imgBack = (ImageView) findViewById(R.id.image_back);
+	imgBack.setVisibility(View.INVISIBLE);
+	ImageView imgHome = (ImageView) findViewById(R.id.image_home);
+	imgHome.setVisibility(View.INVISIBLE);
 
 	_userCredit = (TextView) findViewById(R.id.user_credit);
 	_userPoint = (TextView) findViewById(R.id.user_point);
@@ -81,10 +87,6 @@ public class MainActivity extends Activity {
     public void setting(View view) {
 	Intent intent = new Intent(MainActivity.this, SettingActivity.class);
 	startActivityForResult(intent, EXTRA_MESSAGE_REQUEST_CODE);
-    }
-
-    public void home(View view) {
-
     }
 
     @Override
