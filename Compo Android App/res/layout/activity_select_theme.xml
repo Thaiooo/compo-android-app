@@ -13,26 +13,40 @@
         android:layout_below="@+id/score_bar"
         android:background="@drawable/theme1_cadre" >
 
-        <TextView
-            android:id="@+id/activity_theme_title"
+        <ImageView
+            android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="false"
-            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/main_title_margin_top"
-            android:text="@string/activity_select_theme"
-            android:textColor="@android:color/white"
-            android:textIsSelectable="false"
-            android:textSize="@dimen/theme_title_font_size" />
+            android:contentDescription="@string/logo_desc"
+            android:src="@drawable/logo" />
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/pager"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/theme_image_height"
-            android:layout_below="@+id/activity_theme_title"
-            android:layout_marginTop="@dimen/theme_image_margin_top" >
-        </android.support.v4.view.ViewPager>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/logo"
+            android:background="@drawable/theme1_terrain" >
+
+            <TextView
+                android:id="@+id/activity_theme_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/theme_title_margin_top"
+                android:text="@string/activity_select_theme"
+                android:textColor="@android:color/white"
+                android:textIsSelectable="false"
+                android:textSize="@dimen/theme_title_font_size" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/theme_image_height"
+                android:layout_below="@+id/activity_theme_title"
+                android:layout_marginTop="@dimen/theme_image_margin_top" >
+            </android.support.v4.view.ViewPager>
+        </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>

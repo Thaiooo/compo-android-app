@@ -16,7 +16,8 @@
             android:theme="@style/AppTheme">
         <activity 
         		android:name=".MainActivity" 
-            	android:clearTaskOnLaunch="true">
+            	android:clearTaskOnLaunch="true"
+            	android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -24,6 +25,7 @@
         </activity>
         <activity
                 android:name=".SelectThemeActivity"
+                android:screenOrientation="portrait"
                 android:label="@string/activity_select_theme">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
@@ -31,6 +33,7 @@
         </activity>
         <activity
                 android:name=".SelectPackActivity"
+                android:screenOrientation="portrait"
                 android:label="@string/activity_select_pack">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
@@ -38,6 +41,7 @@
         </activity>
         <activity
                 android:name=".SettingActivity"
+                android:screenOrientation="portrait"
                 android:theme="@style/DialogTheme">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
@@ -45,6 +49,7 @@
         </activity>
         <activity
                 android:name=".StoreActivity"
+                android:screenOrientation="portrait"
                 android:theme="@style/DialogTheme">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
@@ -52,6 +57,7 @@
         </activity>
         <activity
                 android:name=".PackDetailsActivity"
+                android:screenOrientation="portrait"
                 android:theme="@style/DialogTheme">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
@@ -59,6 +65,7 @@
         </activity>
         <activity
                 android:name=".SelectMatchActivity"
+                android:screenOrientation="portrait"
                 android:label="@string/activity_select_match">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
@@ -66,6 +73,7 @@
         </activity>
         <activity
                 android:name=".QuizzActivity"
+                android:screenOrientation="portrait"
                 android:label="@string/activity_quizz">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
@@ -73,6 +81,7 @@
         </activity>
         <activity
                 android:name=".ResponseActivity"
+                android:screenOrientation="portrait"
                 android:theme="@style/DialogTheme">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"

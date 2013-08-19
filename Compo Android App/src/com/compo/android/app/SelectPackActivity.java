@@ -36,7 +36,7 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 	setContentView(R.layout.activity_select_pack);
 
 	if (_fontTitle == null) {
-	    _fontTitle = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
+	    _fontTitle = Typeface.createFromAsset(getAssets(), "DrawingGuides.ttf");
 	}
 
 	Intent intent = getIntent();

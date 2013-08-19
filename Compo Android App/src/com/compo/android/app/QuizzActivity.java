@@ -3,8 +3,10 @@ package com.compo.android.app;
 import java.util.Map;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,8 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
     public static final String EXTRA_MESSAGE_RESULT = "com.compo.android.app.QuizzActivity.MESSAGE.RESULT";
     public static final int EXTRA_MESSAGE_REQUEST_CODE = 1;
 
+    private static Typeface _font;
+    private static Typeface _fontSocrePrinter;
     private TextView _userCredit;
     private TextView _userPoint;
     private QuizzView _quizzView;
@@ -32,6 +36,14 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_quizz);
+
+	if (_font == null) {
+	    _font = Typeface.createFromAsset(getAssets(), "MyLuckyPenny.ttf");
+	}
+
+	if (_fontSocrePrinter == null) {
+	    _fontSocrePrinter = Typeface.createFromAsset(getAssets(), "light_led_board.ttf");
+	}
 
 	PlayDao playDao = new PlayDao(this);
 	User u = UserFactory.getInstance().getUser(QuizzActivity.this);
@@ -61,18 +73,22 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 	    }
 	}
 
-	TextView teamHome = (TextView) findViewById(R.id.team_home);
-	if (home != null) {
-	    teamHome.setText(home.getName() + " (" + selectMatch.getScoreHome() + ")");
-	} else {
-	    teamHome.setText("");
-	}
-	TextView teamAway = (TextView) findViewById(R.id.team_away);
-	if (away != null) {
-	    teamAway.setText(away.getName() + " (" + selectMatch.getScoreAway() + ")");
+	TextView matchDetail = (TextView) findViewById(R.id.match_details);
+	matchDetail.setTypeface(_font);
+	matchDetail.setText(selectMatch.getName());
+
+	TextView teamAway = (TextView) findViewById(R.id.match_teams);
+	teamAway.setTypeface(_font);
+	if (away != null && home != null) {
+	    teamAway.setText(home.getName() + " - " + away.getName());
 	} else {
 	    teamAway.setText("");
 	}
+
+	Button scorePrinter = (Button) findViewById(R.id.score_printer);
+	scorePrinter.setTypeface(_fontSocrePrinter);
+	scorePrinter.setText(selectMatch.getScoreHome() + " - " + selectMatch.getScoreAway());
+
     }
 
     @Override

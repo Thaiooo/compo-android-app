@@ -13,25 +13,39 @@
         android:layout_below="@+id/score_bar"
         android:background="@drawable/theme1_cadre" >
 
-        <TextView
-            android:id="@+id/theme_name"
+        <ImageView
+            android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="false"
-            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/main_title_margin_top"
-            android:textColor="@android:color/white"
-            android:textIsSelectable="false"
-            android:textSize="@dimen/theme_title_font_size" />
+            android:contentDescription="@string/logo_desc"
+            android:src="@drawable/logo" />
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/pager"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/pack_image_height"
-            android:layout_below="@+id/theme_name"
-            android:layout_marginTop="@dimen/pack_image_margin_top" >
-        </android.support.v4.view.ViewPager>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/logo"
+            android:background="@drawable/theme1_terrain" >
+
+            <TextView
+                android:id="@+id/theme_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/pack_theme_margin_top"
+                android:textColor="@android:color/white"
+                android:textIsSelectable="false"
+                android:textSize="@dimen/pack_theme_font_size" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/pack_image_height"
+                android:layout_below="@+id/theme_name"
+                android:layout_marginTop="@dimen/pack_image_margin_top" >
+            </android.support.v4.view.ViewPager>
+        </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>
