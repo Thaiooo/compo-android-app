@@ -26,7 +26,7 @@ public class SelectThemeActivity extends AbstractLSEFragmentActivity {
 	setContentView(R.layout.activity_select_theme);
 
 	if (_fontTitle == null) {
-	    _fontTitle = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
+	    _fontTitle = Typeface.createFromAsset(getAssets(), "DrawingGuides.ttf");
 	}
 
 	_userCredit = (TextView) findViewById(R.id.user_credit);

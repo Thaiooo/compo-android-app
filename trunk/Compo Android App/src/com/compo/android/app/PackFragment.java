@@ -23,6 +23,7 @@ public class PackFragment extends Fragment {
     private static Typeface _font;
 
     private TextView _packName;
+    private TextView _packDescription;
     private TextView _progress;
     private ImageView _lockImage;
     private Theme _currentTheme;
@@ -45,6 +46,7 @@ public class PackFragment extends Fragment {
 	_currentPackProgress = (PackProgress) args.getSerializable(EXTRA_MESSAGE_PACK_PROGRESS);
 
 	_packName = (TextView) rootView.findViewById(R.id.pack_name);
+	_packDescription = (TextView) rootView.findViewById(R.id.pack_desc);
 	_lockImage = (ImageView) rootView.findViewById(R.id.lock_image);
 	_progress = (TextView) rootView.findViewById(R.id.progress);
 	_contentView = (View) rootView.findViewById(R.id.pack_content_layout_id);
@@ -52,6 +54,9 @@ public class PackFragment extends Fragment {
 	_packName.setText(_currentPack.getName());
 	_packName.setTypeface(_font);
 
+	_packDescription.setText(_currentPack.getDescription());
+	_packDescription.setTypeface(_font);
+	
 	_progress.setTypeface(_font);
 
 	if (!_currentPack.isLock()) {

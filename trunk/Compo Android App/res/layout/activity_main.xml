@@ -22,42 +22,48 @@
             android:contentDescription="@string/logo_desc"
             android:src="@drawable/logo" />
 
-        <Button
-            android:id="@+id/button_play"
-            style="@style/paper_post_it_bleu_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_below="@+id/logo"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/main_button_play_margin_top"
-            android:onClick="play"
-            android:text="@string/button_play"
-            android:textSize="@dimen/main_button_font_size"
-            android:textStyle="bold" />
+            android:background="@drawable/theme1_terrain" >
 
-        <Button
-            android:id="@+id/button_store"
-            style="@style/paper_post_it_green_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/button_play"
-            android:layout_centerHorizontal="true"
-            android:onClick="store"
-            android:text="@string/button_store"
-            android:textSize="@dimen/main_button_font_size"
-            android:textStyle="bold" />
+            <Button
+                android:id="@+id/button_play"
+                style="@style/paper_post_it_bleu_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/main_button_play_margin_top"
+                android:onClick="play"
+                android:text="@string/button_play"
+                android:textSize="@dimen/main_button_font_size"
+                android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/button_setting"
-            style="@style/paper_post_it_red_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/button_store"
-            android:layout_centerHorizontal="true"
-            android:onClick="setting"
-            android:text="@string/button_setting"
-            android:textSize="@dimen/main_button_font_size"
-            android:textStyle="bold" />
+            <Button
+                android:id="@+id/button_store"
+                style="@style/paper_post_it_green_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/button_play"
+                android:layout_centerHorizontal="true"
+                android:onClick="store"
+                android:text="@string/button_store"
+                android:textSize="@dimen/main_button_font_size"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button_setting"
+                style="@style/paper_post_it_red_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/button_store"
+                android:layout_centerHorizontal="true"
+                android:onClick="setting"
+                android:text="@string/button_setting"
+                android:textSize="@dimen/main_button_font_size"
+                android:textStyle="bold" />
+        </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>

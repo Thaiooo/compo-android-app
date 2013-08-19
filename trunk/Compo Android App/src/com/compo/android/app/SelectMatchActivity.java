@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -31,8 +32,8 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 
     private TextView _userCredit;
     private TextView _userPoint;
-    private TextView _theme_name;
-    private TextView _pack_name;
+    // private TextView _theme_name;
+    // private TextView _pack_name;
     private GridView _gridview;
     private Theme _selectTheme;
     private Pack _selectPack;
@@ -45,7 +46,7 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 	setContentView(R.layout.activity_select_match);
 
 	if (_fontTitle == null) {
-	    _fontTitle = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
+	    _fontTitle = Typeface.createFromAsset(getAssets(), "DrawingGuides.ttf");
 	}
 
 	Intent intent = getIntent();
@@ -55,13 +56,16 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 	_userCredit = (TextView) findViewById(R.id.user_credit);
 	_userPoint = (TextView) findViewById(R.id.user_point);
 
-	_theme_name = (TextView) findViewById(R.id.theme_name);
-	_theme_name.setTypeface(_fontTitle);
-	_theme_name.setText(_selectTheme.getName());
+	Button title = (Button) findViewById(R.id.button_title);
+	title.setTypeface(_fontTitle);
+	title.setText(_selectTheme.getName() + "\n" + _selectPack.getName());
+	// _theme_name = (TextView) findViewById(R.id.theme_name);
+	// _theme_name.setTypeface(_fontTitle);
+	// _theme_name.setText(_selectTheme.getName());
 
-	_pack_name = (TextView) findViewById(R.id.pack_name);
-	_pack_name.setText(_selectPack.getName());
-	_pack_name.setTypeface(_fontTitle);
+	// _pack_name = (TextView) findViewById(R.id.pack_name);
+	// _pack_name.setText(_selectPack.getName());
+	// _pack_name.setTypeface(_fontTitle);
 
 	_gridview = (GridView) findViewById(R.id.quizzGrid);
 
