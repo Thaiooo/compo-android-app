@@ -142,9 +142,9 @@ public class ResponseActivity extends Activity {
 	    finish();
 	} else {
 	    if (percent >= 50) {
-		_matching.setImageResource(R.drawable.approx_response);
+		_matching.setImageResource(R.drawable.response_approx);
 	    } else {
-		_matching.setImageResource(R.drawable.error_response);
+		_matching.setImageResource(R.drawable.response_error);
 	    }
 
 	    if (_currentPlay == null) {
