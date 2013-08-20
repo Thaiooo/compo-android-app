@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/button_title"
-            android:background="@drawable/background_terrain" >
+            android:background="@drawable/background_soccer_field" >
 
             <GridView
                 android:id="@+id/quizzGrid"
