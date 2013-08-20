@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="200dp"
     android:layout_height="wrap_content"
     android:background="@drawable/theme1_background_dialog" >
 
@@ -9,9 +9,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:text="Pack"
         android:textColor="@color/black"
         android:textIsSelectable="false"
-        android:textSize="24sp" />
+        android:textSize="25dp" />
 
     <TextView
         android:id="@+id/pack_description"
@@ -19,9 +20,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/pack_name"
         android:layout_centerHorizontal="true"
+        android:text="Description"
         android:textColor="@color/black"
         android:textIsSelectable="false"
-        android:textSize="14sp" />
+        android:textSize="15dp" />
 
     <Button
         android:id="@+id/button_submit"
@@ -29,9 +31,36 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/pack_description"
         android:layout_centerHorizontal="true"
-        android:onClick="submit"
         android:layout_marginTop="40dp"
-        android:textSize="24sp"
+        android:onClick="unlockPack"
+        android:text="Unlock"
+        android:textSize="20dp"
         android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/pack_description"
+        android:layout_marginTop="40dp"
+        android:onClick="submit"
+        android:text="Yes"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/button_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/pack_description"
+        android:layout_marginTop="40dp"
+        android:onClick="cancel"
+        android:text="No"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
 
 </RelativeLayout>

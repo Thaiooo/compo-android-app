@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/theme1_background" >
+    android:background="@drawable/background_app" >
 
     <include
         android:id="@+id/score_bar"
@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/score_bar"
-        android:background="@drawable/theme1_cadre" >
+        android:background="@drawable/background_cadre" >
 
         <ImageView
             android:id="@+id/logo"
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/logo"
-            android:background="@drawable/theme1_terrain" >
+            android:background="@drawable/background_terrain" >
 
             <Button
                 android:id="@+id/button_play"
