@@ -100,6 +100,12 @@ class QuizzPlayerListServices:
         
         # Check if player is already stored in database
         current_name = self.__get_player_name(line[NAME])
+        
+        try:
+            current_name.decode('ascii')
+        except:
+            raise ServiceError('%s contains non ASCII character'%current_name)
+        
         current_player = Player.objects.filter(name=current_name)
         
         if not current_player:
