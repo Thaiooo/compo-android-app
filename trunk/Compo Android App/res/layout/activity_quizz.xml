@@ -49,7 +49,7 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/match_teams"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/publicite_left" />
+            android:src="@drawable/advertising_left" />
 
         <ImageView
             android:id="@+id/publicite_right"
@@ -58,7 +58,7 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/match_teams"
             android:layout_marginRight="10dp"
-            android:src="@drawable/publicite_right" />
+            android:src="@drawable/advertising_right" />
 
         <com.compo.android.app.QuizzView
             android:id="@+id/quizz_view"

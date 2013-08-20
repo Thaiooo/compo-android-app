@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="20dp"
-        android:src="@drawable/back" 
+        android:src="@drawable/btn_back" 
         android:onClick="back"/>
     
     <ImageView
@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/home" 
+        android:src="@drawable/btn_home" 
         android:onClick="home"/>
     
     <TextView

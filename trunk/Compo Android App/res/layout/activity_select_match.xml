@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/theme1_background" >
+    android:background="@drawable/background_app" >
 
     <include
         android:id="@+id/score_bar"
@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/score_bar"
-        android:background="@drawable/theme1_cadre" >
+        android:background="@drawable/background_cadre" >
 
         <Button
             android:id="@+id/button_title"
@@ -22,14 +22,14 @@
             android:layout_marginTop="@dimen/main_title_margin_top"
             android:text="Test\nTest"
             android:textColor="@android:color/white"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:textStyle="bold" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/button_title"
-            android:background="@drawable/theme1_terrain" >
+            android:background="@drawable/background_terrain" >
 
             <GridView
                 android:id="@+id/quizzGrid"
