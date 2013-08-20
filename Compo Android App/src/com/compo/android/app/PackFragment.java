@@ -56,7 +56,7 @@ public class PackFragment extends Fragment {
 
 	_packDescription.setText(_currentPack.getDescription());
 	_packDescription.setTypeface(_font);
-	
+
 	_progress.setTypeface(_font);
 
 	if (!_currentPack.isLock()) {
@@ -81,6 +81,16 @@ public class PackFragment extends Fragment {
 	} else {
 	    _lockImage.setVisibility(View.VISIBLE);
 	    _progress.setVisibility(View.INVISIBLE);
+
+	    _contentView.setOnClickListener(new View.OnClickListener() {
+		@Override
+		public void onClick(View view) {
+		    Intent intent = new Intent(getActivity(), PackDetailsActivity.class);
+		    intent.putExtra(PackDetailsActivity.MESSAGE_SELECTED_PACK, _currentPack);
+		    startActivity(intent);
+		    getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+		}
+	    });
 	}
 
 	return rootView;

@@ -44,7 +44,7 @@ public class ThemeFragment extends Fragment {
 	if (id != 0) {
 	    _themeImage.setImageResource(id);
 	} else {
-	    _themeImage.setImageResource(R.drawable.world_cup);
+	    _themeImage.setImageResource(R.drawable.theme_world_cup);
 	}
 
 	_contentView.setOnClickListener(new View.OnClickListener() {
