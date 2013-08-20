@@ -79,7 +79,7 @@ public class QuizzView extends View {
 	font = Typeface.createFromAsset(_context.getAssets(), "MyLuckyPenny.ttf");
 
 	_coachRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.coach)).getBitmap();
-	_terrainRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.football_field)).getBitmap();
+	_terrainRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.soccer_field_grass)).getBitmap();
 	_ballRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.ball)).getBitmap();
 	_ballRedRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.ball_red)).getBitmap();
 	_start = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.start)).getBitmap();
