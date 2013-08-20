@@ -13,40 +13,28 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-    <style name="sticky_green_btn" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/sticky_green_btn</item>
-    </style>
-
     <style name="paper_post_it_bleu_btn" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/paper_post_it_bleu_btn</item>
+        <item name="android:background">@drawable/button_paper_post_it_bleu</item>
     </style>
 
     <style name="paper_post_it_orange_btn" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/paper_post_it_orange_btn</item>
+        <item name="android:background">@drawable/button_paper_post_it_orange</item>
     </style>
 
     <style name="paper_post_it_green_btn" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/paper_post_it_green_btn</item>
+        <item name="android:background">@drawable/button_paper_post_it_green</item>
     </style>
 
     <style name="paper_post_it_purple_btn" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/paper_post_it_purple_btn</item>
+        <item name="android:background">@drawable/button_paper_post_it_purple</item>
     </style>
 
     <style name="paper_post_it_red_btn" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/paper_post_it_red_btn</item>
+        <item name="android:background">@drawable/button_paper_post_it_red</item>
     </style>
 
     <style name="paper_post_it_yellow_btn" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/paper_post_it_yellow_btn</item>
-    </style>
-
-    <style name="sticky_blue_btn" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/sticky_blue_btn</item>
-    </style>
-
-    <style name="sticky_yellow_btn" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/sticky_yellow_btn</item>
+        <item name="android:background">@drawable/button_paper_post_it_yellow</item>
     </style>
 
     <style name="craie_btn" parent="@android:style/Widget.Button">
