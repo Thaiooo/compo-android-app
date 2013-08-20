@@ -94,7 +94,7 @@ public class QuizzView extends View {
 	_selectedMatch = (Match) intent.getSerializableExtra(SelectMatchActivity.EXTRA_MESSAGE_QUIZZ);
 
 	_playerHomeRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_bleu)).getBitmap();
-	_playerAwayRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_white)).getBitmap();
+	_playerAwayRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_red)).getBitmap();
 
 	_matrix = new Matrix();
     }
@@ -151,14 +151,8 @@ public class QuizzView extends View {
 	int terrainW = _terrainRaw.getWidth();
 	int terrainH = _terrainRaw.getHeight();
 
-	double scaleX = 1;
-	if (terrainW > screenW) {
-	    scaleX = (double) screenW / (double) terrainW;
-	}
-	double scaleY = 1;
-	if (terrainH > screenH) {
-	    scaleY = (double) screenH / (double) terrainH;
-	}
+	double scaleX = (double) screenW / (double) terrainW;
+	double scaleY = (double) screenH / (double) terrainH;
 
 	double scale = scaleX;
 	if (scaleY < scaleX) {
