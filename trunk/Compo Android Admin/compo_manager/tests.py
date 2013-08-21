@@ -13,33 +13,33 @@ from compo_manager.services import QuizzPlayerListServices
 class QuizzPlayerListServiceTestCase(TestCase):
     
     def setUp(self):
-        self.home_team = Team.objects.create(name='Argentina', code='ARG')
-        self.away_team = Team.objects.create(name='Germany', code='GER')
+        self.home_team = Team.objects.create(name='Home', code='HOME')
+        self.away_team = Team.objects.create(name='Away', code='AWAY')
         self.compo_file = [
-                           'HOME;Romero;GK;C',
-                           'HOME;Otamendi;D;R',
-                           'HOME;Demichelis;D;C',
-                           'HOME;_Burdisso;D;C',
-                           'HOME;Heinze;D;L',
-                           'HOME;Rodriguez;MD;C',
-                           'HOME;Mascherano;MD;C',
-                           'HOME;di Maria;F;R',
-                           'HOME;_Messi;F;C',
-                           'HOME;Higuain;F;L',
-                           'HOME;Tevez;S;C',
-                           'HOME;Maradona;C;C',
-                           'AWAY;Neuer;GK;C',
-                           'AWAY;_Lahm;D;R',
-                           'AWAY;Mertesacker;D;C',
-                           'AWAY;Friedrich*;D;C',
-                           'AWAY;Boateng;D;L',
-                           'AWAY;Khedira;MD;C',
-                           'AWAY;_Schweinsteiger;MD;C',
-                           'AWAY;Muller*;F;R',
-                           'AWAY;_Ozil;MD;C',
-                           'AWAY;Podolski;F;L',
-                           'AWAY;Klose**;S;C',
-                           'AWAY;Low;C;C',
+                           'HOME\tRomero\tGK\tC',
+                           'HOME\tOtamendi\tD\tR',
+                           'HOME\tDemichelis\tD\tC',
+                           'HOME\t_Burdisso\tD\tC',
+                           'HOME\tHeinze\tD\tL',
+                           'HOME\tRodriguez\tMD\tC',
+                           'HOME\tMascherano\tMD\tC',
+                           'HOME\tdi Maria\tF\tR',
+                           'HOME\t_Messi\tF\tC',
+                           'HOME\tHiguain\tF\tL',
+                           'HOME\tTevez\tS\tC',
+                           'HOME\tMaradona\tC\tC',
+                           'AWAY\tNeuer\tGK\tC',
+                           'AWAY\t_Lahm\tD\tR',
+                           'AWAY\tMertesacker\tD\tC',
+                           'AWAY\tFriedrich*\tD\tC',
+                           'AWAY\tBoateng\tD\tL',
+                           'AWAY\tKhedira\tMD\tC',
+                           'AWAY\t_Schweinsteiger\tMD\tC',
+                           'AWAY\tMuller*\tF\tR',
+                           'AWAY\t_Ozil\tMD\tC',
+                           'AWAY\tPodolski\tF\tL',
+                           'AWAY\tKlose**\tS\tC',
+                           'AWAY\tLow\tC\tC',
                            ]
     
     def test_quizzplayers_from_file(self):
