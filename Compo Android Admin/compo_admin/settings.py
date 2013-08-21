@@ -1,6 +1,6 @@
 # Django settings for compo_admin project.
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -31,7 +31,7 @@ else:
     	 }
 	}
 
-# Hosts/domain names that are valid for this site; required if DEBUG is False
+# Hosts/domain names that are valid for this site\t required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['compoadmin.alwaysdata.net']
 
@@ -69,7 +69,7 @@ MEDIA_ROOT = '/home/compoadmin/www/compo_manager/medias/'
 MEDIA_URL = '/medias/'
 
 # Absolute path to the directory static files should be collected to.
-# Don't put anything in this directory yourself; store your static files
+# Don't put anything in this directory yourself\t store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
 STATIC_ROOT =  '/home/compoadmin/www/compo_admin/public/static/'

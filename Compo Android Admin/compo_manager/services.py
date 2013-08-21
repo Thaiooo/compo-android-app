@@ -36,7 +36,7 @@ POSITION = 2
 
 SIDE = 3
 
-SEPARATOR = ';'
+SEPARATOR = '\t'
 
 NB_LINES = 24
 
