@@ -5,14 +5,17 @@ import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.compo.android.app.dao.PackDao;
 import com.compo.android.app.dao.PackProgressDao;
@@ -75,6 +78,15 @@ public class ResponseActivity extends Activity {
 	cancel.setTypeface(_font);
 	Button check = (Button) findViewById(R.id.button_check);
 	check.setTypeface(_font);
+
+	RelativeLayout layout = (RelativeLayout) findViewById(R.id.responseLayout);
+	layout.setOnClickListener(new View.OnClickListener() {
+	    @Override
+	    public void onClick(View view) {
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+	    }
+	});
     }
 
     public void cancel(View view) {

@@ -8,6 +8,11 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.SimpleOnPageChangeListener;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.compo.android.app.dao.PackDao;
@@ -29,6 +34,10 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
     private Theme _selectTheme;
     private SelectPackAdapter _collectionPacksPagerAdapter;
     private Map<Long, PackProgress> _mapPackToProgress;
+    private LinearLayout _packIndicatorListLayout;
+    private Button _button_preview;
+    private Button _button_next;
+    private int pageSize = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +58,53 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 	_themeName.setTypeface(_fontTitle);
 	_themeName.setText(_selectTheme.getName());
 
+	_packIndicatorListLayout = (LinearLayout) findViewById(R.id.pack_indicator_list_layout);
+	_button_preview = (Button) findViewById(R.id.button_preview);
+	_button_next = (Button) findViewById(R.id.button_next);
+
+	_mViewPager.setOnPageChangeListener(new PageListener());
+
 	new LoadUserTask().execute();
 	new LoadPackTask().execute();
+    }
+
+    public void previewTheme(View view) {
+	_mViewPager.setCurrentItem(_mViewPager.getCurrentItem() - 1, true);
+
+	_packIndicatorListLayout.removeAllViews();
+	for (int i = 0; i < pageSize; i++) {
+	    ImageView ball = new ImageView(SelectPackActivity.this);
+	    if (i == _mViewPager.getCurrentItem()) {
+		ball.setImageResource(R.drawable.ball_red);
+	    } else {
+		ball.setImageResource(R.drawable.ball);
+	    }
+	    _packIndicatorListLayout.addView(ball);
+	}
+
+	if (_mViewPager.getCurrentItem() == 0) {
+	    _button_preview.setVisibility(View.INVISIBLE);
+	}
+	_button_next.setVisibility(View.VISIBLE);
+    }
+
+    public void nextTheme(View view) {
+	_mViewPager.setCurrentItem(_mViewPager.getCurrentItem() + 1, true);
+	_packIndicatorListLayout.removeAllViews();
+	for (int i = 0; i < pageSize; i++) {
+	    ImageView ball = new ImageView(SelectPackActivity.this);
+	    if (i == _mViewPager.getCurrentItem()) {
+		ball.setImageResource(R.drawable.ball_red);
+	    } else {
+		ball.setImageResource(R.drawable.ball);
+	    }
+	    _packIndicatorListLayout.addView(ball);
+	}
+
+	if (_mViewPager.getCurrentItem() == (pageSize - 1)) {
+	    _button_next.setVisibility(View.INVISIBLE);
+	}
+	_button_preview.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -98,6 +152,46 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 	    _collectionPacksPagerAdapter = new SelectPackAdapter(getSupportFragmentManager(), _selectTheme, aPacks,
 		    _mapPackToProgress);
 	    _mViewPager.setAdapter(_collectionPacksPagerAdapter);
+
+	    for (int i = 0; i < aPacks.size(); i++) {
+		ImageView ball = new ImageView(SelectPackActivity.this);
+		if (i == 0) {
+		    ball.setImageResource(R.drawable.ball_red);
+		} else {
+		    ball.setImageResource(R.drawable.ball);
+		}
+		_packIndicatorListLayout.addView(ball);
+	    }
+
+	    pageSize = aPacks.size();
+	}
+    }
+
+    private class PageListener extends SimpleOnPageChangeListener {
+	@Override
+	public void onPageSelected(int position) {
+	    super.onPageSelected(position);
+	    _packIndicatorListLayout.removeAllViews();
+	    for (int i = 0; i < pageSize; i++) {
+		ImageView ball = new ImageView(SelectPackActivity.this);
+		if (i == position) {
+		    ball.setImageResource(R.drawable.ball_red);
+		} else {
+		    ball.setImageResource(R.drawable.ball);
+		}
+		_packIndicatorListLayout.addView(ball);
+	    }
+
+	    if (_mViewPager.getCurrentItem() == (pageSize - 1)) {
+		_button_next.setVisibility(View.INVISIBLE);
+		_button_preview.setVisibility(View.VISIBLE);
+	    } else if (_mViewPager.getCurrentItem() == 0) {
+		_button_next.setVisibility(View.VISIBLE);
+		_button_preview.setVisibility(View.INVISIBLE);
+	    } else {
+		_button_next.setVisibility(View.VISIBLE);
+		_button_preview.setVisibility(View.VISIBLE);
+	    }
 	}
     }
 
