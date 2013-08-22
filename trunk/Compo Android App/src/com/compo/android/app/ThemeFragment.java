@@ -40,7 +40,8 @@ public class ThemeFragment extends Fragment {
 	_themeName.setText(_currentTheme.getName());
 	_themeName.setTypeface(_font);
 
-	int id = getResources().getIdentifier(_currentTheme.getCode(), "drawable", getActivity().getPackageName());
+	int id = getResources().getIdentifier("theme_" + _currentTheme.getCode(), "drawable",
+		getActivity().getPackageName());
 	if (id != 0) {
 	    _themeImage.setImageResource(id);
 	} else {
