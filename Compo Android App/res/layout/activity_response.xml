@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/responseLayout"
     android:layout_width="300dp"
     android:layout_height="220dp"
     android:background="@drawable/background_ardoise" >
