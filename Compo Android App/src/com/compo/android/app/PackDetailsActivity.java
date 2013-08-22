@@ -6,7 +6,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.compo.android.app.model.Pack;
@@ -38,33 +37,20 @@ public class PackDetailsActivity extends Activity {
 	desciption.setTypeface(_font);
 	desciption.setText(_selectPack.getDescription());
 
-	Button buttonSubmit = (Button) findViewById(R.id.button_submit);
-	buttonSubmit.setTypeface(_font);
-	buttonSubmit.setText("Unlock this pack for" + _selectPack.getCreditLimit() + " credit?");
+	TextView creditPrice = (TextView) findViewById(R.id.credit_price);
+	creditPrice.setTypeface(_font);
+	creditPrice.setText(_selectPack.getCreditLimit() + " credits");
 
     }
 
     public void unlockPack(View view) {
-	Button buttonSubmit = (Button) findViewById(R.id.button_submit);
-	buttonSubmit.setVisibility(View.INVISIBLE);
-	Button buttonConfirm = (Button) findViewById(R.id.button_confirm);
-	buttonConfirm.setVisibility(View.VISIBLE);
-	Button buttonCancel = (Button) findViewById(R.id.button_cancel);
-	buttonCancel.setVisibility(View.VISIBLE);
-
-    }
-
-    public void submit(View view) {
+	Intent intent = new Intent(PackDetailsActivity.this, StoreActivity.class);
+	startActivity(intent);
 	this.finish();
     }
 
     public void cancel(View view) {
-	Button buttonSubmit = (Button) findViewById(R.id.button_submit);
-	buttonSubmit.setVisibility(View.VISIBLE);
-	Button buttonConfirm = (Button) findViewById(R.id.button_confirm);
-	buttonConfirm.setVisibility(View.INVISIBLE);
-	Button buttonCancel = (Button) findViewById(R.id.button_cancel);
-	buttonCancel.setVisibility(View.INVISIBLE);
+	this.finish();
     }
 
 }

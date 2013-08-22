@@ -21,8 +21,6 @@ import com.compo.android.app.utils.UserFactory;
 public class MainActivity extends Activity {
     private static final String TAG = MainActivity.class.getName();
 
-    public static final int EXTRA_MESSAGE_REQUEST_CODE = 1;
-
     private static Typeface _font;
     private TextView _userCredit;
     private TextView _userPoint;
@@ -81,12 +79,12 @@ public class MainActivity extends Activity {
 
     public void store(View view) {
 	Intent intent = new Intent(MainActivity.this, StoreActivity.class);
-	startActivityForResult(intent, EXTRA_MESSAGE_REQUEST_CODE);
+	startActivityForResult(intent, 1);
     }
 
     public void setting(View view) {
 	Intent intent = new Intent(MainActivity.this, SettingActivity.class);
-	startActivityForResult(intent, EXTRA_MESSAGE_REQUEST_CODE);
+	startActivityForResult(intent, 1);
     }
 
     @Override
