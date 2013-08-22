@@ -127,6 +127,10 @@ public class SelectThemeActivity extends AbstractLSEFragmentActivity {
 		_themeIndicatorListLayout.addView(ball);
 	    }
 
+	    if (aThemes.size() == 0) {
+		_button_next.setVisibility(View.INVISIBLE);
+	    }
+
 	    pageSize = aThemes.size();
 	}
     }
