@@ -65,6 +65,9 @@ public class ResponseActivity extends Activity {
 	edit = (EditText) findViewById(R.id.edit_response);
 	if (_currentPlay != null) {
 	    edit.setText(_currentPlay.getResponse());
+	    if (StringUtils.isNotBlank(_currentPlay.getResponse())) {
+		edit.setSelection(_currentPlay.getResponse().length());
+	    }
 	}
 
 	_matching = (ImageView) findViewById(R.id.matching_image);
