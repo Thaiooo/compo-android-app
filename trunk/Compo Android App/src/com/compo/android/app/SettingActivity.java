@@ -18,6 +18,8 @@ import com.compo.android.app.utils.UserFactory;
 
 public class SettingActivity extends Activity {
 
+    public static final int EXTRA_MESSAGE_REQUEST_CODE = 1;
+
     private static Typeface _font;
     private TextView _title;
     private Button _sound;
