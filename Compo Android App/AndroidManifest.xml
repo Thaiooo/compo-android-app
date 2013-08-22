@@ -82,7 +82,8 @@
         <activity
                 android:name=".ResponseActivity"
                 android:screenOrientation="portrait"
-                android:theme="@style/DialogTheme">
+                android:theme="@style/DialogTheme"
+                android:windowSoftInputMode="stateAlwaysVisible">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.compo.android.app.ResponseActivity"/>
