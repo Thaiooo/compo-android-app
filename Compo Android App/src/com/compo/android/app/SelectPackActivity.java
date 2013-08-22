@@ -163,6 +163,10 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 		_packIndicatorListLayout.addView(ball);
 	    }
 
+	    if (aPacks.size() == 0) {
+		_button_next.setVisibility(View.INVISIBLE);
+	    }
+
 	    pageSize = aPacks.size();
 	}
     }
