@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<ul style="list-style-type:none;">
+		{% for line in results %}
+			<li>{{ line }}</li>
+		{% endfor %}
+	</ul>
+{% endblock %}

@@ -51,18 +51,15 @@ class QuizzPlayerListServices:
          
         self.field_map = {}
         
-        self.unknown_player_list = []
-        
         self.insert_unknown_players = False
         
     
     def get_quizzplayers_from_file(self, compo_file, home_team, away_team):
-        result = []
-        
         cpt = 0
         # Check the file
         for line in compo_file:
-            splitted_line = line.strip('\n\r').split(SEPARATOR)
+            upper_line = line.upper()
+            splitted_line = upper_line.strip('\n\r').split(SEPARATOR)
             is_valid = self.__process_line_checking(splitted_line)
             
             if is_valid:
@@ -73,23 +70,9 @@ class QuizzPlayerListServices:
         if cpt != NB_LINES:
             raise ServiceError('File contents %i lines instead of %i lines'%(cpt, NB_LINES))
         
-        # Insert unknown players in database
-        if self.insert_unknown_players:
-            self.__store_unknown_players()
-        else:
-            return result
-        
         result = self.__compute_quizzplayers(home_team, away_team)
             
         return result
-        
-        
-    def __store_unknown_players(self):
-        
-        for player_name in self.unknown_player_list:
-            player = Player()
-            player.name = player_name.upper()
-            player.save()
     
     
     def __process_line_checking(self, line):
@@ -109,7 +92,12 @@ class QuizzPlayerListServices:
         current_player = Player.objects.filter(name=current_name)
         
         if not current_player:
-            self.unknown_player_list.append(current_name)
+            if self.insert_unknown_players:
+                current_player = Player()
+                current_player.name = current_name
+                current_player.save()
+            else:
+                raise ServiceError('%s unkown in database and you have selected non unknown player insertion option'%current_name)
         
         # Check position    
         if POSITIONS_TYPE.count(line[POSITION]) == 0:
