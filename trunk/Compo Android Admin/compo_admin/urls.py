@@ -25,6 +25,8 @@ urlpatterns = patterns('',
 
     url(r'^user/$', views.create_user, name="create-user"),
 
+    url(r'^script/$', views.view_sql_script, name="view-sql-script"),
+
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
     url(r'^accounts/password/$', 'django.contrib.auth.views.password_change', {'post_change_redirect':'/'}),
