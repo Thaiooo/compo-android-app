@@ -13,7 +13,7 @@ class Theme(models.Model):
 class Pack(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.CharField(max_length=250, null=True)
-    order = models.IntegerField(null=True, unique=True)
+    rank = models.IntegerField(null=True, unique=True)
     lock = models.BooleanField()
     credit_limit = models.IntegerField()
     theme = models.ForeignKey(Theme)
