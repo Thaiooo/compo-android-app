@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_dialog"
+    android:gravity="center_horizontal" >
+
+    <TextView
+        android:id="@+id/tutorial_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Tutorial"
+        android:textColor="@android:color/black"
+        android:textIsSelectable="false"
+        android:textSize="24dp" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_below="@+id/tutorial_title"
+        android:layout_marginTop="@dimen/theme_image_margin_top" >
+    </android.support.v4.view.ViewPager>
+
+    <Button
+        android:id="@+id/button_cancel"
+        style="@style/paper_post_it_red_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pager"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:onClick="cancel"
+        android:text="@string/button_cancel"
+        android:textSize="@dimen/main_button_font_size"
+        android:textStyle="bold"
+        android:width="@dimen/store_button_width" />
+
+</RelativeLayout>
