@@ -87,6 +87,11 @@ public class MainActivity extends Activity {
 	startActivityForResult(intent, 1);
     }
 
+    public void tutorial(View view) {
+	Intent intent = new Intent(MainActivity.this, TutorialActivity.class);
+	startActivity(intent);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	new LoadUserTask().execute();
