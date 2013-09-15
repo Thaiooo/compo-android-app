@@ -9,7 +9,10 @@ public class PackProgress implements Serializable {
 
     private long id;
     private Pack pack;
-    private int match;
+    /**
+     * Number of success match
+     */
+    private int numberOfsuccessMatch;
 
     public long getId() {
 	return id;
@@ -27,12 +30,12 @@ public class PackProgress implements Serializable {
 	this.pack = pack;
     }
 
-    public int getMatch() {
-	return match;
+    public int getNumberOfSuccessMatch() {
+	return numberOfsuccessMatch;
     }
 
-    public void setMatch(int match) {
-	this.match = match;
+    public void setNumberOfSuccessMatch(int match) {
+	this.numberOfsuccessMatch = match;
     }
 
 }
