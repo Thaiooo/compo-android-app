@@ -8,13 +8,13 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.compo.android.app.model.Pack;
+import com.compo.android.app.model.Theme;
 
-public class PackDetailsActivity extends Activity {
-    public final static String MESSAGE_SELECTED_PACK = "com.compo.android.app.PackDetailsActivity.MESSAGE1";
+public class ThemeDetailsActivity extends Activity {
+    public final static String MESSAGE_SELECTED_THEME = "com.compo.android.app.ThemeDetailsActivity.MESSAGE1";
 
     private static Typeface _font;
-    private Pack _selectPack;
+    private Theme _selectTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,20 +27,24 @@ public class PackDetailsActivity extends Activity {
 	}
 
 	Intent intent = getIntent();
-	_selectPack = (Pack) intent.getSerializableExtra(MESSAGE_SELECTED_PACK);
+	_selectTheme = (Theme) intent.getSerializableExtra(MESSAGE_SELECTED_THEME);
 
 	TextView name = (TextView) findViewById(R.id.pack_name);
 	name.setTypeface(_font);
-	name.setText(_selectPack.getName());
+	name.setText(_selectTheme.getName());
 
-	TextView desciption = (TextView) findViewById(R.id.pack_description);
-	desciption.setTypeface(_font);
-	desciption.setText(_selectPack.getDescription());
+	// TextView desciption = (TextView) findViewById(R.id.pack_description);
+	// desciption.setTypeface(_font);
+	// desciption.setText(_selectTheme.getDescription());
+
+	TextView creditPrice = (TextView) findViewById(R.id.credit_price);
+	creditPrice.setTypeface(_font);
+	creditPrice.setText(_selectTheme.getCreditLimit() + " credits");
 
     }
 
     public void unlockPack(View view) {
-	Intent intent = new Intent(PackDetailsActivity.this, StoreActivity.class);
+	Intent intent = new Intent(ThemeDetailsActivity.this, StoreActivity.class);
 	startActivity(intent);
 	this.finish();
     }

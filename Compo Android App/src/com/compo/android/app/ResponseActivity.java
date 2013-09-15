@@ -143,11 +143,11 @@ public class ResponseActivity extends Activity {
 		PackProgress progress = packProgressDao.find(_currentPack);
 		if (progress == null) {
 		    progress = new PackProgress();
-		    progress.setMatch(1);
+		    progress.setNumberOfSuccessMatch(1);
 		    progress.setPack(_currentPack);
 		    packProgressDao.add(progress);
 		} else {
-		    progress.setMatch(progress.getMatch() + 1);
+		    progress.setNumberOfSuccessMatch(progress.getNumberOfSuccessMatch() + 1);
 		    packProgressDao.update(progress);
 		}
 	    }

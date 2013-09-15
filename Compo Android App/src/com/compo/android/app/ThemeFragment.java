@@ -20,8 +20,10 @@ public class ThemeFragment extends Fragment {
 
     private TextView _themeName;
     private ImageView _themeImage;
-    private Theme _currentTheme;
     private View _contentView;
+    private ImageView _imageLock;
+
+    private Theme _currentTheme;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class ThemeFragment extends Fragment {
 	_themeName = (TextView) rootView.findViewById(R.id.theme_name);
 	_themeImage = (ImageView) rootView.findViewById(R.id.theme_image_id);
 	_contentView = (View) rootView.findViewById(R.id.theme_content_layout_id);
+	_imageLock = (ImageView) rootView.findViewById(R.id.theme_lock_id);
 
 	Bundle args = getArguments();
 	_currentTheme = (Theme) args.getSerializable(EXTRA_MESSAGE_ARG);
@@ -48,17 +51,30 @@ public class ThemeFragment extends Fragment {
 	    _themeImage.setImageResource(R.drawable.theme_world_cup);
 	}
 
-	_contentView.setOnClickListener(new View.OnClickListener() {
-	    @Override
-	    public void onClick(View view) {
-		Intent intent = new Intent(getActivity(), SelectPackActivity.class);
-		intent.putExtra(EXTRA_MESSAGE_ARG, _currentTheme);
-		startActivity(intent);
-		getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-	    }
-	});
+	if (_currentTheme.isLock()) {
+	    _imageLock.setVisibility(View.VISIBLE);
+	    _contentView.setOnClickListener(new View.OnClickListener() {
+		@Override
+		public void onClick(View view) {
+		    Intent intent = new Intent(getActivity(), ThemeDetailsActivity.class);
+		    intent.putExtra(ThemeDetailsActivity.MESSAGE_SELECTED_THEME, _currentTheme);
+		    startActivity(intent);
+		    getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+		}
+	    });
+	} else {
+	    _imageLock.setVisibility(View.INVISIBLE);
+	    _contentView.setOnClickListener(new View.OnClickListener() {
+		@Override
+		public void onClick(View view) {
+		    Intent intent = new Intent(getActivity(), SelectPackActivity.class);
+		    intent.putExtra(EXTRA_MESSAGE_ARG, _currentTheme);
+		    startActivity(intent);
+		    getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+		}
+	    });
+	}
 
 	return rootView;
     }
-
 }
