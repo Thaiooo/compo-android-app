@@ -50,8 +50,8 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 	}
 
 	Intent intent = getIntent();
-	_selectTheme = (Theme) intent.getSerializableExtra(PackFragment.EXTRA_MESSAGE_THEME);
-	_selectPack = (Pack) intent.getSerializableExtra(PackFragment.EXTRA_MESSAGE_PACK);
+	_selectTheme = (Theme) intent.getSerializableExtra(PackFragment.MESSAGE_THEME);
+	_selectPack = (Pack) intent.getSerializableExtra(PackFragment.MESSAGE_CURRENT_PACK);
 
 	_userCredit = (TextView) findViewById(R.id.user_credit);
 	_userPoint = (TextView) findViewById(R.id.user_point);

@@ -34,10 +34,19 @@ public class SelectPackAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int i) {
 	Fragment fragment = new PackFragment();
 	Bundle args = new Bundle();
-	args.putSerializable(PackFragment.EXTRA_MESSAGE_THEME, _theme);
-	Pack pack = _packs.get(i);
-	args.putSerializable(PackFragment.EXTRA_MESSAGE_PACK, pack);
-	args.putSerializable(PackFragment.EXTRA_MESSAGE_PACK_PROGRESS, _mapPackToProgress.get(pack.getId()));
+	args.putSerializable(PackFragment.MESSAGE_THEME, _theme);
+	Pack currentPack = _packs.get(i);
+	Pack previousPack = null;
+	if (i > 0) {
+	    previousPack = _packs.get(i - 1);
+	}
+	args.putSerializable(PackFragment.MESSAGE_CURRENT_PACK, currentPack);
+	args.putSerializable(PackFragment.MESSAGE_PREVIOUS_PACK, previousPack);
+	args.putSerializable(PackFragment.MESSAGE_CURRENT_PACK_PROGRESS, _mapPackToProgress.get(currentPack.getId()));
+	if (previousPack != null) {
+	    args.putSerializable(PackFragment.MESSAGE_PREVIOUS_PACK_PROGRESS,
+		    _mapPackToProgress.get(previousPack.getId()));
+	}
 	fragment.setArguments(args);
 	return fragment;
     }

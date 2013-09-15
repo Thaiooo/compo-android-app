@@ -16,9 +16,14 @@ import com.compo.android.app.model.Theme;
 
 public class PackFragment extends Fragment {
 
-    public static final String EXTRA_MESSAGE_PACK = "com.compo.android.app.PackFragment.MESSAGE.PACK";
-    public static final String EXTRA_MESSAGE_THEME = "com.compo.android.app.PackFragment.MESSAGE.THEME";
-    public static final String EXTRA_MESSAGE_PACK_PROGRESS = "com.compo.android.app.PackFragment.MESSAGE.PACK_PROGRESS";
+    public static final String MESSAGE_CURRENT_PACK = "com.compo.android.app.PackFragment.MESSAGE.CURRENT.PACK";
+    public static final String MESSAGE_PREVIOUS_PACK = "com.compo.android.app.PackFragment.MESSAGE.PREVIOUS.PACK";
+    public static final String MESSAGE_THEME = "com.compo.android.app.PackFragment.MESSAGE.THEME";
+    public static final String MESSAGE_CURRENT_PACK_PROGRESS = "com.compo.android.app.PackFragment.MESSAGE.CURRENT.PACK_PROGRESS";
+    public static final String MESSAGE_PREVIOUS_PACK_PROGRESS = "com.compo.android.app.PackFragment.MESSAGE.PREVIOUS.PACK_PROGRESS";
+
+    private static final double UNLOCK_LIMIT = 0.8d;
+    private static final String SLASH = "/";
 
     private static Typeface _font;
 
@@ -28,7 +33,9 @@ public class PackFragment extends Fragment {
     private ImageView _lockImage;
     private Theme _currentTheme;
     private Pack _currentPack;
+    private Pack _previousPack;
     private PackProgress _currentPackProgress;
+    private PackProgress _previousPackProgress;
 
     private View _contentView;
 
@@ -41,9 +48,11 @@ public class PackFragment extends Fragment {
 	}
 
 	Bundle args = getArguments();
-	_currentTheme = (Theme) args.getSerializable(EXTRA_MESSAGE_THEME);
-	_currentPack = (Pack) args.getSerializable(EXTRA_MESSAGE_PACK);
-	_currentPackProgress = (PackProgress) args.getSerializable(EXTRA_MESSAGE_PACK_PROGRESS);
+	_currentTheme = (Theme) args.getSerializable(MESSAGE_THEME);
+	_currentPack = (Pack) args.getSerializable(MESSAGE_CURRENT_PACK);
+	_previousPack = (Pack) args.getSerializable(MESSAGE_PREVIOUS_PACK);
+	_currentPackProgress = (PackProgress) args.getSerializable(MESSAGE_CURRENT_PACK_PROGRESS);
+	_previousPackProgress = (PackProgress) args.getSerializable(MESSAGE_PREVIOUS_PACK_PROGRESS);
 
 	_packName = (TextView) rootView.findViewById(R.id.pack_name);
 	_packDescription = (TextView) rootView.findViewById(R.id.pack_desc);
@@ -59,21 +68,38 @@ public class PackFragment extends Fragment {
 
 	_progress.setTypeface(_font);
 
-	if (!_currentPack.isLock()) {
+	boolean lock = true;
+	if (_previousPack != null) {
+	    if (_previousPackProgress != null) {
+		double percentPreviousPregress = _previousPackProgress.getNumberOfSuccessMatch()
+			/ _previousPack.getMatchs().size();
+		if (percentPreviousPregress > UNLOCK_LIMIT) {
+		    lock = false;
+		}
+	    }
+
+	} else {
+	    lock = false;
+	}
+
+	if (!lock) {
 	    _lockImage.setVisibility(View.INVISIBLE);
 	    _progress.setVisibility(View.VISIBLE);
 	    int progress = 0;
 	    if (_currentPackProgress != null) {
-		progress = _currentPackProgress.getMatch();
+		progress = _currentPackProgress.getNumberOfSuccessMatch();
 	    }
-	    _progress.setText(progress + "/" + _currentPack.getMatchs().size());
+	    StringBuffer buff = new StringBuffer(progress);
+	    buff.append(SLASH);
+	    buff.append(_currentPack.getMatchs().size());
+	    _progress.setText(buff.toString());
 
 	    _contentView.setOnClickListener(new View.OnClickListener() {
 		@Override
 		public void onClick(View view) {
 		    Intent intent = new Intent(getActivity(), SelectMatchActivity.class);
-		    intent.putExtra(EXTRA_MESSAGE_THEME, _currentTheme);
-		    intent.putExtra(EXTRA_MESSAGE_PACK, _currentPack);
+		    intent.putExtra(MESSAGE_THEME, _currentTheme);
+		    intent.putExtra(MESSAGE_CURRENT_PACK, _currentPack);
 		    startActivity(intent);
 		    getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 		}
