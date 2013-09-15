@@ -15,6 +15,13 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="top" />
 
+        <ImageView
+            android:id="@+id/theme_lock_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/lock" />
+
         <TextView
             android:id="@+id/theme_name"
             android:layout_width="wrap_content"
