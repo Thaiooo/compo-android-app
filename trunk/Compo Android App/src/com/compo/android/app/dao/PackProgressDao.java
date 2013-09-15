@@ -83,7 +83,7 @@ public class PackProgressDao {
 		long packId = c.getLong(index);
 
 		progress.setId(progressId);
-		progress.setMatch(progressMatch);
+		progress.setNumberOfSuccessMatch(progressMatch);
 
 		map.put(packId, progress);
 
@@ -138,7 +138,7 @@ public class PackProgressDao {
 		int progressMatch = c.getInt(index);
 
 		progress.setId(progressId);
-		progress.setMatch(progressMatch);
+		progress.setNumberOfSuccessMatch(progressMatch);
 
 	    }
 	} finally {
@@ -161,7 +161,7 @@ public class PackProgressDao {
 	    session = dataBaseHeleper.getWritableDatabase();
 
 	    ContentValues values = new ContentValues();
-	    values.put(TableConstant.PackProgressTable.COLUMN_MATCH, aProgress.getMatch());
+	    values.put(TableConstant.PackProgressTable.COLUMN_MATCH, aProgress.getNumberOfSuccessMatch());
 
 	    session.update(TableConstant.PackProgressTable.TABLE_NAME, values, TableConstant.PackProgressTable._ID
 		    + " = ?", new String[] { String.valueOf(aProgress.getId()) });
@@ -183,7 +183,7 @@ public class PackProgressDao {
 	    session = dataBaseHeleper.getWritableDatabase();
 
 	    ContentValues values = new ContentValues();
-	    values.put(TableConstant.PackProgressTable.COLUMN_MATCH, aProgress.getMatch());
+	    values.put(TableConstant.PackProgressTable.COLUMN_MATCH, aProgress.getNumberOfSuccessMatch());
 	    values.put(TableConstant.PackProgressTable.COLUMN_PACK_ID, aProgress.getPack().getId());
 
 	    session.insert(TableConstant.PackProgressTable.TABLE_NAME, null, values);

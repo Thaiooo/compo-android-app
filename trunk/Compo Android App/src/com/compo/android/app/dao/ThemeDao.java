@@ -27,7 +27,8 @@ public class ThemeDao {
 
 	    // The columns to return
 	    String[] projection = { TableConstant.ThemeTable._ID, TableConstant.ThemeTable.COLUMN_ORDER_NUMBER,
-		    TableConstant.ThemeTable.COLUMN_CODE, TableConstant.ThemeTable.COLUMN_NAME };
+		    TableConstant.ThemeTable.COLUMN_CODE, TableConstant.ThemeTable.COLUMN_NAME,
+		    TableConstant.ThemeTable.COLUMN_LOCK, TableConstant.ThemeTable.COLUMN_CREDIT_LIMIT };
 
 	    // The columns for the WHERE clause
 	    String selection = null;
@@ -47,11 +48,16 @@ public class ThemeDao {
 		long itemId = c.getLong(c.getColumnIndexOrThrow(TableConstant.ThemeTable._ID));
 		String itemName = c.getString(c.getColumnIndexOrThrow(TableConstant.ThemeTable.COLUMN_NAME));
 		String itemCode = c.getString(c.getColumnIndexOrThrow(TableConstant.ThemeTable.COLUMN_CODE));
+		boolean itemLock = Boolean.valueOf(c.getString(c
+			.getColumnIndexOrThrow(TableConstant.ThemeTable.COLUMN_LOCK)));
+		int itemCreditLimit = c.getInt(c.getColumnIndexOrThrow(TableConstant.ThemeTable.COLUMN_CREDIT_LIMIT));
 
 		Theme p = new Theme();
 		p.setId(itemId);
 		p.setName(itemName);
 		p.setCode(itemCode);
+		p.setLock(itemLock);
+		p.setCreditLimit(itemCreditLimit);
 
 		l.add(p);
 	    }
