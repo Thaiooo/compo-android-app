@@ -12,17 +12,7 @@ public class Pack implements Serializable {
     private long id;
     private String name;
     private String description;
-    private boolean lock;
-    private int creditLimit;
     private List<Match> matchs = new ArrayList<Match>();
-
-    public boolean isLock() {
-	return lock;
-    }
-
-    public void setLock(boolean lock) {
-	this.lock = lock;
-    }
 
     public String getName() {
 	return name;
@@ -54,14 +44,6 @@ public class Pack implements Serializable {
 
     public void setId(long id) {
 	this.id = id;
-    }
-
-    public int getCreditLimit() {
-	return creditLimit;
-    }
-
-    public void setCreditLimit(int creditLimit) {
-	this.creditLimit = creditLimit;
     }
 
 }

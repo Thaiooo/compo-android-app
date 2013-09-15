@@ -12,38 +12,56 @@ public class Theme implements Serializable {
     private long id;
     private String name;
     private String code;
+    private boolean lock;
+    private int creditLimit;
     private List<Pack> packs = new ArrayList<Pack>();
 
     public long getId() {
-        return id;
+	return id;
     }
 
     public void setId(long id) {
-        this.id = id;
+	this.id = id;
     }
 
     public String getCode() {
-        return code;
+	return code;
     }
 
     public void setCode(String code) {
-        this.code = code;
+	this.code = code;
     }
 
     public String getName() {
-        return name;
+	return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+	this.name = name;
     }
 
     public List<Pack> getPacks() {
-        return packs;
+	return packs;
     }
 
     public void setPacks(List<Pack> packList) {
-        this.packs = packList;
+	this.packs = packList;
+    }
+
+    public boolean isLock() {
+	return lock;
+    }
+
+    public void setLock(boolean lock) {
+	this.lock = lock;
+    }
+
+    public int getCreditLimit() {
+	return creditLimit;
+    }
+
+    public void setCreditLimit(int creditLimit) {
+	this.creditLimit = creditLimit;
     }
 
 }
