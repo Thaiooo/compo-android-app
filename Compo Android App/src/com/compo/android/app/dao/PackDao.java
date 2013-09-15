@@ -46,33 +46,25 @@ public class PackDao {
 	    req.append("p.");
 	    req.append(TableConstant.PackTable.COLUMN_DESCRIPTION);
 	    req.append(", ");
-	    // Index 3
-	    req.append("p.");
-	    req.append(TableConstant.PackTable.COLUMN_LOCK);
-	    req.append(", ");
-	    // Index 4
-	    req.append("p.");
-	    req.append(TableConstant.PackTable.COLUMN_CREDIT_LIMIT);
-	    req.append(", ");
 
 	    // ---------------------------------------------------------------------------------
-	    // Index 5
+	    // Index 3
 	    req.append("m.");
 	    req.append(TableConstant.MatchTable._ID);
 	    req.append(", ");
-	    // Index 6
+	    // Index 4
 	    req.append("m.");
 	    req.append(TableConstant.MatchTable.COLUMN_NAME);
 	    req.append(", ");
-	    // Index 7
+	    // Index 5
 	    req.append("m.");
 	    req.append(TableConstant.MatchTable.COLUMN_DATE);
 	    req.append(", ");
-	    // Index 8
+	    // Index 6
 	    req.append("m.");
 	    req.append(TableConstant.MatchTable.COLUMN_SCORE_AWAY);
 	    req.append(", ");
-	    // Index 9
+	    // Index 7
 	    req.append("m.");
 	    req.append(TableConstant.MatchTable.COLUMN_SCORE_HOME);
 	    req.append(" ");
@@ -95,16 +87,10 @@ public class PackDao {
 		String packName = c.getString(index);
 		index++;
 		String packDescription = c.getString(index);
-		index++;
-		boolean packLock = Boolean.valueOf(c.getString(index));
-		index++;
-		int packCreditLimit = c.getInt(index);
 
 		pack.setId(packId);
 		pack.setName(packName);
 		pack.setDescription(packDescription);
-		pack.setLock(packLock);
-		pack.setCreditLimit(packCreditLimit);
 
 		pack.setMatchs(new ArrayList<Match>());
 
@@ -168,33 +154,25 @@ public class PackDao {
 	    req.append("p.");
 	    req.append(TableConstant.PackTable.COLUMN_DESCRIPTION);
 	    req.append(", ");
-	    // Index 3
-	    req.append("p.");
-	    req.append(TableConstant.PackTable.COLUMN_LOCK);
-	    req.append(", ");
-	    // Index 4
-	    req.append("p.");
-	    req.append(TableConstant.PackTable.COLUMN_CREDIT_LIMIT);
-	    req.append(", ");
 
 	    // ---------------------------------------------------------------------------------
-	    // Index 5
+	    // Index 3
 	    req.append("m.");
 	    req.append(TableConstant.MatchTable._ID);
 	    req.append(", ");
-	    // Index 6
+	    // Index 4
 	    req.append("m.");
 	    req.append(TableConstant.MatchTable.COLUMN_NAME);
 	    req.append(", ");
-	    // Index 7
+	    // Index 5
 	    req.append("m.");
 	    req.append(TableConstant.MatchTable.COLUMN_DATE);
 	    req.append(", ");
-	    // Index 8
+	    // Index 6
 	    req.append("m.");
 	    req.append(TableConstant.MatchTable.COLUMN_SCORE_AWAY);
 	    req.append(", ");
-	    // Index 9
+	    // Index 7
 	    req.append("m.");
 	    req.append(TableConstant.MatchTable.COLUMN_SCORE_HOME);
 	    req.append(" ");
@@ -223,16 +201,10 @@ public class PackDao {
 		    String packName = c.getString(index);
 		    index++;
 		    String packDescription = c.getString(index);
-		    index++;
-		    boolean packLock = Boolean.valueOf(c.getString(index));
-		    index++;
-		    int packCreditLimit = c.getInt(index);
 
 		    pack.setId(packId);
 		    pack.setName(packName);
 		    pack.setDescription(packDescription);
-		    pack.setLock(packLock);
-		    pack.setCreditLimit(packCreditLimit);
 
 		    pack.setMatchs(new ArrayList<Match>());
 
@@ -263,7 +235,7 @@ public class PackDao {
 
 		    l.add(pack);
 		} else {
-		    index = 5;
+		    index = 3;
 		    if (c.getLong(index) != 0) {
 			Match match = new Match();
 			match.setId(c.getLong(index));
