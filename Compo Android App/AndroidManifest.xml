@@ -72,6 +72,14 @@
                     android:value="com.compo.android.app.PackDetailsActivity"/>
         </activity>
         <activity
+                android:name=".ThemeDetailsActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/DialogTheme">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.compo.android.app.ThemeDetailsActivity"/>
+        </activity>
+        <activity
                 android:name=".SelectMatchActivity"
                 android:screenOrientation="portrait"
                 android:label="@string/activity_select_match">
