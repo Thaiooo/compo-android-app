@@ -1,17 +1,91 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/responseLayout"
-    android:layout_width="300dp"
-    android:layout_height="220dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/background_ardoise" >
 
     <!-- style="@style/transparent_edit_text" -->
 
+    <include
+        android:id="@+id/score_bar"
+        layout="@layout/score_bar" />
+
+    <Button
+        android:id="@+id/button_hint"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/score_bar"
+        android:layout_marginTop="10dp"
+        android:onClick="openHint"
+        android:text="Hint"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button_random"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button_hint"
+        android:onClick="openRandom"
+        android:text="Random"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button_50"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/score_bar"
+        android:layout_marginTop="10dp"
+        android:onClick="open50Percent"
+        android:text="50/50"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button_100"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/button_50"
+        android:onClick="openResponse"
+        android:text="100%"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/player_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/score_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/player_response_red" />
+
+    <Button
+        android:id="@+id/button_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/player_image"
+        android:layout_marginTop="10dp"
+        android:onClick="check"
+        android:text="VALIDER"
+        android:textColor="@android:color/white" />
+
+    <!--  -->
+
     <EditText
-        android:id="@+id/edit_response"
+        android:id="@+id/edit_responseMMM"
         style="@style/transparent_edit_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_below="@+id/player_image"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/button_check"
         android:lines="1"
         android:maxLength="15"
         android:singleLine="true"
@@ -22,33 +96,7 @@
         android:id="@+id/matching_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_response"
+        android:layout_above="@+id/edit_responseMMM"
         android:layout_centerHorizontal="true" />
-
-    <Button
-        android:id="@+id/button_cancel"
-        style="@style/craie_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="20dp"
-        android:onClick="cancel"
-        android:text="CANCEL"
-        android:textColor="@android:color/white" />
-
-    <Button
-        android:id="@+id/button_check"
-        style="@style/craie_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="20dp"
-        android:onClick="check"
-        android:text="VALIDER"
-        android:textColor="@android:color/white" />
 
 </RelativeLayout>
