@@ -48,6 +48,10 @@ public class TableConstant {
 	public static final String COLUMN_USER_ID = "user_id";
 	public static final String COLUMN_QUIZZ_ID = "quizz_id";
 	public static final String COLUMN_RESPONSE = "response";
+	public static final String COLUMN_UNLOCK_HINT = "unlock_hint";
+	public static final String COLUMN_UNLOCK_RANDOM = "unlock_random";
+	public static final String COLUMN_UNLOCK_50_PERCENT = "unlock_50_percent";
+	public static final String COLUMN_UNLOCK_RESPONSE = "unlock_response";
     }
 
     public static class QuizzPlayerTable implements BaseColumns {
@@ -63,12 +67,19 @@ public class TableConstant {
 	public static final String COLUMN_TEAM_ID = "team_id";
 	public static final String COLUMN_PLAYER_ID = "player_id";
 	public static final String COLUMN_EARN_CREDIT = "earn_credit";
+	public static final String COLUMN_HINT = "hint";
     }
 
     public static class TeamTable implements BaseColumns {
 	public static final String TABLE_NAME = "team";
 	public static final String COLUMN_NAME = "name";
 	public static final String COLUMN_CODE = "code";
+	public static final String COLUMN_HOME_JERSY_COLOR = "home_jersey_color";
+	public static final String COLUMN_AWAY_JERSY_COLOR = "away_jersey_color";
+	public static final String COLUMN_HOME_SHORT_COLOR = "home_short_color";
+	public static final String COLUMN_AWAY_SHORT_COLOR = "away_short_color";
+	public static final String COLUMN_HOME_SOCK_COLOR = "home_sock_color";
+	public static final String COLUMN_AWAY_SOCK_COLOR = "away_sock_color";
     }
 
     public static class PlayerTable implements BaseColumns {
