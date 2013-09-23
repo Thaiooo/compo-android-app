@@ -13,6 +13,10 @@ public class Play implements Serializable {
     private String response;
     private long quizzId;
     private long userId;
+    private boolean unlockHint;
+    private boolean unlockRandom;
+    private boolean unlock50Percent;
+    private boolean unlockResponse;
 
     public long getQuizzId() {
 	return quizzId;
@@ -52,6 +56,38 @@ public class Play implements Serializable {
 
     public void setResponse(String response) {
 	this.response = response;
+    }
+
+    public boolean isUnlockHint() {
+	return unlockHint;
+    }
+
+    public void setUnlockHint(boolean unlockHint) {
+	this.unlockHint = unlockHint;
+    }
+
+    public boolean isUnlockRandom() {
+	return unlockRandom;
+    }
+
+    public void setUnlockRandom(boolean unlockRandom) {
+	this.unlockRandom = unlockRandom;
+    }
+
+    public boolean isUnlock50Percent() {
+	return unlock50Percent;
+    }
+
+    public void setUnlock50Percent(boolean unlock50Percent) {
+	this.unlock50Percent = unlock50Percent;
+    }
+
+    public boolean isUnlockResponse() {
+	return unlockResponse;
+    }
+
+    public void setUnlockResponse(boolean unlockResponse) {
+	this.unlockResponse = unlockResponse;
     }
 
 }

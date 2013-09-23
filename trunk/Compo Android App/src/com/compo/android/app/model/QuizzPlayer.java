@@ -17,6 +17,7 @@ public class QuizzPlayer implements Serializable {
     private int goal;
     private int csc;
     private int earnCredit;
+    private String hint;
 
     public long getId() {
 	return id;
@@ -104,6 +105,14 @@ public class QuizzPlayer implements Serializable {
 
     public void setCsc(int csc) {
 	this.csc = csc;
+    }
+
+    public String getHint() {
+	return hint;
+    }
+
+    public void setHint(String hint) {
+	this.hint = hint;
     }
 
 }
