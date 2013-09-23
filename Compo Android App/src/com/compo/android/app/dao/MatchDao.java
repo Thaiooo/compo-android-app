@@ -9,10 +9,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.compo.android.app.model.ColorEnum;
 import com.compo.android.app.model.Match;
 import com.compo.android.app.model.Player;
 import com.compo.android.app.model.QuizzPlayer;
@@ -93,25 +96,54 @@ public class MatchDao {
 	    req.append("qp.");
 	    req.append(TableConstant.QuizzPlayerTable.COLUMN_GOAL);
 	    req.append(", ");
-	    // ---------------------------------------------------------------------------------
 	    // Index 14
+	    req.append("qp.");
+	    req.append(TableConstant.QuizzPlayerTable.COLUMN_HINT);
+	    req.append(", ");
+	    // ---------------------------------------------------------------------------------
+	    // Index 15
 	    req.append("qp.");
 	    req.append(TableConstant.QuizzPlayerTable.COLUMN_TEAM_ID);
 	    req.append(", ");
-	    // Index 15
+	    // Index 16
 	    req.append("t.");
 	    req.append(TableConstant.TeamTable.COLUMN_CODE);
 	    req.append(", ");
-	    // Index 16
+	    // Index 17
 	    req.append("t.");
 	    req.append(TableConstant.TeamTable.COLUMN_NAME);
 	    req.append(", ");
+	    // Index 18
+	    req.append("t.");
+	    req.append(TableConstant.TeamTable.COLUMN_HOME_JERSY_COLOR);
+	    req.append(", ");
+	    // Index 19
+	    req.append("t.");
+	    req.append(TableConstant.TeamTable.COLUMN_HOME_SHORT_COLOR);
+	    req.append(", ");
+	    // Index 20
+	    req.append("t.");
+	    req.append(TableConstant.TeamTable.COLUMN_HOME_SOCK_COLOR);
+	    req.append(", ");
+	    // Index 21
+	    req.append("t.");
+	    req.append(TableConstant.TeamTable.COLUMN_AWAY_JERSY_COLOR);
+	    req.append(", ");
+	    // Index 22
+	    req.append("t.");
+	    req.append(TableConstant.TeamTable.COLUMN_AWAY_SHORT_COLOR);
+	    req.append(", ");
+	    // Index 23
+	    req.append("t.");
+	    req.append(TableConstant.TeamTable.COLUMN_AWAY_SOCK_COLOR);
+	    req.append(", ");
+
 	    // ---------------------------------------------------------------------------------
-	    // Index 17
+	    // Index 24
 	    req.append("qp.");
 	    req.append(TableConstant.QuizzPlayerTable.COLUMN_PLAYER_ID);
 	    req.append(", ");
-	    // Index 18
+	    // Index 25
 	    req.append("p.");
 	    req.append(TableConstant.PlayerTable.COLUMN_NAME);
 	    req.append(" ");
@@ -182,6 +214,8 @@ public class MatchDao {
 			quizzPlayer.setCsc(c.getInt(index));
 			index++;
 			quizzPlayer.setGoal(c.getInt(index));
+			index++;
+			quizzPlayer.setHint(c.getString(index));
 
 			Team team = new Team();
 			index++;
@@ -190,6 +224,36 @@ public class MatchDao {
 			team.setCode(c.getString(index));
 			index++;
 			team.setName(c.getString(index));
+			index++;
+			String s = c.getString(index);
+			if (StringUtils.isNotBlank(s)) {
+			    team.setHomeJerseyColor(ColorEnum.valueOf(s));
+			}
+			index++;
+			s = c.getString(index);
+			if (StringUtils.isNotBlank(s)) {
+			    team.setHomeShortColor(ColorEnum.valueOf(s));
+			}
+			index++;
+			s = c.getString(index);
+			if (StringUtils.isNotBlank(s)) {
+			    team.setHomeSockColor(ColorEnum.valueOf(s));
+			}
+			index++;
+			s = c.getString(index);
+			if (StringUtils.isNotBlank(s)) {
+			    team.setAwayJerseyColor(ColorEnum.valueOf(s));
+			}
+			index++;
+			s = c.getString(index);
+			if (StringUtils.isNotBlank(s)) {
+			    team.setAwayShortColor(ColorEnum.valueOf(s));
+			}
+			index++;
+			s = c.getString(index);
+			if (StringUtils.isNotBlank(s)) {
+			    team.setAwaySockColor(ColorEnum.valueOf(s));
+			}
 			quizzPlayer.setTeam(team);
 
 			Player player = new Player();
@@ -225,6 +289,8 @@ public class MatchDao {
 			quizzPlayer.setCsc(c.getInt(index));
 			index++;
 			quizzPlayer.setGoal(c.getInt(index));
+			index++;
+			quizzPlayer.setHint(c.getString(index));
 
 			Team team = new Team();
 			index++;
@@ -233,6 +299,36 @@ public class MatchDao {
 			team.setCode(c.getString(index));
 			index++;
 			team.setName(c.getString(index));
+			index++;
+			String s = c.getString(index);
+			if (StringUtils.isNotBlank(s)) {
+			    team.setHomeJerseyColor(ColorEnum.valueOf(s));
+			}
+			index++;
+			s = c.getString(index);
+			if (StringUtils.isNotBlank(s)) {
+			    team.setHomeShortColor(ColorEnum.valueOf(s));
+			}
+			index++;
+			s = c.getString(index);
+			if (StringUtils.isNotBlank(s)) {
+			    team.setHomeSockColor(ColorEnum.valueOf(s));
+			}
+			index++;
+			s = c.getString(index);
+			if (StringUtils.isNotBlank(s)) {
+			    team.setAwayJerseyColor(ColorEnum.valueOf(s));
+			}
+			index++;
+			s = c.getString(index);
+			if (StringUtils.isNotBlank(s)) {
+			    team.setAwayShortColor(ColorEnum.valueOf(s));
+			}
+			index++;
+			s = c.getString(index);
+			if (StringUtils.isNotBlank(s)) {
+			    team.setAwaySockColor(ColorEnum.valueOf(s));
+			}
 			quizzPlayer.setTeam(team);
 
 			Player player = new Player();
