@@ -4,7 +4,6 @@ import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -27,7 +26,7 @@ import com.compo.android.app.model.QuizzPlayer;
 import com.compo.android.app.model.User;
 import com.compo.android.app.utils.UserFactory;
 
-public class ResponseActivity extends Activity {
+public class ResponseActivity extends AbstractLSEFragmentActivity {
     // private static final String TAG = ResponseActivity.class.getName();
 
     public static final String EXTRA_MESSAGE_QUIZZ_SIZE = "com.compo.android.app.ResponseActivity.MESSAGE.QUIZZ.SIZE";
@@ -37,7 +36,7 @@ public class ResponseActivity extends Activity {
     public static final String EXTRA_MESSAGE_MATCH_ID = "com.compo.android.app.ResponseActivity.MESSAGE.MATCH.ID";
 
     private static Typeface _font;
-    private EditText edit;
+    private EditText _edit;
     private ImageView _matching;
     private Pack _currentPack;
     private QuizzPlayer _currentQuizz;
@@ -62,11 +61,11 @@ public class ResponseActivity extends Activity {
 	PackDao packDao = new PackDao(this);
 	_currentPack = packDao.findPackByMatch(_matchId);
 
-	edit = (EditText) findViewById(R.id.edit_response);
+	_edit = (EditText) findViewById(R.id.edit_responseMMM);
 	if (_currentPlay != null) {
-	    edit.setText(_currentPlay.getResponse());
+	    _edit.setText(_currentPlay.getResponse());
 	    if (StringUtils.isNotBlank(_currentPlay.getResponse())) {
-		edit.setSelection(_currentPlay.getResponse().length());
+		_edit.setSelection(_currentPlay.getResponse().length());
 	    }
 	}
 
@@ -75,10 +74,8 @@ public class ResponseActivity extends Activity {
 	if (_font == null) {
 	    _font = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
 	}
-	edit.setTypeface(_font);
+	_edit.setTypeface(_font);
 
-	Button cancel = (Button) findViewById(R.id.button_cancel);
-	cancel.setTypeface(_font);
 	Button check = (Button) findViewById(R.id.button_check);
 	check.setTypeface(_font);
 
@@ -97,7 +94,7 @@ public class ResponseActivity extends Activity {
     }
 
     public void check(View view) {
-	String response = edit.getText().toString().trim();
+	String response = _edit.getText().toString().trim();
 	response = StringUtils.lowerCase(response);
 
 	String playerName = _currentQuizz.getPlayer().getName();
@@ -157,9 +154,9 @@ public class ResponseActivity extends Activity {
 	    finish();
 	} else {
 	    if (percent >= 50) {
-		_matching.setImageResource(R.drawable.response_approx);
+		_matching.setImageResource(R.drawable.yellow_card);
 	    } else {
-		_matching.setImageResource(R.drawable.response_error);
+		_matching.setImageResource(R.drawable.red_card);
 	    }
 
 	    if (_currentPlay == null) {
@@ -180,5 +177,33 @@ public class ResponseActivity extends Activity {
 	    setResult(RESULT_CANCELED, newIntent);
 	}
 
+    }
+
+    private void displayHintPopup(HintTypeEnum aType) {
+	Intent intent = new Intent(ResponseActivity.this, HintActivity.class);
+	intent.putExtra(HintActivity.MESSAGE_HINT_TYPE, aType);
+	intent.putExtra(HintActivity.MESSAGE_QUIZZ_PLAYER, _currentQuizz);
+	startActivity(intent);
+	overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    public void openHint(View view) {
+	// TODO Detecte s'il y a assez de credit pour l'afficher
+	displayHintPopup(HintTypeEnum.HINT);
+    }
+
+    public void openRandom(View view) {
+	// TODO Detecte s'il y a assez de credit pour l'afficher
+	displayHintPopup(HintTypeEnum.RANDOM);
+    }
+
+    public void open50Percent(View view) {
+	// TODO Detecte s'il y a assez de credit pour l'afficher
+	displayHintPopup(HintTypeEnum.HALF);
+    }
+
+    public void openResponse(View view) {
+	// TODO Detecte s'il y a assez de credit pour l'afficher
+	displayHintPopup(HintTypeEnum.RESPONSE);
     }
 }
