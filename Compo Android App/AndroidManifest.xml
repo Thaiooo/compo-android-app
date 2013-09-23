@@ -1,108 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.compo.android.app"
-          android:versionCode="1"
-          android:versionName="1.0">
+    package="com.compo.android.app"
+    android:versionCode="1"
+    android:versionName="1.0" >
 
     <uses-sdk
-            android:minSdkVersion="9"
-            android:targetSdkVersion="9"/>
+        android:minSdkVersion="9"
+        android:targetSdkVersion="9" />
 
     <application
-            android:label="@string/app_name"
-            android:allowBackup="true"
-            android:debuggable="true"
-            android:icon="@drawable/ic_launcher"
-            android:theme="@style/AppTheme">
-        <activity 
-        		android:name=".MainActivity" 
-            	android:clearTaskOnLaunch="true"
-            	android:screenOrientation="portrait">
+        android:allowBackup="true"
+        android:debuggable="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:clearTaskOnLaunch="true"
+            android:screenOrientation="portrait" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-                android:name=".SelectThemeActivity"
-                android:screenOrientation="portrait"
-                android:label="@string/activity_select_theme">
+            android:name=".SelectThemeActivity"
+            android:label="@string/activity_select_theme"
+            android:screenOrientation="portrait" >
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.compo.android.app.MainActivity"/>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.compo.android.app.MainActivity" />
         </activity>
         <activity
-                android:name=".SelectPackActivity"
-                android:screenOrientation="portrait"
-                android:label="@string/activity_select_pack">
+            android:name=".SelectPackActivity"
+            android:label="@string/activity_select_pack"
+            android:screenOrientation="portrait" >
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.compo.android.app.MainActivity"/>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.compo.android.app.MainActivity" />
         </activity>
         <activity
-                android:name=".SettingActivity"
-                android:screenOrientation="portrait"
-                android:theme="@style/DialogTheme">
+            android:name=".SettingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DialogTheme" >
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.compo.android.app.SettingActivity"/>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.compo.android.app.SettingActivity" />
         </activity>
         <activity
-                android:name=".StoreActivity"
-                android:screenOrientation="portrait"
-                android:theme="@style/DialogTheme">
+            android:name=".StoreActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DialogTheme" >
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.compo.android.app.MainActivity"/>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.compo.android.app.MainActivity" />
         </activity>
         <activity
-                android:name=".TutorialActivity"
-                android:screenOrientation="portrait"
-                android:theme="@style/DialogTheme">
+            android:name=".TutorialActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DialogTheme" >
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.compo.android.app.MainActivity"/>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.compo.android.app.MainActivity" />
         </activity>
         <activity
-                android:name=".PackDetailsActivity"
-                android:screenOrientation="portrait"
-                android:theme="@style/DialogTheme">
+            android:name=".PackDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DialogTheme" >
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.compo.android.app.PackDetailsActivity"/>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.compo.android.app.PackDetailsActivity" />
         </activity>
         <activity
-                android:name=".ThemeDetailsActivity"
-                android:screenOrientation="portrait"
-                android:theme="@style/DialogTheme">
+            android:name=".ThemeDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DialogTheme" >
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.compo.android.app.ThemeDetailsActivity"/>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.compo.android.app.ThemeDetailsActivity" />
         </activity>
         <activity
-                android:name=".SelectMatchActivity"
-                android:screenOrientation="portrait"
-                android:label="@string/activity_select_match">
+            android:name=".SelectMatchActivity"
+            android:label="@string/activity_select_match"
+            android:screenOrientation="portrait" >
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.compo.android.app.MainActivity"/>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.compo.android.app.MainActivity" />
         </activity>
         <activity
-                android:name=".QuizzActivity"
-                android:screenOrientation="portrait"
-                android:label="@string/activity_quizz">
+            android:name=".QuizzActivity"
+            android:label="@string/activity_quizz"
+            android:screenOrientation="portrait" >
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.compo.android.app.MainActivity"/>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.compo.android.app.MainActivity" />
         </activity>
         <activity
-                android:name=".ResponseActivity"
-                android:screenOrientation="portrait"
-                android:theme="@style/DialogTheme"
-                android:windowSoftInputMode="stateAlwaysVisible">
+            android:name=".ResponseActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysVisible" >
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.compo.android.app.ResponseActivity"/>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.compo.android.app.ResponseActivity" />
+        </activity>
+        <activity
+            android:name=".HintActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DialogTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.compo.android.app.ResponseActivity" />
         </activity>
     </application>
 
