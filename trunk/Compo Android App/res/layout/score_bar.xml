@@ -10,17 +10,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="20dp"
-        android:src="@drawable/btn_back" 
-        android:onClick="back"/>
-    
+        android:onClick="back"
+        android:src="@drawable/btn_back" />
+
     <ImageView
         android:id="@+id/image_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/btn_home" 
-        android:onClick="home"/>
-    
+        android:onClick="home"
+        android:src="@drawable/btn_home" />
+
     <TextView
         android:id="@+id/user_credit"
         android:layout_width="wrap_content"
@@ -40,17 +40,5 @@
         android:layout_marginTop="5dp"
         android:layout_toLeftOf="@+id/user_credit"
         android:src="@drawable/coins" />
-    
-     <TextView
-        android:id="@+id/user_point"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
-        android:layout_toLeftOf="@+id/image_user_coins"
-        android:textColor="@android:color/white"
-        android:textIsSelectable="false"
-        android:layout_alignBaseline="@+id/user_credit"
-        android:textSize="@dimen/score_font_size" />
-    
 
 </RelativeLayout>

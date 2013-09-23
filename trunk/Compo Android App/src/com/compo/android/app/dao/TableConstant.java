@@ -27,7 +27,6 @@ public class TableConstant {
     public static class UserTable implements BaseColumns {
 	public static final String TABLE_NAME = "user";
 	public static final String COLUMN_CREDIT = "credit";
-	public static final String COLUMN_POINT = "point";
 	public static final String COLUMN_OVERALL_TIME = "overall_time";
 	public static final String COLUMN_SOUND = "sound";
     }

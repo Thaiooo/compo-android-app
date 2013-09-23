@@ -13,7 +13,6 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private long id;
-    private int point;
     private int credit;
     private long overallTime;
     private Sound sound;
@@ -24,14 +23,6 @@ public class User implements Serializable {
 
     public void setId(long id) {
 	this.id = id;
-    }
-
-    public int getPoint() {
-	return point;
-    }
-
-    public void setPoint(int point) {
-	this.point = point;
     }
 
     public int getCredit() {
