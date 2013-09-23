@@ -23,7 +23,6 @@ public class SelectThemeActivity extends AbstractLSEFragmentActivity {
     private static Typeface _fontTitle;
     private ViewPager _mViewPager;
     private TextView _userCredit;
-    private TextView _userPoint;
     private TextView _activity_theme_title;
     private LinearLayout _themeIndicatorListLayout;
     private Button _button_preview;
@@ -39,7 +38,6 @@ public class SelectThemeActivity extends AbstractLSEFragmentActivity {
 	}
 
 	_userCredit = (TextView) findViewById(R.id.user_credit);
-	_userPoint = (TextView) findViewById(R.id.user_point);
 	_mViewPager = (ViewPager) findViewById(R.id.pager);
 	_themeIndicatorListLayout = (LinearLayout) findViewById(R.id.theme_indicator_list_layout);
 	_button_preview = (Button) findViewById(R.id.button_preview);
@@ -98,7 +96,6 @@ public class SelectThemeActivity extends AbstractLSEFragmentActivity {
 	protected Void doInBackground(Void... params) {
 	    User u = UserFactory.getInstance().getUser(SelectThemeActivity.this);
 	    _userCredit.setText(u.getCredit() + "");
-	    _userPoint.setText(u.getPoint() + " pts");
 	    return null;
 	}
     }

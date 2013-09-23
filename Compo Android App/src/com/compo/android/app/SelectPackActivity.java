@@ -29,7 +29,6 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
     private static Typeface _fontTitle;
     private ViewPager _mViewPager;
     private TextView _userCredit;
-    private TextView _userPoint;
     private TextView _themeName;
     private Theme _selectTheme;
     private SelectPackAdapter _collectionPacksPagerAdapter;
@@ -52,7 +51,6 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 	_selectTheme = (Theme) intent.getSerializableExtra(ThemeFragment.EXTRA_MESSAGE_ARG);
 
 	_userCredit = (TextView) findViewById(R.id.user_credit);
-	_userPoint = (TextView) findViewById(R.id.user_point);
 	_mViewPager = (ViewPager) findViewById(R.id.pager);
 	_themeName = (TextView) findViewById(R.id.theme_name);
 	_themeName.setTypeface(_fontTitle);
@@ -128,7 +126,6 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 	    User u = UserFactory.getInstance().getUser(SelectPackActivity.this);
 	    if (u != null) {
 		_userCredit.setText(u.getCredit() + "");
-		_userPoint.setText(u.getPoint() + " pts");
 	    }
 	    return null;
 	}

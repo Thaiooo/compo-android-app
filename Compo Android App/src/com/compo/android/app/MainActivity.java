@@ -23,7 +23,6 @@ public class MainActivity extends Activity {
 
     private static Typeface _font;
     private TextView _userCredit;
-    private TextView _userPoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +35,6 @@ public class MainActivity extends Activity {
 	imgHome.setVisibility(View.INVISIBLE);
 
 	_userCredit = (TextView) findViewById(R.id.user_credit);
-	_userPoint = (TextView) findViewById(R.id.user_point);
 
 	Button buttonPlay = (Button) findViewById(R.id.button_play);
 	Button buttonStore = (Button) findViewById(R.id.button_store);
@@ -111,7 +109,6 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onPostExecute(User anUser) {
 	    _userCredit.setText(anUser.getCredit() + "");
-	    _userPoint.setText(anUser.getPoint() + " pts");
 	}
     }
 

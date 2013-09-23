@@ -80,7 +80,6 @@ public class SettingActivity extends Activity {
 			PackProgressDao progressDao = new PackProgressDao(SettingActivity.this);
 			progressDao.eraseAll();
 
-			_currentUser.setPoint(0);
 			_currentUser.setOverallTime(0);
 			_currentUser.setCredit(0);
 

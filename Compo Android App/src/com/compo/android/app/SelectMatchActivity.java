@@ -31,7 +31,6 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
     private static Typeface _fontTitle;
 
     private TextView _userCredit;
-    private TextView _userPoint;
     // private TextView _theme_name;
     // private TextView _pack_name;
     private GridView _gridview;
@@ -54,7 +53,6 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 	_selectPack = (Pack) intent.getSerializableExtra(PackFragment.MESSAGE_CURRENT_PACK);
 
 	_userCredit = (TextView) findViewById(R.id.user_credit);
-	_userPoint = (TextView) findViewById(R.id.user_point);
 
 	Button title = (Button) findViewById(R.id.button_title);
 	title.setTypeface(_fontTitle);
@@ -91,7 +89,6 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 	    User u = UserFactory.getInstance().getUser(SelectMatchActivity.this);
 	    if (null != u) {
 		_userCredit.setText(u.getCredit() + "");
-		_userPoint.setText(u.getPoint() + " pts");
 	    }
 	    return null;
 	}
