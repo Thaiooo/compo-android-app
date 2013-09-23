@@ -38,6 +38,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/coins" />
+
+        <TextView
+            android:id="@+id/credit_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1OO credits"
+            android:textColor="@color/black"
+            android:textIsSelectable="false"
+            android:textSize="15dp" />
     </LinearLayout>
 
     <LinearLayout
