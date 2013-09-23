@@ -28,7 +28,6 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
     private static Typeface _font;
     private static Typeface _fontSocrePrinter;
     private TextView _userCredit;
-    private TextView _userPoint;
     private QuizzView _quizzView;
     private Map<Long, Play> _mapQuizzToPlay;
 
@@ -53,7 +52,6 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 	Match selectMatch = (Match) intent.getSerializableExtra(SelectMatchActivity.EXTRA_MESSAGE_QUIZZ);
 
 	_userCredit = (TextView) findViewById(R.id.user_credit);
-	_userPoint = (TextView) findViewById(R.id.user_point);
 	_quizzView = (QuizzView) findViewById(R.id.quizz_view);
 	_quizzView.setQuizz(selectMatch);
 	_quizzView.setMapQuizzToPlay(_mapQuizzToPlay);
@@ -108,7 +106,6 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 		_quizzView.invalidate();
 		User u = UserFactory.getInstance().getUser(QuizzActivity.this);
 		_userCredit.setText(u.getCredit() + "");
-		_userPoint.setText(u.getPoint() + " pts");
 		Toast.makeText(this, "You have found " + " " + play.getResponse(), Toast.LENGTH_LONG).show();
 		break;
 	    }
@@ -120,7 +117,6 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 	protected Void doInBackground(Void... params) {
 	    User u = UserFactory.getInstance().getUser(QuizzActivity.this);
 	    _userCredit.setText(u.getCredit() + "");
-	    _userPoint.setText(u.getPoint() + " pts");
 	    return null;
 	}
 

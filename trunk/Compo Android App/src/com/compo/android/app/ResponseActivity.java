@@ -115,7 +115,6 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 
 	    // MAJ du user
 	    User user = UserFactory.getInstance().getUser(ResponseActivity.this);
-	    user.setPoint(user.getPoint() + 1);
 	    user.setCredit(user.getCredit() + _currentQuizz.getEarnCredit());
 	    UserFactory.getInstance().updateUser(ResponseActivity.this);
 
