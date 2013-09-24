@@ -78,15 +78,15 @@ public class MatchDao {
 	    req.append(", ");
 	    // Index 9
 	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_HIDE);
+	    req.append(TableConstant.QuizzPlayerTable.COLUMN_IS_HIDE);
 	    req.append(", ");
 	    // Index 10
 	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_HOME);
+	    req.append(TableConstant.QuizzPlayerTable.COLUMN_IS_HOME);
 	    req.append(", ");
 	    // Index 11
 	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_COACH);
+	    req.append(TableConstant.QuizzPlayerTable.COLUMN_IS_COACH);
 	    req.append(", ");
 	    // Index 12
 	    req.append("qp.");

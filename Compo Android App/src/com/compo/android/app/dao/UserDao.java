@@ -23,7 +23,7 @@ public class UserDao {
 
 	    ContentValues values = new ContentValues();
 	    values.put(TableConstant.UserTable.COLUMN_CREDIT, o.getCredit());
-	    values.put(TableConstant.UserTable.COLUMN_SOUND, o.getSound().name());
+	    values.put(TableConstant.UserTable.COLUMN_IS_SOUND_ENABLE, o.getSound().name());
 
 	    session.update(TableConstant.UserTable.TABLE_NAME, values, TableConstant.UserTable._ID + " = ?",
 		    new String[] { String.valueOf(o.getId()) });
@@ -48,7 +48,7 @@ public class UserDao {
 
 	    // The columns to return
 	    String[] projection = { TableConstant.UserTable._ID, TableConstant.UserTable.COLUMN_CREDIT,
-		    TableConstant.UserTable.COLUMN_OVERALL_TIME, TableConstant.UserTable.COLUMN_SOUND };
+		    TableConstant.UserTable.COLUMN_OVERALL_TIME, TableConstant.UserTable.COLUMN_IS_SOUND_ENABLE };
 
 	    // The columns for the WHERE clause
 	    String selection = null;
@@ -70,7 +70,7 @@ public class UserDao {
 		long itemId = c.getLong(c.getColumnIndexOrThrow(TableConstant.UserTable._ID));
 		Integer itemCredit = c.getInt(c.getColumnIndexOrThrow(TableConstant.UserTable.COLUMN_CREDIT));
 		Long itemOverallTime = c.getLong(c.getColumnIndexOrThrow(TableConstant.UserTable.COLUMN_OVERALL_TIME));
-		Sound sound = Sound.valueOf(c.getString(c.getColumnIndexOrThrow(TableConstant.UserTable.COLUMN_SOUND)));
+		Sound sound = Sound.valueOf(c.getString(c.getColumnIndexOrThrow(TableConstant.UserTable.COLUMN_IS_SOUND_ENABLE)));
 
 		u.setId(itemId);
 		u.setCredit(itemCredit);
