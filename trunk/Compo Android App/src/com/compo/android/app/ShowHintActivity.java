@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.compo.android.app.model.QuizzPlayer;
 
-public class HintActivity extends Activity {
+public class ShowHintActivity extends Activity {
     public final static String MESSAGE_HINT_TYPE = "com.compo.android.app.HintActivity.MESSAGE1";
     public final static String MESSAGE_QUIZZ_PLAYER = "com.compo.android.app.HintActivity.MESSAGE2";
 
