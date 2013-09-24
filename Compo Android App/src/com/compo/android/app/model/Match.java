@@ -15,6 +15,9 @@ public class Match implements Serializable {
     private Date date;
     private int scoreHome;
     private int scoreAway;
+    private boolean overtime;
+    private Integer sogHome;
+    private Integer sogAway;
     private List<QuizzPlayer> quizzs = new ArrayList<QuizzPlayer>();
 
     public long getId() {
@@ -63,6 +66,30 @@ public class Match implements Serializable {
 
     public void setScoreAway(int scoreAway) {
 	this.scoreAway = scoreAway;
+    }
+
+    public boolean isOvertime() {
+	return overtime;
+    }
+
+    public void setOvertime(boolean overtime) {
+	this.overtime = overtime;
+    }
+
+    public Integer getSogHome() {
+	return sogHome;
+    }
+
+    public void setSogHome(Integer sogHome) {
+	this.sogHome = sogHome;
+    }
+
+    public Integer getSogAway() {
+	return sogAway;
+    }
+
+    public void setSogAway(Integer sogAway) {
+	this.sogAway = sogAway;
     }
 
 }
