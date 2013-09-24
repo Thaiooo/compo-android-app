@@ -38,11 +38,11 @@ class Team(models.Model):
     
     name = models.CharField(max_length=100, unique=True)
     code = models.CharField(max_length=10, unique=True)
+    home_jersey_color = models.CharField(max_length=10, choices=COLORS)
     home_short_color = models.CharField(max_length=10, choices=COLORS)
     home_sock_color = models.CharField(max_length=10, choices=COLORS)
-    home_jersey_color = models.CharField(max_length=10, choices=COLORS)
-    away_short_color = models.CharField(max_length=10, choices=COLORS)
     away_jersey_color = models.CharField(max_length=10, choices=COLORS)
+    away_short_color = models.CharField(max_length=10, choices=COLORS)
     away_sock_color = models.CharField(max_length=10, choices=COLORS)
     
     def __unicode__(self):
