@@ -112,50 +112,54 @@ public class MatchDao {
 	    req.append("qp.");
 	    req.append(TableConstant.QuizzPlayerTable.COLUMN_HINT);
 	    req.append(", ");
-	    // ---------------------------------------------------------------------------------
 	    // Index 18
+	    req.append("qp.");
+	    req.append(TableConstant.QuizzPlayerTable.COLUMN_IS_CAPTAIN);
+	    req.append(", ");
+	    // ---------------------------------------------------------------------------------
+	    // Index 19
 	    req.append("qp.");
 	    req.append(TableConstant.QuizzPlayerTable.COLUMN_TEAM_ID);
 	    req.append(", ");
-	    // Index 19
+	    // Index 20
 	    req.append("t.");
 	    req.append(TableConstant.TeamTable.COLUMN_CODE);
 	    req.append(", ");
-	    // Index 20
+	    // Index 21
 	    req.append("t.");
 	    req.append(TableConstant.TeamTable.COLUMN_NAME);
 	    req.append(", ");
-	    // Index 21
+	    // Index 22
 	    req.append("t.");
 	    req.append(TableConstant.TeamTable.COLUMN_HOME_JERSY_COLOR);
 	    req.append(", ");
-	    // Index 22
+	    // Index 23
 	    req.append("t.");
 	    req.append(TableConstant.TeamTable.COLUMN_HOME_SHORT_COLOR);
 	    req.append(", ");
-	    // Index 23
+	    // Index 24
 	    req.append("t.");
 	    req.append(TableConstant.TeamTable.COLUMN_HOME_SOCK_COLOR);
 	    req.append(", ");
-	    // Index 24
+	    // Index 25
 	    req.append("t.");
 	    req.append(TableConstant.TeamTable.COLUMN_AWAY_JERSY_COLOR);
 	    req.append(", ");
-	    // Index 25
+	    // Index 26
 	    req.append("t.");
 	    req.append(TableConstant.TeamTable.COLUMN_AWAY_SHORT_COLOR);
 	    req.append(", ");
-	    // Index 26
+	    // Index 27
 	    req.append("t.");
 	    req.append(TableConstant.TeamTable.COLUMN_AWAY_SOCK_COLOR);
 	    req.append(", ");
 
 	    // ---------------------------------------------------------------------------------
-	    // Index 27
+	    // Index 28
 	    req.append("qp.");
 	    req.append(TableConstant.QuizzPlayerTable.COLUMN_PLAYER_ID);
 	    req.append(", ");
-	    // Index 28
+	    // Index 29
 	    req.append("p.");
 	    req.append(TableConstant.PlayerTable.COLUMN_NAME);
 	    req.append(" ");
@@ -242,6 +246,8 @@ public class MatchDao {
 			quizzPlayer.setGoal(c.getInt(index));
 			index++;
 			quizzPlayer.setHint(c.getString(index));
+			index++;
+			quizzPlayer.setCaptain(Boolean.parseBoolean(c.getString(index)));
 
 			Team team = new Team();
 			index++;
@@ -317,6 +323,8 @@ public class MatchDao {
 			quizzPlayer.setGoal(c.getInt(index));
 			index++;
 			quizzPlayer.setHint(c.getString(index));
+			index++;
+			quizzPlayer.setCaptain(Boolean.parseBoolean(c.getString(index)));
 
 			Team team = new Team();
 			index++;
