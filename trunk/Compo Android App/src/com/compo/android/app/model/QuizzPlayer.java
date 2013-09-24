@@ -18,6 +18,7 @@ public class QuizzPlayer implements Serializable {
     private int csc;
     private int earnCredit;
     private String hint;
+    private boolean captain;
 
     public long getId() {
 	return id;
@@ -113,6 +114,14 @@ public class QuizzPlayer implements Serializable {
 
     public void setHint(String hint) {
 	this.hint = hint;
+    }
+
+    public boolean isCaptain() {
+	return captain;
+    }
+
+    public void setCaptain(boolean captain) {
+	this.captain = captain;
     }
 
 }
