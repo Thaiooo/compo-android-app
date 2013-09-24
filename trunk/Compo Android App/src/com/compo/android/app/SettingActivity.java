@@ -46,7 +46,7 @@ public class SettingActivity extends Activity {
 	_sound = (Button) findViewById(R.id.button_sound);
 
 	_currentUser = UserFactory.getInstance().getUser(this);
-	if (_currentUser.getSound() == Sound.OFF) {
+	if (_currentUser.getSoundEnable() == Sound.OFF) {
 	    _sound.setBackgroundResource(R.drawable.sound_off);
 	} else {
 	    _sound.setBackgroundResource(R.drawable.sound);
@@ -95,12 +95,12 @@ public class SettingActivity extends Activity {
     }
 
     public void changeSound(View view) {
-	if (_currentUser.getSound() == Sound.OFF) {
+	if (_currentUser.getSoundEnable() == Sound.OFF) {
 	    _sound.setBackgroundResource(R.drawable.sound);
-	    _currentUser.setSound(Sound.ON);
+	    _currentUser.setSoundEnable(Sound.ON);
 	} else {
 	    _sound.setBackgroundResource(R.drawable.sound_off);
-	    _currentUser.setSound(Sound.OFF);
+	    _currentUser.setSoundEnable(Sound.OFF);
 	}
 	UserFactory.getInstance().updateUser(this);
 

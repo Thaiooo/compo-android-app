@@ -23,7 +23,7 @@ public class UserDao {
 
 	    ContentValues values = new ContentValues();
 	    values.put(TableConstant.UserTable.COLUMN_CREDIT, o.getCredit());
-	    values.put(TableConstant.UserTable.COLUMN_IS_SOUND_ENABLE, o.getSound().name());
+	    values.put(TableConstant.UserTable.COLUMN_IS_SOUND_ENABLE, o.getSoundEnable().name());
 
 	    session.update(TableConstant.UserTable.TABLE_NAME, values, TableConstant.UserTable._ID + " = ?",
 		    new String[] { String.valueOf(o.getId()) });
@@ -75,7 +75,7 @@ public class UserDao {
 		u.setId(itemId);
 		u.setCredit(itemCredit);
 		u.setOverallTime(itemOverallTime);
-		u.setSound(sound);
+		u.setSoundEnable(sound);
 	    }
 	} finally {
 	    if (c != null) {
