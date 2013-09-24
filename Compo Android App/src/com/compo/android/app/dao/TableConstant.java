@@ -11,7 +11,7 @@ public class TableConstant {
 	public static final String TABLE_NAME = "theme";
 	public static final String COLUMN_NAME = "name";
 	public static final String COLUMN_CODE = "code";
-	public static final String COLUMN_LOCK = "lock";
+	public static final String COLUMN_IS_LOCK = "is_lock";
 	public static final String COLUMN_CREDIT_LIMIT = "credit_limit";
 	public static final String COLUMN_ORDER_NUMBER = "order_number";
     }
@@ -28,7 +28,7 @@ public class TableConstant {
 	public static final String TABLE_NAME = "user";
 	public static final String COLUMN_CREDIT = "credit";
 	public static final String COLUMN_OVERALL_TIME = "overall_time";
-	public static final String COLUMN_SOUND = "sound";
+	public static final String COLUMN_IS_SOUND_ENABLE = "is_sound_enable";
     }
 
     public static class MatchTable implements BaseColumns {
@@ -39,6 +39,9 @@ public class TableConstant {
 	public static final String COLUMN_SCORE_AWAY = "score_away";
 	public static final String COLUMN_ORDER_NUMBER = "order_number";
 	public static final String COLUMN_PACK_ID = "pack_id";
+	public static final String COLUMN_IS_OVERTIME = "is_overtime";
+	public static final String COLUMN_SOG_HOME = "sog_home";
+	public static final String COLUMN_SOG_AWAY = "sog_away";
     }
 
     public static class PlayTable implements BaseColumns {
@@ -47,18 +50,18 @@ public class TableConstant {
 	public static final String COLUMN_USER_ID = "user_id";
 	public static final String COLUMN_QUIZZ_ID = "quizz_id";
 	public static final String COLUMN_RESPONSE = "response";
-	public static final String COLUMN_UNLOCK_HINT = "unlock_hint";
-	public static final String COLUMN_UNLOCK_RANDOM = "unlock_random";
-	public static final String COLUMN_UNLOCK_50_PERCENT = "unlock_50_percent";
-	public static final String COLUMN_UNLOCK_RESPONSE = "unlock_response";
+	public static final String COLUMN_IS_UNLOCK_HINT = "is_unlock_hint";
+	public static final String COLUMN_IS_UNLOCK_RANDOM = "is_unlock_random";
+	public static final String COLUMN_IS_UNLOCK_50_PERCENT = "is_unlock_50_percent";
+	public static final String COLUMN_IS_UNLOCK_RESPONSE = "is_unlock_response";
     }
 
     public static class QuizzPlayerTable implements BaseColumns {
 	public static final String TABLE_NAME = "quizz_player";
 	public static final String COLUMN_QUIZZ_ID = "quizz_id";
-	public static final String COLUMN_HIDE = "hide";
-	public static final String COLUMN_HOME = "home";
-	public static final String COLUMN_COACH = "coach";
+	public static final String COLUMN_IS_HIDE = "is_hide";
+	public static final String COLUMN_IS_HOME = "is_home";
+	public static final String COLUMN_IS_COACH = "is_coach";
 	public static final String COLUMN_X = "x";
 	public static final String COLUMN_Y = "y";
 	public static final String COLUMN_CSC = "csc";
@@ -67,6 +70,7 @@ public class TableConstant {
 	public static final String COLUMN_PLAYER_ID = "player_id";
 	public static final String COLUMN_EARN_CREDIT = "earn_credit";
 	public static final String COLUMN_HINT = "hint";
+	public static final String COLUMN_IS_CAPTAIN = "is_captain";
     }
 
     public static class TeamTable implements BaseColumns {
