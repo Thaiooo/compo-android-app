@@ -15,7 +15,7 @@ public class User implements Serializable {
     private long id;
     private int credit;
     private long overallTime;
-    private Sound sound;
+    private Sound soundEnable;
 
     public long getId() {
 	return id;
@@ -41,12 +41,12 @@ public class User implements Serializable {
 	this.overallTime = overallTime;
     }
 
-    public Sound getSound() {
-	return sound;
+    public Sound getSoundEnable() {
+	return soundEnable;
     }
 
-    public void setSound(Sound sound) {
-	this.sound = sound;
+    public void setSoundEnable(Sound sound) {
+	this.soundEnable = sound;
     }
 
 }
