@@ -44,6 +44,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
     private Long _matchId;
     private Integer _nbCorrectResponse;
     private Integer _nbQuizz;
+    private User _currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,8 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	_matchId = (Long) intent.getSerializableExtra(EXTRA_MESSAGE_MATCH_ID);
 	_nbCorrectResponse = (Integer) intent.getSerializableExtra(EXTRA_MESSAGE_RESPONSE_SIZE);
 	_nbQuizz = (Integer) intent.getSerializableExtra(EXTRA_MESSAGE_QUIZZ_SIZE);
+
+	_currentUser = UserFactory.getInstance().getUser(this);
 
 	PackDao packDao = new PackDao(this);
 	_currentPack = packDao.findPackByMatch(_matchId);
@@ -187,6 +190,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
     }
 
     public void openHint(View view) {
+
 	// TODO Detecte s'il y a assez de credit pour l'afficher
 	displayHintPopup(HintTypeEnum.HINT);
     }
