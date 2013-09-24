@@ -62,6 +62,7 @@ class QuizzPlayer(models.Model):
     is_hide = models.BooleanField()
     is_home = models.BooleanField()
     is_coach = models.BooleanField()
+    is_captain = models.BooleanField()
     goal = models.IntegerField()
     csc = models.IntegerField()
     earn_credit = models.IntegerField()
@@ -81,6 +82,9 @@ class Match(models.Model):
         
     score_home = models.IntegerField()
     score_away = models.IntegerField()
+    is_overtime = models.BooleanField()
+    sog_home = models.IntegerField(null=True, blank=True)
+    sog_away = models.IntegerField(null=True, blank=True)
     name = models.CharField(max_length=100, unique=True)
     date = models.DateField()
     pack = models.ForeignKey(Pack)

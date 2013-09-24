@@ -16,6 +16,6 @@ class MatchFormMatchStep3(ModelForm):
     
     class Meta:
         model = Match
-        fields = ('score_home', 'score_away', 'name', 'date', 'pack')
+        fields = ('score_home', 'score_away', 'is_overtime', 'sog_home', 'sog_away', 'name', 'date', 'pack')
 
 

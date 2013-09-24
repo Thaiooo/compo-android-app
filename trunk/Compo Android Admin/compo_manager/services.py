@@ -28,6 +28,8 @@ GOAL_PLAYER = '*'
 
 OG_PLAYER = '-'
 
+CAPTAIN_PLAYER = '+'
+
 TEAM = 0
 
 NAME = 1
@@ -126,7 +128,7 @@ class QuizzPlayerListServices:
         
     
     def __get_player_name(self, name):
-        return name.replace(HIDDEN_PLAYER, '').replace(GOAL_PLAYER, '').replace(OG_PLAYER, '').upper()
+        return name.replace(HIDDEN_PLAYER, '').replace(GOAL_PLAYER, '').replace(OG_PLAYER, '').replace(CAPTAIN_PLAYER, '').upper()
     
     
     def __compute_quizzplayers(self, home_team, away_team):
@@ -229,6 +231,8 @@ class QuizzPlayerListServices:
         quizzplayer.goal = name.count(GOAL_PLAYER)
         
         quizzplayer.csc = name.count(OG_PLAYER)
+        
+        quizzplayer.is_captain = CAPTAIN_PLAYER in name
         
         if position == 'C':
             quizzplayer.is_coach = True
