@@ -71,6 +71,10 @@ public class TableConstant {
 	public static final String COLUMN_EARN_CREDIT = "earn_credit";
 	public static final String COLUMN_HINT = "hint";
 	public static final String COLUMN_IS_CAPTAIN = "is_captain";
+	public static final String COLUMN_CREDIT_TO_UNLOCK_HINT = "credit_to_unlock_hint";
+	public static final String COLUMN_CREDIT_TO_UNLOCK_RANDOM = "credit_to_unlock_random";
+	public static final String COLUMN_CREDIT_TO_UNLOCK_HALF = "credit_to_unlock_half";
+	public static final String COLUMN_CREDIT_TO_UNLOCK_RESPONSE = "credit_to_unlock_response";
     }
 
     public static class TeamTable implements BaseColumns {
