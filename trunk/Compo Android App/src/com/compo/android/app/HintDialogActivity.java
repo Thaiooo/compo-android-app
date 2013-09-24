@@ -1,5 +1,7 @@
 package com.compo.android.app;
 
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -8,6 +10,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
+import com.compo.android.app.dao.PlayDao;
+import com.compo.android.app.model.Play;
 import com.compo.android.app.model.QuizzPlayer;
 import com.compo.android.app.model.User;
 import com.compo.android.app.utils.UserFactory;
@@ -15,9 +19,11 @@ import com.compo.android.app.utils.UserFactory;
 public class HintDialogActivity extends Activity {
     public final static String MESSAGE_HINT_TYPE = "com.compo.android.app.HintDetailsActivity.MESSAGE1";
     public final static String MESSAGE_QUIZZ_PLAYER = "com.compo.android.app.HintDetailsActivity.MESSAGE2";
+    public final static String MESSAGE_PLAY = "com.compo.android.app.HintDetailsActivity.MESSAGE4";
 
     private static Typeface _font;
 
+    private Play _currentPlay;
     private QuizzPlayer _currentQuizz;
     private HintTypeEnum _hintType;
     private User _currentUser;
@@ -35,6 +41,7 @@ public class HintDialogActivity extends Activity {
 	_currentUser = UserFactory.getInstance().getUser(this);
 
 	Intent intent = getIntent();
+	_currentPlay = (Play) intent.getSerializableExtra(MESSAGE_PLAY);
 	_currentQuizz = (QuizzPlayer) intent.getSerializableExtra(MESSAGE_QUIZZ_PLAYER);
 	_hintType = (HintTypeEnum) intent.getSerializableExtra(MESSAGE_HINT_TYPE);
 
@@ -99,7 +106,38 @@ public class HintDialogActivity extends Activity {
 	    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
 	    // TODO Décrémenter le crédit de l'utilisateur
-	    // TODO Updater l'objet play
+
+	    // Update de l'objet play
+	    if (_currentPlay == null) {
+		_currentPlay = new Play();
+		_currentPlay.setQuizzId(_currentQuizz.getId());
+		_currentPlay.setUserId(_currentUser.getId());
+	    }
+	    PlayDao dao = new PlayDao(HintDialogActivity.this);
+	    switch (_hintType) {
+	    case HINT:
+		_currentPlay.setUnlockHint(true);
+		break;
+	    case RANDOM:
+		_currentPlay.setUnlockRandom(true);
+		break;
+	    case HALF:
+		_currentPlay.setUnlock50Percent(true);
+		break;
+	    default:
+		_currentPlay.setUnlockResponse(true);
+		break;
+	    }
+	    _currentPlay.setDateTime(new Date());
+
+	    if (_currentPlay.getId() == 0) {
+		dao.add(_currentPlay);
+	    } else {
+		dao.update(_currentPlay);
+	    }
+
+	    // TODO Il faut répercuter la maj sur l'écran ResponseActivity
+
 	} else {
 	    Intent intent = new Intent(HintDialogActivity.this, StoreActivity.class);
 	    startActivity(intent);

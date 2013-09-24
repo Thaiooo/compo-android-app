@@ -185,6 +185,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	Intent intent = new Intent(ResponseActivity.this, HintDialogActivity.class);
 	intent.putExtra(HintDialogActivity.MESSAGE_HINT_TYPE, aType);
 	intent.putExtra(HintDialogActivity.MESSAGE_QUIZZ_PLAYER, _currentQuizz);
+	intent.putExtra(HintDialogActivity.MESSAGE_PLAY, _currentPlay);
 	startActivity(intent);
 	overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
