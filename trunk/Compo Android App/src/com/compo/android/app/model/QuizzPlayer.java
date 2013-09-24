@@ -19,6 +19,10 @@ public class QuizzPlayer implements Serializable {
     private int earnCredit;
     private String hint;
     private boolean captain;
+    private int creditToUnlockHint;
+    private int creditToUnlockRandom;
+    private int creditToUnlockHalf;
+    private int creditToUnlockResponse;
 
     public long getId() {
 	return id;
@@ -122,6 +126,38 @@ public class QuizzPlayer implements Serializable {
 
     public void setCaptain(boolean captain) {
 	this.captain = captain;
+    }
+
+    public int getCreditToUnlockHint() {
+	return creditToUnlockHint;
+    }
+
+    public void setCreditToUnlockHint(int creditToUnlockHint) {
+	this.creditToUnlockHint = creditToUnlockHint;
+    }
+
+    public int getCreditToUnlockRandom() {
+	return creditToUnlockRandom;
+    }
+
+    public void setCreditToUnlockRandom(int creditToUnlockRandom) {
+	this.creditToUnlockRandom = creditToUnlockRandom;
+    }
+
+    public int getCreditToUnlockHalf() {
+	return creditToUnlockHalf;
+    }
+
+    public void setCreditToUnlockHalf(int creditToUnlockHalf) {
+	this.creditToUnlockHalf = creditToUnlockHalf;
+    }
+
+    public int getCreditToUnlockResponse() {
+	return creditToUnlockResponse;
+    }
+
+    public void setCreditToUnlockResponse(int creditToUnlockResponse) {
+	this.creditToUnlockResponse = creditToUnlockResponse;
     }
 
 }
