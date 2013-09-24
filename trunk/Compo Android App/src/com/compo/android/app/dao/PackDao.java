@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -67,6 +69,18 @@ public class PackDao {
 	    // Index 7
 	    req.append("m.");
 	    req.append(TableConstant.MatchTable.COLUMN_SCORE_HOME);
+	    req.append(", ");
+	    // Index 8
+	    req.append("m.");
+	    req.append(TableConstant.MatchTable.COLUMN_IS_OVERTIME);
+	    req.append(", ");
+	    // Index 9
+	    req.append("m.");
+	    req.append(TableConstant.MatchTable.COLUMN_SOG_HOME);
+	    req.append(", ");
+	    // Index 10
+	    req.append("m.");
+	    req.append(TableConstant.MatchTable.COLUMN_SOG_AWAY);
 	    req.append(" ");
 
 	    req.append("from " + TableConstant.PackTable.TABLE_NAME + " p ");
@@ -113,6 +127,19 @@ public class PackDao {
 		    match.setScoreAway(c.getInt(index));
 		    index++;
 		    match.setScoreHome(c.getInt(index));
+		    index++;
+		    boolean isOvertime = Boolean.parseBoolean(c.getString(index));
+		    match.setOvertime(isOvertime);
+		    index++;
+		    String quizzSogHome = c.getString(index);
+		    if (StringUtils.isNotBlank(quizzSogHome)) {
+			match.setSogHome(Integer.getInteger(quizzSogHome));
+		    }
+		    index++;
+		    String quizzSogAway = c.getString(index);
+		    if (StringUtils.isNotBlank(quizzSogAway)) {
+			match.setSogAway(Integer.getInteger(quizzSogAway));
+		    }
 
 		    pack.getMatchs().add(match);
 		}
@@ -175,6 +202,18 @@ public class PackDao {
 	    // Index 7
 	    req.append("m.");
 	    req.append(TableConstant.MatchTable.COLUMN_SCORE_HOME);
+	    req.append(", ");
+	    // Index 8
+	    req.append("m.");
+	    req.append(TableConstant.MatchTable.COLUMN_IS_OVERTIME);
+	    req.append(", ");
+	    // Index 9
+	    req.append("m.");
+	    req.append(TableConstant.MatchTable.COLUMN_SOG_HOME);
+	    req.append(", ");
+	    // Index 10
+	    req.append("m.");
+	    req.append(TableConstant.MatchTable.COLUMN_SOG_AWAY);
 	    req.append(" ");
 
 	    req.append("from " + TableConstant.PackTable.TABLE_NAME + " p ");
@@ -228,6 +267,19 @@ public class PackDao {
 			match.setScoreAway(c.getInt(index));
 			index++;
 			match.setScoreHome(c.getInt(index));
+			index++;
+			boolean isOvertime = Boolean.parseBoolean(c.getString(index));
+			match.setOvertime(isOvertime);
+			index++;
+			String quizzSogHome = c.getString(index);
+			if (StringUtils.isNotBlank(quizzSogHome)) {
+			    match.setSogHome(Integer.getInteger(quizzSogHome));
+			}
+			index++;
+			String quizzSogAway = c.getString(index);
+			if (StringUtils.isNotBlank(quizzSogAway)) {
+			    match.setSogAway(Integer.getInteger(quizzSogAway));
+			}
 
 			pack.getMatchs().add(match);
 		    }
