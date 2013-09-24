@@ -5,6 +5,9 @@ from django.forms.models import ModelForm
 class Theme(models.Model):
     code = models.CharField(max_length=100, unique=True)
     name = models.CharField(max_length=250, unique=True)
+    order_number = models.IntegerField(null=True, unique=True)
+    lock = models.BooleanField()
+    credit_limit = models.IntegerField()
     
     def __unicode__(self):
         return self.name
@@ -13,9 +16,7 @@ class Theme(models.Model):
 class Pack(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.CharField(max_length=250, null=True)
-    rank = models.IntegerField(null=True, unique=True)
-    lock = models.BooleanField()
-    credit_limit = models.IntegerField()
+    order_number = models.IntegerField(null=True, unique=True)
     theme = models.ForeignKey(Theme)
     
     def __unicode__(self):
@@ -23,8 +24,26 @@ class Pack(models.Model):
     
     
 class Team(models.Model):
+    
+    COLORS = (
+              ('WHITE','White'),
+              ('BLUE', 'Blue'),
+              ('RED', 'Red'),
+              ('YELLOW', 'Yellow'),
+              ('BLACK', 'Black'),
+              ('GREEN', 'Green'),
+              ('PURPLE', 'Purple'),
+              ('ORANGE', 'Orange'),
+              )
+    
     name = models.CharField(max_length=100, unique=True)
     code = models.CharField(max_length=10, unique=True)
+    home_short_color = models.CharField(max_length=10, choices=COLORS)
+    home_sock_color = models.CharField(max_length=10, choices=COLORS)
+    home_jersey_color = models.CharField(max_length=10, choices=COLORS)
+    away_short_color = models.CharField(max_length=10, choices=COLORS)
+    away_jersey_color = models.CharField(max_length=10, choices=COLORS)
+    away_sock_color = models.CharField(max_length=10, choices=COLORS)
     
     def __unicode__(self):
         return self.name
@@ -43,9 +62,10 @@ class QuizzPlayer(models.Model):
     is_hide = models.BooleanField()
     is_home = models.BooleanField()
     is_coach = models.BooleanField()
-    goals = models.IntegerField()
-    og = models.IntegerField()
+    goal = models.IntegerField()
+    csc = models.IntegerField()
     earn_credit = models.IntegerField()
+    hint = models.CharField(max_length=500)
     team = models.ForeignKey(Team)
     player = models.ForeignKey(Player)
 
@@ -78,7 +98,6 @@ class ThemeForm(ModelForm):
     class Meta:
         model = Theme
         
-        fields = ('name',) 
         
 class PackForm(ModelForm):
     
@@ -89,5 +108,3 @@ class TeamForm(ModelForm):
     
     class Meta:
         model = Team
-        
-        fields = ('name',)
