@@ -47,15 +47,7 @@ def create_theme(request):
     if request.method == 'POST':
         form = ThemeForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            code = name.replace(' ','').upper()
-            
-            theme = Theme()
-            theme.name = name
-            theme.code = code
-                
-            theme.save()
-            
+            form.save()
             return HttpResponseRedirect('/theme')
     else:
         form = ThemeForm() 
@@ -69,14 +61,7 @@ def update_theme(request, theme_id):
     form = ThemeForm(request.POST, instance=theme)
     
     if form.is_valid():
-            name = form.cleaned_data['name']
-            code = name.replace(' ','').upper()
-            
-            theme.name = name
-            theme.code = code
-            
-            theme.save()
-            
+            form.save()
             return HttpResponseRedirect('/theme')
     else:
         form = ThemeForm(instance=theme) 

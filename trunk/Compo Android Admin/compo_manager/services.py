@@ -36,6 +36,8 @@ POSITION = 2
 
 SIDE = 3
 
+HINT = 4
+
 SEPARATOR = '\t'
 
 NB_LINES = 24
@@ -114,12 +116,12 @@ class QuizzPlayerListServices:
     
     def __fill_position_map(self, line):
         current_key = line[TEAM] + MAP_SEP + line[POSITION] + MAP_SEP + line[SIDE]
-        current_name = line[NAME].upper()
+        current_value = line[NAME].upper() + MAP_SEP + line[HINT]
         
         if current_key in self.field_map:
-            self.field_map[current_key].append(current_name)
+            self.field_map[current_key].append(current_value)
         else:
-            self.field_map[current_key] = [current_name]
+            self.field_map[current_key] = [current_value]
             
         
     
@@ -174,8 +176,12 @@ class QuizzPlayerListServices:
                 team = away_team
                 if team_name == 'HOME':
                     team = home_team
+                
+                current_table = p.split(MAP_SEP)
+                current_name = current_table[0]
+                current_hint = current_table[1]
                     
-                quizzplayer = self.__get_quizzplayer(p, team, position)
+                quizzplayer = self.__get_quizzplayer(current_name, current_hint, team, position)
                 
                 if position != 'C':
                     current_x = x_s[cpt]
@@ -201,13 +207,15 @@ class QuizzPlayerListServices:
         return result
                 
     
-    def __get_quizzplayer(self, name, team, position):
+    def __get_quizzplayer(self, name, hint, team, position):
         
         quizzplayer = QuizzPlayer()
         
         player = Player.objects.get(name=self.__get_player_name(name))
         
         quizzplayer.player = player
+        
+        quizzplayer.hint = hint
         
         quizzplayer.team = team
             
@@ -218,9 +226,9 @@ class QuizzPlayerListServices:
         else:
             quizzplayer.is_hide = False
             
-        quizzplayer.goals = name.count(GOAL_PLAYER)
+        quizzplayer.goal = name.count(GOAL_PLAYER)
         
-        quizzplayer.og = name.count(OG_PLAYER)
+        quizzplayer.csc = name.count(OG_PLAYER)
         
         if position == 'C':
             quizzplayer.is_coach = True
@@ -255,9 +263,9 @@ class QuizzPlayerDisplayer():
         
         self.is_coach = quizzplayer.is_coach
         
-        self.goals = quizzplayer.goals
+        self.goals = quizzplayer.goal
         
-        self.og = quizzplayer.og
+        self.og = quizzplayer.csc
         
         self.earn_credit = quizzplayer.earn_credit
         
