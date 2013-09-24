@@ -181,32 +181,51 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 
     }
 
-    private void displayHintPopup(HintTypeEnum aType) {
-	Intent intent = new Intent(ResponseActivity.this, HintActivity.class);
-	intent.putExtra(HintActivity.MESSAGE_HINT_TYPE, aType);
-	intent.putExtra(HintActivity.MESSAGE_QUIZZ_PLAYER, _currentQuizz);
+    private void displayHintDialog(HintTypeEnum aType) {
+	Intent intent = new Intent(ResponseActivity.this, HintDialogActivity.class);
+	intent.putExtra(HintDialogActivity.MESSAGE_HINT_TYPE, aType);
+	intent.putExtra(HintDialogActivity.MESSAGE_QUIZZ_PLAYER, _currentQuizz);
+	startActivity(intent);
+	overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    private void displayHint(HintTypeEnum aType) {
+	Intent intent = new Intent(ResponseActivity.this, ShowHintActivity.class);
+	intent.putExtra(ShowHintActivity.MESSAGE_HINT_TYPE, aType);
+	intent.putExtra(ShowHintActivity.MESSAGE_QUIZZ_PLAYER, _currentQuizz);
 	startActivity(intent);
 	overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     public void openHint(View view) {
-
-	// TODO Detecte s'il y a assez de credit pour l'afficher
-	displayHintPopup(HintTypeEnum.HINT);
+	if (_currentPlay != null && _currentPlay.isUnlockHint()) {
+	    displayHint(HintTypeEnum.HINT);
+	} else {
+	    displayHintDialog(HintTypeEnum.HINT);
+	}
     }
 
     public void openRandom(View view) {
-	// TODO Detecte s'il y a assez de credit pour l'afficher
-	displayHintPopup(HintTypeEnum.RANDOM);
+	if (_currentPlay != null && _currentPlay.isUnlockRandom()) {
+	    displayHint(HintTypeEnum.RANDOM);
+	} else {
+	    displayHintDialog(HintTypeEnum.RANDOM);
+	}
     }
 
     public void open50Percent(View view) {
-	// TODO Detecte s'il y a assez de credit pour l'afficher
-	displayHintPopup(HintTypeEnum.HALF);
+	if (_currentPlay != null && _currentPlay.isUnlock50Percent()) {
+	    displayHint(HintTypeEnum.HALF);
+	} else {
+	    displayHintDialog(HintTypeEnum.HALF);
+	}
     }
 
     public void openResponse(View view) {
-	// TODO Detecte s'il y a assez de credit pour l'afficher
-	displayHintPopup(HintTypeEnum.RESPONSE);
+	if (_currentPlay != null && _currentPlay.isUnlockResponse()) {
+	    displayHint(HintTypeEnum.RESPONSE);
+	} else {
+	    displayHintDialog(HintTypeEnum.RESPONSE);
+	}
     }
 }
