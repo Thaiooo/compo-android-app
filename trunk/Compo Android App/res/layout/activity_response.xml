@@ -28,10 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/button_hint"
-        android:onClick="openRandom"
-        android:text="Random"
-        android:textSize="15dp"
-        android:textStyle="bold" />
+        android:drawableTop="@drawable/des"
+        android:onClick="openRandom" />
 
     <Button
         android:id="@+id/button_50"
