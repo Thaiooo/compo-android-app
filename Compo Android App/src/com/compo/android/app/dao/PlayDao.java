@@ -84,10 +84,10 @@ public class PlayDao {
 		    TableConstant.PlayTable.COLUMN_DATE_TIME,
 		    DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.FRANCE).format(
 			    o.getDateTime()));
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_HINT, o.isUnlockHint());
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RANDOM, o.isUnlockRandom());
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_50_PERCENT, o.isUnlock50Percent());
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RESPONSE, o.isUnlockResponse());
+	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_HINT, Boolean.toString(o.isUnlockHint()));
+	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RANDOM, Boolean.toString(o.isUnlockRandom()));
+	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_50_PERCENT, Boolean.toString(o.isUnlock50Percent()));
+	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RESPONSE, Boolean.toString(o.isUnlockResponse()));
 
 	    session.update(TableConstant.PlayTable.TABLE_NAME, values, TableConstant.PlayTable._ID + " = ?",
 		    new String[] { String.valueOf(o.getId()) });
