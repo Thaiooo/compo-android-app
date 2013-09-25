@@ -95,13 +95,11 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 	    return;
 	}
 	Play play = (Play) data.getSerializableExtra(QuizzActivity.EXTRA_MESSAGE_RESULT);
+	_mapQuizzToPlay.put(play.getQuizzId(), play);
+	_quizzView.setMapQuizzToPlay(_mapQuizzToPlay);
 
 	switch (requestCode) {
 	case EXTRA_MESSAGE_REQUEST_CODE:
-
-	    _mapQuizzToPlay.put(play.getQuizzId(), play);
-	    _quizzView.setMapQuizzToPlay(_mapQuizzToPlay);
-
 	    if (resultCode == RESULT_OK) {
 		_quizzView.invalidate();
 		User u = UserFactory.getInstance().getUser(QuizzActivity.this);
