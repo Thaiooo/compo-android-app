@@ -200,6 +200,12 @@ class QuizzPlayerListServices:
                 else:
                     quizzplayer.is_home = False
                 
+                # Credits for hint
+                quizzplayer.credit_to_unlock_half = 0
+                quizzplayer.credit_to_unlock_hint = 0
+                quizzplayer.credit_to_unlock_random = 0
+                quizzplayer.credit_to_unlock_response = 0
+                
                 quizzplayer.save()
                 
                 result.append(quizzplayer)

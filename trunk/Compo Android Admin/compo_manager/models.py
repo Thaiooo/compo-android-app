@@ -67,6 +67,10 @@ class QuizzPlayer(models.Model):
     csc = models.IntegerField()
     earn_credit = models.IntegerField()
     hint = models.CharField(max_length=500)
+    credit_to_unlock_hint = models.IntegerField()
+    credit_to_unlock_random = models.IntegerField()
+    credit_to_unlock_half = models.IntegerField()
+    credit_to_unlock_response = models.IntegerField()
     team = models.ForeignKey(Team)
     player = models.ForeignKey(Player)
 
