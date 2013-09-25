@@ -136,7 +136,10 @@ public class HintDialogActivity extends Activity {
 		dao.update(_currentPlay);
 	    }
 
-	    // TODO Il faut répercuter la maj sur l'écran ResponseActivity
+	    // Pour répercuter la maj sur l'écran ResponseActivity
+	    Intent newIntent = new Intent();
+	    newIntent.putExtra(ResponseActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
+	    setResult(RESULT_OK, newIntent);
 
 	} else {
 	    Intent intent = new Intent(HintDialogActivity.this, StoreActivity.class);
