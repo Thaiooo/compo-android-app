@@ -35,6 +35,9 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
     public static final String EXTRA_MESSAGE_PLAY = "com.compo.android.app.ResponseActivity.MESSAGE.PLAY";
     public static final String EXTRA_MESSAGE_MATCH_ID = "com.compo.android.app.ResponseActivity.MESSAGE.MATCH.ID";
 
+    public static final String EXTRA_MESSAGE_RESULT = "com.compo.android.app.ResponseActivity.MESSAGE.RESULT";
+    public static final int EXTRA_MESSAGE_REQUEST_CODE = 1;
+
     private static Typeface _font;
     private EditText _edit;
     private ImageView _matching;
@@ -45,6 +48,10 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
     private Integer _nbCorrectResponse;
     private Integer _nbQuizz;
     private User _currentUser;
+    private Button _buttonHint;
+    private Button _buttonRandom;
+    private Button _buttonHalf;
+    private Button _buttonResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +89,25 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	Button check = (Button) findViewById(R.id.button_check);
 	check.setTypeface(_font);
 
+	_buttonHint = (Button) findViewById(R.id.button_hint);
+	_buttonRandom = (Button) findViewById(R.id.button_random);
+	_buttonHalf = (Button) findViewById(R.id.button_50);
+	_buttonResponse = (Button) findViewById(R.id.button_100);
+	if (_currentPlay != null) {
+	    if (_currentPlay.isUnlockHint()) {
+		_buttonHint.setText("unlock");
+	    }
+	    if (_currentPlay.isUnlockRandom()) {
+		_buttonRandom.setText("unlock");
+	    }
+	    if (_currentPlay.isUnlock50Percent()) {
+		_buttonHalf.setText("*");
+	    }
+	    if (_currentPlay.isUnlockResponse()) {
+		_buttonResponse.setText("*");
+	    }
+	}
+
 	RelativeLayout layout = (RelativeLayout) findViewById(R.id.responseLayout);
 	layout.setOnClickListener(new View.OnClickListener() {
 	    @Override
@@ -92,7 +118,19 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	});
     }
 
-    public void cancel(View view) {
+    @Override
+    public void back(View view) {
+	Intent newIntent = new Intent();
+	newIntent.putExtra(QuizzActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
+	setResult(RESULT_CANCELED, newIntent);
+	finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+	Intent newIntent = new Intent();
+	newIntent.putExtra(QuizzActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
+	setResult(RESULT_CANCELED, newIntent);
 	finish();
     }
 
@@ -186,7 +224,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	intent.putExtra(HintDialogActivity.MESSAGE_HINT_TYPE, aType);
 	intent.putExtra(HintDialogActivity.MESSAGE_QUIZZ_PLAYER, _currentQuizz);
 	intent.putExtra(HintDialogActivity.MESSAGE_PLAY, _currentPlay);
-	startActivity(intent);
+	startActivityForResult(intent, EXTRA_MESSAGE_REQUEST_CODE);
 	overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
@@ -229,4 +267,27 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	    displayHintDialog(HintTypeEnum.RESPONSE);
 	}
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	if (data == null) {
+	    return;
+	}
+	_currentPlay = (Play) data.getSerializableExtra(ResponseActivity.EXTRA_MESSAGE_RESULT);
+	if (_currentPlay != null) {
+	    if (_currentPlay.isUnlockHint()) {
+		_buttonHint.setText("unlock");
+	    }
+	    if (_currentPlay.isUnlockRandom()) {
+		_buttonRandom.setText("unlock");
+	    }
+	    if (_currentPlay.isUnlock50Percent()) {
+		_buttonHalf.setText("*");
+	    }
+	    if (_currentPlay.isUnlockResponse()) {
+		_buttonResponse.setText("*");
+	    }
+	}
+    }
+
 }
