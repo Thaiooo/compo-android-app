@@ -17,10 +17,8 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/score_bar"
         android:layout_marginTop="10dp"
-        android:onClick="openHint"
-        android:text="Hint"
-        android:textSize="15dp"
-        android:textStyle="bold" />
+        android:drawableTop="@drawable/idee"
+        android:onClick="openHint" />
 
     <Button
         android:id="@+id/button_random"
