@@ -105,7 +105,7 @@
                 android:value="com.compo.android.app.ResponseActivity" />
         </activity>
         <activity
-            android:name=".ShowHintActivity"
+            android:name=".HintDisplayActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DialogTheme" >
             <meta-data
@@ -114,6 +114,14 @@
         </activity>
         <activity
             android:name=".HintDialogActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DialogTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.compo.android.app.ResponseActivity" />
+        </activity>
+        <activity
+            android:name=".SuccessDialogActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DialogTheme" >
             <meta-data
