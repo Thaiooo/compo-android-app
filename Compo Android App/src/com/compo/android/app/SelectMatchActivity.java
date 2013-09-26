@@ -25,8 +25,6 @@ import com.compo.android.app.utils.UserFactory;
 public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 
     public static final String EXTRA_MESSAGE_ARG = "com.compo.android.app.QuizzLevelFragment.MESSAGE.ARG";
-    public static final String EXTRA_MESSAGE_QUIZZ = "com.compo.android.app.QuizzLevelFragment.MESSAGE.QUIZZ";
-    public static final String EXTRA_MESSAGE_GAME = "com.compo.android.app.QuizzLevelFragment.MESSAGE.GAME";
 
     private static Typeface _fontTitle;
 
@@ -99,12 +97,12 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 	@Override
 	protected List<Match> doInBackground(Object... params) {
 	    MatchDao dao = new MatchDao(SelectMatchActivity.this);
-	    List<Match> quizzList = dao.getAllQuizz(((Pack) params[0]).getId());
+	    List<Match> matchList = dao.getAllQuizz(((Pack) params[0]).getId());
 
 	    PlayDao playDao = new PlayDao(SelectMatchActivity.this);
 	    User u = UserFactory.getInstance().getUser(SelectMatchActivity.this);
 	    _mapQuizzToPlay = playDao.getAllPlay(u.getId());
-	    return quizzList;
+	    return matchList;
 	}
 
 	@Override
@@ -115,10 +113,41 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int aPosition, long id) {
-		    Match selectQuizz = aMatchList.get(aPosition);
+		    Match selectMatch = aMatchList.get(aPosition);
+
+		    Match nextMatch = null;
+		    if (aPosition == aMatchList.size()) {
+			nextMatch = aMatchList.get(0);
+		    } else {
+			nextMatch = aMatchList.get(aPosition + 1);
+		    }
+
+		    // for (int i = aPosition + 1; i < aMatchList.size(); i++) {
+		    // Match m = aMatchList.get(i);
+		    //
+		    // int nbResponse = 0;
+		    // for (QuizzPlayer quizz : m.getQuizzs()) {
+		    // if (!quizz.isHide()) {
+		    // continue;
+		    // }
+		    // String playerName = quizz.getPlayer().getName();
+		    // Play play = _mapQuizzToPlay.get(quizz.getId());
+		    // if (play != null && playerName.equals(play.getResponse())) {
+		    // nbResponse++;
+		    // } else {
+		    // break;
+		    // }
+		    // }
+		    //
+		    // if (m.getQuizzs().size() != nbResponse) {
+		    // nextMatch = m;
+		    // }
+		    // }
+
 		    Intent intent = new Intent(SelectMatchActivity.this, QuizzActivity.class);
-		    intent.putExtra(EXTRA_MESSAGE_QUIZZ, selectQuizz);
-		    intent.putExtra(EXTRA_MESSAGE_GAME, _selectPack);
+		    intent.putExtra(QuizzActivity.REQ_MESSAGE_MATCH, selectMatch);
+		    intent.putExtra(QuizzActivity.REQ_MESSAGE_NEXT_MATCH, nextMatch);
+		    intent.putExtra(QuizzActivity.REQ_MESSAGE_GAME, _selectPack);
 		    startActivity(intent);
 
 		    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

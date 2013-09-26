@@ -22,7 +22,11 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 
     // private static final String TAG = QuizzActivity.class.getName();
 
-    public static final String EXTRA_MESSAGE_RESULT = "com.compo.android.app.QuizzActivity.MESSAGE.RESULT";
+    public static final String REQ_MESSAGE_MATCH = "com.compo.android.app.QuizzActivity.MESSAGE.MATCH";
+    public static final String REQ_MESSAGE_NEXT_MATCH = "com.compo.android.app.QuizzActivity.MESSAGE.MATCH.NEXT";
+    public static final String REQ_MESSAGE_GAME = "com.compo.android.app.QuizzActivity.MESSAGE.GAME";
+
+    public static final String RESULT_MESSAGE = "com.compo.android.app.QuizzActivity.MESSAGE.RESULT";
     public static final int EXTRA_MESSAGE_REQUEST_CODE = 1;
 
     private static Typeface _font;
@@ -49,7 +53,7 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 	_mapQuizzToPlay = playDao.getAllPlay(u.getId());
 
 	Intent intent = getIntent();
-	Match selectMatch = (Match) intent.getSerializableExtra(SelectMatchActivity.EXTRA_MESSAGE_QUIZZ);
+	Match selectMatch = (Match) intent.getSerializableExtra(QuizzActivity.REQ_MESSAGE_MATCH);
 
 	_userCredit = (TextView) findViewById(R.id.user_credit);
 	_quizzView = (QuizzView) findViewById(R.id.quizz_view);
@@ -94,7 +98,7 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 	if (data == null) {
 	    return;
 	}
-	Play play = (Play) data.getSerializableExtra(QuizzActivity.EXTRA_MESSAGE_RESULT);
+	Play play = (Play) data.getSerializableExtra(QuizzActivity.RESULT_MESSAGE);
 	_mapQuizzToPlay.put(play.getQuizzId(), play);
 	_quizzView.setMapQuizzToPlay(_mapQuizzToPlay);
 
@@ -106,6 +110,8 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 		_userCredit.setText(u.getCredit() + "");
 		Toast.makeText(this, "You have found " + " " + play.getResponse(), Toast.LENGTH_LONG).show();
 		break;
+	    } else if (resultCode == RESULT_FIRST_USER) {
+		// TODO Cas du next
 	    }
 	}
     }

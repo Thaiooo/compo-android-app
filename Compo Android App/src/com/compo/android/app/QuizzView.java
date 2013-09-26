@@ -92,8 +92,8 @@ public class QuizzView extends View {
 	_paint.setTypeface(font);
 
 	Intent intent = ((Activity) context).getIntent();
-	_selectedMatch = (Match) intent.getSerializableExtra(QuizzActivity.EXTRA_MESSAGE_MATCH);
-	_nextMatch = (Match) intent.getSerializableExtra(QuizzActivity.EXTRA_MESSAGE_NEXT_MATCH);
+	_selectedMatch = (Match) intent.getSerializableExtra(QuizzActivity.REQ_MESSAGE_MATCH);
+	_nextMatch = (Match) intent.getSerializableExtra(QuizzActivity.REQ_MESSAGE_NEXT_MATCH);
 
 	_playerHomeRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_bleu)).getBitmap();
 	_playerAwayRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_red)).getBitmap();
