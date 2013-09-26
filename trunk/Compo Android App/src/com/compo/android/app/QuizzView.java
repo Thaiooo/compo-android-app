@@ -68,6 +68,7 @@ public class QuizzView extends View {
     protected boolean _completed = false;
 
     protected Match _selectedMatch;
+    protected Match _nextMatch;
     protected Map<Long, Play> _mapQuizzToPlay;
     protected int _nbCorrectResponse = 0;
     protected int _nbQuizz = 0;
@@ -91,7 +92,8 @@ public class QuizzView extends View {
 	_paint.setTypeface(font);
 
 	Intent intent = ((Activity) context).getIntent();
-	_selectedMatch = (Match) intent.getSerializableExtra(SelectMatchActivity.EXTRA_MESSAGE_QUIZZ);
+	_selectedMatch = (Match) intent.getSerializableExtra(QuizzActivity.EXTRA_MESSAGE_MATCH);
+	_nextMatch = (Match) intent.getSerializableExtra(QuizzActivity.EXTRA_MESSAGE_NEXT_MATCH);
 
 	_playerHomeRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_bleu)).getBitmap();
 	_playerAwayRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_red)).getBitmap();
