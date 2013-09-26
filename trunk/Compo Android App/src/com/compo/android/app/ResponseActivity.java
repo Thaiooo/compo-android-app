@@ -122,7 +122,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
     @Override
     public void back(View view) {
 	Intent newIntent = new Intent();
-	newIntent.putExtra(QuizzActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
+	newIntent.putExtra(QuizzActivity.RESULT_MESSAGE, _currentPlay);
 	setResult(RESULT_CANCELED, newIntent);
 	finish();
     }
@@ -130,7 +130,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
     @Override
     public void onBackPressed() {
 	Intent newIntent = new Intent();
-	newIntent.putExtra(QuizzActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
+	newIntent.putExtra(QuizzActivity.RESULT_MESSAGE, _currentPlay);
 	setResult(RESULT_CANCELED, newIntent);
 	finish();
     }
@@ -146,7 +146,6 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	double percent = 100 - (distance / (double) response.length() * 100);
 
 	PlayDao dao = new PlayDao(ResponseActivity.this);
-	Intent returnIntent = new Intent();
 	System.out.println("NB QUIZZ=====>" + _nbQuizz);
 	System.out.println("NB RESPONSE=====>" + _nbCorrectResponse);
 
@@ -175,6 +174,9 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 		dao.update(_currentPlay);
 	    }
 
+	    Intent successDialogIntent = new Intent(ResponseActivity.this, SuccessDialogActivity.class);
+	    successDialogIntent.putExtra(SuccessDialogActivity.MESSAGE_QUIZZ_PLAYER, _currentQuizz);
+
 	    // MAJ du pack progress
 	    if (_nbQuizz == _nbCorrectResponse + 1) {
 		PackProgressDao packProgressDao = new PackProgressDao(ResponseActivity.this);
@@ -188,17 +190,14 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 		    progress.setNumberOfSuccessMatch(progress.getNumberOfSuccessMatch() + 1);
 		    packProgressDao.update(progress);
 		}
+
+		// Pour déterminer si il y aura la possibilité de faire suivant
+		// successDialogIntent.putExtra(QuizzActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
+		successDialogIntent.putExtra(SuccessDialogActivity.MESSAGE_DISPLAY_NEXT, true);
+	    } else {
+		successDialogIntent.putExtra(SuccessDialogActivity.MESSAGE_DISPLAY_NEXT, false);
 	    }
 
-	    returnIntent.putExtra(QuizzActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
-	    setResult(RESULT_OK, returnIntent);
-	    // finish();
-
-	    Intent successDialogIntent = new Intent(ResponseActivity.this, SuccessDialogActivity.class);
-	    successDialogIntent.putExtra(SuccessDialogActivity.MESSAGE_QUIZZ_PLAYER, _currentQuizz);
-
-	    // TODO Solution pour déterminer si il y aura la possibilité de faire suivant
-	    // successDialogIntent.putExtra(QuizzActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
 	    startActivityForResult(successDialogIntent, EXTRA_MESSAGE_REQUEST_CODE_SUCCESS_DIALOG);
 
 	} else {
@@ -222,7 +221,8 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 		dao.update(_currentPlay);
 	    }
 
-	    returnIntent.putExtra(QuizzActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
+	    Intent returnIntent = new Intent();
+	    returnIntent.putExtra(QuizzActivity.RESULT_MESSAGE, _currentPlay);
 	    setResult(RESULT_CANCELED, returnIntent);
 	}
 
@@ -309,10 +309,17 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	    // Cas du retour de la page Success dialog
 	    // =========================================================================================================
 
-	    // 2 cas possibles
-	    // Cas 1: OK
-	    // Cas 2: Suivant
-	    // Cas 3: Back
+	    Intent returnIntent = new Intent();
+	    returnIntent.putExtra(QuizzActivity.RESULT_MESSAGE, _currentPlay);
+
+	    // 2 cas possibles:
+	    if (resultCode == RESULT_OK) {
+		// Cas 1: OK ou Back
+		setResult(RESULT_OK, returnIntent);
+	    } else {
+		// Cas 2: Suivant
+		setResult(RESULT_FIRST_USER, returnIntent);
+	    }
 
 	    finish();
 	}
