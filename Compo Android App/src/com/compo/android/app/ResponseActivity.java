@@ -36,7 +36,8 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
     public static final String EXTRA_MESSAGE_MATCH_ID = "com.compo.android.app.ResponseActivity.MESSAGE.MATCH.ID";
 
     public static final String EXTRA_MESSAGE_RESULT = "com.compo.android.app.ResponseActivity.MESSAGE.RESULT";
-    public static final int EXTRA_MESSAGE_REQUEST_CODE = 1;
+    public static final int EXTRA_MESSAGE_REQUEST_CODE_HINT_DIALOG = 1;
+    public static final int EXTRA_MESSAGE_REQUEST_CODE_SUCCESS_DIALOG = 2;
 
     private static Typeface _font;
     private EditText _edit;
@@ -145,7 +146,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	double percent = 100 - (distance / (double) response.length() * 100);
 
 	PlayDao dao = new PlayDao(ResponseActivity.this);
-	Intent newIntent = new Intent();
+	Intent returnIntent = new Intent();
 	System.out.println("NB QUIZZ=====>" + _nbQuizz);
 	System.out.println("NB RESPONSE=====>" + _nbCorrectResponse);
 
@@ -189,9 +190,17 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 		}
 	    }
 
-	    newIntent.putExtra(QuizzActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
-	    setResult(RESULT_OK, newIntent);
-	    finish();
+	    returnIntent.putExtra(QuizzActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
+	    setResult(RESULT_OK, returnIntent);
+	    // finish();
+
+	    Intent successDialogIntent = new Intent(ResponseActivity.this, SuccessDialogActivity.class);
+	    successDialogIntent.putExtra(SuccessDialogActivity.MESSAGE_QUIZZ_PLAYER, _currentQuizz);
+
+	    // TODO Solution pour déterminer si il y aura la possibilité de faire suivant
+	    // successDialogIntent.putExtra(QuizzActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
+	    startActivityForResult(successDialogIntent, EXTRA_MESSAGE_REQUEST_CODE_SUCCESS_DIALOG);
+
 	} else {
 	    if (percent >= 50) {
 		_matching.setImageResource(R.drawable.yellow_card);
@@ -213,8 +222,8 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 		dao.update(_currentPlay);
 	    }
 
-	    newIntent.putExtra(QuizzActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
-	    setResult(RESULT_CANCELED, newIntent);
+	    returnIntent.putExtra(QuizzActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
+	    setResult(RESULT_CANCELED, returnIntent);
 	}
 
     }
@@ -224,14 +233,14 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	intent.putExtra(HintDialogActivity.MESSAGE_HINT_TYPE, aType);
 	intent.putExtra(HintDialogActivity.MESSAGE_QUIZZ_PLAYER, _currentQuizz);
 	intent.putExtra(HintDialogActivity.MESSAGE_PLAY, _currentPlay);
-	startActivityForResult(intent, EXTRA_MESSAGE_REQUEST_CODE);
+	startActivityForResult(intent, EXTRA_MESSAGE_REQUEST_CODE_HINT_DIALOG);
 	overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     private void displayHint(HintTypeEnum aType) {
-	Intent intent = new Intent(ResponseActivity.this, ShowHintActivity.class);
-	intent.putExtra(ShowHintActivity.MESSAGE_HINT_TYPE, aType);
-	intent.putExtra(ShowHintActivity.MESSAGE_QUIZZ_PLAYER, _currentQuizz);
+	Intent intent = new Intent(ResponseActivity.this, HintDisplayActivity.class);
+	intent.putExtra(HintDisplayActivity.MESSAGE_HINT_TYPE, aType);
+	intent.putExtra(HintDisplayActivity.MESSAGE_QUIZZ_PLAYER, _currentQuizz);
 	startActivity(intent);
 	overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
@@ -270,24 +279,44 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	if (data == null) {
-	    return;
+
+	if (requestCode == EXTRA_MESSAGE_REQUEST_CODE_HINT_DIALOG) {
+	    // =========================================================================================================
+	    // Cas du retour de la page Hint dialog
+	    // =========================================================================================================
+
+	    if (data == null) {
+		return;
+	    }
+	    _currentPlay = (Play) data.getSerializableExtra(ResponseActivity.EXTRA_MESSAGE_RESULT);
+	    if (_currentPlay != null) {
+		if (_currentPlay.isUnlockHint()) {
+		    _buttonHint.setText("unlock");
+		}
+		if (_currentPlay.isUnlockRandom()) {
+		    _buttonRandom.setText("unlock");
+		}
+		if (_currentPlay.isUnlock50Percent()) {
+		    _buttonHalf.setText("*");
+		}
+		if (_currentPlay.isUnlockResponse()) {
+		    _buttonResponse.setText("*");
+		}
+	    }
+	} else {
+	    System.out.println("===> ici");
+	    // =========================================================================================================
+	    // Cas du retour de la page Success dialog
+	    // =========================================================================================================
+
+	    // 2 cas possibles
+	    // Cas 1: OK
+	    // Cas 2: Suivant
+	    // Cas 3: Back
+
+	    finish();
 	}
-	_currentPlay = (Play) data.getSerializableExtra(ResponseActivity.EXTRA_MESSAGE_RESULT);
-	if (_currentPlay != null) {
-	    if (_currentPlay.isUnlockHint()) {
-		_buttonHint.setText("unlock");
-	    }
-	    if (_currentPlay.isUnlockRandom()) {
-		_buttonRandom.setText("unlock");
-	    }
-	    if (_currentPlay.isUnlock50Percent()) {
-		_buttonHalf.setText("*");
-	    }
-	    if (_currentPlay.isUnlockResponse()) {
-		_buttonResponse.setText("*");
-	    }
-	}
+
     }
 
 }
