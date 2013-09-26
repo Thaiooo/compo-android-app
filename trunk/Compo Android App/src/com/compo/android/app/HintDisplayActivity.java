@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.compo.android.app.model.QuizzPlayer;
 
-public class ShowHintActivity extends Activity {
+public class HintDisplayActivity extends Activity {
     public final static String MESSAGE_HINT_TYPE = "com.compo.android.app.HintActivity.MESSAGE1";
     public final static String MESSAGE_QUIZZ_PLAYER = "com.compo.android.app.HintActivity.MESSAGE2";
 
@@ -25,7 +25,7 @@ public class ShowHintActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	requestWindowFeature(Window.FEATURE_NO_TITLE);
-	setContentView(R.layout.activity_hint);
+	setContentView(R.layout.activity_hint_display);
 
 	Intent intent = getIntent();
 	_currentQuizz = (QuizzPlayer) intent.getSerializableExtra(MESSAGE_QUIZZ_PLAYER);

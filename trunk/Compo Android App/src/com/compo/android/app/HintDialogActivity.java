@@ -32,7 +32,7 @@ public class HintDialogActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	requestWindowFeature(Window.FEATURE_NO_TITLE);
-	setContentView(R.layout.activity_hint_details);
+	setContentView(R.layout.activity_hint_dialog);
 
 	if (_font == null) {
 	    _font = Typeface.createFromAsset(getAssets(), "MyLuckyPenny.ttf");
@@ -99,9 +99,9 @@ public class HintDialogActivity extends Activity {
 	}
 
 	if (_currentUser.getCredit() >= cost) {
-	    Intent intent = new Intent(HintDialogActivity.this, ShowHintActivity.class);
-	    intent.putExtra(ShowHintActivity.MESSAGE_HINT_TYPE, _hintType);
-	    intent.putExtra(ShowHintActivity.MESSAGE_QUIZZ_PLAYER, _currentQuizz);
+	    Intent intent = new Intent(HintDialogActivity.this, HintDisplayActivity.class);
+	    intent.putExtra(HintDisplayActivity.MESSAGE_HINT_TYPE, _hintType);
+	    intent.putExtra(HintDisplayActivity.MESSAGE_QUIZZ_PLAYER, _currentQuizz);
 	    startActivity(intent);
 	    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
