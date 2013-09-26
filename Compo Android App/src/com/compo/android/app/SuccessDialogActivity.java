@@ -6,12 +6,13 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.compo.android.app.model.QuizzPlayer;
 
 public class SuccessDialogActivity extends Activity {
-    // public final static String MESSAGE_HINT_TYPE = "com.compo.android.app.SuccessDialogActivity.MESSAGE1";
+    public final static String MESSAGE_DISPLAY_NEXT = "com.compo.android.app.SuccessDialogActivity.MESSAGE1";
     public final static String MESSAGE_QUIZZ_PLAYER = "com.compo.android.app.SuccessDialogActivity.MESSAGE2";
 
     private QuizzPlayer _currentQuizz;
@@ -25,7 +26,7 @@ public class SuccessDialogActivity extends Activity {
 
 	Intent intent = getIntent();
 	_currentQuizz = (QuizzPlayer) intent.getSerializableExtra(MESSAGE_QUIZZ_PLAYER);
-	// HintTypeEnum hintType = (HintTypeEnum) intent.getSerializableExtra(MESSAGE_HINT_TYPE);
+	boolean displayNextButton = (Boolean) intent.getSerializableExtra(MESSAGE_DISPLAY_NEXT);
 
 	TextView earnCreditValue = (TextView) findViewById(R.id.earn_credit_value);
 	if (_font == null) {
@@ -33,6 +34,19 @@ public class SuccessDialogActivity extends Activity {
 	}
 	earnCreditValue.setTypeface(_font);
 	earnCreditValue.setText(Integer.toString(_currentQuizz.getEarnCredit()));
+
+	LinearLayout layoutSuccessAndNextButton = (LinearLayout) findViewById(R.id.button_layout);
+	LinearLayout layoutSuccessOnlyButton = (LinearLayout) findViewById(R.id.button_success_only_layout);
+
+	if (displayNextButton) {
+	    layoutSuccessOnlyButton.setVisibility(View.INVISIBLE);
+	    layoutSuccessAndNextButton.setVisibility(View.VISIBLE);
+
+	} else {
+	    layoutSuccessOnlyButton.setVisibility(View.VISIBLE);
+	    layoutSuccessAndNextButton.setVisibility(View.INVISIBLE);
+
+	}
 
     }
 
@@ -52,6 +66,12 @@ public class SuccessDialogActivity extends Activity {
     public void success(View view) {
 	Intent returnIntent = new Intent();
 	setResult(RESULT_OK, returnIntent);
+	finish();
+    }
+
+    public void next(View view) {
+	Intent returnIntent = new Intent();
+	setResult(RESULT_FIRST_USER, returnIntent);
 	finish();
     }
 
