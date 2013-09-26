@@ -40,20 +40,47 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/button_success_only_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/earn_credit_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:visibility="invisible" >
+
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:onClick="success"
+            android:text="OK"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/button_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/earn_credit_layout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:visibility="invisible" >
 
         <Button
-            android:id="@+id/button_ok"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:onClick="success"
             android:text="OK"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:onClick="next"
+            android:text="Next"
             android:textSize="15dp"
             android:textStyle="bold" />
     </LinearLayout>
