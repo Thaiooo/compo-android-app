@@ -292,6 +292,12 @@ class MatchDisplayer():
         
         self.score_home = match.score_home
         
+        self.is_overtime = match.is_overtime
+        
+        self.sog_home = match.sog_home
+        
+        self.sog_away = match.sog_away
+        
         self.name = match.name
         
         self.date = match.date
@@ -299,7 +305,14 @@ class MatchDisplayer():
         self.is_valid = match.is_valid
         
         self.quizzplayer_displayer = []
+        
         for quizzplayer in match.quizz_players.all():
+            
+            if quizzplayer.is_home:
+                self.home_team = quizzplayer.team
+            else:
+                self.away_team = quizzplayer.team
+            
             quizzplayer_displayer = QuizzPlayerDisplayer(quizzplayer)
             self.quizzplayer_displayer.append(quizzplayer_displayer)
 
