@@ -1,7 +1,9 @@
 {% extends "base.html" %}
-
 {% block content %}
+
 <div class="field">
+
+  
   {% load staticfiles %}
   <img src="{% static "terrain.jpg" %}" width="100%" height="100%">
   
@@ -23,10 +25,19 @@
       
   	</div>
   {% endfor %}
+  
   	<a href='/match/delete/{{ match_displayer.id }}/'>Delete</a> 
   	{% if not match_displayer.is_valid %}
   		<a href='/match/validate/{{ match_displayer.id }}/'>Validate</a>
   	{% endif %}   
 	<a href='/match/'>Back</a>
+	<br>
+	<i>
+		{{ match_displayer.name }} ({{ match_displayer.date }}): 
+		{{ match_displayer.home_team }} - {{ match_displayer.away_team }}
+		{{ match_displayer.score_home }} - {{ match_displayer.score_away }}
+		{{ match_displayer.is_overtime }}
+		{{ match_displayer.sog_home }} - {{ match_displayer.sog_away }}
+	</i>  
 </div>
 {% endblock %}

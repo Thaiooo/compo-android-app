@@ -116,3 +116,4 @@ class TeamForm(ModelForm):
     
     class Meta:
         model = Team
+        exclude = ('code',)
