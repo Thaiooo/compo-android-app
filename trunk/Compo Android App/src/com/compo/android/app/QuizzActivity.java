@@ -112,6 +112,7 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 		break;
 	    } else if (resultCode == RESULT_FIRST_USER) {
 		// TODO Cas du next
+		System.out.println("=============> Afficher le suivant");
 	    }
 	}
     }
