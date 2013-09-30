@@ -58,7 +58,7 @@ public class TableConstant {
 
     public static class QuizzPlayerTable implements BaseColumns {
 	public static final String TABLE_NAME = "quizz_player";
-	public static final String COLUMN_QUIZZ_ID = "quizz_id";
+	public static final String COLUMN_MATCH_ID = "match_id";
 	public static final String COLUMN_IS_HIDE = "is_hide";
 	public static final String COLUMN_IS_HOME = "is_home";
 	public static final String COLUMN_IS_COACH = "is_coach";
@@ -96,7 +96,14 @@ public class TableConstant {
 
     public static class PackProgressTable implements BaseColumns {
 	public static final String TABLE_NAME = "pack_progress";
-	public static final String COLUMN_MATCH = "match";
+	public static final String COLUMN_NB_MATCH_SUCCESS = "nb_macth_success";
 	public static final String COLUMN_PACK_ID = "pack_id";
     }
+
+    public static class MatchProgressTable implements BaseColumns {
+	public static final String TABLE_NAME = "match_progress";
+	public static final String COLUMN_NB_QUIZZ_SUCCESS = "nb_quizz_success";
+	public static final String COLUMN_MATCH_ID = "match_id";
+    }
+
 }
