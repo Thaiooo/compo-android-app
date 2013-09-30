@@ -67,12 +67,12 @@ public class QuizzService {
 	if (mathProgress != null) {
 	    nbOfSuccessQuizz = mathProgress.getNumberOfSuccessQuizz();
 	    mathProgress.setNumberOfSuccessQuizz(nbOfSuccessQuizz + 1);
-	    mpDao.add(mathProgress);
+	    mpDao.update(mathProgress);
 	} else {
 	    mathProgress = new MatchProgress();
 	    mathProgress.setMatch(aQuizzPlayer.getMatch());
 	    mathProgress.setNumberOfSuccessQuizz(1);
-	    mpDao.update(mathProgress);
+	    mpDao.add(mathProgress);
 	}
 
 	PackDao packDao = new PackDao(_context);
