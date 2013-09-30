@@ -1,7 +1,5 @@
 package com.compo.android.app;
 
-import java.util.Date;
-
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
@@ -16,24 +14,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.compo.android.app.dao.PackDao;
-import com.compo.android.app.dao.PackProgressDao;
-import com.compo.android.app.dao.PlayDao;
-import com.compo.android.app.model.Pack;
-import com.compo.android.app.model.PackProgress;
 import com.compo.android.app.model.Play;
 import com.compo.android.app.model.QuizzPlayer;
-import com.compo.android.app.model.User;
-import com.compo.android.app.utils.UserFactory;
+import com.compo.android.app.service.QuizzService;
+import com.compo.android.app.service.ServiceResultSave;
 
 public class ResponseActivity extends AbstractLSEFragmentActivity {
     // private static final String TAG = ResponseActivity.class.getName();
 
-    public static final String EXTRA_MESSAGE_QUIZZ_SIZE = "com.compo.android.app.ResponseActivity.MESSAGE.QUIZZ.SIZE";
-    public static final String EXTRA_MESSAGE_RESPONSE_SIZE = "com.compo.android.app.ResponseActivity.MESSAGE.RESPONSE.SIZE";
     public static final String EXTRA_MESSAGE_QUIZZ = "com.compo.android.app.ResponseActivity.MESSAGE.QUIZZ";
     public static final String EXTRA_MESSAGE_PLAY = "com.compo.android.app.ResponseActivity.MESSAGE.PLAY";
-    public static final String EXTRA_MESSAGE_MATCH_ID = "com.compo.android.app.ResponseActivity.MESSAGE.MATCH.ID";
 
     public static final String EXTRA_MESSAGE_RESULT = "com.compo.android.app.ResponseActivity.MESSAGE.RESULT";
     public static final int EXTRA_MESSAGE_REQUEST_CODE_HINT_DIALOG = 1;
@@ -42,13 +32,8 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
     private static Typeface _font;
     private EditText _edit;
     private ImageView _matching;
-    private Pack _currentPack;
     private QuizzPlayer _currentQuizz;
     private Play _currentPlay;
-    private Long _matchId;
-    private Integer _nbCorrectResponse;
-    private Integer _nbQuizz;
-    private User _currentUser;
     private Button _buttonHint;
     private Button _buttonRandom;
     private Button _buttonHalf;
@@ -63,14 +48,6 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	Intent intent = getIntent();
 	_currentQuizz = (QuizzPlayer) intent.getSerializableExtra(EXTRA_MESSAGE_QUIZZ);
 	_currentPlay = (Play) intent.getSerializableExtra(EXTRA_MESSAGE_PLAY);
-	_matchId = (Long) intent.getSerializableExtra(EXTRA_MESSAGE_MATCH_ID);
-	_nbCorrectResponse = (Integer) intent.getSerializableExtra(EXTRA_MESSAGE_RESPONSE_SIZE);
-	_nbQuizz = (Integer) intent.getSerializableExtra(EXTRA_MESSAGE_QUIZZ_SIZE);
-
-	_currentUser = UserFactory.getInstance().getUser(this);
-
-	PackDao packDao = new PackDao(this);
-	_currentPack = packDao.findPackByMatch(_matchId);
 
 	_edit = (EditText) findViewById(R.id.edit_responseMMM);
 	if (_currentPlay != null) {
@@ -145,59 +122,19 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	double distance = StringUtils.getLevenshteinDistance(response, playerName);
 	double percent = 100 - (distance / (double) response.length() * 100);
 
-	PlayDao dao = new PlayDao(ResponseActivity.this);
-	System.out.println("NB QUIZZ=====>" + _nbQuizz);
-	System.out.println("NB RESPONSE=====>" + _nbCorrectResponse);
-
+	QuizzService quizzService = new QuizzService(ResponseActivity.this);
 	if (percent == 100) {
-	    // =========================================
-	    // TODO Ceci dans etre dans une transaction
-	    // =========================================
 
-	    // MAJ du user
-	    User user = UserFactory.getInstance().getUser(ResponseActivity.this);
-	    user.setCredit(user.getCredit() + _currentQuizz.getEarnCredit());
-	    UserFactory.getInstance().updateUser(ResponseActivity.this);
-
-	    // MAJ du play
-	    if (_currentPlay == null) {
-		_currentPlay = new Play();
-		_currentPlay.setQuizzId(_currentQuizz.getId());
-		_currentPlay.setUserId(UserFactory.getInstance().getUser(ResponseActivity.this).getId());
-	    }
-	    _currentPlay.setResponse(response);
-	    _currentPlay.setDateTime(new Date());
-
-	    if (_currentPlay.getId() == 0) {
-		dao.add(_currentPlay);
-	    } else {
-		dao.update(_currentPlay);
-	    }
+	    ServiceResultSave result = quizzService.saveSuccessResponse(_currentQuizz, _currentPlay, response);
+	    _currentPlay = result.getPlay();
 
 	    Intent successDialogIntent = new Intent(ResponseActivity.this, SuccessDialogActivity.class);
 	    successDialogIntent.putExtra(SuccessDialogActivity.MESSAGE_QUIZZ_PLAYER, _currentQuizz);
-
-	    // MAJ du pack progress
-	    if (_nbQuizz == _nbCorrectResponse + 1) {
-		PackProgressDao packProgressDao = new PackProgressDao(ResponseActivity.this);
-		PackProgress progress = packProgressDao.find(_currentPack);
-		if (progress == null) {
-		    progress = new PackProgress();
-		    progress.setNumberOfSuccessMatch(1);
-		    progress.setPack(_currentPack);
-		    packProgressDao.add(progress);
-		} else {
-		    progress.setNumberOfSuccessMatch(progress.getNumberOfSuccessMatch() + 1);
-		    packProgressDao.update(progress);
-		}
-
-		// Pour déterminer si il y aura la possibilité de faire suivant
-		// successDialogIntent.putExtra(QuizzActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
+	    if (result.isAllQuizzSuccess()) {
 		successDialogIntent.putExtra(SuccessDialogActivity.MESSAGE_DISPLAY_NEXT, true);
 	    } else {
 		successDialogIntent.putExtra(SuccessDialogActivity.MESSAGE_DISPLAY_NEXT, false);
 	    }
-
 	    startActivityForResult(successDialogIntent, EXTRA_MESSAGE_REQUEST_CODE_SUCCESS_DIALOG);
 
 	} else {
@@ -207,20 +144,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 		_matching.setImageResource(R.drawable.red_card);
 	    }
 
-	    if (_currentPlay == null) {
-		_currentPlay = new Play();
-		_currentPlay.setDateTime(new Date());
-		_currentPlay.setQuizzId(_currentQuizz.getId());
-		_currentPlay.setUserId(UserFactory.getInstance().getUser(ResponseActivity.this).getId());
-		_currentPlay.setResponse(response);
-		dao.add(_currentPlay);
-
-	    } else {
-		_currentPlay.setResponse(response);
-		_currentPlay.setDateTime(new Date());
-		dao.update(_currentPlay);
-	    }
-
+	    _currentPlay = quizzService.saveInccorectResponse(_currentQuizz, _currentPlay, response);
 	    Intent returnIntent = new Intent();
 	    returnIntent.putExtra(QuizzActivity.RESULT_MESSAGE, _currentPlay);
 	    setResult(RESULT_CANCELED, returnIntent);
