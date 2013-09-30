@@ -57,7 +57,7 @@ public class PackProgressDao {
 	    req.append(", ");
 	    // Index 1
 	    req.append("p.");
-	    req.append(TableConstant.PackProgressTable.COLUMN_MATCH);
+	    req.append(TableConstant.PackProgressTable.COLUMN_NB_MATCH_SUCCESS);
 	    req.append(", ");
 	    // Index 2
 	    req.append("p.");
@@ -117,7 +117,7 @@ public class PackProgressDao {
 	    req.append(", ");
 	    // Index 1
 	    req.append("p.");
-	    req.append(TableConstant.PackProgressTable.COLUMN_MATCH);
+	    req.append(TableConstant.PackProgressTable.COLUMN_NB_MATCH_SUCCESS);
 	    req.append(", ");
 	    // Index 2
 	    req.append("p.");
@@ -161,7 +161,7 @@ public class PackProgressDao {
 	    session = dataBaseHeleper.getWritableDatabase();
 
 	    ContentValues values = new ContentValues();
-	    values.put(TableConstant.PackProgressTable.COLUMN_MATCH, aProgress.getNumberOfSuccessMatch());
+	    values.put(TableConstant.PackProgressTable.COLUMN_NB_MATCH_SUCCESS, aProgress.getNumberOfSuccessMatch());
 
 	    session.update(TableConstant.PackProgressTable.TABLE_NAME, values, TableConstant.PackProgressTable._ID
 		    + " = ?", new String[] { String.valueOf(aProgress.getId()) });
@@ -183,7 +183,7 @@ public class PackProgressDao {
 	    session = dataBaseHeleper.getWritableDatabase();
 
 	    ContentValues values = new ContentValues();
-	    values.put(TableConstant.PackProgressTable.COLUMN_MATCH, aProgress.getNumberOfSuccessMatch());
+	    values.put(TableConstant.PackProgressTable.COLUMN_NB_MATCH_SUCCESS, aProgress.getNumberOfSuccessMatch());
 	    values.put(TableConstant.PackProgressTable.COLUMN_PACK_ID, aProgress.getPack().getId());
 
 	    session.insert(TableConstant.PackProgressTable.TABLE_NAME, null, values);
