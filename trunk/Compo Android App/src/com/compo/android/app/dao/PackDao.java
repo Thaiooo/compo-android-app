@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
@@ -262,7 +263,7 @@ public class PackDao {
 	anIndex++;
 	match.setScoreHome(aCursor.getInt(anIndex));
 	anIndex++;
-	boolean isOvertime = Boolean.parseBoolean(aCursor.getString(anIndex));
+	boolean isOvertime = BooleanUtils.toBoolean(aCursor.getInt(anIndex));
 	match.setOvertime(isOvertime);
 	anIndex++;
 	String quizzSogHome = aCursor.getString(anIndex);

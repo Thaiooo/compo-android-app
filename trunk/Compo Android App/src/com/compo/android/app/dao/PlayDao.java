@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.lang3.BooleanUtils;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -84,10 +86,13 @@ public class PlayDao {
 		    TableConstant.PlayTable.COLUMN_DATE_TIME,
 		    DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.FRANCE).format(
 			    o.getDateTime()));
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_HINT, Boolean.toString(o.isUnlockHint()));
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RANDOM, Boolean.toString(o.isUnlockRandom()));
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_50_PERCENT, Boolean.toString(o.isUnlock50Percent()));
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RESPONSE, Boolean.toString(o.isUnlockResponse()));
+	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_HINT, BooleanUtils.toIntegerObject(o.isUnlockHint()));
+	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RANDOM,
+		    BooleanUtils.toIntegerObject(o.isUnlockRandom()));
+	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_50_PERCENT,
+		    BooleanUtils.toIntegerObject(o.isUnlock50Percent()));
+	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RESPONSE,
+		    BooleanUtils.toIntegerObject(o.isUnlockResponse()));
 
 	    session.update(TableConstant.PlayTable.TABLE_NAME, values, TableConstant.PlayTable._ID + " = ?",
 		    new String[] { String.valueOf(o.getId()) });
@@ -115,10 +120,13 @@ public class PlayDao {
 	    values.put(TableConstant.PlayTable.COLUMN_QUIZZ_ID, o.getQuizzId());
 	    values.put(TableConstant.PlayTable.COLUMN_USER_ID, o.getUserId());
 	    values.put(TableConstant.PlayTable.COLUMN_RESPONSE, o.getResponse());
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_HINT, Boolean.toString(o.isUnlockHint()));
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RANDOM, Boolean.toString(o.isUnlockRandom()));
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_50_PERCENT, Boolean.toString(o.isUnlock50Percent()));
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RESPONSE, Boolean.toString(o.isUnlockResponse()));
+	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_HINT, BooleanUtils.toIntegerObject(o.isUnlockHint()));
+	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RANDOM,
+		    BooleanUtils.toIntegerObject(o.isUnlockRandom()));
+	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_50_PERCENT,
+		    BooleanUtils.toIntegerObject(o.isUnlock50Percent()));
+	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RESPONSE,
+		    BooleanUtils.toIntegerObject(o.isUnlockResponse()));
 
 	    session.insert(TableConstant.PlayTable.TABLE_NAME, null, values);
 
@@ -168,13 +176,13 @@ public class PlayDao {
 		long itemQuizzId = c.getLong(c.getColumnIndexOrThrow(TableConstant.PlayTable.COLUMN_QUIZZ_ID));
 		long iteUserId = c.getLong(c.getColumnIndexOrThrow(TableConstant.PlayTable.COLUMN_USER_ID));
 		String itemResponse = c.getString(c.getColumnIndexOrThrow(TableConstant.PlayTable.COLUMN_RESPONSE));
-		boolean isUnlockHint = Boolean.parseBoolean(c.getString(c
+		boolean isUnlockHint = BooleanUtils.toBoolean(c.getInt(c
 			.getColumnIndexOrThrow(TableConstant.PlayTable.COLUMN_IS_UNLOCK_HINT)));
-		boolean isUnlockRandom = Boolean.parseBoolean(c.getString(c
+		boolean isUnlockRandom = BooleanUtils.toBoolean(c.getInt(c
 			.getColumnIndexOrThrow(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RANDOM)));
-		boolean isUnlock50percent = Boolean.parseBoolean(c.getString(c
+		boolean isUnlock50percent = BooleanUtils.toBoolean(c.getInt(c
 			.getColumnIndexOrThrow(TableConstant.PlayTable.COLUMN_IS_UNLOCK_50_PERCENT)));
-		boolean isUnlockResponse = Boolean.parseBoolean(c.getString(c
+		boolean isUnlockResponse = BooleanUtils.toBoolean(c.getInt(c
 			.getColumnIndexOrThrow(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RESPONSE)));
 
 		Play p = new Play();
