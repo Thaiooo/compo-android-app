@@ -32,25 +32,25 @@ urlpatterns = patterns('',
     #Theme manager
     url(r'^theme/create/$', views.create_theme, name="create-theme"),
     url(r'^theme/update/(?P<theme_id>\d+)/$', views.update_theme, name="update-theme"),
-    url(r'^theme/delete/(?P<theme_id>\d+)/$', views.delete_theme, name="delete-theme"),
+#     url(r'^theme/delete/(?P<theme_id>\d+)/$', views.delete_theme, name="delete-theme"),
     url(r'^theme/$', views.index_theme, name="index-theme"),
     
     #Pack manager
     url(r'^pack/create/$', views.create_pack, name="create-pack"),
     url(r'^pack/update/(?P<pack_id>\d+)/$', views.update_pack, name="update-pack"),
-    url(r'^pack/delete/(?P<pack_id>\d+)/$', views.delete_pack, name="delete-pack"),
+#     url(r'^pack/delete/(?P<pack_id>\d+)/$', views.delete_pack, name="delete-pack"),
     url(r'^pack/$', views.index_pack, name="index-pack"),
     
     #Team manager
     url(r'^team/create/$', views.create_team, name="create-team"),
     url(r'^team/update/(?P<team_id>\d+)/$', views.update_team, name="update-team"),
-    url(r'^team/delete/(?P<team_id>\d+)/$', views.delete_team, name="delete-team"),
+#     url(r'^team/delete/(?P<team_id>\d+)/$', views.delete_team, name="delete-team"),
     url(r'^team/$', views.index_team, name="index-team"),
     
     #Match manager
     url(r'^match/create/$', login_required(views.MatchWizard.as_view([MatchFormTeamsStep1, MatchFormUploadQuizzPlayersStep2, MatchFormMatchStep3])), name="create-match"),
     url(r'^match/update/(?P<match_id>\d+)/$', views.update_match, name="update-match"),
-    url(r'^match/delete/(?P<match_id>\d+)/$', views.delete_match, name="delete-match"),
+#     url(r'^match/delete/(?P<match_id>\d+)/$', views.delete_match, name="delete-match"),
     url(r'^match/validate/(?P<match_id>\d+)/$', views.validate_match, name="validate-match"),
     url(r'^match/$', views.index_match, name="index-match"),
     

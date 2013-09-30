@@ -69,12 +69,12 @@ def update_theme(request, theme_id):
     variables = RequestContext(request, {'form':form, 'theme_id':theme_id})
     return render_to_response('create_theme.html', variables)
 
-@login_required(redirect_field_name='/accounts/login')
-def delete_theme(request, theme_id):
-    theme = get_object_or_404(Theme, id=theme_id)
-    theme.delete()
-    
-    return HttpResponseRedirect('/theme')
+# @login_required(redirect_field_name='/accounts/login')
+# def delete_theme(request, theme_id):
+#     theme = get_object_or_404(Theme, id=theme_id)
+#     theme.delete()
+#     
+#     return HttpResponseRedirect('/theme')
 
 
 @login_required(redirect_field_name='/accounts/login')
@@ -112,12 +112,12 @@ def update_pack(request, pack_id):
     variables = RequestContext(request, {'form':form, 'pack_id':pack_id})
     return render_to_response('create_pack.html', variables)
 
-@login_required(redirect_field_name='/accounts/login')
-def delete_pack(request, pack_id):
-    pack = get_object_or_404(Pack, id=pack_id)
-    pack.delete()
-    
-    return HttpResponseRedirect('/pack')
+# @login_required(redirect_field_name='/accounts/login')
+# def delete_pack(request, pack_id):
+#     pack = get_object_or_404(Pack, id=pack_id)
+#     pack.delete()
+#     
+#     return HttpResponseRedirect('/pack')
 
 
 @login_required(redirect_field_name='/accounts/login')
@@ -171,11 +171,11 @@ def update_team(request, team_id):
     variables = RequestContext(request, {'form':form, 'team_id':team_id})
     return render_to_response('create_team.html', variables)
 
-@login_required(redirect_field_name='/accounts/login')
-def delete_team(request, team_id):
-    team = get_object_or_404(Team, id=team_id)
-    team.delete()
-    return HttpResponseRedirect('/team')
+# @login_required(redirect_field_name='/accounts/login')
+# def delete_team(request, team_id):
+#     team = get_object_or_404(Team, id=team_id)
+#     team.delete()
+#     return HttpResponseRedirect('/team')
 
 @login_required(redirect_field_name='/accounts/login')
 def index_team(request):
@@ -207,11 +207,6 @@ class MatchWizard(SessionWizardView):
         if file_form.is_valid():
             compo_file = file_form.cleaned_data['file']
         
-        service = QuizzPlayerListServices() 
-        service.insert_unknown_players = True
-        
-        quizzplayers = service.get_quizzplayers_from_file(compo_file, home_team, away_team)
-        
         match_form = form_list[2]
         
         if match_form.is_valid():
@@ -222,10 +217,14 @@ class MatchWizard(SessionWizardView):
             match.score_away = match_form.cleaned_data['score_away']
             match.score_home = match_form.cleaned_data['score_home']
             match.pack = match_form.cleaned_data['pack']
+            match.order_number = match_form.cleaned_data['order_number']
             
             match.save()
             
-            match.quizz_players = quizzplayers
+            service = QuizzPlayerListServices() 
+            service.insert_unknown_players = True
+        
+            service.get_quizzplayers_from_file(compo_file, home_team, away_team, match)
             
         return HttpResponseRedirect('/match')
 
@@ -251,15 +250,15 @@ def validate_match(request, match_id):
     
     return HttpResponseRedirect('/match')
 
-@login_required(redirect_field_name='/')    
-def delete_match(request, match_id):
-    match = get_object_or_404(Match, id=match_id)
-    
-    for quizzplayer in match.quizz_players.all():
-        quizzplayer.delete()
-    
-    match.delete()
-    return HttpResponseRedirect('/match')
+# @login_required(redirect_field_name='/')    
+# def delete_match(request, match_id):
+#     match = get_object_or_404(Match, id=match_id)
+#     
+#     for quizzplayer in match.quizz_players.all():
+#         quizzplayer.delete()
+#     
+#     match.delete()
+#     return HttpResponseRedirect('/match')
     
 @login_required(redirect_field_name='/accounts/login')    
 def index_match(request):

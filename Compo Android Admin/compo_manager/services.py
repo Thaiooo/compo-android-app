@@ -58,7 +58,7 @@ class QuizzPlayerListServices:
         self.insert_unknown_players = False
         
     
-    def get_quizzplayers_from_file(self, compo_file, home_team, away_team):
+    def get_quizzplayers_from_file(self, compo_file, home_team, away_team, match):
         cpt = 0
         # Check the file
         for line in compo_file:
@@ -74,9 +74,7 @@ class QuizzPlayerListServices:
         if cpt != NB_LINES:
             raise ServiceError('File contents %i lines instead of %i lines'%(cpt, NB_LINES))
         
-        result = self.__compute_quizzplayers(home_team, away_team)
-            
-        return result
+        self.__compute_quizzplayers(home_team, away_team, match)
     
     
     def __process_line_checking(self, line):
@@ -131,9 +129,7 @@ class QuizzPlayerListServices:
         return name.replace(HIDDEN_PLAYER, '').replace(GOAL_PLAYER, '').replace(OG_PLAYER, '').replace(CAPTAIN_PLAYER, '').upper()
     
     
-    def __compute_quizzplayers(self, home_team, away_team):
-        result = []
-        
+    def __compute_quizzplayers(self, home_team, away_team, match):
         for key in self.field_map:
             
             player_list = self.field_map[key]
@@ -183,7 +179,7 @@ class QuizzPlayerListServices:
                 current_name = current_table[0]
                 current_hint = current_table[1]
                     
-                quizzplayer = self.__get_quizzplayer(current_name, current_hint, team, position)
+                quizzplayer = self.__get_quizzplayer(current_name, current_hint, team, position, match)
                 
                 if position != 'C':
                     current_x = x_s[cpt]
@@ -208,16 +204,15 @@ class QuizzPlayerListServices:
                 
                 quizzplayer.save()
                 
-                result.append(quizzplayer)
                 
                 cpt = cpt + 1
             
-        return result
-                
     
-    def __get_quizzplayer(self, name, hint, team, position):
+    def __get_quizzplayer(self, name, hint, team, position, match):
         
         quizzplayer = QuizzPlayer()
+        
+        quizzplayer.match = match
         
         player = Player.objects.get(name=self.__get_player_name(name))
         
@@ -306,7 +301,7 @@ class MatchDisplayer():
         
         self.quizzplayer_displayer = []
         
-        for quizzplayer in match.quizz_players.all():
+        for quizzplayer in match.quizzplayer_set.all():
             
             if quizzplayer.is_home:
                 self.home_team = quizzplayer.team
