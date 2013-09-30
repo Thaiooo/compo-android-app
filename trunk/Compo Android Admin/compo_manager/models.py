@@ -55,6 +55,26 @@ class Player(models.Model):
     def __unicode__(self):
         return self.name
 
+class Match(models.Model):
+    
+    class Meta:
+        permissions = (('validate', 'Can validate a match'))
+        
+        
+    score_home = models.IntegerField()
+    score_away = models.IntegerField()
+    is_overtime = models.BooleanField()
+    sog_home = models.IntegerField(null=True, blank=True)
+    sog_away = models.IntegerField(null=True, blank=True)
+    name = models.CharField(max_length=100, unique=True)
+    date = models.DateField()
+    order_number = models.IntegerField()
+    pack = models.ForeignKey(Pack)
+    is_valid = models.BooleanField()
+    update_time = models.DateTimeField()
+    
+    def __unicode__(self):
+        return self.name
 
 class QuizzPlayer(models.Model):
     x = models.FloatField()
@@ -73,31 +93,10 @@ class QuizzPlayer(models.Model):
     credit_to_unlock_response = models.IntegerField()
     team = models.ForeignKey(Team)
     player = models.ForeignKey(Player)
-
+    match = models.ForeignKey(Match)
+    
     def __unicode__(self):
         return self.player.name
-
-
-class Match(models.Model):
-    
-    class Meta:
-        permissions = (('validate', 'Can validate a match'))
-        
-        
-    score_home = models.IntegerField()
-    score_away = models.IntegerField()
-    is_overtime = models.BooleanField()
-    sog_home = models.IntegerField(null=True, blank=True)
-    sog_away = models.IntegerField(null=True, blank=True)
-    name = models.CharField(max_length=100, unique=True)
-    date = models.DateField()
-    pack = models.ForeignKey(Pack)
-    is_valid = models.BooleanField()
-    update_time = models.DateTimeField()
-    quizz_players = models.ManyToManyField(QuizzPlayer)
-    
-    def __unicode__(self):
-        return self.name
 
    
 #********************* Forms *********************** 

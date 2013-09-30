@@ -6,7 +6,6 @@
 	{{ form.as_p }}
 	<input type="submit" value="Submit" />
 	</form>
-	<a href='/pack/delete/{{ pack_id }}/'>Delete</a>
 {% else %}
 	<form action="/pack/create/" method="post">{% csrf_token %}
 	{{ form.as_p }}
