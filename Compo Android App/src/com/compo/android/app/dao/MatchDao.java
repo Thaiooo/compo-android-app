@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
@@ -215,7 +216,7 @@ public class MatchDao {
 		    index++;
 		    int quizzScoreHome = c.getInt(index);
 		    index++;
-		    boolean isOvertime = Boolean.parseBoolean(c.getString(index));
+		    boolean isOvertime = BooleanUtils.toBoolean(c.getInt(index));
 		    index++;
 		    String quizzSogHome = c.getString(index);
 		    index++;
@@ -279,11 +280,11 @@ public class MatchDao {
 	anIndex++;
 	quizzPlayer.setY(aCursor.getInt(anIndex));
 	anIndex++;
-	quizzPlayer.setHide(Boolean.parseBoolean(aCursor.getString(anIndex)));
+	quizzPlayer.setHide(BooleanUtils.toBoolean(aCursor.getInt(anIndex)));
 	anIndex++;
-	quizzPlayer.setHome(Boolean.parseBoolean(aCursor.getString(anIndex)));
+	quizzPlayer.setHome(BooleanUtils.toBoolean(aCursor.getInt(anIndex)));
 	anIndex++;
-	quizzPlayer.setCoach(Boolean.parseBoolean(aCursor.getString(anIndex)));
+	quizzPlayer.setCoach(BooleanUtils.toBoolean(aCursor.getInt(anIndex)));
 	anIndex++;
 	quizzPlayer.setCsc(aCursor.getInt(anIndex));
 	anIndex++;
@@ -291,7 +292,7 @@ public class MatchDao {
 	anIndex++;
 	quizzPlayer.setHint(aCursor.getString(anIndex));
 	anIndex++;
-	quizzPlayer.setCaptain(Boolean.parseBoolean(aCursor.getString(anIndex)));
+	quizzPlayer.setCaptain(BooleanUtils.toBoolean(aCursor.getInt(anIndex)));
 	anIndex++;
 	quizzPlayer.setCreditToUnlockHint(aCursor.getInt(anIndex));
 	anIndex++;

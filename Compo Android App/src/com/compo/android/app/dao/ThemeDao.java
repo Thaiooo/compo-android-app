@@ -9,6 +9,8 @@ import com.compo.android.app.model.Theme;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.BooleanUtils;
+
 public class ThemeDao {
     private DataBaseHelper dataBaseHeleper;
 
@@ -48,7 +50,7 @@ public class ThemeDao {
 		long itemId = c.getLong(c.getColumnIndexOrThrow(TableConstant.ThemeTable._ID));
 		String itemName = c.getString(c.getColumnIndexOrThrow(TableConstant.ThemeTable.COLUMN_NAME));
 		String itemCode = c.getString(c.getColumnIndexOrThrow(TableConstant.ThemeTable.COLUMN_CODE));
-		boolean itemLock = Boolean.valueOf(c.getString(c
+		boolean itemLock = BooleanUtils.toBoolean(c.getInt(c
 			.getColumnIndexOrThrow(TableConstant.ThemeTable.COLUMN_IS_LOCK)));
 		int itemCreditLimit = c.getInt(c.getColumnIndexOrThrow(TableConstant.ThemeTable.COLUMN_CREDIT_LIMIT));
 
