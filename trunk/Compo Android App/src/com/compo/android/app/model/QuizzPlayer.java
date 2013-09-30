@@ -23,6 +23,7 @@ public class QuizzPlayer implements Serializable {
     private int creditToUnlockRandom;
     private int creditToUnlockHalf;
     private int creditToUnlockResponse;
+    private Match match;
 
     public long getId() {
 	return id;
@@ -158,6 +159,14 @@ public class QuizzPlayer implements Serializable {
 
     public void setCreditToUnlockResponse(int creditToUnlockResponse) {
 	this.creditToUnlockResponse = creditToUnlockResponse;
+    }
+
+    public Match getMatch() {
+	return match;
+    }
+
+    public void setMatch(Match match) {
+	this.match = match;
     }
 
 }
