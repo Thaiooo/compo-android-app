@@ -135,14 +135,7 @@ def create_team(request):
     if request.method == 'POST':
         form = TeamForm(request.POST)
         if form.is_valid():    
-            name = form.cleaned_data['name']
-            code = name.replace(' ','').upper()
-            
-            team = Team()
-            team.name = name
-            team.code = code
-            
-            team.save()
+            form.save()
             
             return HttpResponseRedirect('/team')
     else:
