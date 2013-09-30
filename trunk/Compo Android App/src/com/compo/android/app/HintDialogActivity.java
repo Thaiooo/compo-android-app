@@ -10,10 +10,10 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.compo.android.app.dao.PlayDao;
 import com.compo.android.app.model.Play;
 import com.compo.android.app.model.QuizzPlayer;
 import com.compo.android.app.model.User;
+import com.compo.android.app.service.QuizzService;
 import com.compo.android.app.utils.UserFactory;
 
 public class HintDialogActivity extends Activity {
@@ -113,7 +113,6 @@ public class HintDialogActivity extends Activity {
 		_currentPlay.setQuizzId(_currentQuizz.getId());
 		_currentPlay.setUserId(_currentUser.getId());
 	    }
-	    PlayDao dao = new PlayDao(HintDialogActivity.this);
 	    switch (_hintType) {
 	    case HINT:
 		_currentPlay.setUnlockHint(true);
@@ -130,11 +129,8 @@ public class HintDialogActivity extends Activity {
 	    }
 	    _currentPlay.setDateTime(new Date());
 
-	    if (_currentPlay.getId() == 0) {
-		dao.add(_currentPlay);
-	    } else {
-		dao.update(_currentPlay);
-	    }
+	    QuizzService service = new QuizzService(HintDialogActivity.this);
+	    _currentPlay = service.savePlay(_currentPlay);
 
 	    // Pour répercuter la maj sur l'écran ResponseActivity
 	    Intent newIntent = new Intent();

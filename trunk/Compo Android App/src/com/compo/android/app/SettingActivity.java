@@ -5,15 +5,16 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.compo.android.app.dao.PackProgressDao;
 import com.compo.android.app.dao.PlayDao;
 import com.compo.android.app.model.User;
 import com.compo.android.app.model.User.Sound;
+import com.compo.android.app.service.QuizzService;
 import com.compo.android.app.utils.UserFactory;
 
 public class SettingActivity extends Activity {
@@ -70,20 +71,8 @@ public class SettingActivity extends Activity {
 		.setPositiveButton(R.string.button_validate, new DialogInterface.OnClickListener() {
 		    public void onClick(DialogInterface dialog, int id) {
 
-			// =================================
-			// TODO: TRANSACTION ICI!!!
-			// =================================
-
-			PlayDao dao = new PlayDao(SettingActivity.this);
-			dao.eraseAll();
-
-			PackProgressDao progressDao = new PackProgressDao(SettingActivity.this);
-			progressDao.eraseAll();
-
-			_currentUser.setOverallTime(0);
-			_currentUser.setCredit(0);
-
-			UserFactory.getInstance().updateUser(SettingActivity.this);
+			QuizzService service = new QuizzService(SettingActivity.this);
+			service.resetAllUserData();
 
 			_trash.setBackgroundResource(R.drawable.trash_empty);
 		    }
@@ -110,4 +99,8 @@ public class SettingActivity extends Activity {
 	finish();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+	return false;
+    }
 }
