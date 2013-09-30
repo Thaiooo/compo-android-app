@@ -26,7 +26,7 @@ public class PackDao {
 	dataBaseHeleper = new DataBaseHelper(context);
     }
 
-    public Pack findPackByMatch(Long aMatchId) {
+    public Pack findPackLightByMatch(Long aMatchId) {
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = null;
 	Cursor c = null;
@@ -110,38 +110,7 @@ public class PackDao {
 
 		index++;
 		if (c.getLong(index) != 0) {
-		    Match match = new Match();
-		    match.setId(c.getLong(index));
-		    index++;
-		    match.setName(c.getString(index));
-		    index++;
-		    String matchDate = c.getString(index);
-		    try {
-			java.util.Date d = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE).parse(matchDate);
-			Date date = new Date(d.getTime());
-			match.setDate(date);
-		    } catch (ParseException e) {
-			e.printStackTrace();
-		    }
-		    index++;
-		    match.setScoreAway(c.getInt(index));
-		    index++;
-		    match.setScoreHome(c.getInt(index));
-		    index++;
-		    boolean isOvertime = Boolean.parseBoolean(c.getString(index));
-		    match.setOvertime(isOvertime);
-		    index++;
-		    String quizzSogHome = c.getString(index);
-		    if (StringUtils.isNotBlank(quizzSogHome)) {
-			match.setSogHome(Integer.getInteger(quizzSogHome));
-		    }
-		    index++;
-		    String quizzSogAway = c.getString(index);
-		    if (StringUtils.isNotBlank(quizzSogAway)) {
-			match.setSogAway(Integer.getInteger(quizzSogAway));
-		    }
-
-		    pack.getMatchs().add(match);
+		    fillMatch(c, index, pack);
 		}
 
 	    }
@@ -249,39 +218,7 @@ public class PackDao {
 
 		    index++;
 		    if (c.getLong(index) != 0) {
-			Match match = new Match();
-			match.setId(c.getLong(index));
-			index++;
-			match.setName(c.getString(index));
-			index++;
-			String matchDate = c.getString(index);
-			try {
-			    java.util.Date d = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE).parse(
-				    matchDate);
-			    Date date = new Date(d.getTime());
-			    match.setDate(date);
-			} catch (ParseException e) {
-			    e.printStackTrace();
-			}
-			index++;
-			match.setScoreAway(c.getInt(index));
-			index++;
-			match.setScoreHome(c.getInt(index));
-			index++;
-			boolean isOvertime = Boolean.parseBoolean(c.getString(index));
-			match.setOvertime(isOvertime);
-			index++;
-			String quizzSogHome = c.getString(index);
-			if (StringUtils.isNotBlank(quizzSogHome)) {
-			    match.setSogHome(Integer.getInteger(quizzSogHome));
-			}
-			index++;
-			String quizzSogAway = c.getString(index);
-			if (StringUtils.isNotBlank(quizzSogAway)) {
-			    match.setSogAway(Integer.getInteger(quizzSogAway));
-			}
-
-			pack.getMatchs().add(match);
+			fillMatch(c, index, pack);
 		    }
 		    mapPack.put(packId, pack);
 
@@ -289,26 +226,7 @@ public class PackDao {
 		} else {
 		    index = 3;
 		    if (c.getLong(index) != 0) {
-			Match match = new Match();
-			match.setId(c.getLong(index));
-			index++;
-			match.setName(c.getString(index));
-			index++;
-			String matchDate = c.getString(index);
-			try {
-			    java.util.Date d = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE).parse(
-				    matchDate);
-			    Date date = new Date(d.getTime());
-			    match.setDate(date);
-			} catch (ParseException e) {
-			    e.printStackTrace();
-			}
-			index++;
-			match.setScoreAway(c.getInt(index));
-			index++;
-			match.setScoreHome(c.getInt(index));
-
-			pack.getMatchs().add(match);
+			fillMatch(c, index, pack);
 		    }
 		}
 	    }
@@ -323,6 +241,41 @@ public class PackDao {
 	}
 
 	return l;
+    }
+
+    private void fillMatch(Cursor aCursor, int anIndex, Pack aPack) {
+	Match match = new Match();
+	match.setId(aCursor.getLong(anIndex));
+	anIndex++;
+	match.setName(aCursor.getString(anIndex));
+	anIndex++;
+	String matchDate = aCursor.getString(anIndex);
+	try {
+	    java.util.Date d = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE).parse(matchDate);
+	    Date date = new Date(d.getTime());
+	    match.setDate(date);
+	} catch (ParseException e) {
+	    e.printStackTrace();
+	}
+	anIndex++;
+	match.setScoreAway(aCursor.getInt(anIndex));
+	anIndex++;
+	match.setScoreHome(aCursor.getInt(anIndex));
+	anIndex++;
+	boolean isOvertime = Boolean.parseBoolean(aCursor.getString(anIndex));
+	match.setOvertime(isOvertime);
+	anIndex++;
+	String quizzSogHome = aCursor.getString(anIndex);
+	if (StringUtils.isNotBlank(quizzSogHome)) {
+	    match.setSogHome(Integer.getInteger(quizzSogHome));
+	}
+	anIndex++;
+	String quizzSogAway = aCursor.getString(anIndex);
+	if (StringUtils.isNotBlank(quizzSogAway)) {
+	    match.setSogAway(Integer.getInteger(quizzSogAway));
+	}
+
+	aPack.getMatchs().add(match);
     }
 
 }

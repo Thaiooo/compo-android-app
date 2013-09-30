@@ -183,7 +183,7 @@ public class MatchDao {
 
 	    req.append("from " + TableConstant.MatchTable.TABLE_NAME + " q ");
 	    req.append("left join " + TableConstant.QuizzPlayerTable.TABLE_NAME + " qp on q."
-		    + TableConstant.MatchTable._ID + " = qp." + TableConstant.QuizzPlayerTable.COLUMN_QUIZZ_ID + " ");
+		    + TableConstant.MatchTable._ID + " = qp." + TableConstant.QuizzPlayerTable.COLUMN_MATCH_ID + " ");
 
 	    req.append("left join " + TableConstant.TeamTable.TABLE_NAME + " t on qp."
 		    + TableConstant.QuizzPlayerTable.COLUMN_TEAM_ID + " = t." + TableConstant.TeamTable._ID + " ");
@@ -243,84 +243,7 @@ public class MatchDao {
 
 		    index++;
 		    if (c.getLong(index) != 0) {
-			QuizzPlayer quizzPlayer = new QuizzPlayer();
-			quizzPlayer.setId(c.getLong(index));
-			index++;
-			quizzPlayer.setEarnCredit(c.getInt(index));
-			index++;
-			quizzPlayer.setX(c.getInt(index));
-			index++;
-			quizzPlayer.setY(c.getInt(index));
-			index++;
-			quizzPlayer.setHide(Boolean.parseBoolean(c.getString(index)));
-			index++;
-			quizzPlayer.setHome(Boolean.parseBoolean(c.getString(index)));
-			index++;
-			quizzPlayer.setCoach(Boolean.parseBoolean(c.getString(index)));
-			index++;
-			quizzPlayer.setCsc(c.getInt(index));
-			index++;
-			quizzPlayer.setGoal(c.getInt(index));
-			index++;
-			quizzPlayer.setHint(c.getString(index));
-			index++;
-			quizzPlayer.setCaptain(Boolean.parseBoolean(c.getString(index)));
-			index++;
-			quizzPlayer.setCreditToUnlockHint(c.getInt(index));
-			index++;
-			quizzPlayer.setCreditToUnlockRandom(c.getInt(index));
-			index++;
-			quizzPlayer.setCreditToUnlockHalf(c.getInt(index));
-			index++;
-			quizzPlayer.setCreditToUnlockResponse(c.getInt(index));
-
-			Team team = new Team();
-			index++;
-			team.setId(c.getLong(index));
-			index++;
-			team.setCode(c.getString(index));
-			index++;
-			team.setName(c.getString(index));
-			index++;
-			String s = c.getString(index);
-			if (StringUtils.isNotBlank(s)) {
-			    team.setHomeJerseyColor(ColorEnum.valueOf(s));
-			}
-			index++;
-			s = c.getString(index);
-			if (StringUtils.isNotBlank(s)) {
-			    team.setHomeShortColor(ColorEnum.valueOf(s));
-			}
-			index++;
-			s = c.getString(index);
-			if (StringUtils.isNotBlank(s)) {
-			    team.setHomeSockColor(ColorEnum.valueOf(s));
-			}
-			index++;
-			s = c.getString(index);
-			if (StringUtils.isNotBlank(s)) {
-			    team.setAwayJerseyColor(ColorEnum.valueOf(s));
-			}
-			index++;
-			s = c.getString(index);
-			if (StringUtils.isNotBlank(s)) {
-			    team.setAwayShortColor(ColorEnum.valueOf(s));
-			}
-			index++;
-			s = c.getString(index);
-			if (StringUtils.isNotBlank(s)) {
-			    team.setAwaySockColor(ColorEnum.valueOf(s));
-			}
-			quizzPlayer.setTeam(team);
-
-			Player player = new Player();
-			index++;
-			player.setId(c.getLong(index));
-			index++;
-			player.setName(c.getString(index));
-			quizzPlayer.setPlayer(player);
-
-			match.getQuizzs().add(quizzPlayer);
+			fillQuizzPlayer(c, index, match);
 		    }
 		    mapQuizz.put(quizzId, match);
 
@@ -328,84 +251,7 @@ public class MatchDao {
 		} else {
 		    index = 8;
 		    if (c.getLong(index) != 0) {
-			QuizzPlayer quizzPlayer = new QuizzPlayer();
-			quizzPlayer.setId(c.getLong(index));
-			index++;
-			quizzPlayer.setEarnCredit(c.getInt(index));
-			index++;
-			quizzPlayer.setX(c.getInt(index));
-			index++;
-			quizzPlayer.setY(c.getInt(index));
-			index++;
-			quizzPlayer.setHide(Boolean.parseBoolean(c.getString(index)));
-			index++;
-			quizzPlayer.setHome(Boolean.parseBoolean(c.getString(index)));
-			index++;
-			quizzPlayer.setCoach(Boolean.parseBoolean(c.getString(index)));
-			index++;
-			quizzPlayer.setCsc(c.getInt(index));
-			index++;
-			quizzPlayer.setGoal(c.getInt(index));
-			index++;
-			quizzPlayer.setHint(c.getString(index));
-			index++;
-			quizzPlayer.setCaptain(Boolean.parseBoolean(c.getString(index)));
-			index++;
-			quizzPlayer.setCreditToUnlockHint(c.getInt(index));
-			index++;
-			quizzPlayer.setCreditToUnlockRandom(c.getInt(index));
-			index++;
-			quizzPlayer.setCreditToUnlockHalf(c.getInt(index));
-			index++;
-			quizzPlayer.setCreditToUnlockResponse(c.getInt(index));
-
-			Team team = new Team();
-			index++;
-			team.setId(c.getLong(index));
-			index++;
-			team.setCode(c.getString(index));
-			index++;
-			team.setName(c.getString(index));
-			index++;
-			String s = c.getString(index);
-			if (StringUtils.isNotBlank(s)) {
-			    team.setHomeJerseyColor(ColorEnum.valueOf(s));
-			}
-			index++;
-			s = c.getString(index);
-			if (StringUtils.isNotBlank(s)) {
-			    team.setHomeShortColor(ColorEnum.valueOf(s));
-			}
-			index++;
-			s = c.getString(index);
-			if (StringUtils.isNotBlank(s)) {
-			    team.setHomeSockColor(ColorEnum.valueOf(s));
-			}
-			index++;
-			s = c.getString(index);
-			if (StringUtils.isNotBlank(s)) {
-			    team.setAwayJerseyColor(ColorEnum.valueOf(s));
-			}
-			index++;
-			s = c.getString(index);
-			if (StringUtils.isNotBlank(s)) {
-			    team.setAwayShortColor(ColorEnum.valueOf(s));
-			}
-			index++;
-			s = c.getString(index);
-			if (StringUtils.isNotBlank(s)) {
-			    team.setAwaySockColor(ColorEnum.valueOf(s));
-			}
-			quizzPlayer.setTeam(team);
-
-			Player player = new Player();
-			index++;
-			player.setId(c.getLong(index));
-			index++;
-			player.setName(c.getString(index));
-			quizzPlayer.setPlayer(player);
-
-			match.getQuizzs().add(quizzPlayer);
+			fillQuizzPlayer(c, index, match);
 		    }
 		}
 	    }
@@ -420,5 +266,87 @@ public class MatchDao {
 	}
 
 	return l;
+    }
+
+    private void fillQuizzPlayer(Cursor aCursor, int anIndex, Match aMatch) {
+	QuizzPlayer quizzPlayer = new QuizzPlayer();
+	quizzPlayer.setMatch(aMatch);
+	quizzPlayer.setId(aCursor.getLong(anIndex));
+	anIndex++;
+	quizzPlayer.setEarnCredit(aCursor.getInt(anIndex));
+	anIndex++;
+	quizzPlayer.setX(aCursor.getInt(anIndex));
+	anIndex++;
+	quizzPlayer.setY(aCursor.getInt(anIndex));
+	anIndex++;
+	quizzPlayer.setHide(Boolean.parseBoolean(aCursor.getString(anIndex)));
+	anIndex++;
+	quizzPlayer.setHome(Boolean.parseBoolean(aCursor.getString(anIndex)));
+	anIndex++;
+	quizzPlayer.setCoach(Boolean.parseBoolean(aCursor.getString(anIndex)));
+	anIndex++;
+	quizzPlayer.setCsc(aCursor.getInt(anIndex));
+	anIndex++;
+	quizzPlayer.setGoal(aCursor.getInt(anIndex));
+	anIndex++;
+	quizzPlayer.setHint(aCursor.getString(anIndex));
+	anIndex++;
+	quizzPlayer.setCaptain(Boolean.parseBoolean(aCursor.getString(anIndex)));
+	anIndex++;
+	quizzPlayer.setCreditToUnlockHint(aCursor.getInt(anIndex));
+	anIndex++;
+	quizzPlayer.setCreditToUnlockRandom(aCursor.getInt(anIndex));
+	anIndex++;
+	quizzPlayer.setCreditToUnlockHalf(aCursor.getInt(anIndex));
+	anIndex++;
+	quizzPlayer.setCreditToUnlockResponse(aCursor.getInt(anIndex));
+
+	Team team = new Team();
+	anIndex++;
+	team.setId(aCursor.getLong(anIndex));
+	anIndex++;
+	team.setCode(aCursor.getString(anIndex));
+	anIndex++;
+	team.setName(aCursor.getString(anIndex));
+	anIndex++;
+	String s = aCursor.getString(anIndex);
+	if (StringUtils.isNotBlank(s)) {
+	    team.setHomeJerseyColor(ColorEnum.valueOf(s));
+	}
+	anIndex++;
+	s = aCursor.getString(anIndex);
+	if (StringUtils.isNotBlank(s)) {
+	    team.setHomeShortColor(ColorEnum.valueOf(s));
+	}
+	anIndex++;
+	s = aCursor.getString(anIndex);
+	if (StringUtils.isNotBlank(s)) {
+	    team.setHomeSockColor(ColorEnum.valueOf(s));
+	}
+	anIndex++;
+	s = aCursor.getString(anIndex);
+	if (StringUtils.isNotBlank(s)) {
+	    team.setAwayJerseyColor(ColorEnum.valueOf(s));
+	}
+	anIndex++;
+	s = aCursor.getString(anIndex);
+	if (StringUtils.isNotBlank(s)) {
+	    team.setAwayShortColor(ColorEnum.valueOf(s));
+	}
+	anIndex++;
+	s = aCursor.getString(anIndex);
+	if (StringUtils.isNotBlank(s)) {
+	    team.setAwaySockColor(ColorEnum.valueOf(s));
+	}
+	quizzPlayer.setTeam(team);
+
+	Player player = new Player();
+	anIndex++;
+	player.setId(aCursor.getLong(anIndex));
+	anIndex++;
+	player.setName(aCursor.getString(anIndex));
+	quizzPlayer.setPlayer(player);
+
+	aMatch.getQuizzs().add(quizzPlayer);
     }
 }

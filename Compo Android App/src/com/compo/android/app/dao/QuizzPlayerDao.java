@@ -1,10 +1,8 @@
 package com.compo.android.app.dao;
 
-import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
-import com.compo.android.app.model.QuizzPlayer;
 
 public class QuizzPlayerDao {
     private DataBaseHelper dataBaseHeleper;
@@ -13,27 +11,37 @@ public class QuizzPlayerDao {
 	dataBaseHeleper = new DataBaseHelper(context);
     }
 
-    public void save(QuizzPlayer o) {
-	/*
+    public int countHidePlayerForMatch(long aMatchId) {
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = null;
+	Cursor c = null;
+	int count = 0;
 	try {
-	    session = dataBaseHeleper.getWritableDatabase();
+	    session = dataBaseHeleper.getReadableDatabase();
+	    String[] selectionArgs = { String.valueOf(aMatchId) };
 
-	    ContentValues values = new ContentValues();
-	    values.put(TableConstant.QuizzPlayerTable.COLUMN_DISCOVERED, Boolean.toString(o.isDiscovered()));
+	    StringBuffer req = new StringBuffer("select count(*) ");
+	    req.append("from " + TableConstant.QuizzPlayerTable.TABLE_NAME);
+	    req.append(" where ");
+	    req.append(TableConstant.QuizzPlayerTable.COLUMN_IS_HIDE);
+	    req.append(" = 'true' and ");
+	    req.append(TableConstant.QuizzPlayerTable.COLUMN_MATCH_ID);
+	    req.append(" = ?");
+	    c = session.rawQuery(req.toString(), selectionArgs);
 
-	    session.update(TableConstant.QuizzPlayerTable.TABLE_NAME, values, TableConstant.QuizzPlayerTable._ID
-		    + " = ?", new String[] { String.valueOf(o.getId()) });
-
+	    c.moveToFirst();
+	    count = c.getInt(0);
 	} finally {
+	    if (c != null) {
+		c.close();
+	    }
 	    if (session != null) {
 		session.close();
 	    }
-
 	    dataBaseHeleper.close();
 	}
-	*/
+
+	return count;
     }
 
 }
