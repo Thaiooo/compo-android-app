@@ -80,8 +80,6 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 	_selSelectMatchAdapter.notifyDataSetInvalidated();
     }
 
-   
-
     private class LoadMatchTask extends AsyncTask<Object, Void, List<Match>> {
 	@Override
 	protected List<Match> doInBackground(Object... params) {
