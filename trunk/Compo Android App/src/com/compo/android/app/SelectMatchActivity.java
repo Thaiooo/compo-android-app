@@ -86,7 +86,7 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 	protected Void doInBackground(Void... params) {
 	    User u = UserFactory.getInstance().getUser(SelectMatchActivity.this);
 	    if (null != u) {
-		_userCredit.setText(u.getCredit() + "");
+		_userCredit.setText(Integer.toString(u.getCredit()));
 	    }
 	    return null;
 	}
@@ -115,12 +115,12 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 		public void onItemClick(AdapterView<?> parent, View v, int aPosition, long id) {
 		    Match selectMatch = aMatchList.get(aPosition);
 
-		    Match nextMatch = null;
-		    if (aPosition == aMatchList.size()) {
-			nextMatch = aMatchList.get(0);
-		    } else {
-			nextMatch = aMatchList.get(aPosition + 1);
-		    }
+		    // Match nextMatch = null;
+		    // if (aPosition == aMatchList.size()) {
+		    // nextMatch = aMatchList.get(0);
+		    // } else {
+		    // nextMatch = aMatchList.get(aPosition + 1);
+		    // }
 
 		    // for (int i = aPosition + 1; i < aMatchList.size(); i++) {
 		    // Match m = aMatchList.get(i);
@@ -146,7 +146,7 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 
 		    Intent intent = new Intent(SelectMatchActivity.this, QuizzActivity.class);
 		    intent.putExtra(QuizzActivity.REQ_MESSAGE_MATCH, selectMatch);
-		    intent.putExtra(QuizzActivity.REQ_MESSAGE_NEXT_MATCH, nextMatch);
+		    // intent.putExtra(QuizzActivity.REQ_MESSAGE_NEXT_MATCH, nextMatch);
 		    intent.putExtra(QuizzActivity.REQ_MESSAGE_GAME, _selectPack);
 		    startActivity(intent);
 

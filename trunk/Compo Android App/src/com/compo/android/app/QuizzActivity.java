@@ -1,5 +1,6 @@
 package com.compo.android.app;
 
+import java.util.Locale;
 import java.util.Map;
 
 import android.content.Intent;
@@ -23,7 +24,6 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
     // private static final String TAG = QuizzActivity.class.getName();
 
     public static final String REQ_MESSAGE_MATCH = "com.compo.android.app.QuizzActivity.MESSAGE.MATCH";
-    public static final String REQ_MESSAGE_NEXT_MATCH = "com.compo.android.app.QuizzActivity.MESSAGE.MATCH.NEXT";
     public static final String REQ_MESSAGE_GAME = "com.compo.android.app.QuizzActivity.MESSAGE.GAME";
 
     public static final String RESULT_MESSAGE = "com.compo.android.app.QuizzActivity.MESSAGE.RESULT";
@@ -107,11 +107,19 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 	    if (resultCode == RESULT_OK) {
 		_quizzView.invalidate();
 		User u = UserFactory.getInstance().getUser(QuizzActivity.this);
-		_userCredit.setText(u.getCredit() + "");
-		Toast.makeText(this, "You have found " + " " + play.getResponse(), Toast.LENGTH_LONG).show();
+		_userCredit.setText(Integer.toString(u.getCredit()));
+		if (play != null) {
+		    Toast.makeText(this, "You have found " + " " + play.getResponse().toUpperCase(Locale.US),
+			    Toast.LENGTH_LONG).show();
+		}
 		break;
 	    } else if (resultCode == RESULT_FIRST_USER) {
 		// TODO Cas du next
+		// Rechercher le match suivant. Dans un job au début de l'activité
+		
+		
+		
+
 		System.out.println("=============> Afficher le suivant");
 	    }
 	}
@@ -121,7 +129,7 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 	@Override
 	protected Void doInBackground(Void... params) {
 	    User u = UserFactory.getInstance().getUser(QuizzActivity.this);
-	    _userCredit.setText(u.getCredit() + "");
+	    _userCredit.setText(Integer.toString(u.getCredit()));
 	    return null;
 	}
 

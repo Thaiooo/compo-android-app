@@ -125,7 +125,7 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 	protected Void doInBackground(Void... params) {
 	    User u = UserFactory.getInstance().getUser(SelectPackActivity.this);
 	    if (u != null) {
-		_userCredit.setText(u.getCredit() + "");
+		_userCredit.setText(Integer.toString(u.getCredit()));
 	    }
 	    return null;
 	}

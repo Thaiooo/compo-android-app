@@ -1,5 +1,6 @@
 package com.compo.android.app;
 
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,6 +22,7 @@ import android.view.View;
 import com.compo.android.app.model.Match;
 import com.compo.android.app.model.Play;
 import com.compo.android.app.model.QuizzPlayer;
+import com.compo.android.app.model.Team;
 
 public class QuizzView extends View {
 
@@ -68,7 +70,7 @@ public class QuizzView extends View {
     protected boolean _completed = false;
 
     protected Match _selectedMatch;
-    protected Match _nextMatch;
+    // protected Match _nextMatch;
     protected Map<Long, Play> _mapQuizzToPlay;
 
     public QuizzView(Context context, AttributeSet attrs) {
@@ -91,10 +93,32 @@ public class QuizzView extends View {
 
 	Intent intent = ((Activity) context).getIntent();
 	_selectedMatch = (Match) intent.getSerializableExtra(QuizzActivity.REQ_MESSAGE_MATCH);
-	_nextMatch = (Match) intent.getSerializableExtra(QuizzActivity.REQ_MESSAGE_NEXT_MATCH);
+	// _nextMatch = (Match) intent.getSerializableExtra(QuizzActivity.REQ_MESSAGE_NEXT_MATCH);
 
-	_playerHomeRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_bleu)).getBitmap();
-	_playerAwayRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.player_red)).getBitmap();
+	Team home = null;
+	Team away = null;
+	for (QuizzPlayer qp : _selectedMatch.getQuizzs()) {
+	    if (qp.isHome()) {
+		home = qp.getTeam();
+	    } else {
+		away = qp.getTeam();
+	    }
+	    if (home != null && away != null) {
+		break;
+	    }
+	}
+
+	int idHome = getResources().getIdentifier("player_" + home.getHomeJerseyColor().name().toLowerCase(Locale.US),
+		"drawable", getContext().getPackageName());
+	int idAway = getResources().getIdentifier("player_" + away.getHomeJerseyColor().name().toLowerCase(Locale.US),
+		"drawable", getContext().getPackageName());
+	if (idAway == idHome) {
+	    idAway = getResources().getIdentifier("player_" + away.getAwayJerseyColor().name().toLowerCase(Locale.US),
+		    "drawable", getContext().getPackageName());
+	}
+
+	_playerHomeRaw = ((BitmapDrawable) _context.getResources().getDrawable(idHome)).getBitmap();
+	_playerAwayRaw = ((BitmapDrawable) _context.getResources().getDrawable(idAway)).getBitmap();
 
 	_matrix = new Matrix();
     }
