@@ -2,15 +2,15 @@ from compo_manager.models import Player, QuizzPlayer
 
 POSITIONS_TYPE = ('GK','L','D','MD','M','MO','F','S','C')
 
-MAX_Y = 100
+MAX_Y = 50
 
-MIN_Y = 0 
+MIN_Y = -50 
 
 MAX_X = 34
 
 MIN_X = -34
 
-POSITIONS_Y = {'GK':0, 'L':1, 'D':2, 'MD':3, 'M': 4, 'MO':5, 'F':6, 'S':7}
+POSITIONS_Y = {'GK':8, 'L':7, 'D':6, 'MD':5, 'M':4, 'MO':3, 'F':2, 'S':1}
 
 POSITION_X = {'L':[-34,-18], 'C':[-17,17], 'R':[18,34]}
 
@@ -145,7 +145,7 @@ class QuizzPlayerListServices:
                 current_y = POSITIONS_Y[ position ]*DISTANCE_Y
         
                 if team_name == 'AWAY':
-                    current_y = MAX_Y - current_y
+                    current_y = -current_y
             else:
                 current_y = 0
             
@@ -253,7 +253,7 @@ class QuizzPlayerDisplayer():
         
         if not quizzplayer.is_coach:
             self.x = int((quizzplayer.x + MAX_X)*10 - 25)
-            self.y = int(quizzplayer.y*10 - 12)
+            self.y = int((MAX_Y - quizzplayer.y)*10 - 12)
         else:
             if quizzplayer.is_home:
                 self.x = 0

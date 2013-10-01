@@ -149,14 +149,7 @@ def update_team(request, team_id):
     team = get_object_or_404(Team, id=team_id)
     form = TeamForm(request.POST, instance=team)
     if form.is_valid():
-        name = form.cleaned_data['name']
-        code = name.replace(' ','').upper()
-            
-        team.name = name
-        team.code = code
-            
-        team.save()
-        
+        form.save()
         return HttpResponseRedirect('/team')
     else:
         form = TeamForm(instance=team) 
