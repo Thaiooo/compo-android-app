@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.TextView;
 
 import com.compo.android.app.dao.MatchDao;
 import com.compo.android.app.dao.PlayDao;
@@ -28,7 +27,6 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 
     private static Typeface _fontTitle;
 
-    private TextView _userCredit;
     // private TextView _theme_name;
     // private TextView _pack_name;
     private GridView _gridview;
@@ -38,9 +36,13 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
     private SelectMatchAdapter _selSelectMatchAdapter;
 
     @Override
+    protected int getContentViewId() {
+	return R.layout.activity_select_match;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_select_match);
 
 	if (_fontTitle == null) {
 	    _fontTitle = Typeface.createFromAsset(getAssets(), "DrawingGuides.ttf");
@@ -49,8 +51,6 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 	Intent intent = getIntent();
 	_selectTheme = (Theme) intent.getSerializableExtra(PackFragment.MESSAGE_THEME);
 	_selectPack = (Pack) intent.getSerializableExtra(PackFragment.MESSAGE_CURRENT_PACK);
-
-	_userCredit = (TextView) findViewById(R.id.user_credit);
 
 	Button title = (Button) findViewById(R.id.button_title);
 	title.setTypeface(_fontTitle);
@@ -65,8 +65,6 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 
 	_gridview = (GridView) findViewById(R.id.quizzGrid);
 
-	new LoadUserTask().execute();
-
 	Object[] params = { _selectPack };
 	new LoadMatchTask().execute(params);
     }
@@ -79,18 +77,6 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 	_mapQuizzToPlay = playDao.getAllPlay(u.getId());
 	_selSelectMatchAdapter.setMapQuizzToPlay(_mapQuizzToPlay);
 	_selSelectMatchAdapter.notifyDataSetInvalidated();
-    }
-
-    private class LoadUserTask extends AsyncTask<Void, Void, Void> {
-	@Override
-	protected Void doInBackground(Void... params) {
-	    User u = UserFactory.getInstance().getUser(SelectMatchActivity.this);
-	    if (null != u) {
-		_userCredit.setText(Integer.toString(u.getCredit()));
-	    }
-	    return null;
-	}
-
     }
 
     private class LoadMatchTask extends AsyncTask<Object, Void, List<Match>> {

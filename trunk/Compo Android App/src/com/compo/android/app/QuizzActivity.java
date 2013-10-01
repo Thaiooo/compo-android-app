@@ -3,9 +3,9 @@ package com.compo.android.app;
 import java.util.Locale;
 import java.util.Map;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -31,14 +31,17 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 
     private static Typeface _font;
     private static Typeface _fontSocrePrinter;
-    private TextView _userCredit;
     private QuizzView _quizzView;
     private Map<Long, Play> _mapQuizzToPlay;
 
     @Override
+    protected int getContentViewId() {
+	return R.layout.activity_quizz;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_quizz);
 
 	if (_font == null) {
 	    _font = Typeface.createFromAsset(getAssets(), "MyLuckyPenny.ttf");
@@ -55,12 +58,9 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 	Intent intent = getIntent();
 	Match selectMatch = (Match) intent.getSerializableExtra(QuizzActivity.REQ_MESSAGE_MATCH);
 
-	_userCredit = (TextView) findViewById(R.id.user_credit);
 	_quizzView = (QuizzView) findViewById(R.id.quizz_view);
 	_quizzView.setQuizz(selectMatch);
 	_quizzView.setMapQuizzToPlay(_mapQuizzToPlay);
-
-	new LoadUserTask().execute();
 
 	Team home = null;
 	Team away = null;
@@ -93,6 +93,7 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	if (data == null) {
@@ -104,12 +105,14 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 	    _quizzView.setMapQuizzToPlay(_mapQuizzToPlay);
 	}
 
+	User u = UserFactory.getInstance().getUser(QuizzActivity.this);
+	_userCredit.setText(Integer.toString(u.getCredit()));
+
 	switch (requestCode) {
 	case EXTRA_MESSAGE_REQUEST_CODE:
 	    if (resultCode == RESULT_OK) {
 		_quizzView.invalidate();
-		User u = UserFactory.getInstance().getUser(QuizzActivity.this);
-		_userCredit.setText(Integer.toString(u.getCredit()));
+
 		if (play != null) {
 		    Toast.makeText(this, "You have found " + " " + play.getResponse().toUpperCase(Locale.US),
 			    Toast.LENGTH_LONG).show();
@@ -124,13 +127,4 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 	}
     }
 
-    private class LoadUserTask extends AsyncTask<Void, Void, Void> {
-	@Override
-	protected Void doInBackground(Void... params) {
-	    User u = UserFactory.getInstance().getUser(QuizzActivity.this);
-	    _userCredit.setText(Integer.toString(u.getCredit()));
-	    return null;
-	}
-
-    }
 }

@@ -78,8 +78,28 @@ public class QuizzService {
 	    mathProgress = new MatchProgress();
 	    mathProgress.setMatch(aQuizzPlayer.getMatch());
 	}
-	if (nbOfSuccessQuizz == nbQuizz) {
+
+	boolean isAllQuizzSuccess = false;
+	if (nbQuizz == nbOfSuccessQuizz) {
 	    mathProgress.setCompleted(true);
+
+	    // ---------------------------------------------------------------------------------------------------------
+	    // MAJ du pack progress
+	    // ---------------------------------------------------------------------------------------------------------
+	    PackDao packDao = new PackDao(_context);
+	    Pack pack = packDao.findPackLightByMatch(aQuizzPlayer.getMatch().getId());
+	    PackProgressDao packProgressDao = new PackProgressDao(_context);
+	    PackProgress packProgress = packProgressDao.find(pack);
+	    if (packProgress == null) {
+		packProgress = new PackProgress();
+		packProgress.setNumberOfSuccessMatch(1);
+		packProgress.setPack(pack);
+		packProgressDao.add(packProgress);
+	    } else {
+		packProgress.setNumberOfSuccessMatch(packProgress.getNumberOfSuccessMatch() + 1);
+		packProgressDao.update(packProgress);
+	    }
+	    isAllQuizzSuccess = true;
 	} else {
 	    mathProgress.setCompleted(false);
 	}
@@ -91,27 +111,6 @@ public class QuizzService {
 	    mpDao.update(mathProgress);
 	}
 
-	PackDao packDao = new PackDao(_context);
-	Pack pack = packDao.findPackLightByMatch(aQuizzPlayer.getMatch().getId());
-
-	// -------------------------------------------------------------------------------------------------------------
-	// MAJ du pack progress
-	// -------------------------------------------------------------------------------------------------------------
-	boolean isAllQuizzSuccess = false;
-	if (nbQuizz == nbOfSuccessQuizz + 1) {
-	    PackProgressDao packProgressDao = new PackProgressDao(_context);
-	    PackProgress progress = packProgressDao.find(pack);
-	    if (progress == null) {
-		progress = new PackProgress();
-		progress.setNumberOfSuccessMatch(1);
-		progress.setPack(pack);
-		packProgressDao.add(progress);
-	    } else {
-		progress.setNumberOfSuccessMatch(progress.getNumberOfSuccessMatch() + 1);
-		packProgressDao.update(progress);
-	    }
-	    isAllQuizzSuccess = true;
-	}
 	result.setAllQuizzSuccess(isAllQuizzSuccess);
 
 	return result;

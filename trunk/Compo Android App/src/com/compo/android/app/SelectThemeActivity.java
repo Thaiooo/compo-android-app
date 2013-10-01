@@ -15,29 +15,30 @@ import android.widget.TextView;
 
 import com.compo.android.app.dao.ThemeDao;
 import com.compo.android.app.model.Theme;
-import com.compo.android.app.model.User;
-import com.compo.android.app.utils.UserFactory;
 
 public class SelectThemeActivity extends AbstractLSEFragmentActivity {
 
     private static Typeface _fontTitle;
     private ViewPager _mViewPager;
-    private TextView _userCredit;
     private TextView _activity_theme_title;
     private LinearLayout _themeIndicatorListLayout;
     private Button _button_preview;
     private Button _button_next;
     private int pageSize = 0;
 
+    @Override
+    protected int getContentViewId() {
+	return R.layout.activity_select_theme;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_select_theme);
 
 	if (_fontTitle == null) {
 	    _fontTitle = Typeface.createFromAsset(getAssets(), "DrawingGuides.ttf");
 	}
 
-	_userCredit = (TextView) findViewById(R.id.user_credit);
 	_mViewPager = (ViewPager) findViewById(R.id.pager);
 	_themeIndicatorListLayout = (LinearLayout) findViewById(R.id.theme_indicator_list_layout);
 	_button_preview = (Button) findViewById(R.id.button_preview);
@@ -48,7 +49,6 @@ public class SelectThemeActivity extends AbstractLSEFragmentActivity {
 
 	_mViewPager.setOnPageChangeListener(new PageListener());
 
-	new LoadUserTask().execute();
 	new LoadThemeTask().execute();
     }
 
@@ -89,15 +89,6 @@ public class SelectThemeActivity extends AbstractLSEFragmentActivity {
 	    _button_next.setVisibility(View.INVISIBLE);
 	}
 	_button_preview.setVisibility(View.VISIBLE);
-    }
-
-    private class LoadUserTask extends AsyncTask<Void, Void, Void> {
-	@Override
-	protected Void doInBackground(Void... params) {
-	    User u = UserFactory.getInstance().getUser(SelectThemeActivity.this);
-	    _userCredit.setText(Integer.toString(u.getCredit()));
-	    return null;
-	}
     }
 
     private class LoadThemeTask extends AsyncTask<Void, Void, List<Theme>> {
