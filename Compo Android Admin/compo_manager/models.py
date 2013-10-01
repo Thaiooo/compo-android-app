@@ -37,7 +37,6 @@ class Team(models.Model):
               )
     
     name = models.CharField(max_length=100, unique=True)
-    code = models.CharField(max_length=10, unique=True)
     home_jersey_color = models.CharField(max_length=10, choices=COLORS)
     home_short_color = models.CharField(max_length=10, choices=COLORS)
     home_sock_color = models.CharField(max_length=10, choices=COLORS)
@@ -115,4 +114,3 @@ class TeamForm(ModelForm):
     
     class Meta:
         model = Team
-        exclude = ('code',)
