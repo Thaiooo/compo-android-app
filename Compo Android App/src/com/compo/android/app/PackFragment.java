@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.compo.android.app.model.Pack;
 import com.compo.android.app.model.PackProgress;
@@ -90,6 +91,7 @@ public class PackFragment extends Fragment {
 		progress = _currentPackProgress.getNumberOfSuccessMatch();
 	    }
 	    StringBuffer buff = new StringBuffer(progress);
+	    buff.append(progress);
 	    buff.append(SLASH);
 	    buff.append(_currentPack.getMatchs().size());
 	    _progress.setText(buff.toString());
@@ -111,10 +113,11 @@ public class PackFragment extends Fragment {
 	    _contentView.setOnClickListener(new View.OnClickListener() {
 		@Override
 		public void onClick(View view) {
-		    Intent intent = new Intent(getActivity(), PackDetailsActivity.class);
-		    intent.putExtra(PackDetailsActivity.MESSAGE_SELECTED_PACK, _currentPack);
-		    startActivity(intent);
-		    getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+		    Toast.makeText(getActivity(), "Completed the previous level before", Toast.LENGTH_LONG).show();
+		    // Intent intent = new Intent(getActivity(), PackDetailsActivity.class);
+		    // intent.putExtra(PackDetailsActivity.MESSAGE_SELECTED_PACK, _currentPack);
+		    // startActivity(intent);
+		    // getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 		}
 	    });
 	}

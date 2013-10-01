@@ -95,7 +95,7 @@ public class SelectThemeActivity extends AbstractLSEFragmentActivity {
 	@Override
 	protected Void doInBackground(Void... params) {
 	    User u = UserFactory.getInstance().getUser(SelectThemeActivity.this);
-	    _userCredit.setText(u.getCredit() + "");
+	    _userCredit.setText(Integer.toString(u.getCredit()));
 	    return null;
 	}
     }

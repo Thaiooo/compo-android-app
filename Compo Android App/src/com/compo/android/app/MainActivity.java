@@ -108,7 +108,7 @@ public class MainActivity extends Activity {
 
 	@Override
 	protected void onPostExecute(User anUser) {
-	    _userCredit.setText(anUser.getCredit() + "");
+	    _userCredit.setText(Integer.toString(anUser.getCredit()));
 	}
     }
 
