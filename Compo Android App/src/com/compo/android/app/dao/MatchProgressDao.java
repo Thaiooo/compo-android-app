@@ -3,6 +3,8 @@ package com.compo.android.app.dao;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.BooleanUtils;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -62,6 +64,10 @@ public class MatchProgressDao {
 	    req.append("p.");
 	    req.append(TableConstant.MatchProgressTable.COLUMN_MATCH_ID);
 	    req.append(" ");
+	    // Index 4
+	    req.append("p.");
+	    req.append(TableConstant.MatchProgressTable.COLUMN_IS_COMPLETED);
+	    req.append(" ");
 
 	    req.append("from " + TableConstant.MatchProgressTable.TABLE_NAME + " p ");
 	    req.append("inner join " + TableConstant.MatchTable.TABLE_NAME + " k on k." + TableConstant.MatchTable._ID
@@ -80,9 +86,12 @@ public class MatchProgressDao {
 		int nbSuccess = c.getInt(index);
 		index++;
 		long matchId = c.getLong(index);
+		index++;
+		boolean isCompleted = BooleanUtils.toBoolean(c.getInt(index));
 
 		progress.setId(progressId);
 		progress.setNumberOfSuccessQuizz(nbSuccess);
+		progress.setCompleted(isCompleted);
 
 		map.put(matchId, progress);
 
@@ -122,6 +131,10 @@ public class MatchProgressDao {
 	    req.append("p.");
 	    req.append(TableConstant.MatchProgressTable.COLUMN_MATCH_ID);
 	    req.append(" ");
+	    // Index 3
+	    req.append("p.");
+	    req.append(TableConstant.MatchProgressTable.COLUMN_IS_COMPLETED);
+	    req.append(" ");
 
 	    req.append("from " + TableConstant.MatchProgressTable.TABLE_NAME + " p ");
 	    req.append("where p." + TableConstant.MatchProgressTable.COLUMN_MATCH_ID + " = ? ");
@@ -135,10 +148,12 @@ public class MatchProgressDao {
 		long progressId = c.getLong(index);
 		index++;
 		int nbSuccess = c.getInt(index);
+		index++;
+		boolean isCompleted = BooleanUtils.toBoolean(c.getInt(index));
 
 		progress.setId(progressId);
 		progress.setNumberOfSuccessQuizz(nbSuccess);
-
+		progress.setCompleted(isCompleted);
 	    }
 	} finally {
 	    if (c != null) {
@@ -161,6 +176,7 @@ public class MatchProgressDao {
 
 	    ContentValues values = new ContentValues();
 	    values.put(TableConstant.MatchProgressTable.COLUMN_NB_QUIZZ_SUCCESS, aProgress.getNumberOfSuccessQuizz());
+	    values.put(TableConstant.MatchProgressTable.COLUMN_IS_COMPLETED, aProgress.isCompleted());
 
 	    session.update(TableConstant.MatchProgressTable.TABLE_NAME, values, TableConstant.MatchProgressTable._ID
 		    + " = ?", new String[] { String.valueOf(aProgress.getId()) });
@@ -184,6 +200,8 @@ public class MatchProgressDao {
 	    ContentValues values = new ContentValues();
 	    values.put(TableConstant.MatchProgressTable.COLUMN_NB_QUIZZ_SUCCESS, aProgress.getNumberOfSuccessQuizz());
 	    values.put(TableConstant.MatchProgressTable.COLUMN_MATCH_ID, aProgress.getMatch().getId());
+	    values.put(TableConstant.MatchProgressTable.COLUMN_IS_COMPLETED,
+		    BooleanUtils.toIntegerObject(aProgress.isCompleted()));
 
 	    session.insert(TableConstant.MatchProgressTable.TABLE_NAME, null, values);
 
