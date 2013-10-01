@@ -1,5 +1,5 @@
 package com.compo.android.app.model;
 
 public enum ColorEnum {
-    WHITE, BLEU, RED, YELLOW, BLACK, GREEN;
+    WHITE, BLUE, RED, YELLOW, BLACK, GREEN, ORANGE, PURPLE;
 }
