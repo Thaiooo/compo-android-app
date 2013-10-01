@@ -85,7 +85,7 @@ class QuizzPlayer(models.Model):
     goal = models.IntegerField()
     csc = models.IntegerField()
     earn_credit = models.IntegerField()
-    hint = models.CharField(max_length=500)
+    hint = models.CharField(max_length=500, blank=True)
     credit_to_unlock_hint = models.IntegerField()
     credit_to_unlock_random = models.IntegerField()
     credit_to_unlock_half = models.IntegerField()
@@ -114,3 +114,9 @@ class TeamForm(ModelForm):
     
     class Meta:
         model = Team
+        
+class QuizzPlayerForm(ModelForm):
+    
+    class Meta:
+        model = QuizzPlayer
+        fields = ('x', 'y',)

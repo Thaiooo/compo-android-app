@@ -1,18 +1,18 @@
-from django.http.response import HttpResponse, HttpResponseRedirect
-from django.template import loader
-from django.template.context import RequestContext
-from compo_manager.models import ThemeForm, Theme, PackForm, Pack, TeamForm,\
-    Team, Match
-from django.shortcuts import render_to_response, get_object_or_404
-from django.contrib.formtools.wizard.views import SessionWizardView
-import datetime
-from django.core.files.storage import FileSystemStorage
 from compo_admin import settings
-from compo_manager.services import QuizzPlayerListServices,\
+from compo_manager.models import ThemeForm, Theme, PackForm, Pack, TeamForm, \
+    Team, Match, QuizzPlayer, QuizzPlayerForm
+from compo_manager.services import QuizzPlayerListServices, \
     MatchDisplayerService
-from django.contrib.auth.decorators import login_required, permission_required,\
+from django.contrib.auth.decorators import login_required, permission_required, \
     user_passes_test
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.formtools.wizard.views import SessionWizardView
+from django.core.files.storage import FileSystemStorage
+from django.http.response import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render_to_response, get_object_or_404
+from django.template import loader
+from django.template.context import RequestContext
+import datetime
 
 def superuser_check(user):
     return user.is_superuser
@@ -69,14 +69,6 @@ def update_theme(request, theme_id):
     variables = RequestContext(request, {'form':form, 'theme_id':theme_id})
     return render_to_response('create_theme.html', variables)
 
-# @login_required(redirect_field_name='/accounts/login')
-# def delete_theme(request, theme_id):
-#     theme = get_object_or_404(Theme, id=theme_id)
-#     theme.delete()
-#     
-#     return HttpResponseRedirect('/theme')
-
-
 @login_required(redirect_field_name='/accounts/login')
 def index_theme(request):
     themes = Theme.objects.all()
@@ -111,14 +103,6 @@ def update_pack(request, pack_id):
         
     variables = RequestContext(request, {'form':form, 'pack_id':pack_id})
     return render_to_response('create_pack.html', variables)
-
-# @login_required(redirect_field_name='/accounts/login')
-# def delete_pack(request, pack_id):
-#     pack = get_object_or_404(Pack, id=pack_id)
-#     pack.delete()
-#     
-#     return HttpResponseRedirect('/pack')
-
 
 @login_required(redirect_field_name='/accounts/login')
 def index_pack(request):
@@ -156,12 +140,6 @@ def update_team(request, team_id):
         
     variables = RequestContext(request, {'form':form, 'team_id':team_id})
     return render_to_response('create_team.html', variables)
-
-# @login_required(redirect_field_name='/accounts/login')
-# def delete_team(request, team_id):
-#     team = get_object_or_404(Team, id=team_id)
-#     team.delete()
-#     return HttpResponseRedirect('/team')
 
 @login_required(redirect_field_name='/accounts/login')
 def index_team(request):
@@ -235,20 +213,24 @@ def validate_match(request, match_id):
         match.save()
     
     return HttpResponseRedirect('/match')
-
-# @login_required(redirect_field_name='/')    
-# def delete_match(request, match_id):
-#     match = get_object_or_404(Match, id=match_id)
-#     
-#     for quizzplayer in match.quizz_players.all():
-#         quizzplayer.delete()
-#     
-#     match.delete()
-#     return HttpResponseRedirect('/match')
-    
+ 
 @login_required(redirect_field_name='/accounts/login')    
 def index_match(request):
     matchs = Match.objects.order_by('is_valid')
     template = loader.get_template('index_match.html')
     context = RequestContext(request, {'matchs':matchs})
     return HttpResponse(template.render(context))
+
+@login_required(redirect_field_name='/accounts/login')    
+def update_quizzplayer(request, quizzplayer_id):
+    quizzplayer = get_object_or_404(QuizzPlayer, id=quizzplayer_id)
+    form = QuizzPlayerForm(request.POST, instance=quizzplayer)
+    
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/match/update/%i'%quizzplayer.match.id)
+    else:
+        form = QuizzPlayerForm(instance=quizzplayer)
+    
+    variables = RequestContext(request, {'form':form, 'quizzplayer_id':quizzplayer_id, 'match_id':quizzplayer.match.id})
+    return render_to_response('update_quizzplayer.html', variables)
