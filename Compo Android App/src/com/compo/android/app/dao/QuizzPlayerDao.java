@@ -24,7 +24,7 @@ public class QuizzPlayerDao {
 	    req.append("from " + TableConstant.QuizzPlayerTable.TABLE_NAME);
 	    req.append(" where ");
 	    req.append(TableConstant.QuizzPlayerTable.COLUMN_IS_HIDE);
-	    req.append(" = 'true' and ");
+	    req.append(" = 1 and ");
 	    req.append(TableConstant.QuizzPlayerTable.COLUMN_MATCH_ID);
 	    req.append(" = ?");
 	    c = session.rawQuery(req.toString(), selectionArgs);

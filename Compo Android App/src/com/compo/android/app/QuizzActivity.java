@@ -99,8 +99,10 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 	    return;
 	}
 	Play play = (Play) data.getSerializableExtra(QuizzActivity.RESULT_MESSAGE);
-	_mapQuizzToPlay.put(play.getQuizzId(), play);
-	_quizzView.setMapQuizzToPlay(_mapQuizzToPlay);
+	if (play != null) {
+	    _mapQuizzToPlay.put(play.getQuizzId(), play);
+	    _quizzView.setMapQuizzToPlay(_mapQuizzToPlay);
+	}
 
 	switch (requestCode) {
 	case EXTRA_MESSAGE_REQUEST_CODE:
@@ -116,9 +118,6 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 	    } else if (resultCode == RESULT_FIRST_USER) {
 		// TODO Cas du next
 		// Rechercher le match suivant. Dans un job au début de l'activité
-		
-		
-		
 
 		System.out.println("=============> Afficher le suivant");
 	    }

@@ -32,12 +32,16 @@ public class QuizzService {
 
 	ServiceResultSave result = new ServiceResultSave();
 
+	// -------------------------------------------------------------------------------------------------------------
 	// MAJ du user
+	// -------------------------------------------------------------------------------------------------------------
 	User user = UserFactory.getInstance().getUser(_context);
 	user.setCredit(user.getCredit() + aQuizzPlayer.getEarnCredit());
 	UserFactory.getInstance().updateUser(_context);
 
+	// -------------------------------------------------------------------------------------------------------------
 	// MAJ du play
+	// -------------------------------------------------------------------------------------------------------------
 	if (aPlay == null) {
 	    aPlay = new Play();
 	    aPlay.setQuizzId(aQuizzPlayer.getId());
@@ -58,6 +62,9 @@ public class QuizzService {
 	    dao.update(aPlay);
 	}
 
+	// -------------------------------------------------------------------------------------------------------------
+	// MAJ du match progress
+	// -------------------------------------------------------------------------------------------------------------
 	QuizzPlayerDao qpDao = new QuizzPlayerDao(_context);
 	int nbQuizz = qpDao.countHidePlayerForMatch(aQuizzPlayer.getMatch().getId());
 
@@ -65,25 +72,32 @@ public class QuizzService {
 	MatchProgress mathProgress = mpDao.find(aQuizzPlayer.getMatch().getId());
 	int nbOfSuccessQuizz = 0;
 	if (mathProgress != null) {
-	    nbOfSuccessQuizz = mathProgress.getNumberOfSuccessQuizz();
-	    mathProgress.setNumberOfSuccessQuizz(nbOfSuccessQuizz + 1);
-	    if (nbOfSuccessQuizz + 1 == nbQuizz) {
-		mathProgress.setCompleted(true);
-	    }
-	    mpDao.update(mathProgress);
+	    nbOfSuccessQuizz = mathProgress.getNumberOfSuccessQuizz() + 1;
 	} else {
+	    nbOfSuccessQuizz = 1;
 	    mathProgress = new MatchProgress();
 	    mathProgress.setMatch(aQuizzPlayer.getMatch());
-	    mathProgress.setNumberOfSuccessQuizz(1);
+	}
+	if (nbOfSuccessQuizz == nbQuizz) {
+	    mathProgress.setCompleted(true);
+	} else {
 	    mathProgress.setCompleted(false);
+	}
+	mathProgress.setNumberOfSuccessQuizz(nbOfSuccessQuizz);
+
+	if (mathProgress.getId() == 0) {
 	    mpDao.add(mathProgress);
+	} else {
+	    mpDao.update(mathProgress);
 	}
 
 	PackDao packDao = new PackDao(_context);
 	Pack pack = packDao.findPackLightByMatch(aQuizzPlayer.getMatch().getId());
 
-	boolean isAllQuizzSuccess = false;
+	// -------------------------------------------------------------------------------------------------------------
 	// MAJ du pack progress
+	// -------------------------------------------------------------------------------------------------------------
+	boolean isAllQuizzSuccess = false;
 	if (nbQuizz == nbOfSuccessQuizz + 1) {
 	    PackProgressDao packProgressDao = new PackProgressDao(_context);
 	    PackProgress progress = packProgressDao.find(pack);
@@ -108,6 +122,10 @@ public class QuizzService {
     // TODO Ceci doit etre dans une transaction
     // =========================================
     public Play saveInccorectResponse(QuizzPlayer aQuizzPlayer, Play aPlay, String aResponse) {
+
+	// -------------------------------------------------------------------------------------------------------------
+	// MAJ du play
+	// -------------------------------------------------------------------------------------------------------------
 	PlayDao dao = new PlayDao(_context);
 	if (aPlay == null) {
 	    aPlay = new Play();
@@ -127,6 +145,9 @@ public class QuizzService {
 	    dao.update(aPlay);
 	}
 
+	// -------------------------------------------------------------------------------------------------------------
+	// MAJ du match progress
+	// -------------------------------------------------------------------------------------------------------------
 	MatchProgressDao mpDao = new MatchProgressDao(_context);
 	MatchProgress mathProgress = mpDao.find(aQuizzPlayer.getMatch().getId());
 	if (mathProgress == null) {
@@ -134,7 +155,7 @@ public class QuizzService {
 	    mathProgress.setMatch(aQuizzPlayer.getMatch());
 	    mathProgress.setNumberOfSuccessQuizz(0);
 	    mathProgress.setCompleted(false);
-	    mpDao.update(mathProgress);
+	    mpDao.add(mathProgress);
 	}
 
 	return aPlay;

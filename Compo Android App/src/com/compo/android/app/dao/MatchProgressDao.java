@@ -63,7 +63,7 @@ public class MatchProgressDao {
 	    // Index 2
 	    req.append("p.");
 	    req.append(TableConstant.MatchProgressTable.COLUMN_MATCH_ID);
-	    req.append(" ");
+	    req.append(", ");
 	    // Index 4
 	    req.append("p.");
 	    req.append(TableConstant.MatchProgressTable.COLUMN_IS_COMPLETED);
@@ -130,7 +130,7 @@ public class MatchProgressDao {
 	    // Index 2
 	    req.append("p.");
 	    req.append(TableConstant.MatchProgressTable.COLUMN_MATCH_ID);
-	    req.append(" ");
+	    req.append(", ");
 	    // Index 3
 	    req.append("p.");
 	    req.append(TableConstant.MatchProgressTable.COLUMN_IS_COMPLETED);
