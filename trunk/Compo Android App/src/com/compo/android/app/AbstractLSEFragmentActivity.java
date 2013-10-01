@@ -23,9 +23,9 @@ public abstract class AbstractLSEFragmentActivity extends FragmentActivity {
     }
 
     @Override
-    protected void onResume() {
-	super.onResume();
-
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	User u = UserFactory.getInstance().getUser(getBaseContext());
+	_userCredit.setText(Integer.toString(u.getCredit()));
     }
 
     public void home(View view) {

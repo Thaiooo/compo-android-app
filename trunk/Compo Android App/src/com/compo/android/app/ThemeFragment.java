@@ -69,7 +69,7 @@ public class ThemeFragment extends Fragment {
 		public void onClick(View view) {
 		    Intent intent = new Intent(getActivity(), SelectPackActivity.class);
 		    intent.putExtra(EXTRA_MESSAGE_ARG, _currentTheme);
-		    startActivity(intent);
+		    startActivityForResult(intent, SelectThemeActivity.EXTRA_MESSAGE_REQUEST_CODE);
 		    getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 		}
 	    });

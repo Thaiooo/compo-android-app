@@ -210,6 +210,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	super.onActivityResult(requestCode, resultCode, data);
 
 	if (requestCode == EXTRA_MESSAGE_REQUEST_CODE_HINT_DIALOG) {
 	    // =========================================================================================================

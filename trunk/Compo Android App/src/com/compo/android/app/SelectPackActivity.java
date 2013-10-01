@@ -24,6 +24,8 @@ import com.compo.android.app.model.Theme;
 public class SelectPackActivity extends AbstractLSEFragmentActivity {
 
     public final static String MESSAGE_SELECTED_PACK = "com.compo.android.app.SelectGameActivity.MESSAGE1";
+    public static final int EXTRA_MESSAGE_REQUEST_CODE = 1;
+    
     private static Typeface _fontTitle;
     private ViewPager _mViewPager;
     private TextView _themeName;
