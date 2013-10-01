@@ -5,9 +5,9 @@ import org.apache.commons.lang3.StringUtils;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,8 +16,10 @@ import android.widget.RelativeLayout;
 
 import com.compo.android.app.model.Play;
 import com.compo.android.app.model.QuizzPlayer;
+import com.compo.android.app.model.User;
 import com.compo.android.app.service.QuizzService;
 import com.compo.android.app.service.ServiceResultSave;
+import com.compo.android.app.utils.UserFactory;
 
 public class ResponseActivity extends AbstractLSEFragmentActivity {
     // private static final String TAG = ResponseActivity.class.getName();
@@ -40,14 +42,20 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
     private Button _buttonResponse;
 
     @Override
+    protected int getContentViewId() {
+	return R.layout.activity_response;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	requestWindowFeature(Window.FEATURE_NO_TITLE);
-	setContentView(R.layout.activity_response);
+	// requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 	Intent intent = getIntent();
 	_currentQuizz = (QuizzPlayer) intent.getSerializableExtra(EXTRA_MESSAGE_QUIZZ);
 	_currentPlay = (Play) intent.getSerializableExtra(EXTRA_MESSAGE_PLAY);
+
+	new LoadUserTask().execute();
 
 	_edit = (EditText) findViewById(R.id.edit_responseMMM);
 	if (_currentPlay != null) {
@@ -124,7 +132,6 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 
 	QuizzService quizzService = new QuizzService(ResponseActivity.this);
 	if (percent == 100) {
-
 	    ServiceResultSave result = quizzService.saveSuccessResponse(_currentQuizz, _currentPlay, response);
 	    _currentPlay = result.getPlay();
 
@@ -248,6 +255,22 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	    finish();
 	}
 
+    }
+
+    private class LoadUserTask extends AsyncTask<Void, Void, User> {
+	@Override
+	protected User doInBackground(Void... params) {
+	    User u = UserFactory.getInstance().getUser(ResponseActivity.this);
+	    if (u == null) {
+		// TODO: Il faut afficher une alerte?
+	    }
+	    return u;
+	}
+
+	@Override
+	protected void onPostExecute(User anUser) {
+	    _userCredit.setText(Integer.toString(anUser.getCredit()));
+	}
     }
 
 }

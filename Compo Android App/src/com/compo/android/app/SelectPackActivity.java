@@ -20,15 +20,12 @@ import com.compo.android.app.dao.PackProgressDao;
 import com.compo.android.app.model.Pack;
 import com.compo.android.app.model.PackProgress;
 import com.compo.android.app.model.Theme;
-import com.compo.android.app.model.User;
-import com.compo.android.app.utils.UserFactory;
 
 public class SelectPackActivity extends AbstractLSEFragmentActivity {
 
     public final static String MESSAGE_SELECTED_PACK = "com.compo.android.app.SelectGameActivity.MESSAGE1";
     private static Typeface _fontTitle;
     private ViewPager _mViewPager;
-    private TextView _userCredit;
     private TextView _themeName;
     private Theme _selectTheme;
     private SelectPackAdapter _collectionPacksPagerAdapter;
@@ -39,9 +36,13 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
     private int pageSize = 0;
 
     @Override
+    protected int getContentViewId() {
+	return R.layout.activity_select_pack;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_select_pack);
 
 	if (_fontTitle == null) {
 	    _fontTitle = Typeface.createFromAsset(getAssets(), "DrawingGuides.ttf");
@@ -50,7 +51,6 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 	Intent intent = getIntent();
 	_selectTheme = (Theme) intent.getSerializableExtra(ThemeFragment.EXTRA_MESSAGE_ARG);
 
-	_userCredit = (TextView) findViewById(R.id.user_credit);
 	_mViewPager = (ViewPager) findViewById(R.id.pager);
 	_themeName = (TextView) findViewById(R.id.theme_name);
 	_themeName.setTypeface(_fontTitle);
@@ -62,7 +62,6 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 
 	_mViewPager.setOnPageChangeListener(new PageListener());
 
-	new LoadUserTask().execute();
 	new LoadPackTask().execute();
     }
 
@@ -118,17 +117,6 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 	// _collectionPacksPagerAdapter.notifyAll();
 	// TODO A tester
 	_mViewPager.invalidate();
-    }
-
-    private class LoadUserTask extends AsyncTask<Void, Void, Void> {
-	@Override
-	protected Void doInBackground(Void... params) {
-	    User u = UserFactory.getInstance().getUser(SelectPackActivity.this);
-	    if (u != null) {
-		_userCredit.setText(Integer.toString(u.getCredit()));
-	    }
-	    return null;
-	}
     }
 
     private class LoadPackTask extends AsyncTask<Void, Void, List<Pack>> {
