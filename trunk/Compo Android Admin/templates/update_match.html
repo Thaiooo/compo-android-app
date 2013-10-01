@@ -18,9 +18,9 @@
       	{% endif %}
       
       {% if quizzplayer_displayer.is_hide%}
-      	<div class="name">({{ quizzplayer_displayer.name }})</div>
+      	<div class="name"><a href='/quizzplayer/update/{{ quizzplayer_displayer.id }}'>({{ quizzplayer_displayer.name }})</a></div>
       {% else %}
-      	<div class="name">{{ quizzplayer_displayer.name }}</div>
+      	<div class="name"><a href='/quizzplayer/update/{{ quizzplayer_displayer.id }}'>{{ quizzplayer_displayer.name }}</a></div>
       {% endif %}
       
   	</div>
