@@ -104,6 +104,7 @@ public class TableConstant {
 	public static final String TABLE_NAME = "match_progress";
 	public static final String COLUMN_NB_QUIZZ_SUCCESS = "nb_quizz_success";
 	public static final String COLUMN_MATCH_ID = "match_id";
+	public static final String COLUMN_IS_COMPLETED = "is_completed";
     }
 
 }
