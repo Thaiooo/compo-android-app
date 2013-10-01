@@ -67,11 +67,15 @@ public class QuizzService {
 	if (mathProgress != null) {
 	    nbOfSuccessQuizz = mathProgress.getNumberOfSuccessQuizz();
 	    mathProgress.setNumberOfSuccessQuizz(nbOfSuccessQuizz + 1);
+	    if (nbOfSuccessQuizz + 1 == nbQuizz) {
+		mathProgress.setCompleted(true);
+	    }
 	    mpDao.update(mathProgress);
 	} else {
 	    mathProgress = new MatchProgress();
 	    mathProgress.setMatch(aQuizzPlayer.getMatch());
 	    mathProgress.setNumberOfSuccessQuizz(1);
+	    mathProgress.setCompleted(false);
 	    mpDao.add(mathProgress);
 	}
 
@@ -125,15 +129,11 @@ public class QuizzService {
 
 	MatchProgressDao mpDao = new MatchProgressDao(_context);
 	MatchProgress mathProgress = mpDao.find(aQuizzPlayer.getMatch().getId());
-	int nbOfSuccessQuizz = 0;
-	if (mathProgress != null) {
-	    nbOfSuccessQuizz = mathProgress.getNumberOfSuccessQuizz();
-	    mathProgress.setNumberOfSuccessQuizz(nbOfSuccessQuizz + 1);
-	    mpDao.add(mathProgress);
-	} else {
+	if (mathProgress == null) {
 	    mathProgress = new MatchProgress();
 	    mathProgress.setMatch(aQuizzPlayer.getMatch());
-	    mathProgress.setNumberOfSuccessQuizz(1);
+	    mathProgress.setNumberOfSuccessQuizz(0);
+	    mathProgress.setCompleted(false);
 	    mpDao.update(mathProgress);
 	}
 
