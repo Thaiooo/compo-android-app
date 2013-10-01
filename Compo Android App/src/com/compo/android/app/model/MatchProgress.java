@@ -14,6 +14,11 @@ public class MatchProgress implements Serializable {
      */
     private int numberOfSuccessQuizz;
 
+    /**
+     * Indicate if all the quizz of the match is completed
+     */
+    private boolean completed;
+
     public long getId() {
 	return id;
     }
@@ -36,6 +41,14 @@ public class MatchProgress implements Serializable {
 
     public void setNumberOfSuccessQuizz(int numberOfSuccessQuizz) {
 	this.numberOfSuccessQuizz = numberOfSuccessQuizz;
+    }
+
+    public boolean isCompleted() {
+	return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+	this.completed = completed;
     }
 
 }
