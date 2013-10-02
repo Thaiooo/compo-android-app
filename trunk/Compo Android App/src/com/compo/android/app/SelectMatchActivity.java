@@ -131,10 +131,10 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 		    // }
 		    // }
 
-		    Intent intent = new Intent(SelectMatchActivity.this, QuizzActivity.class);
-		    intent.putExtra(QuizzActivity.REQ_MESSAGE_MATCH, selectMatch);
+		    Intent intent = new Intent(SelectMatchActivity.this, MatchActivity.class);
+		    intent.putExtra(MatchActivity.REQ_MESSAGE_MATCH, selectMatch);
 		    // intent.putExtra(QuizzActivity.REQ_MESSAGE_NEXT_MATCH, nextMatch);
-		    intent.putExtra(QuizzActivity.REQ_MESSAGE_GAME, _selectPack);
+		    intent.putExtra(MatchActivity.REQ_MESSAGE_PACK, _selectPack);
 		    startActivityForResult(intent, EXTRA_MESSAGE_REQUEST_CODE);
 
 		    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

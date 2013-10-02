@@ -40,8 +40,21 @@ public class PackFragment extends Fragment {
 
     private View _contentView;
 
+    // @Override
+    // public void onResume() {
+    // System.out.println("=============> RESUME");
+    // super.onResume();
+    // if (_currentPackProgress != null) {
+    // PackProgressDao packProgressDao = new PackProgressDao(getActivity());
+    // _currentPackProgress = packProgressDao.find(_currentPack);
+    //
+    // System.out.println("=============> RESUME FRAGMENT " + _currentPackProgress.getNumberOfSuccessMatch());
+    // }
+    // }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	// System.out.println("=============> onCreateView ");
 	View rootView = inflater.inflate(R.layout.fragment_pack, container, false);
 
 	if (_font == null) {
