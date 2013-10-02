@@ -24,9 +24,9 @@ import com.compo.android.app.model.Play;
 import com.compo.android.app.model.QuizzPlayer;
 import com.compo.android.app.model.Team;
 
-public class QuizzView extends View {
+public class MatchView extends View {
 
-    private static final String TAG = QuizzView.class.getName();
+    private static final String TAG = MatchView.class.getName();
 
     /**
      * Field width in meter
@@ -73,7 +73,7 @@ public class QuizzView extends View {
     // protected Match _nextMatch;
     protected Map<Long, Play> _mapQuizzToPlay;
 
-    public QuizzView(Context context, AttributeSet attrs) {
+    public MatchView(Context context, AttributeSet attrs) {
 	super(context, attrs);
 	_context = context;
 
@@ -92,7 +92,7 @@ public class QuizzView extends View {
 	_paint.setTypeface(font);
 
 	Intent intent = ((Activity) context).getIntent();
-	_selectedMatch = (Match) intent.getSerializableExtra(QuizzActivity.REQ_MESSAGE_MATCH);
+	_selectedMatch = (Match) intent.getSerializableExtra(MatchActivity.REQ_MESSAGE_MATCH);
 	// _nextMatch = (Match) intent.getSerializableExtra(QuizzActivity.REQ_MESSAGE_NEXT_MATCH);
 
 	Team home = null;
@@ -434,7 +434,7 @@ public class QuizzView extends View {
 		Intent intent = new Intent(getContext(), ResponseActivity.class);
 		intent.putExtra(ResponseActivity.EXTRA_MESSAGE_QUIZZ, qp);
 		intent.putExtra(ResponseActivity.EXTRA_MESSAGE_PLAY, _mapQuizzToPlay.get(qp.getId()));
-		((QuizzActivity) getContext()).startActivityForResult(intent, QuizzActivity.EXTRA_MESSAGE_REQUEST_CODE);
+		((MatchActivity) getContext()).startActivityForResult(intent, MatchActivity.EXTRA_MESSAGE_REQUEST_CODE);
 
 		return b;
 	    }
