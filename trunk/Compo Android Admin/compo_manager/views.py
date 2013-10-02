@@ -13,6 +13,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import loader
 from django.template.context import RequestContext
 import datetime
+from compo_manager.forms import MatchFormMatchStep3
 
 def superuser_check(user):
     return user.is_superuser
@@ -58,9 +59,10 @@ def create_theme(request):
 @login_required(redirect_field_name='/accounts/login')
 def update_theme(request, theme_id):
     theme = get_object_or_404(Theme, id=theme_id)
-    form = ThemeForm(request.POST, instance=theme)
     
-    if form.is_valid():
+    if request.method == 'POST':
+        form = ThemeForm(request.POST, instance=theme)
+        if form.is_valid():
             form.save()
             return HttpResponseRedirect('/theme')
     else:
@@ -94,10 +96,12 @@ def create_pack(request):
 @login_required(redirect_field_name='/accounts/login')
 def update_pack(request, pack_id):
     pack = get_object_or_404(Pack, id=pack_id)
-    form = PackForm(request.POST, instance=pack)
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect('/pack')
+    
+    if request.method == 'POST':
+        form = PackForm(request.POST, instance=pack)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/pack')
     else:
         form = PackForm(instance=pack) 
         
@@ -131,10 +135,12 @@ def create_team(request):
 @login_required(redirect_field_name='/accounts/login')
 def update_team(request, team_id):
     team = get_object_or_404(Team, id=team_id)
-    form = TeamForm(request.POST, instance=team)
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect('/team')
+    
+    if request.method == 'POST':
+        form = TeamForm(request.POST, instance=team)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/team')
     else:
         form = TeamForm(instance=team) 
         
@@ -200,7 +206,17 @@ def update_match(request, match_id):
     
     match_displayer = service.get_match_displayer(match)
     
-    variables = RequestContext(request, {'match_displayer':match_displayer})
+    if request.method == 'POST':
+        form = MatchFormMatchStep3(request.POST, instance=match)
+    
+        if form.is_valid():
+            match.is_valid = False
+            form.save()
+            return HttpResponseRedirect('/match')
+    else:
+        form = MatchFormMatchStep3(instance=match)
+    
+    variables = RequestContext(request, {'match_displayer':match_displayer,'form':form})
     return render_to_response('update_match.html', variables)
 
 @login_required(redirect_field_name='/accounts/login')
@@ -224,11 +240,12 @@ def index_match(request):
 @login_required(redirect_field_name='/accounts/login')    
 def update_quizzplayer(request, quizzplayer_id):
     quizzplayer = get_object_or_404(QuizzPlayer, id=quizzplayer_id)
-    form = QuizzPlayerForm(request.POST, instance=quizzplayer)
+    if request.method == 'POST':
+        form = QuizzPlayerForm(request.POST, instance=quizzplayer)
     
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect('/match/update/%i'%quizzplayer.match.id)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/match/update/%i'%quizzplayer.match.id)
     else:
         form = QuizzPlayerForm(instance=quizzplayer)
     
