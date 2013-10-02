@@ -18,6 +18,7 @@ public class Match implements Serializable {
     private boolean overtime;
     private Integer sogHome;
     private Integer sogAway;
+    private int orderNumber;
     private List<QuizzPlayer> quizzs = new ArrayList<QuizzPlayer>();
 
     public long getId() {
@@ -90,6 +91,14 @@ public class Match implements Serializable {
 
     public void setSogAway(Integer sogAway) {
 	this.sogAway = sogAway;
+    }
+
+    public int getOrderNumber() {
+	return orderNumber;
+    }
+
+    public void setOrderNumber(int orderNumber) {
+	this.orderNumber = orderNumber;
     }
 
 }
