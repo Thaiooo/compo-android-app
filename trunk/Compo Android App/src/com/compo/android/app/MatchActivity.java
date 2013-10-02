@@ -13,30 +13,34 @@ import android.widget.Toast;
 
 import com.compo.android.app.dao.PlayDao;
 import com.compo.android.app.model.Match;
+import com.compo.android.app.model.Pack;
 import com.compo.android.app.model.Play;
 import com.compo.android.app.model.QuizzPlayer;
 import com.compo.android.app.model.Team;
 import com.compo.android.app.model.User;
+import com.compo.android.app.service.QuizzService;
 import com.compo.android.app.utils.UserFactory;
 
-public class QuizzActivity extends AbstractLSEFragmentActivity {
+public class MatchActivity extends AbstractLSEFragmentActivity {
 
     // private static final String TAG = QuizzActivity.class.getName();
 
     public static final String REQ_MESSAGE_MATCH = "com.compo.android.app.QuizzActivity.MESSAGE.MATCH";
-    public static final String REQ_MESSAGE_GAME = "com.compo.android.app.QuizzActivity.MESSAGE.GAME";
+    public static final String REQ_MESSAGE_PACK = "com.compo.android.app.QuizzActivity.MESSAGE.PACK";
 
     public static final String RESULT_MESSAGE = "com.compo.android.app.QuizzActivity.MESSAGE.RESULT";
     public static final int EXTRA_MESSAGE_REQUEST_CODE = 1;
 
     private static Typeface _font;
     private static Typeface _fontSocrePrinter;
-    private QuizzView _quizzView;
+    private MatchView _matchView;
     private Map<Long, Play> _mapQuizzToPlay;
+    private Match _currentMatch;
+    private Pack _currentPack;
 
     @Override
     protected int getContentViewId() {
-	return R.layout.activity_quizz;
+	return R.layout.activity_match;
     }
 
     @Override
@@ -52,19 +56,20 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 	}
 
 	PlayDao playDao = new PlayDao(this);
-	User u = UserFactory.getInstance().getUser(QuizzActivity.this);
+	User u = UserFactory.getInstance().getUser(MatchActivity.this);
 	_mapQuizzToPlay = playDao.getAllPlay(u.getId());
 
 	Intent intent = getIntent();
-	Match selectMatch = (Match) intent.getSerializableExtra(QuizzActivity.REQ_MESSAGE_MATCH);
+	_currentMatch = (Match) intent.getSerializableExtra(MatchActivity.REQ_MESSAGE_MATCH);
+	_currentPack = (Pack) intent.getSerializableExtra(MatchActivity.REQ_MESSAGE_PACK);
 
-	_quizzView = (QuizzView) findViewById(R.id.quizz_view);
-	_quizzView.setQuizz(selectMatch);
-	_quizzView.setMapQuizzToPlay(_mapQuizzToPlay);
+	_matchView = (MatchView) findViewById(R.id.quizz_view);
+	_matchView.setQuizz(_currentMatch);
+	_matchView.setMapQuizzToPlay(_mapQuizzToPlay);
 
 	Team home = null;
 	Team away = null;
-	for (QuizzPlayer qp : selectMatch.getQuizzs()) {
+	for (QuizzPlayer qp : _currentMatch.getQuizzs()) {
 	    if (home != null && away != null) {
 		break;
 	    }
@@ -77,7 +82,7 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 
 	TextView matchDetail = (TextView) findViewById(R.id.match_details);
 	matchDetail.setTypeface(_font);
-	matchDetail.setText(selectMatch.getName());
+	matchDetail.setText(_currentMatch.getName());
 
 	TextView teamAway = (TextView) findViewById(R.id.match_teams);
 	teamAway.setTypeface(_font);
@@ -89,7 +94,7 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 
 	Button scorePrinter = (Button) findViewById(R.id.score_printer);
 	scorePrinter.setTypeface(_fontSocrePrinter);
-	scorePrinter.setText(selectMatch.getScoreHome() + " - " + selectMatch.getScoreAway());
+	scorePrinter.setText(_currentMatch.getScoreHome() + " - " + _currentMatch.getScoreAway());
 
     }
 
@@ -99,19 +104,19 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 	if (data == null) {
 	    return;
 	}
-	Play play = (Play) data.getSerializableExtra(QuizzActivity.RESULT_MESSAGE);
+	Play play = (Play) data.getSerializableExtra(MatchActivity.RESULT_MESSAGE);
 	if (play != null) {
 	    _mapQuizzToPlay.put(play.getQuizzId(), play);
-	    _quizzView.setMapQuizzToPlay(_mapQuizzToPlay);
+	    _matchView.setMapQuizzToPlay(_mapQuizzToPlay);
 	}
 
-	User u = UserFactory.getInstance().getUser(QuizzActivity.this);
+	User u = UserFactory.getInstance().getUser(MatchActivity.this);
 	_userCredit.setText(Integer.toString(u.getCredit()));
 
 	switch (requestCode) {
 	case EXTRA_MESSAGE_REQUEST_CODE:
 	    if (resultCode == RESULT_OK) {
-		_quizzView.invalidate();
+		_matchView.invalidate();
 
 		if (play != null) {
 		    Toast.makeText(this, "You have found " + " " + play.getResponse().toUpperCase(Locale.US),
@@ -121,6 +126,8 @@ public class QuizzActivity extends AbstractLSEFragmentActivity {
 	    } else if (resultCode == RESULT_FIRST_USER) {
 		// TODO Cas du next
 		// Rechercher le match suivant. Dans un job au début de l'activité
+		QuizzService service = new QuizzService(this);
+		Match nextMatch = service.getNexMatch(_currentPack, _currentMatch);
 
 		System.out.println("=============> Afficher le suivant");
 	    }
