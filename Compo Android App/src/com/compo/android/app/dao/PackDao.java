@@ -37,58 +37,25 @@ public class PackDao {
 	    String[] selectionArgs = { String.valueOf(aMatchId) };
 
 	    StringBuffer req = new StringBuffer("select ");
-	    // Index 0
-	    req.append("p.");
+	    // Column 0 to 2
+	    req.append(createPackColumnRequest("p"));
+	    // Column 3 to 11
+	    req.append(createMatchColumnRequest("m"));
+
+	    req.append("from ");
+	    req.append(TableConstant.PackTable.TABLE_NAME);
+	    req.append(" p ");
+
+	    req.append("left join ");
+	    req.append(TableConstant.MatchTable.TABLE_NAME);
+	    req.append(" m on m.");
+	    req.append(TableConstant.MatchTable.COLUMN_PACK_ID);
+	    req.append(" = p.");
 	    req.append(TableConstant.PackTable._ID);
-	    req.append(", ");
-	    // Index 1
-	    req.append("p.");
-	    req.append(TableConstant.PackTable.COLUMN_NAME);
-	    req.append(", ");
-	    // Index 2
-	    req.append("p.");
-	    req.append(TableConstant.PackTable.COLUMN_DESCRIPTION);
-	    req.append(", ");
 
-	    // ---------------------------------------------------------------------------------
-	    // Index 3
-	    req.append("m.");
+	    req.append(" where m.");
 	    req.append(TableConstant.MatchTable._ID);
-	    req.append(", ");
-	    // Index 4
-	    req.append("m.");
-	    req.append(TableConstant.MatchTable.COLUMN_NAME);
-	    req.append(", ");
-	    // Index 5
-	    req.append("m.");
-	    req.append(TableConstant.MatchTable.COLUMN_DATE);
-	    req.append(", ");
-	    // Index 6
-	    req.append("m.");
-	    req.append(TableConstant.MatchTable.COLUMN_SCORE_AWAY);
-	    req.append(", ");
-	    // Index 7
-	    req.append("m.");
-	    req.append(TableConstant.MatchTable.COLUMN_SCORE_HOME);
-	    req.append(", ");
-	    // Index 8
-	    req.append("m.");
-	    req.append(TableConstant.MatchTable.COLUMN_IS_OVERTIME);
-	    req.append(", ");
-	    // Index 9
-	    req.append("m.");
-	    req.append(TableConstant.MatchTable.COLUMN_SOG_HOME);
-	    req.append(", ");
-	    // Index 10
-	    req.append("m.");
-	    req.append(TableConstant.MatchTable.COLUMN_SOG_AWAY);
-	    req.append(" ");
-
-	    req.append("from " + TableConstant.PackTable.TABLE_NAME + " p ");
-	    req.append("left join " + TableConstant.MatchTable.TABLE_NAME + " m on m."
-		    + TableConstant.MatchTable.COLUMN_PACK_ID + " = p." + TableConstant.PackTable._ID + " ");
-
-	    req.append("where m." + TableConstant.MatchTable._ID + " = ? ");
+	    req.append(" = ? ");
 
 	    c = session.rawQuery(req.toString(), selectionArgs);
 
@@ -98,20 +65,14 @@ public class PackDao {
 
 		index++;
 		pack = new Pack();
-
-		String packName = c.getString(index);
-		index++;
-		String packDescription = c.getString(index);
-
 		pack.setId(packId);
-		pack.setName(packName);
-		pack.setDescription(packDescription);
+		index = fillPack(c, index, pack);
 
-		pack.setMatchs(new ArrayList<Match>());
-
-		index++;
+		index = 3;
 		if (c.getLong(index) != 0) {
-		    fillMatch(c, index, pack);
+		    Match match = new Match();
+		    fillMatch(c, index, match);
+		    pack.getMatchs().add(match);
 		}
 
 	    }
@@ -139,60 +100,32 @@ public class PackDao {
 	    String[] selectionArgs = { String.valueOf(aTheme.getId()) };
 
 	    StringBuffer req = new StringBuffer("select ");
-	    // Index 0
-	    req.append("p.");
-	    req.append(TableConstant.PackTable._ID);
-	    req.append(", ");
-	    // Index 1
-	    req.append("p.");
-	    req.append(TableConstant.PackTable.COLUMN_NAME);
-	    req.append(", ");
-	    // Index 2
-	    req.append("p.");
-	    req.append(TableConstant.PackTable.COLUMN_DESCRIPTION);
-	    req.append(", ");
+	    // Column 0 to 2
+	    req.append(createPackColumnRequest("p"));
+	    // Column 3 to 11
+	    req.append(createMatchColumnRequest("m"));
 
-	    // ---------------------------------------------------------------------------------
-	    // Index 3
-	    req.append("m.");
-	    req.append(TableConstant.MatchTable._ID);
-	    req.append(", ");
-	    // Index 4
-	    req.append("m.");
-	    req.append(TableConstant.MatchTable.COLUMN_NAME);
-	    req.append(", ");
-	    // Index 5
-	    req.append("m.");
-	    req.append(TableConstant.MatchTable.COLUMN_DATE);
-	    req.append(", ");
-	    // Index 6
-	    req.append("m.");
-	    req.append(TableConstant.MatchTable.COLUMN_SCORE_AWAY);
-	    req.append(", ");
-	    // Index 7
-	    req.append("m.");
-	    req.append(TableConstant.MatchTable.COLUMN_SCORE_HOME);
-	    req.append(", ");
-	    // Index 8
-	    req.append("m.");
-	    req.append(TableConstant.MatchTable.COLUMN_IS_OVERTIME);
-	    req.append(", ");
-	    // Index 9
-	    req.append("m.");
-	    req.append(TableConstant.MatchTable.COLUMN_SOG_HOME);
-	    req.append(", ");
-	    // Index 10
-	    req.append("m.");
-	    req.append(TableConstant.MatchTable.COLUMN_SOG_AWAY);
+	    req.append("from ");
+	    req.append(TableConstant.PackTable.TABLE_NAME);
+	    req.append(" p ");
+
+	    req.append("left join ");
+	    req.append(TableConstant.MatchTable.TABLE_NAME);
+	    req.append(" m on m.");
+	    req.append(TableConstant.MatchTable.COLUMN_PACK_ID);
+	    req.append(" = p.");
+	    req.append(TableConstant.PackTable._ID);
 	    req.append(" ");
 
-	    req.append("from " + TableConstant.PackTable.TABLE_NAME + " p ");
-	    req.append("left join " + TableConstant.MatchTable.TABLE_NAME + " m on m."
-		    + TableConstant.MatchTable.COLUMN_PACK_ID + " = p." + TableConstant.PackTable._ID + " ");
+	    req.append("where p.");
+	    req.append(TableConstant.PackTable.COLUMN_THEME_ID);
+	    req.append(" = ? ");
 
-	    req.append("where p." + TableConstant.PackTable.COLUMN_THEME_ID + " = ? ");
-	    req.append("order by p." + TableConstant.PackTable.COLUMN_ORDER_NUMBER + " asc ");
-	    req.append(", m." + TableConstant.MatchTable.COLUMN_ORDER_NUMBER + " asc ");
+	    req.append("order by p.");
+	    req.append(TableConstant.PackTable.COLUMN_ORDER_NUMBER);
+	    req.append(" asc , m.");
+	    req.append(TableConstant.MatchTable.COLUMN_ORDER_NUMBER);
+	    req.append(" asc ");
 
 	    c = session.rawQuery(req.toString(), selectionArgs);
 
@@ -203,32 +136,20 @@ public class PackDao {
 		long packId = c.getLong(index);
 		Pack pack = mapPack.get(packId);
 
-		index++;
 		if (pack == null) {
 		    pack = new Pack();
-
-		    String packName = c.getString(index);
-		    index++;
-		    String packDescription = c.getString(index);
-
 		    pack.setId(packId);
-		    pack.setName(packName);
-		    pack.setDescription(packDescription);
+		    index = fillPack(c, index, pack);
 
-		    pack.setMatchs(new ArrayList<Match>());
-
-		    index++;
-		    if (c.getLong(index) != 0) {
-			fillMatch(c, index, pack);
-		    }
 		    mapPack.put(packId, pack);
-
 		    l.add(pack);
-		} else {
-		    index = 3;
-		    if (c.getLong(index) != 0) {
-			fillMatch(c, index, pack);
-		    }
+		}
+
+		index = 3;
+		if (c.getLong(index) != 0) {
+		    Match match = new Match();
+		    fillMatch(c, index, match);
+		    pack.getMatchs().add(match);
 		}
 	    }
 	} finally {
@@ -244,39 +165,136 @@ public class PackDao {
 	return l;
     }
 
-    private void fillMatch(Cursor aCursor, int anIndex, Pack aPack) {
-	Match match = new Match();
-	match.setId(aCursor.getLong(anIndex));
+    private String createPackColumnRequest(String aPrefixe) {
+	StringBuffer req = new StringBuffer();
+	// Index 0
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.PackTable._ID);
+	req.append(", ");
+	// Index 1
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.PackTable.COLUMN_NAME);
+	req.append(", ");
+	// Index 2
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.PackTable.COLUMN_DESCRIPTION);
+	req.append(", ");
+
+	return req.toString();
+    }
+
+    private String createMatchColumnRequest(String aPrefixe) {
+	StringBuffer req = new StringBuffer();
+
+	// Index 3
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchTable._ID);
+	req.append(", ");
+	// Index 4
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchTable.COLUMN_NAME);
+	req.append(", ");
+	// Index 5
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchTable.COLUMN_DATE);
+	req.append(", ");
+	// Index 6
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchTable.COLUMN_SCORE_AWAY);
+	req.append(", ");
+	// Index 7
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchTable.COLUMN_SCORE_HOME);
+	req.append(", ");
+	// Index 8
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchTable.COLUMN_IS_OVERTIME);
+	req.append(", ");
+	// Index 9
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchTable.COLUMN_SOG_HOME);
+	req.append(", ");
+	// Index 10
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchTable.COLUMN_SOG_AWAY);
+	req.append(", ");
+	// Index 11
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchTable.COLUMN_ORDER_NUMBER);
+	req.append(" ");
+
+	return req.toString();
+    }
+
+    private int fillPack(Cursor aCursor, int anIndex, Pack aPack) {
 	anIndex++;
-	match.setName(aCursor.getString(anIndex));
+	String packName = aCursor.getString(anIndex);
+	aPack.setName(packName);
+
+	anIndex++;
+	String packDescription = aCursor.getString(anIndex);
+	aPack.setDescription(packDescription);
+
+	aPack.setMatchs(new ArrayList<Match>());
+
+	return anIndex;
+    }
+
+    private int fillMatch(Cursor aCursor, int anIndex, Match aMatch) {
+	aMatch.setId(aCursor.getLong(anIndex));
+
+	anIndex++;
+	aMatch.setName(aCursor.getString(anIndex));
+
 	anIndex++;
 	String matchDate = aCursor.getString(anIndex);
 	try {
 	    java.util.Date d = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE).parse(matchDate);
 	    Date date = new Date(d.getTime());
-	    match.setDate(date);
+	    aMatch.setDate(date);
 	} catch (ParseException e) {
 	    e.printStackTrace();
 	}
+
 	anIndex++;
-	match.setScoreAway(aCursor.getInt(anIndex));
+	aMatch.setScoreAway(aCursor.getInt(anIndex));
+
 	anIndex++;
-	match.setScoreHome(aCursor.getInt(anIndex));
+	aMatch.setScoreHome(aCursor.getInt(anIndex));
+
 	anIndex++;
 	boolean isOvertime = BooleanUtils.toBoolean(aCursor.getInt(anIndex));
-	match.setOvertime(isOvertime);
+	aMatch.setOvertime(isOvertime);
+
 	anIndex++;
 	String quizzSogHome = aCursor.getString(anIndex);
 	if (StringUtils.isNotBlank(quizzSogHome)) {
-	    match.setSogHome(Integer.getInteger(quizzSogHome));
+	    aMatch.setSogHome(Integer.getInteger(quizzSogHome));
 	}
+
 	anIndex++;
 	String quizzSogAway = aCursor.getString(anIndex);
 	if (StringUtils.isNotBlank(quizzSogAway)) {
-	    match.setSogAway(Integer.getInteger(quizzSogAway));
+	    aMatch.setSogAway(Integer.getInteger(quizzSogAway));
 	}
 
-	aPack.getMatchs().add(match);
+	anIndex++;
+	int orderNumber = aCursor.getInt(anIndex);
+	aMatch.setOrderNumber(orderNumber);
+
+	return anIndex;
     }
 
 }

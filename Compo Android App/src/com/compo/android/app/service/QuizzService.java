@@ -1,14 +1,17 @@
 package com.compo.android.app.service;
 
 import java.util.Date;
+import java.util.List;
 
 import android.content.Context;
 
+import com.compo.android.app.dao.MatchDao;
 import com.compo.android.app.dao.MatchProgressDao;
 import com.compo.android.app.dao.PackDao;
 import com.compo.android.app.dao.PackProgressDao;
 import com.compo.android.app.dao.PlayDao;
 import com.compo.android.app.dao.QuizzPlayerDao;
+import com.compo.android.app.model.Match;
 import com.compo.android.app.model.MatchProgress;
 import com.compo.android.app.model.Pack;
 import com.compo.android.app.model.PackProgress;
@@ -188,6 +191,14 @@ public class QuizzService {
 	    dao.update(aPlay);
 	}
 	return aPlay;
+    }
+
+    public Match getNexMatch(Pack aPack, Match aCurrentMatch) {
+	MatchDao matchDao = new MatchDao(_context);
+	List<Match> matchs = matchDao.getUncompletedMatchsByPack(aPack);
+	for (Match m : matchs) {
+	}
+	return null;
     }
 
 }
