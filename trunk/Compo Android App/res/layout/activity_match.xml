@@ -60,7 +60,7 @@
             android:layout_marginRight="10dp"
             android:src="@drawable/advertising_right" />
 
-        <com.compo.android.app.QuizzView
+        <com.compo.android.app.MatchView
             android:id="@+id/quizz_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
