@@ -89,7 +89,7 @@
                 android:value="com.compo.android.app.MainActivity" />
         </activity>
         <activity
-            android:name=".QuizzActivity"
+            android:name=".MatchActivity"
             android:label="@string/activity_quizz"
             android:screenOrientation="portrait" >
             <meta-data
