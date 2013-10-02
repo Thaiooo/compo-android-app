@@ -55,5 +55,10 @@ public class SelectPackAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
 	return _packs.size();
     }
+    
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
 
 }

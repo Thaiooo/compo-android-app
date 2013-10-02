@@ -25,7 +25,7 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 
     public final static String MESSAGE_SELECTED_PACK = "com.compo.android.app.SelectGameActivity.MESSAGE1";
     public static final int EXTRA_MESSAGE_REQUEST_CODE = 1;
-    
+
     private static Typeface _fontTitle;
     private ViewPager _mViewPager;
     private TextView _themeName;
@@ -111,14 +111,10 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 	super.onRestart();
 	PackProgressDao packProgressDao = new PackProgressDao(SelectPackActivity.this);
 	_mapPackToProgress = packProgressDao.getAllPackProgress(_selectTheme.getId());
-
-	System.out.println("====>" + _mapPackToProgress);
-
 	_collectionPacksPagerAdapter.setMapPackToProgress(_mapPackToProgress);
-	// _collectionPacksPagerAdapter.getItem(0).getFragmentManager().;
-	// _collectionPacksPagerAdapter.notifyAll();
+	_collectionPacksPagerAdapter.notifyDataSetChanged();
 	// TODO A tester
-	_mViewPager.invalidate();
+	// _mViewPager.invalidate();
     }
 
     private class LoadPackTask extends AsyncTask<Void, Void, List<Pack>> {

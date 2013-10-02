@@ -107,7 +107,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
     @Override
     public void back(View view) {
 	Intent newIntent = new Intent();
-	newIntent.putExtra(QuizzActivity.RESULT_MESSAGE, _currentPlay);
+	newIntent.putExtra(MatchActivity.RESULT_MESSAGE, _currentPlay);
 	setResult(RESULT_CANCELED, newIntent);
 	finish();
     }
@@ -115,7 +115,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
     @Override
     public void onBackPressed() {
 	Intent newIntent = new Intent();
-	newIntent.putExtra(QuizzActivity.RESULT_MESSAGE, _currentPlay);
+	newIntent.putExtra(MatchActivity.RESULT_MESSAGE, _currentPlay);
 	setResult(RESULT_CANCELED, newIntent);
 	finish();
     }
@@ -153,7 +153,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 
 	    _currentPlay = quizzService.saveInccorectResponse(_currentQuizz, _currentPlay, response);
 	    Intent returnIntent = new Intent();
-	    returnIntent.putExtra(QuizzActivity.RESULT_MESSAGE, _currentPlay);
+	    returnIntent.putExtra(MatchActivity.RESULT_MESSAGE, _currentPlay);
 	    setResult(RESULT_CANCELED, returnIntent);
 	}
 
@@ -242,7 +242,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	    // =========================================================================================================
 
 	    Intent returnIntent = new Intent();
-	    returnIntent.putExtra(QuizzActivity.RESULT_MESSAGE, _currentPlay);
+	    returnIntent.putExtra(MatchActivity.RESULT_MESSAGE, _currentPlay);
 
 	    // 2 cas possibles:
 	    if (resultCode == RESULT_OK) {
