@@ -25,17 +25,17 @@
       
   	</div>
   {% endfor %}
-  	{% if not match_displayer.is_valid %}
+	
+	
+	<form action="/match/update/{{ match_displayer.id }}/" method="post">{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Submit" />
+	</form>
+	
+	{% if not match_displayer.is_valid %}
   		<a href='/match/validate/{{ match_displayer.id }}/'>Validate</a>
   	{% endif %}   
 	<a href='/match/'>Back</a>
-	<br>
-	<i>
-		{{ match_displayer.name }} ({{ match_displayer.date }}): 
-		{{ match_displayer.home_team }} - {{ match_displayer.away_team }}
-		{{ match_displayer.score_home }} - {{ match_displayer.score_away }}
-		{{ match_displayer.is_overtime }}
-		{{ match_displayer.sog_home }} - {{ match_displayer.sog_away }}
-	</i>  
+	
 </div>
 {% endblock %}

@@ -119,4 +119,4 @@ class QuizzPlayerForm(ModelForm):
     
     class Meta:
         model = QuizzPlayer
-        fields = ('x', 'y',)
+#         fields = ('x', 'y',)
