@@ -31,7 +31,7 @@ public class MatchDao {
     }
 
     public List<Match> getAllQuizz(long aPackId) {
-	List<Match> l = new ArrayList<Match>();
+	List<Match> l = null;
 
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = null;
@@ -41,153 +41,19 @@ public class MatchDao {
 	    String[] selectionArgs = { String.valueOf(aPackId) };
 
 	    StringBuffer req = new StringBuffer("select ");
-	    // Index 0
-	    req.append("q.");
-	    req.append(TableConstant.MatchTable._ID);
-	    req.append(", ");
-	    // Index 1
-	    req.append("q.");
-	    req.append(TableConstant.MatchTable.COLUMN_NAME);
-	    req.append(", ");
-	    // Index 2
-	    req.append("q.");
-	    req.append(TableConstant.MatchTable.COLUMN_DATE);
-	    req.append(", ");
-	    // Index 3
-	    req.append("q.");
-	    req.append(TableConstant.MatchTable.COLUMN_SCORE_AWAY);
-	    req.append(", ");
-	    // Index 4
-	    req.append("q.");
-	    req.append(TableConstant.MatchTable.COLUMN_SCORE_HOME);
-	    req.append(", ");
-	    // Index 5
-	    req.append("q.");
-	    req.append(TableConstant.MatchTable.COLUMN_IS_OVERTIME);
-	    req.append(", ");
-	    // Index 6
-	    req.append("q.");
-	    req.append(TableConstant.MatchTable.COLUMN_SOG_HOME);
-	    req.append(", ");
-	    // Index 7
-	    req.append("q.");
-	    req.append(TableConstant.MatchTable.COLUMN_SOG_AWAY);
-	    req.append(", ");
-	    // Index 8
-	    req.append("q.");
-	    req.append(TableConstant.MatchTable.COLUMN_ORDER_NUMBER);
-	    req.append(", ");
-	    // ---------------------------------------------------------------------------------
-	    // Index 9
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable._ID);
-	    req.append(", ");
-	    // Index 10
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_EARN_CREDIT);
-	    req.append(", ");
-	    // Index 11
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_X);
-	    req.append(", ");
-	    // Index 12
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_Y);
-	    req.append(", ");
-	    // Index 13
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_IS_HIDE);
-	    req.append(", ");
-	    // Index 14
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_IS_HOME);
-	    req.append(", ");
-	    // Index 15
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_IS_COACH);
-	    req.append(", ");
-	    // Index 16
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_CSC);
-	    req.append(", ");
-	    // Index 17
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_GOAL);
-	    req.append(", ");
-	    // Index 18
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_HINT);
-	    req.append(", ");
-	    // Index 19
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_IS_CAPTAIN);
-	    req.append(", ");
-	    // Index 20
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_CREDIT_TO_UNLOCK_HINT);
-	    req.append(", ");
-	    // Index 21
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_CREDIT_TO_UNLOCK_RANDOM);
-	    req.append(", ");
-	    // Index 22
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_CREDIT_TO_UNLOCK_HALF);
-	    req.append(", ");
-	    // Index 23
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_CREDIT_TO_UNLOCK_RESPONSE);
-	    req.append(", ");
+	    // Column 0 to 8
+	    req.append(createMatchColumnRequest("q"));
+	    // Column 9 to 23
+	    req.append(createQuizzPlayerColumnRequest("qp"));
+	    // Column 24 to 32
+	    req.append(createTeamColumnRequest("t"));
+	    // Column 33 to 34
+	    req.append(createPlayerColumnRequest("p"));
 
-	    // ---------------------------------------------------------------------------------
-	    // Index 24
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_TEAM_ID);
-	    req.append(", ");
-	    // Index 25
-	    req.append("t.");
-	    req.append(TableConstant.TeamTable.COLUMN_CODE);
-	    req.append(", ");
-	    // Index 26
-	    req.append("t.");
-	    req.append(TableConstant.TeamTable.COLUMN_NAME);
-	    req.append(", ");
-	    // Index 27
-	    req.append("t.");
-	    req.append(TableConstant.TeamTable.COLUMN_HOME_JERSY_COLOR);
-	    req.append(", ");
-	    // Index 28
-	    req.append("t.");
-	    req.append(TableConstant.TeamTable.COLUMN_HOME_SHORT_COLOR);
-	    req.append(", ");
-	    // Index 29
-	    req.append("t.");
-	    req.append(TableConstant.TeamTable.COLUMN_HOME_SOCK_COLOR);
-	    req.append(", ");
-	    // Index 30
-	    req.append("t.");
-	    req.append(TableConstant.TeamTable.COLUMN_AWAY_JERSY_COLOR);
-	    req.append(", ");
-	    // Index 31
-	    req.append("t.");
-	    req.append(TableConstant.TeamTable.COLUMN_AWAY_SHORT_COLOR);
-	    req.append(", ");
-	    // Index 32
-	    req.append("t.");
-	    req.append(TableConstant.TeamTable.COLUMN_AWAY_SOCK_COLOR);
-	    req.append(", ");
+	    req.append("from ");
+	    req.append(TableConstant.MatchTable.TABLE_NAME);
+	    req.append(" q ");
 
-	    // ---------------------------------------------------------------------------------
-	    // Index 33
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_PLAYER_ID);
-	    req.append(", ");
-	    // Index 34
-	    req.append("p.");
-	    req.append(TableConstant.PlayerTable.COLUMN_NAME);
-	    req.append(" ");
-
-	    req.append("from " + TableConstant.MatchTable.TABLE_NAME + " q ");
 	    req.append("left join " + TableConstant.QuizzPlayerTable.TABLE_NAME + " qp on q."
 		    + TableConstant.MatchTable._ID + " = qp." + TableConstant.QuizzPlayerTable.COLUMN_MATCH_ID + " ");
 
@@ -202,68 +68,8 @@ public class MatchDao {
 
 	    c = session.rawQuery(req.toString(), selectionArgs);
 
-	    Map<Long, Match> mapQuizz = new HashMap<Long, Match>();
+	    l = fillResult(c);
 
-	    while (c.moveToNext()) {
-		int index = 0;
-		long quizzId = c.getLong(index);
-		Match match = mapQuizz.get(quizzId);
-
-		index++;
-		if (match == null) {
-		    match = new Match();
-
-		    String quizzName = c.getString(index);
-		    index++;
-		    String quizzDate = c.getString(index);
-		    index++;
-		    int quizzScoreAway = c.getInt(index);
-		    index++;
-		    int quizzScoreHome = c.getInt(index);
-		    index++;
-		    boolean isOvertime = BooleanUtils.toBoolean(c.getInt(index));
-		    index++;
-		    String quizzSogHome = c.getString(index);
-		    index++;
-		    String quizzSogAway = c.getString(index);
-		    index++;
-		    int orderNumber = c.getInt(index);
-
-		    match.setId(quizzId);
-		    match.setName(quizzName);
-		    try {
-			java.util.Date d = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE).parse(quizzDate);
-			Date date = new Date(d.getTime());
-			match.setDate(date);
-		    } catch (ParseException e) {
-			e.printStackTrace();
-		    }
-		    match.setScoreAway(quizzScoreAway);
-		    match.setScoreHome(quizzScoreHome);
-		    match.setOvertime(isOvertime);
-		    if (StringUtils.isNotBlank(quizzSogHome)) {
-			match.setSogHome(Integer.getInteger(quizzSogHome));
-		    }
-		    if (StringUtils.isNotBlank(quizzSogAway)) {
-			match.setSogAway(Integer.getInteger(quizzSogAway));
-		    }
-		    match.setOrderNumber(orderNumber);
-		    match.setQuizzs(new ArrayList<QuizzPlayer>());
-
-		    index++;
-		    if (c.getLong(index) != 0) {
-			fillQuizzPlayer(c, index, match);
-		    }
-		    mapQuizz.put(quizzId, match);
-
-		    l.add(match);
-		} else {
-		    index = 9;
-		    if (c.getLong(index) != 0) {
-			fillQuizzPlayer(c, index, match);
-		    }
-		}
-	    }
 	} finally {
 	    if (c != null) {
 		c.close();
@@ -274,11 +80,14 @@ public class MatchDao {
 	    dataBaseHeleper.close();
 	}
 
+	if (l == null) {
+	    l = new ArrayList<Match>();
+	}
 	return l;
     }
 
     public List<Match> getUncompletedMatchsByPack(Pack aPack) {
-	List<Match> l = new ArrayList<Match>();
+	List<Match> l = null;
 
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = null;
@@ -288,154 +97,19 @@ public class MatchDao {
 	    String[] selectionArgs = { String.valueOf(aPack.getId()) };
 
 	    StringBuffer req = new StringBuffer("select ");
-	    // Index 0
-	    req.append("q.");
-	    req.append(TableConstant.MatchTable._ID);
-	    req.append(", ");
-	    // Index 1
-	    req.append("q.");
-	    req.append(TableConstant.MatchTable.COLUMN_NAME);
-	    req.append(", ");
-	    // Index 2
-	    req.append("q.");
-	    req.append(TableConstant.MatchTable.COLUMN_DATE);
-	    req.append(", ");
-	    // Index 3
-	    req.append("q.");
-	    req.append(TableConstant.MatchTable.COLUMN_SCORE_AWAY);
-	    req.append(", ");
-	    // Index 4
-	    req.append("q.");
-	    req.append(TableConstant.MatchTable.COLUMN_SCORE_HOME);
-	    req.append(", ");
-	    // Index 5
-	    req.append("q.");
-	    req.append(TableConstant.MatchTable.COLUMN_IS_OVERTIME);
-	    req.append(", ");
-	    // Index 6
-	    req.append("q.");
-	    req.append(TableConstant.MatchTable.COLUMN_SOG_HOME);
-	    req.append(", ");
-	    // Index 7
-	    req.append("q.");
-	    req.append(TableConstant.MatchTable.COLUMN_SOG_AWAY);
-	    req.append(", ");
-	    // Index 8
-	    req.append("q.");
-	    req.append(TableConstant.MatchTable.COLUMN_ORDER_NUMBER);
-	    req.append(", ");
+	    // Column 0 to 8
+	    req.append(createMatchColumnRequest("q"));
+	    // Column 9 to 23
+	    req.append(createQuizzPlayerColumnRequest("qp"));
+	    // Column 24 to 32
+	    req.append(createTeamColumnRequest("t"));
+	    // Column 33 to 34
+	    req.append(createPlayerColumnRequest("p"));
 
-	    // ---------------------------------------------------------------------------------
-	    // Index 9
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable._ID);
-	    req.append(", ");
-	    // Index 10
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_EARN_CREDIT);
-	    req.append(", ");
-	    // Index 11
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_X);
-	    req.append(", ");
-	    // Index 12
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_Y);
-	    req.append(", ");
-	    // Index 13
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_IS_HIDE);
-	    req.append(", ");
-	    // Index 14
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_IS_HOME);
-	    req.append(", ");
-	    // Index 15
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_IS_COACH);
-	    req.append(", ");
-	    // Index 16
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_CSC);
-	    req.append(", ");
-	    // Index 17
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_GOAL);
-	    req.append(", ");
-	    // Index 18
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_HINT);
-	    req.append(", ");
-	    // Index 19
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_IS_CAPTAIN);
-	    req.append(", ");
-	    // Index 20
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_CREDIT_TO_UNLOCK_HINT);
-	    req.append(", ");
-	    // Index 21
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_CREDIT_TO_UNLOCK_RANDOM);
-	    req.append(", ");
-	    // Index 22
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_CREDIT_TO_UNLOCK_HALF);
-	    req.append(", ");
-	    // Index 23
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_CREDIT_TO_UNLOCK_RESPONSE);
-	    req.append(", ");
+	    req.append("from ");
+	    req.append(TableConstant.MatchTable.TABLE_NAME);
+	    req.append(" q ");
 
-	    // ---------------------------------------------------------------------------------
-	    // Index 24
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_TEAM_ID);
-	    req.append(", ");
-	    // Index 25
-	    req.append("t.");
-	    req.append(TableConstant.TeamTable.COLUMN_CODE);
-	    req.append(", ");
-	    // Index 26
-	    req.append("t.");
-	    req.append(TableConstant.TeamTable.COLUMN_NAME);
-	    req.append(", ");
-	    // Index 27
-	    req.append("t.");
-	    req.append(TableConstant.TeamTable.COLUMN_HOME_JERSY_COLOR);
-	    req.append(", ");
-	    // Index 28
-	    req.append("t.");
-	    req.append(TableConstant.TeamTable.COLUMN_HOME_SHORT_COLOR);
-	    req.append(", ");
-	    // Index 29
-	    req.append("t.");
-	    req.append(TableConstant.TeamTable.COLUMN_HOME_SOCK_COLOR);
-	    req.append(", ");
-	    // Index 30
-	    req.append("t.");
-	    req.append(TableConstant.TeamTable.COLUMN_AWAY_JERSY_COLOR);
-	    req.append(", ");
-	    // Index 31
-	    req.append("t.");
-	    req.append(TableConstant.TeamTable.COLUMN_AWAY_SHORT_COLOR);
-	    req.append(", ");
-	    // Index 32
-	    req.append("t.");
-	    req.append(TableConstant.TeamTable.COLUMN_AWAY_SOCK_COLOR);
-	    req.append(", ");
-
-	    // ---------------------------------------------------------------------------------
-	    // Index 33
-	    req.append("qp.");
-	    req.append(TableConstant.QuizzPlayerTable.COLUMN_PLAYER_ID);
-	    req.append(", ");
-	    // Index 34
-	    req.append("p.");
-	    req.append(TableConstant.PlayerTable.COLUMN_NAME);
-	    req.append(" ");
-
-	    req.append("from " + TableConstant.MatchTable.TABLE_NAME + " q ");
 	    req.append("left join " + TableConstant.MatchProgressTable.TABLE_NAME + " mp on q."
 		    + TableConstant.MatchTable._ID + " = mp." + TableConstant.MatchProgressTable.COLUMN_MATCH_ID + " ");
 
@@ -457,68 +131,8 @@ public class MatchDao {
 
 	    c = session.rawQuery(req.toString(), selectionArgs);
 
-	    Map<Long, Match> mapQuizz = new HashMap<Long, Match>();
+	    l = fillResult(c);
 
-	    while (c.moveToNext()) {
-		int index = 0;
-		long quizzId = c.getLong(index);
-		Match match = mapQuizz.get(quizzId);
-
-		index++;
-		if (match == null) {
-		    match = new Match();
-
-		    String quizzName = c.getString(index);
-		    index++;
-		    String quizzDate = c.getString(index);
-		    index++;
-		    int quizzScoreAway = c.getInt(index);
-		    index++;
-		    int quizzScoreHome = c.getInt(index);
-		    index++;
-		    boolean isOvertime = BooleanUtils.toBoolean(c.getInt(index));
-		    index++;
-		    String quizzSogHome = c.getString(index);
-		    index++;
-		    String quizzSogAway = c.getString(index);
-		    index++;
-		    int orderNumber = c.getInt(index);
-
-		    match.setId(quizzId);
-		    match.setName(quizzName);
-		    try {
-			java.util.Date d = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE).parse(quizzDate);
-			Date date = new Date(d.getTime());
-			match.setDate(date);
-		    } catch (ParseException e) {
-			e.printStackTrace();
-		    }
-		    match.setScoreAway(quizzScoreAway);
-		    match.setScoreHome(quizzScoreHome);
-		    match.setOvertime(isOvertime);
-		    if (StringUtils.isNotBlank(quizzSogHome)) {
-			match.setSogHome(Integer.getInteger(quizzSogHome));
-		    }
-		    if (StringUtils.isNotBlank(quizzSogAway)) {
-			match.setSogAway(Integer.getInteger(quizzSogAway));
-		    }
-		    match.setOrderNumber(orderNumber);
-		    match.setQuizzs(new ArrayList<QuizzPlayer>());
-
-		    index++;
-		    if (c.getLong(index) != 0) {
-			fillQuizzPlayer(c, index, match);
-		    }
-		    mapQuizz.put(quizzId, match);
-
-		    l.add(match);
-		} else {
-		    index = 9;
-		    if (c.getLong(index) != 0) {
-			fillQuizzPlayer(c, index, match);
-		    }
-		}
-	    }
 	} finally {
 	    if (c != null) {
 		c.close();
@@ -529,74 +143,175 @@ public class MatchDao {
 	    dataBaseHeleper.close();
 	}
 
+	if (l == null) {
+	    l = new ArrayList<Match>();
+	}
+
 	return l;
+    }
+
+    private List<Match> fillResult(Cursor c) {
+	List<Match> l = new ArrayList<Match>();
+	Map<Long, Match> mapMatch = new HashMap<Long, Match>();
+	while (c.moveToNext()) {
+	    int index = 0;
+	    long matchId = c.getLong(index);
+	    Match match = mapMatch.get(matchId);
+
+	    index++;
+	    if (match == null) {
+		match = new Match();
+		match.setId(matchId);
+
+		index = fillMatch(c, index, match);
+		mapMatch.put(matchId, match);
+
+		l.add(match);
+	    }
+	    index = 9;
+	    if (c.getLong(index) != 0) {
+		fillQuizzPlayer(c, index, match);
+	    }
+	}
+
+	return l;
+    }
+
+    private int fillMatch(Cursor aCursor, int anIndex, Match aMatch) {
+	anIndex++;
+	String quizzName = aCursor.getString(anIndex);
+	aMatch.setName(quizzName);
+
+	anIndex++;
+	String quizzDate = aCursor.getString(anIndex);
+	try {
+	    java.util.Date d = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE).parse(quizzDate);
+	    Date date = new Date(d.getTime());
+	    aMatch.setDate(date);
+	} catch (ParseException e) {
+	    e.printStackTrace();
+	}
+
+	anIndex++;
+	int quizzScoreAway = aCursor.getInt(anIndex);
+	aMatch.setScoreAway(quizzScoreAway);
+
+	anIndex++;
+	int quizzScoreHome = aCursor.getInt(anIndex);
+	aMatch.setScoreHome(quizzScoreHome);
+
+	anIndex++;
+	boolean isOvertime = BooleanUtils.toBoolean(aCursor.getInt(anIndex));
+	aMatch.setOvertime(isOvertime);
+
+	anIndex++;
+	String quizzSogHome = aCursor.getString(anIndex);
+	if (StringUtils.isNotBlank(quizzSogHome)) {
+	    aMatch.setSogHome(Integer.getInteger(quizzSogHome));
+	}
+
+	anIndex++;
+	String quizzSogAway = aCursor.getString(anIndex);
+	if (StringUtils.isNotBlank(quizzSogAway)) {
+	    aMatch.setSogAway(Integer.getInteger(quizzSogAway));
+	}
+
+	anIndex++;
+	int orderNumber = aCursor.getInt(anIndex);
+	aMatch.setOrderNumber(orderNumber);
+
+	aMatch.setQuizzs(new ArrayList<QuizzPlayer>());
+
+	return anIndex;
     }
 
     private void fillQuizzPlayer(Cursor aCursor, int anIndex, Match aMatch) {
 	QuizzPlayer quizzPlayer = new QuizzPlayer();
 	quizzPlayer.setMatch(aMatch);
 	quizzPlayer.setId(aCursor.getLong(anIndex));
+
 	anIndex++;
 	quizzPlayer.setEarnCredit(aCursor.getInt(anIndex));
+
 	anIndex++;
 	quizzPlayer.setX(aCursor.getInt(anIndex));
+
 	anIndex++;
 	quizzPlayer.setY(aCursor.getInt(anIndex));
+
 	anIndex++;
 	quizzPlayer.setHide(BooleanUtils.toBoolean(aCursor.getInt(anIndex)));
+
 	anIndex++;
 	quizzPlayer.setHome(BooleanUtils.toBoolean(aCursor.getInt(anIndex)));
+
 	anIndex++;
 	quizzPlayer.setCoach(BooleanUtils.toBoolean(aCursor.getInt(anIndex)));
+
 	anIndex++;
 	quizzPlayer.setCsc(aCursor.getInt(anIndex));
+
 	anIndex++;
 	quizzPlayer.setGoal(aCursor.getInt(anIndex));
+
 	anIndex++;
 	quizzPlayer.setHint(aCursor.getString(anIndex));
+
 	anIndex++;
 	quizzPlayer.setCaptain(BooleanUtils.toBoolean(aCursor.getInt(anIndex)));
+
 	anIndex++;
 	quizzPlayer.setCreditToUnlockHint(aCursor.getInt(anIndex));
+
 	anIndex++;
 	quizzPlayer.setCreditToUnlockRandom(aCursor.getInt(anIndex));
+
 	anIndex++;
 	quizzPlayer.setCreditToUnlockHalf(aCursor.getInt(anIndex));
+
 	anIndex++;
 	quizzPlayer.setCreditToUnlockResponse(aCursor.getInt(anIndex));
 
 	Team team = new Team();
 	anIndex++;
 	team.setId(aCursor.getLong(anIndex));
+
 	anIndex++;
 	team.setCode(aCursor.getString(anIndex));
+
 	anIndex++;
 	team.setName(aCursor.getString(anIndex));
+
 	anIndex++;
 	String s = aCursor.getString(anIndex);
 	if (StringUtils.isNotBlank(s)) {
 	    team.setHomeJerseyColor(ColorEnum.valueOf(s));
 	}
+
 	anIndex++;
 	s = aCursor.getString(anIndex);
 	if (StringUtils.isNotBlank(s)) {
 	    team.setHomeShortColor(ColorEnum.valueOf(s));
 	}
+
 	anIndex++;
 	s = aCursor.getString(anIndex);
 	if (StringUtils.isNotBlank(s)) {
 	    team.setHomeSockColor(ColorEnum.valueOf(s));
 	}
+
 	anIndex++;
 	s = aCursor.getString(anIndex);
 	if (StringUtils.isNotBlank(s)) {
 	    team.setAwayJerseyColor(ColorEnum.valueOf(s));
 	}
+
 	anIndex++;
 	s = aCursor.getString(anIndex);
 	if (StringUtils.isNotBlank(s)) {
 	    team.setAwayShortColor(ColorEnum.valueOf(s));
 	}
+
 	anIndex++;
 	s = aCursor.getString(anIndex);
 	if (StringUtils.isNotBlank(s)) {
@@ -607,11 +322,214 @@ public class MatchDao {
 	Player player = new Player();
 	anIndex++;
 	player.setId(aCursor.getLong(anIndex));
+
 	anIndex++;
 	player.setName(aCursor.getString(anIndex));
 	quizzPlayer.setPlayer(player);
 
 	aMatch.getQuizzs().add(quizzPlayer);
+    }
+
+    private String createMatchColumnRequest(String aPrefixe) {
+	StringBuffer req = new StringBuffer();
+	// Index 0
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchTable._ID);
+	req.append(", ");
+	// Index 1
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchTable.COLUMN_NAME);
+	req.append(", ");
+	// Index 2
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchTable.COLUMN_DATE);
+	req.append(", ");
+	// Index 3
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchTable.COLUMN_SCORE_AWAY);
+	req.append(", ");
+	// Index 4
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchTable.COLUMN_SCORE_HOME);
+	req.append(", ");
+	// Index 5
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchTable.COLUMN_IS_OVERTIME);
+	req.append(", ");
+	// Index 6
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchTable.COLUMN_SOG_HOME);
+	req.append(", ");
+	// Index 7
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchTable.COLUMN_SOG_AWAY);
+	req.append(", ");
+	// Index 8
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchTable.COLUMN_ORDER_NUMBER);
+	req.append(", ");
+
+	return req.toString();
+    }
+
+    private String createQuizzPlayerColumnRequest(String aPrefixe) {
+	StringBuffer req = new StringBuffer();
+
+	// Index 9
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.QuizzPlayerTable._ID);
+	req.append(", ");
+	// Index 10
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_EARN_CREDIT);
+	req.append(", ");
+	// Index 11
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_X);
+	req.append(", ");
+	// Index 12
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_Y);
+	req.append(", ");
+	// Index 13
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_IS_HIDE);
+	req.append(", ");
+	// Index 14
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_IS_HOME);
+	req.append(", ");
+	// Index 15
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_IS_COACH);
+	req.append(", ");
+	// Index 16
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_CSC);
+	req.append(", ");
+	// Index 17
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_GOAL);
+	req.append(", ");
+	// Index 18
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_HINT);
+	req.append(", ");
+	// Index 19
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_IS_CAPTAIN);
+	req.append(", ");
+	// Index 20
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_CREDIT_TO_UNLOCK_HINT);
+	req.append(", ");
+	// Index 21
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_CREDIT_TO_UNLOCK_RANDOM);
+	req.append(", ");
+	// Index 22
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_CREDIT_TO_UNLOCK_HALF);
+	req.append(", ");
+	// Index 23
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.QuizzPlayerTable.COLUMN_CREDIT_TO_UNLOCK_RESPONSE);
+	req.append(", ");
+
+	return req.toString();
+    }
+
+    private String createTeamColumnRequest(String aPrefixe) {
+	StringBuffer req = new StringBuffer();
+
+	// Index 24
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.TeamTable._ID);
+	req.append(", ");
+	// Index 25
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.TeamTable.COLUMN_CODE);
+	req.append(", ");
+	// Index 26
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.TeamTable.COLUMN_NAME);
+	req.append(", ");
+	// Index 27
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.TeamTable.COLUMN_HOME_JERSY_COLOR);
+	req.append(", ");
+	// Index 28
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.TeamTable.COLUMN_HOME_SHORT_COLOR);
+	req.append(", ");
+	// Index 29
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.TeamTable.COLUMN_HOME_SOCK_COLOR);
+	req.append(", ");
+	// Index 30
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.TeamTable.COLUMN_AWAY_JERSY_COLOR);
+	req.append(", ");
+	// Index 31
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.TeamTable.COLUMN_AWAY_SHORT_COLOR);
+	req.append(", ");
+	// Index 32
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.TeamTable.COLUMN_AWAY_SOCK_COLOR);
+	req.append(", ");
+
+	return req.toString();
+    }
+
+    private String createPlayerColumnRequest(String aPrefixe) {
+	StringBuffer req = new StringBuffer();
+
+	// Index 33
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.PlayerTable._ID);
+	req.append(", ");
+	// Index 34
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.PlayerTable.COLUMN_NAME);
+	req.append(" ");
+
+	return req.toString();
     }
 
 }
