@@ -1,6 +1,6 @@
 from compo_admin import settings
 from compo_manager.models import ThemeForm, Theme, PackForm, Pack, TeamForm, \
-    Team, Match, QuizzPlayer, QuizzPlayerForm
+    Team, Match, QuizzPlayer, QuizzPlayerForm, PlayerForm
 from compo_manager.services import QuizzPlayerListServices, \
     MatchDisplayerService
 from django.contrib.auth.decorators import login_required, permission_required, \
@@ -241,13 +241,18 @@ def index_match(request):
 def update_quizzplayer(request, quizzplayer_id):
     quizzplayer = get_object_or_404(QuizzPlayer, id=quizzplayer_id)
     if request.method == 'POST':
-        form = QuizzPlayerForm(request.POST, instance=quizzplayer)
-    
-        if form.is_valid():
-            form.save()
+        quizzplayer_form = QuizzPlayerForm(request.POST, instance=quizzplayer)
+        player_form = PlayerForm(request.POST, instance=quizzplayer.player)
+        if quizzplayer_form.is_valid():
+            quizzplayer_form.save()
+        
+        if player_form.is_valid():
+            player_form.save()
             return HttpResponseRedirect('/match/update/%i'%quizzplayer.match.id)
     else:
-        form = QuizzPlayerForm(instance=quizzplayer)
+        quizzplayer_form = QuizzPlayerForm(instance=quizzplayer)
+        player_form = PlayerForm(instance=quizzplayer.player)
     
-    variables = RequestContext(request, {'form':form, 'quizzplayer_id':quizzplayer_id, 'match_id':quizzplayer.match.id})
+    variables = RequestContext(request, {'quizzplayer_form':quizzplayer_form, 'quizzplayer_id':quizzplayer_id, 
+                                         'player_form':player_form,'match_id':quizzplayer.match.id})
     return render_to_response('update_quizzplayer.html', variables)
