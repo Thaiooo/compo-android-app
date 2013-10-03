@@ -119,4 +119,9 @@ class QuizzPlayerForm(ModelForm):
     
     class Meta:
         model = QuizzPlayer
-#         fields = ('x', 'y',)
+        exclude = ('team', 'player', 'match',)
+
+class PlayerForm(ModelForm):
+    
+    class Meta:
+        model = Player

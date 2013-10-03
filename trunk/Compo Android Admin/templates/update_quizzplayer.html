@@ -3,7 +3,8 @@
 {% block content %}
 {% if quizzplayer_id %}
 	<form action="/quizzplayer/update/{{ quizzplayer_id }}/" method="post">{% csrf_token %}
-	{{ form.as_p }}
+	{{ quizzplayer_form.as_p }}
+	{{ player_form.as_p }}
 	<input type="submit" value="Submit" />
 	</form>
 {% endif %}
