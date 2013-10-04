@@ -186,6 +186,9 @@ class MatchWizard(SessionWizardView):
             match.date = match_form.cleaned_data['date']
             match.score_away = match_form.cleaned_data['score_away']
             match.score_home = match_form.cleaned_data['score_home']
+            match.is_overtime = match_form.cleaned_data['is_overtime']
+            match.sog_home = match_form.cleaned_data['sog_home']
+            match.sog_away = match_form.cleaned_data['sog_away']
             match.pack = match_form.cleaned_data['pack']
             match.order_number = match_form.cleaned_data['order_number']
             
