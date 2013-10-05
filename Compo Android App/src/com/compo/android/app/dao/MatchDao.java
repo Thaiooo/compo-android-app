@@ -54,17 +54,36 @@ public class MatchDao {
 	    req.append(TableConstant.MatchTable.TABLE_NAME);
 	    req.append(" q ");
 
-	    req.append("left join " + TableConstant.QuizzPlayerTable.TABLE_NAME + " qp on q."
-		    + TableConstant.MatchTable._ID + " = qp." + TableConstant.QuizzPlayerTable.COLUMN_MATCH_ID + " ");
+	    req.append("left join ");
+	    req.append(TableConstant.QuizzPlayerTable.TABLE_NAME);
+	    req.append(" qp on q.");
+	    req.append(TableConstant.MatchTable._ID);
+	    req.append(" = qp.");
+	    req.append(TableConstant.QuizzPlayerTable.COLUMN_MATCH_ID);
+	    req.append(" ");
 
-	    req.append("left join " + TableConstant.TeamTable.TABLE_NAME + " t on qp."
-		    + TableConstant.QuizzPlayerTable.COLUMN_TEAM_ID + " = t." + TableConstant.TeamTable._ID + " ");
+	    req.append("left join ");
+	    req.append(TableConstant.TeamTable.TABLE_NAME);
+	    req.append(" t on qp.");
+	    req.append(TableConstant.QuizzPlayerTable.COLUMN_TEAM_ID);
+	    req.append(" = t.");
+	    req.append(TableConstant.TeamTable._ID);
+	    req.append(" ");
 
-	    req.append("left join " + TableConstant.PlayerTable.TABLE_NAME + " p on qp."
-		    + TableConstant.QuizzPlayerTable.COLUMN_PLAYER_ID + " = p." + TableConstant.PlayerTable._ID + " ");
+	    req.append("left join ");
+	    req.append(TableConstant.PlayerTable.TABLE_NAME);
+	    req.append(" p on qp.");
+	    req.append(TableConstant.QuizzPlayerTable.COLUMN_PLAYER_ID);
+	    req.append(" = p.");
+	    req.append(TableConstant.PlayerTable._ID);
+	    req.append(" ");
 
-	    req.append("where q." + TableConstant.MatchTable.COLUMN_PACK_ID + " = ? ");
-	    req.append("order by q." + TableConstant.MatchTable.COLUMN_ORDER_NUMBER + " asc ");
+	    req.append("where q.");
+	    req.append(TableConstant.MatchTable.COLUMN_PACK_ID);
+	    req.append(" = ? ");
+	    req.append("order by q.");
+	    req.append(TableConstant.MatchTable.COLUMN_ORDER_NUMBER);
+	    req.append(" asc ");
 
 	    c = session.rawQuery(req.toString(), selectionArgs);
 
@@ -110,24 +129,52 @@ public class MatchDao {
 	    req.append(TableConstant.MatchTable.TABLE_NAME);
 	    req.append(" q ");
 
-	    req.append("left join " + TableConstant.MatchProgressTable.TABLE_NAME + " mp on q."
-		    + TableConstant.MatchTable._ID + " = mp." + TableConstant.MatchProgressTable.COLUMN_MATCH_ID + " ");
+	    req.append("left join ");
+	    req.append(TableConstant.MatchProgressTable.TABLE_NAME);
+	    req.append(" mp on q.");
+	    req.append(TableConstant.MatchTable._ID);
+	    req.append(" = mp.");
+	    req.append(TableConstant.MatchProgressTable.COLUMN_MATCH_ID);
+	    req.append(" ");
 
-	    req.append("left join " + TableConstant.QuizzPlayerTable.TABLE_NAME + " qp on q."
-		    + TableConstant.MatchTable._ID + " = qp." + TableConstant.QuizzPlayerTable.COLUMN_MATCH_ID + " ");
+	    req.append("left join ");
+	    req.append(TableConstant.QuizzPlayerTable.TABLE_NAME);
+	    req.append(" qp on q.");
+	    req.append(TableConstant.MatchTable._ID);
+	    req.append(" = qp.");
+	    req.append(TableConstant.QuizzPlayerTable.COLUMN_MATCH_ID);
+	    req.append(" ");
 
-	    req.append("left join " + TableConstant.TeamTable.TABLE_NAME + " t on qp."
-		    + TableConstant.QuizzPlayerTable.COLUMN_TEAM_ID + " = t." + TableConstant.TeamTable._ID + " ");
+	    req.append("left join ");
+	    req.append(TableConstant.TeamTable.TABLE_NAME);
+	    req.append(" t on qp.");
+	    req.append(TableConstant.QuizzPlayerTable.COLUMN_TEAM_ID);
+	    req.append(" = t.");
+	    req.append(TableConstant.TeamTable._ID);
+	    req.append(" ");
 
-	    req.append("left join " + TableConstant.PlayerTable.TABLE_NAME + " p on qp."
-		    + TableConstant.QuizzPlayerTable.COLUMN_PLAYER_ID + " = p." + TableConstant.PlayerTable._ID + " ");
+	    req.append("left join ");
+	    req.append(TableConstant.PlayerTable.TABLE_NAME);
+	    req.append(" p on qp.");
+	    req.append(TableConstant.QuizzPlayerTable.COLUMN_PLAYER_ID);
+	    req.append(" = p.");
+	    req.append(TableConstant.PlayerTable._ID);
+	    req.append(" ");
 
-	    req.append("where q." + TableConstant.MatchTable.COLUMN_PACK_ID + " = ? ");
+	    req.append("where q.");
+	    req.append(TableConstant.MatchTable.COLUMN_PACK_ID);
+	    req.append(" = ? ");
 
-	    req.append("and (mp." + TableConstant.MatchProgressTable.COLUMN_IS_COMPLETED + " is null or mp."
-		    + TableConstant.MatchProgressTable.COLUMN_IS_COMPLETED + "=" + BooleanUtils.toInteger(false)
-		    + " ) ");
-	    req.append("order by q." + TableConstant.MatchTable.COLUMN_ORDER_NUMBER + " asc ");
+	    req.append("and (mp.");
+	    req.append(TableConstant.MatchProgressTable.COLUMN_IS_COMPLETED);
+	    req.append(" is null or mp.");
+	    req.append(TableConstant.MatchProgressTable.COLUMN_IS_COMPLETED);
+	    req.append("=");
+	    req.append(BooleanUtils.toInteger(false));
+	    req.append(" ) ");
+	    req.append("order by q.");
+	    req.append(TableConstant.MatchTable.COLUMN_ORDER_NUMBER);
+	    req.append(" asc ");
 
 	    c = session.rawQuery(req.toString(), selectionArgs);
 

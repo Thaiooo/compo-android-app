@@ -40,7 +40,10 @@ public class PackProgressDao {
 
     }
 
-    public Map<Long, PackProgress> getAllPackProgress(long aThemeId) {
+    /**
+     * Return a map Pack id to <code>PackProgress</code>
+     */
+    public Map<Long, PackProgress> getAllPackProgressByTheme(long aThemeId) {
 	Map<Long, PackProgress> map = new HashMap<Long, PackProgress>();
 
 	dataBaseHeleper.openDataBase();
@@ -51,42 +54,35 @@ public class PackProgressDao {
 	    String[] selectionArgs = { String.valueOf(aThemeId) };
 
 	    StringBuffer req = new StringBuffer("select ");
-	    // Index 0
-	    req.append("p.");
-	    req.append(TableConstant.PackProgressTable._ID);
-	    req.append(", ");
-	    // Index 1
-	    req.append("p.");
-	    req.append(TableConstant.PackProgressTable.COLUMN_NB_MATCH_SUCCESS);
-	    req.append(", ");
-	    // Index 2
-	    req.append("p.");
+	    // Column 0 to 2
+	    req.append(createPackProgressColumnRequest("p"));
+
+	    req.append("from ");
+	    req.append(TableConstant.PackProgressTable.TABLE_NAME);
+	    req.append(" p ");
+	    
+	    req.append("inner join ");
+	    req.append(TableConstant.PackTable.TABLE_NAME);
+	    req.append(" k on k.");
+	    req.append(TableConstant.PackTable._ID);
+	    req.append(" = p.");
 	    req.append(TableConstant.PackProgressTable.COLUMN_PACK_ID);
 	    req.append(" ");
 
-	    req.append("from " + TableConstant.PackProgressTable.TABLE_NAME + " p ");
-	    req.append("inner join " + TableConstant.PackTable.TABLE_NAME + " k on k." + TableConstant.PackTable._ID
-		    + " = p." + TableConstant.PackProgressTable.COLUMN_PACK_ID + " ");
-
-	    req.append("where k." + TableConstant.PackTable.COLUMN_THEME_ID + " = ? ");
+	    req.append("where k.");
+	    req.append(TableConstant.PackTable.COLUMN_THEME_ID);
+	    req.append(" = ? ");
 
 	    c = session.rawQuery(req.toString(), selectionArgs);
 
 	    while (c.moveToNext()) {
 		PackProgress progress = new PackProgress();
+		int index = fillPackProgress(c, 0, progress);
 
-		int index = 0;
-		long progressId = c.getLong(index);
-		index++;
-		int progressMatch = c.getInt(index);
 		index++;
 		long packId = c.getLong(index);
 
-		progress.setId(progressId);
-		progress.setNumberOfSuccessMatch(progressMatch);
-
 		map.put(packId, progress);
-
 	    }
 	} finally {
 	    if (c != null) {
@@ -101,6 +97,17 @@ public class PackProgressDao {
 	return map;
     }
 
+    private int fillPackProgress(Cursor aCursor, int anIndex, PackProgress aPackProgress) {
+	long progressId = aCursor.getLong(anIndex);
+	aPackProgress.setId(progressId);
+
+	anIndex++;
+	int progressMatch = aCursor.getInt(anIndex);
+	aPackProgress.setNumberOfSuccessMatch(progressMatch);
+
+	return anIndex;
+    }
+
     public PackProgress find(Pack aPack) {
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = null;
@@ -111,35 +118,21 @@ public class PackProgressDao {
 	    String[] selectionArgs = { String.valueOf(aPack.getId()) };
 
 	    StringBuffer req = new StringBuffer("select ");
-	    // Index 0
-	    req.append("p.");
-	    req.append(TableConstant.PackProgressTable._ID);
-	    req.append(", ");
-	    // Index 1
-	    req.append("p.");
-	    req.append(TableConstant.PackProgressTable.COLUMN_NB_MATCH_SUCCESS);
-	    req.append(", ");
-	    // Index 2
-	    req.append("p.");
-	    req.append(TableConstant.PackProgressTable.COLUMN_PACK_ID);
-	    req.append(" ");
+	    // Column 0 to 2
+	    req.append(createPackProgressColumnRequest("p"));
 
-	    req.append("from " + TableConstant.PackProgressTable.TABLE_NAME + " p ");
-	    req.append("where p." + TableConstant.PackProgressTable.COLUMN_PACK_ID + " = ? ");
+	    req.append("from ");
+	    req.append(TableConstant.PackProgressTable.TABLE_NAME);
+	    req.append(" p ");
+	    req.append("where p.");
+	    req.append(TableConstant.PackProgressTable.COLUMN_PACK_ID);
+	    req.append(" = ? ");
 
 	    c = session.rawQuery(req.toString(), selectionArgs);
 
 	    while (c.moveToNext()) {
 		progress = new PackProgress();
-
-		int index = 0;
-		long progressId = c.getLong(index);
-		index++;
-		int progressMatch = c.getInt(index);
-
-		progress.setId(progressId);
-		progress.setNumberOfSuccessMatch(progressMatch);
-
+		fillPackProgress(c, 0, progress);
 	    }
 	} finally {
 	    if (c != null) {
@@ -197,4 +190,25 @@ public class PackProgressDao {
 	}
 
     }
+
+    private String createPackProgressColumnRequest(String aPrefixe) {
+	StringBuffer req = new StringBuffer();
+	// Index 0
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.PackProgressTable._ID);
+	req.append(", ");
+	// Index 1
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.PackProgressTable.COLUMN_NB_MATCH_SUCCESS);
+	req.append(", ");
+	// Index 2
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.PackProgressTable.COLUMN_PACK_ID);
+	req.append(" ");
+	return req.toString();
+    }
+
 }

@@ -21,7 +21,8 @@ public class QuizzPlayerDao {
 	    String[] selectionArgs = { String.valueOf(aMatchId) };
 
 	    StringBuffer req = new StringBuffer("select count(*) ");
-	    req.append("from " + TableConstant.QuizzPlayerTable.TABLE_NAME);
+	    req.append("from ");
+	    req.append(TableConstant.QuizzPlayerTable.TABLE_NAME);
 	    req.append(" where ");
 	    req.append(TableConstant.QuizzPlayerTable.COLUMN_IS_HIDE);
 	    req.append(" = 1 and ");
