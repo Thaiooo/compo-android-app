@@ -10,6 +10,7 @@
         android:id="@+id/score_bar"
         layout="@layout/score_bar" />
 
+    <!-- style="@style/post_it_hint_btn" -->
     <Button
         android:id="@+id/button_hint"
         android:layout_width="80dp"
@@ -20,6 +21,7 @@
         android:drawableTop="@drawable/idee"
         android:onClick="openHint" />
 
+    <!-- style="@style/post_it_hint_btn" -->
     <Button
         android:id="@+id/button_random"
         android:layout_width="80dp"
@@ -29,6 +31,7 @@
         android:drawableTop="@drawable/des"
         android:onClick="openRandom" />
 
+    <!-- style="@style/post_it_hint_btn" -->
     <Button
         android:id="@+id/button_50"
         android:layout_width="80dp"
@@ -41,6 +44,7 @@
         android:textSize="15dp"
         android:textStyle="bold" />
 
+    <!-- style="@style/post_it_hint_btn" -->
     <Button
         android:id="@+id/button_100"
         android:layout_width="80dp"
