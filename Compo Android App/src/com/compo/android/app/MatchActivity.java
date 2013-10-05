@@ -6,6 +6,7 @@ import java.util.Map;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -36,7 +37,11 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
     private MatchView _matchView;
     private Map<Long, Play> _mapQuizzToPlay;
     private Match _currentMatch;
+    private Match _nextMatch;
     private Pack _currentPack;
+    private TextView _matchDetail;
+    private TextView _teams;
+    private Button _scorePrinter;
 
     @Override
     protected int getContentViewId() {
@@ -64,8 +69,24 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
 	_currentPack = (Pack) intent.getSerializableExtra(MatchActivity.REQ_MESSAGE_PACK);
 
 	_matchView = (MatchView) findViewById(R.id.quizz_view);
-	_matchView.setQuizz(_currentMatch);
 	_matchView.setMapQuizzToPlay(_mapQuizzToPlay);
+
+	_matchDetail = (TextView) findViewById(R.id.match_details);
+	_matchDetail.setTypeface(_font);
+
+	_teams = (TextView) findViewById(R.id.match_teams);
+	_teams.setTypeface(_font);
+
+	_scorePrinter = (Button) findViewById(R.id.score_printer);
+	_scorePrinter.setTypeface(_fontSocrePrinter);
+
+	fillDataToView();
+    }
+
+    private void fillDataToView() {
+	_matchView.setQuizz(_currentMatch);
+	_matchDetail.setText(_currentMatch.getName());
+	_scorePrinter.setText(_currentMatch.getScoreHome() + " - " + _currentMatch.getScoreAway());
 
 	Team home = null;
 	Team away = null;
@@ -80,22 +101,11 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
 	    }
 	}
 
-	TextView matchDetail = (TextView) findViewById(R.id.match_details);
-	matchDetail.setTypeface(_font);
-	matchDetail.setText(_currentMatch.getName());
-
-	TextView teamAway = (TextView) findViewById(R.id.match_teams);
-	teamAway.setTypeface(_font);
 	if (away != null && home != null) {
-	    teamAway.setText(home.getName() + " - " + away.getName());
+	    _teams.setText(home.getName() + " - " + away.getName());
 	} else {
-	    teamAway.setText("");
+	    _teams.setText("");
 	}
-
-	Button scorePrinter = (Button) findViewById(R.id.score_printer);
-	scorePrinter.setTypeface(_fontSocrePrinter);
-	scorePrinter.setText(_currentMatch.getScoreHome() + " - " + _currentMatch.getScoreAway());
-
     }
 
     @SuppressLint("DefaultLocale")
@@ -124,13 +134,25 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
 		}
 		break;
 	    } else if (resultCode == RESULT_FIRST_USER) {
-		// TODO Cas du next
-		// Rechercher le match suivant. Dans un job au début de l'activité
-		QuizzService service = new QuizzService(this);
-		Match nextMatch = service.getNexMatch(_currentPack, _currentMatch);
+		if (_nextMatch != null) {
+		    _currentMatch = _nextMatch;
+		    fillDataToView();
+		    _matchView.invalidate();
 
-		System.out.println("=============> Afficher le suivant");
+		    // Recherche du match suivant pour anticiper la suite
+		    new LoadNextMatchTask().execute();
+		}
 	    }
+	}
+    }
+
+    private class LoadNextMatchTask extends AsyncTask<Void, Void, Void> {
+	@Override
+	protected Void doInBackground(Void... params) {
+	    // Rechercher le match suivant. Dans un job au début de l'activité
+	    QuizzService service = new QuizzService(MatchActivity.this);
+	    _nextMatch = service.getNexMatch(_currentPack, _currentMatch);
+	    return null;
 	}
     }
 
