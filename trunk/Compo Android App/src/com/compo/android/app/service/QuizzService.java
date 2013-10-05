@@ -1,5 +1,7 @@
 package com.compo.android.app.service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -196,9 +198,42 @@ public class QuizzService {
     public Match getNexMatch(Pack aPack, Match aCurrentMatch) {
 	MatchDao matchDao = new MatchDao(_context);
 	List<Match> matchs = matchDao.getUncompletedMatchsByPack(aPack);
-	for (Match m : matchs) {
+	if (matchs.isEmpty()) {
+	    return null;
 	}
-	return null;
-    }
 
+	Match next = null;
+	for (Match m : matchs) {
+	    if (m.getOrderNumber() > aCurrentMatch.getOrderNumber()) {
+		next = m;
+		break;
+	    }
+	}
+
+	if (next == null) {
+	    // Trier dans l'ordre inverse. Plus grand au plus petit
+	    Collections.sort(matchs, new Comparator<Match>() {
+		@Override
+		public int compare(Match aMatch1, Match aMatch2) {
+
+		    if (aMatch1.getOrderNumber() > aMatch2.getOrderNumber()) {
+			return 1;
+		    } else if (aMatch1.getOrderNumber() == aMatch2.getOrderNumber()) {
+			return 0;
+		    } else {
+			return -1;
+		    }
+		}
+	    });
+
+	    for (Match m : matchs) {
+		if (m.getOrderNumber() < aCurrentMatch.getOrderNumber()) {
+		    next = m;
+		    break;
+		}
+	    }
+	}
+
+	return next;
+    }
 }
