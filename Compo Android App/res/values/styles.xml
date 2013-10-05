@@ -37,6 +37,10 @@
         <item name="android:background">@drawable/button_paper_post_it_yellow</item>
     </style>
 
+    <style name="post_it_hint_btn" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/button_post_it_hint</item>
+    </style>
+
     <style name="craie_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/btn_craie</item>
     </style>
