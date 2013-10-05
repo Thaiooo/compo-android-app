@@ -41,7 +41,7 @@ public class MatchProgressDao {
 
     }
 
-    public Map<Long, MatchProgress> getAllMatchProgress(long aPackId) {
+    public Map<Long, MatchProgress> getAllMatchProgressByPack(long aPackId) {
 	Map<Long, MatchProgress> map = new HashMap<Long, MatchProgress>();
 
 	dataBaseHeleper.openDataBase();
@@ -52,46 +52,32 @@ public class MatchProgressDao {
 	    String[] selectionArgs = { String.valueOf(aPackId) };
 
 	    StringBuffer req = new StringBuffer("select ");
-	    // Index 0
-	    req.append("p.");
-	    req.append(TableConstant.MatchProgressTable._ID);
-	    req.append(", ");
-	    // Index 1
-	    req.append("p.");
-	    req.append(TableConstant.MatchProgressTable.COLUMN_NB_QUIZZ_SUCCESS);
-	    req.append(", ");
-	    // Index 2
-	    req.append("p.");
+	    req.append(createMatchColumnRequest("p"));
+
+	    req.append("from ");
+	    req.append(TableConstant.MatchProgressTable.TABLE_NAME);
+	    req.append(" p ");
+	    
+	    req.append("inner join ");
+	    req.append(TableConstant.MatchTable.TABLE_NAME);
+	    req.append(" k on k.");
+	    req.append(TableConstant.MatchTable._ID);
+	    req.append(" = p.");
 	    req.append(TableConstant.MatchProgressTable.COLUMN_MATCH_ID);
-	    req.append(", ");
-	    // Index 4
-	    req.append("p.");
-	    req.append(TableConstant.MatchProgressTable.COLUMN_IS_COMPLETED);
 	    req.append(" ");
 
-	    req.append("from " + TableConstant.MatchProgressTable.TABLE_NAME + " p ");
-	    req.append("inner join " + TableConstant.MatchTable.TABLE_NAME + " k on k." + TableConstant.MatchTable._ID
-		    + " = p." + TableConstant.MatchProgressTable.COLUMN_MATCH_ID + " ");
-
-	    req.append("where k." + TableConstant.PackTable.COLUMN_THEME_ID + " = ? ");
+	    req.append("where k.");
+	    req.append(TableConstant.PackTable.COLUMN_THEME_ID);
+	    req.append(" = ? ");
 
 	    c = session.rawQuery(req.toString(), selectionArgs);
 
 	    while (c.moveToNext()) {
 		MatchProgress progress = new MatchProgress();
 
-		int index = 0;
-		long progressId = c.getLong(index);
-		index++;
-		int nbSuccess = c.getInt(index);
+		int index = fillMatchProgress(c, 0, progress);
 		index++;
 		long matchId = c.getLong(index);
-		index++;
-		boolean isCompleted = BooleanUtils.toBoolean(c.getInt(index));
-
-		progress.setId(progressId);
-		progress.setNumberOfSuccessQuizz(nbSuccess);
-		progress.setCompleted(isCompleted);
 
 		map.put(matchId, progress);
 
@@ -119,41 +105,20 @@ public class MatchProgressDao {
 	    String[] selectionArgs = { String.valueOf(aMatchId) };
 
 	    StringBuffer req = new StringBuffer("select ");
-	    // Index 0
-	    req.append("p.");
-	    req.append(TableConstant.MatchProgressTable._ID);
-	    req.append(", ");
-	    // Index 1
-	    req.append("p.");
-	    req.append(TableConstant.MatchProgressTable.COLUMN_NB_QUIZZ_SUCCESS);
-	    req.append(", ");
-	    // Index 2
-	    req.append("p.");
-	    req.append(TableConstant.MatchProgressTable.COLUMN_MATCH_ID);
-	    req.append(", ");
-	    // Index 3
-	    req.append("p.");
-	    req.append(TableConstant.MatchProgressTable.COLUMN_IS_COMPLETED);
-	    req.append(" ");
+	    req.append(createMatchColumnRequest("p"));
 
-	    req.append("from " + TableConstant.MatchProgressTable.TABLE_NAME + " p ");
-	    req.append("where p." + TableConstant.MatchProgressTable.COLUMN_MATCH_ID + " = ? ");
+	    req.append("from ");
+	    req.append(TableConstant.MatchProgressTable.TABLE_NAME);
+	    req.append(" p ");
+	    req.append("where p.");
+	    req.append(TableConstant.MatchProgressTable.COLUMN_MATCH_ID);
+	    req.append(" = ? ");
 
 	    c = session.rawQuery(req.toString(), selectionArgs);
 
 	    while (c.moveToNext()) {
 		progress = new MatchProgress();
-
-		int index = 0;
-		long progressId = c.getLong(index);
-		index++;
-		int nbSuccess = c.getInt(index);
-		index++;
-		boolean isCompleted = BooleanUtils.toBoolean(c.getInt(index));
-
-		progress.setId(progressId);
-		progress.setNumberOfSuccessQuizz(nbSuccess);
-		progress.setCompleted(isCompleted);
+		fillMatchProgress(c, 0, progress);
 	    }
 	} finally {
 	    if (c != null) {
@@ -214,4 +179,46 @@ public class MatchProgressDao {
 	}
 
     }
+
+    private int fillMatchProgress(Cursor c, int index, MatchProgress progress) {
+	long progressId = c.getLong(index);
+	progress.setId(progressId);
+
+	index++;
+	int nbSuccess = c.getInt(index);
+	progress.setNumberOfSuccessQuizz(nbSuccess);
+
+	index++;
+	boolean isCompleted = BooleanUtils.toBoolean(c.getInt(index));
+	progress.setCompleted(isCompleted);
+
+	return index;
+    }
+
+    private String createMatchColumnRequest(String aPrefixe) {
+	StringBuffer req = new StringBuffer();
+	// Index 0
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchProgressTable._ID);
+	req.append(", ");
+	// Index 1
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchProgressTable.COLUMN_NB_QUIZZ_SUCCESS);
+	req.append(", ");
+	// Index 2
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchProgressTable.COLUMN_IS_COMPLETED);
+	req.append(", ");
+	// Index 3
+	req.append(aPrefixe);
+	req.append(".");
+	req.append(TableConstant.MatchProgressTable.COLUMN_MATCH_ID);
+	req.append(" ");
+
+	return req.toString();
+    }
+
 }
