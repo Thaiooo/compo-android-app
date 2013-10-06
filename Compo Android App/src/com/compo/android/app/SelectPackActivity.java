@@ -113,8 +113,6 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 	_mapPackToProgress = packProgressDao.getAllPackProgressByTheme(_selectTheme.getId());
 	_collectionPacksPagerAdapter.setMapPackToProgress(_mapPackToProgress);
 	_collectionPacksPagerAdapter.notifyDataSetChanged();
-	// TODO A tester
-	// _mViewPager.invalidate();
     }
 
     private class LoadPackTask extends AsyncTask<Void, Void, List<Pack>> {
@@ -125,8 +123,6 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 
 	    PackProgressDao packProgressDao = new PackProgressDao(SelectPackActivity.this);
 	    _mapPackToProgress = packProgressDao.getAllPackProgressByTheme(_selectTheme.getId());
-	    System.out.println("====>" + _mapPackToProgress);
-
 	    return packs;
 	}
 

@@ -51,14 +51,17 @@ public class SelectPackAdapter extends FragmentStatePagerAdapter {
 	return fragment;
     }
 
+    public int getItemPosition(Object item) {
+	PackFragment fragment = (PackFragment) item;
+	Pack pack = fragment.getCurrentPack();
+	PackProgress progress = _mapPackToProgress.get(pack.getId());
+	fragment.refresh(progress);
+	return super.getItemPosition(item);
+    }
+
     @Override
     public int getCount() {
 	return _packs.size();
-    }
-    
-    @Override
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
     }
 
 }

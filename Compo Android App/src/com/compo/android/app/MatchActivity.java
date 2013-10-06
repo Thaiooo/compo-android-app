@@ -68,6 +68,8 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
 	_currentMatch = (Match) intent.getSerializableExtra(MatchActivity.REQ_MESSAGE_MATCH);
 	_currentPack = (Pack) intent.getSerializableExtra(MatchActivity.REQ_MESSAGE_PACK);
 
+	new LoadNextMatchTask().execute();
+
 	_matchView = (MatchView) findViewById(R.id.quizz_view);
 	_matchView.setMapQuizzToPlay(_mapQuizzToPlay);
 
