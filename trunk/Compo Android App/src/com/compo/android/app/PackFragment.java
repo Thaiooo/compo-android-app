@@ -40,21 +40,8 @@ public class PackFragment extends Fragment {
 
     private View _contentView;
 
-    // @Override
-    // public void onResume() {
-    // System.out.println("=============> RESUME");
-    // super.onResume();
-    // if (_currentPackProgress != null) {
-    // PackProgressDao packProgressDao = new PackProgressDao(getActivity());
-    // _currentPackProgress = packProgressDao.find(_currentPack);
-    //
-    // System.out.println("=============> RESUME FRAGMENT " + _currentPackProgress.getNumberOfSuccessMatch());
-    // }
-    // }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-	// System.out.println("=============> onCreateView ");
 	View rootView = inflater.inflate(R.layout.fragment_pack, container, false);
 
 	if (_font == null) {
@@ -127,15 +114,29 @@ public class PackFragment extends Fragment {
 		@Override
 		public void onClick(View view) {
 		    Toast.makeText(getActivity(), "Completed the previous level before", Toast.LENGTH_LONG).show();
-		    // Intent intent = new Intent(getActivity(), PackDetailsActivity.class);
-		    // intent.putExtra(PackDetailsActivity.MESSAGE_SELECTED_PACK, _currentPack);
-		    // startActivity(intent);
-		    // getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 		}
 	    });
 	}
 
 	return rootView;
+    }
+
+    public Pack getCurrentPack() {
+	return _currentPack;
+    }
+
+    public void refresh(PackProgress aPackProgress) {
+	_currentPackProgress = aPackProgress;
+	int progress = 0;
+	if (_currentPackProgress != null) {
+	    progress = _currentPackProgress.getNumberOfSuccessMatch();
+	}
+	StringBuffer buff = new StringBuffer(progress);
+	buff.append(progress);
+	buff.append(SLASH);
+	buff.append(_currentPack.getMatchs().size());
+	_progress.setText(buff.toString());
+
     }
 
 }
