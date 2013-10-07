@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.compo.android.app.model.Theme;
+import com.compo.android.app.utils.FontEnum;
 
 public class ThemeFragment extends Fragment {
 
@@ -25,12 +26,14 @@ public class ThemeFragment extends Fragment {
 
     private Theme _currentTheme;
 
+    private final static String THEME_PREFIX = "theme_";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	View rootView = inflater.inflate(R.layout.fragment_theme, container, false);
 
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(getActivity().getAssets(), "MyLuckyPenny.ttf");
+	    _font = Typeface.createFromAsset(getActivity().getAssets(), FontEnum.LUCKY_PENNY.getName());
 	}
 
 	_themeName = (TextView) rootView.findViewById(R.id.theme_name);
@@ -43,7 +46,7 @@ public class ThemeFragment extends Fragment {
 	_themeName.setText(_currentTheme.getName());
 	_themeName.setTypeface(_font);
 
-	int id = getResources().getIdentifier("theme_" + _currentTheme.getCode(), "drawable",
+	int id = getResources().getIdentifier(THEME_PREFIX + _currentTheme.getCode(), "drawable",
 		getActivity().getPackageName());
 	if (id != 0) {
 	    _themeImage.setImageResource(id);

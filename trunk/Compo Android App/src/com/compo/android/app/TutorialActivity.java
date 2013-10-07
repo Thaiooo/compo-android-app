@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
+import com.compo.android.app.utils.FontEnum;
+
 public class TutorialActivity extends FragmentActivity {
 
     private static Typeface _font;
@@ -21,7 +23,7 @@ public class TutorialActivity extends FragmentActivity {
 	setContentView(R.layout.activity_tutorial);
 
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(getAssets(), "MyLuckyPenny.ttf");
+	    _font = Typeface.createFromAsset(getAssets(), FontEnum.LUCKY_PENNY.getName());
 	}
 
 	_title = (TextView) findViewById(R.id.tutorial_title);

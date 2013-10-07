@@ -8,6 +8,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.compo.android.app.utils.FontEnum;
+
 public class StoreActivity extends Activity {
 
     private static Typeface _font;
@@ -20,7 +22,7 @@ public class StoreActivity extends Activity {
 	setContentView(R.layout.activity_store);
 
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(getAssets(), "MyLuckyPenny.ttf");
+	    _font = Typeface.createFromAsset(getAssets(), FontEnum.LUCKY_PENNY.getName());
 	}
 
 	Button buttonCredit25 = (Button) findViewById(R.id.button_credit_25);

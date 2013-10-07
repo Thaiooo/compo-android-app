@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.compo.android.app.model.Pack;
 import com.compo.android.app.model.PackProgress;
 import com.compo.android.app.model.Theme;
+import com.compo.android.app.utils.FontEnum;
 
 public class PackFragment extends Fragment {
 
@@ -45,7 +46,7 @@ public class PackFragment extends Fragment {
 	View rootView = inflater.inflate(R.layout.fragment_pack, container, false);
 
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(getActivity().getAssets(), "MyLuckyPenny.ttf");
+	    _font = Typeface.createFromAsset(getActivity().getAssets(), FontEnum.LUCKY_PENNY.getName());
 	}
 
 	Bundle args = getArguments();
@@ -113,7 +114,7 @@ public class PackFragment extends Fragment {
 	    _contentView.setOnClickListener(new View.OnClickListener() {
 		@Override
 		public void onClick(View view) {
-		    Toast.makeText(getActivity(), "Completed the previous level before", Toast.LENGTH_LONG).show();
+		    Toast.makeText(getActivity(), getString(R.string.message_pack_lock), Toast.LENGTH_LONG).show();
 		}
 	    });
 	}

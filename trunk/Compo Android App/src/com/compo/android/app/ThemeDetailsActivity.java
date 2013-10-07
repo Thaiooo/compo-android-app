@@ -9,6 +9,7 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.compo.android.app.model.Theme;
+import com.compo.android.app.utils.FontEnum;
 
 public class ThemeDetailsActivity extends Activity {
     public final static String MESSAGE_SELECTED_THEME = "com.compo.android.app.ThemeDetailsActivity.MESSAGE1";
@@ -23,7 +24,7 @@ public class ThemeDetailsActivity extends Activity {
 	setContentView(R.layout.activity_pack_details);
 
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(getAssets(), "MyLuckyPenny.ttf");
+	    _font = Typeface.createFromAsset(getAssets(), FontEnum.LUCKY_PENNY.getName());
 	}
 
 	Intent intent = getIntent();
@@ -37,9 +38,12 @@ public class ThemeDetailsActivity extends Activity {
 	// desciption.setTypeface(_font);
 	// desciption.setText(_selectTheme.getDescription());
 
+	StringBuffer message = new StringBuffer(_selectTheme.getCreditLimit());
+	message.append(" ");
+	message.append(getString(R.string.label_credit));
 	TextView creditPrice = (TextView) findViewById(R.id.credit_price);
 	creditPrice.setTypeface(_font);
-	creditPrice.setText(_selectTheme.getCreditLimit() + " credits");
+	creditPrice.setText(message.toString());
 
     }
 

@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.compo.android.app.model.QuizzPlayer;
+import com.compo.android.app.utils.FontEnum;
 
 public class SuccessDialogActivity extends Activity {
     public final static String MESSAGE_DISPLAY_NEXT = "com.compo.android.app.SuccessDialogActivity.MESSAGE1";
@@ -30,7 +31,7 @@ public class SuccessDialogActivity extends Activity {
 
 	TextView earnCreditValue = (TextView) findViewById(R.id.earn_credit_value);
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
+	    _font = Typeface.createFromAsset(getAssets(), FontEnum.ERASER.getName());
 	}
 	earnCreditValue.setTypeface(_font);
 	earnCreditValue.setText(Integer.toString(_currentQuizz.getEarnCredit()));

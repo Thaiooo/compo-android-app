@@ -14,6 +14,7 @@ import com.compo.android.app.model.Play;
 import com.compo.android.app.model.QuizzPlayer;
 import com.compo.android.app.model.User;
 import com.compo.android.app.service.QuizzService;
+import com.compo.android.app.utils.FontEnum;
 import com.compo.android.app.utils.UserFactory;
 
 public class HintDialogActivity extends Activity {
@@ -35,7 +36,7 @@ public class HintDialogActivity extends Activity {
 	setContentView(R.layout.activity_hint_dialog);
 
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(getAssets(), "MyLuckyPenny.ttf");
+	    _font = Typeface.createFromAsset(getAssets(), FontEnum.LUCKY_PENNY.getName());
 	}
 
 	_currentUser = UserFactory.getInstance().getUser(this);
@@ -50,7 +51,7 @@ public class HintDialogActivity extends Activity {
 	TextView price = (TextView) findViewById(R.id.hint_price);
 
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
+	    _font = Typeface.createFromAsset(getAssets(), FontEnum.ERASER.getName());
 	}
 	title.setTypeface(_font);
 	description.setTypeface(_font);
@@ -58,23 +59,23 @@ public class HintDialogActivity extends Activity {
 
 	switch (_hintType) {
 	case HINT:
-	    title.setText("Show hint");
-	    description.setText("Show the clue sentence of the answer!");
+	    title.setText(getString(R.string.help_hint_title));
+	    description.setText(getString(R.string.help_hint_desc));
 	    price.setText(Integer.toString(_currentQuizz.getCreditToUnlockHint()));
 	    break;
 	case RANDOM:
-	    title.setText("Show used letters");
-	    description.setText("Show all the letters of the answer (unordered)");
+	    title.setText(getString(R.string.help_random_title));
+	    description.setText(getString(R.string.help_random_desc));
 	    price.setText(Integer.toString(_currentQuizz.getCreditToUnlockRandom()));
 	    break;
 	case HALF:
-	    title.setText("Some letters in order");
-	    description.setText("Show some letters of the answer (ordered)");
+	    title.setText(getString(R.string.help_half_title));
+	    description.setText(getString(R.string.help_half_desc));
 	    price.setText(Integer.toString(_currentQuizz.getCreditToUnlockHalf()));
 	    break;
 	default:
-	    title.setText("Show full response");
-	    description.setText("Answer the question for you!");
+	    title.setText(getString(R.string.help_full_title));
+	    description.setText(getString(R.string.help_full_desc));
 	    price.setText(Integer.toString(_currentQuizz.getCreditToUnlockResponse()));
 	    break;
 	}

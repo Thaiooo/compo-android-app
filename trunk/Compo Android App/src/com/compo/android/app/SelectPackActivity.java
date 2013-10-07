@@ -20,6 +20,7 @@ import com.compo.android.app.dao.PackProgressDao;
 import com.compo.android.app.model.Pack;
 import com.compo.android.app.model.PackProgress;
 import com.compo.android.app.model.Theme;
+import com.compo.android.app.utils.FontEnum;
 
 public class SelectPackActivity extends AbstractLSEFragmentActivity {
 
@@ -47,7 +48,7 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 	super.onCreate(savedInstanceState);
 
 	if (_fontTitle == null) {
-	    _fontTitle = Typeface.createFromAsset(getAssets(), "DrawingGuides.ttf");
+	    _fontTitle = Typeface.createFromAsset(getAssets(), FontEnum.DRAWING_GUIDES.getName());
 	}
 
 	Intent intent = getIntent();

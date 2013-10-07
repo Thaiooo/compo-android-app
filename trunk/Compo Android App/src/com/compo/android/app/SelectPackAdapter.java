@@ -1,5 +1,8 @@
 package com.compo.android.app;
 
+import java.util.List;
+import java.util.Map;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,9 +11,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import com.compo.android.app.model.Pack;
 import com.compo.android.app.model.PackProgress;
 import com.compo.android.app.model.Theme;
-
-import java.util.List;
-import java.util.Map;
 
 public class SelectPackAdapter extends FragmentStatePagerAdapter {
 

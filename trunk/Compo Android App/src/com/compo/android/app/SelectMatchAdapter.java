@@ -19,6 +19,7 @@ import com.compo.android.app.model.Match;
 import com.compo.android.app.model.Play;
 import com.compo.android.app.model.QuizzPlayer;
 import com.compo.android.app.model.Team;
+import com.compo.android.app.utils.FontEnum;
 
 public class SelectMatchAdapter extends BaseAdapter {
     private static Typeface _font;
@@ -33,7 +34,7 @@ public class SelectMatchAdapter extends BaseAdapter {
 	_mapQuizzToPlay = aMapQuizzToPlay;
 
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(c.getAssets(), "MyLuckyPenny.ttf");
+	    _font = Typeface.createFromAsset(c.getAssets(), FontEnum.LUCKY_PENNY.getName());
 	}
     }
 
