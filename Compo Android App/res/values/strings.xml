@@ -24,6 +24,23 @@
     <string name="setting.erase.data.confirm">Voulez vous supprimer toutes les données?</string>
     <string name="button_validate">Valider</string>
 
+    <!-- LABEL -->
+    <string name="label.credit">credit</string>
+
+    <!-- MESSAGE -->
+    <string name="message.pack.lock">Completed the previous level before</string>
+    <string name="message.quizz.success">You have found</string>
+
+    <!-- HELP -->
+    <string name="help.hint.title">Show hint</string>
+    <string name="help.hint.desc">Show the clue sentence of the answer!</string>
+    <string name="help.random.title">Show used letters</string>
+    <string name="help.random.desc">Show all the letters of the answer (unordered)</string>
+    <string name="help.half.title">Some letters in order</string>
+    <string name="help.half.desc">Show some letters of the answer (ordered)</string>
+    <string name="help.full.title">Show full response</string>
+    <string name="help.full.desc">Answer the question for you!</string>
+
     <dimen name="myFontSize">10sp</dimen>
 
 </resources>
