@@ -205,7 +205,6 @@ public class MatchDao {
 	    long matchId = c.getLong(index);
 	    Match match = mapMatch.get(matchId);
 
-	    index++;
 	    if (match == null) {
 		match = new Match();
 		match.setId(matchId);
