@@ -15,7 +15,6 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -27,7 +26,7 @@ import com.compo.android.app.utils.FontEnum;
 
 public class MatchView extends View {
 
-    private static final String TAG = MatchView.class.getName();
+    // private static final String TAG = MatchView.class.getName();
 
     /**
      * Field width in meter
@@ -40,14 +39,7 @@ public class MatchView extends View {
     /**
      * Field width in meter
      */
-    protected static final int START_REPERE = 34;
-    /**
-     * Marge in meter
-     */
-    protected static final int MARGE_METER = 6;
-    /**
-     */
-    protected static final int TEXT_HIGHT = 20;
+    protected static final int START_REPERE_X = 34;
 
     private static Typeface font;
 
@@ -73,7 +65,6 @@ public class MatchView extends View {
     protected boolean _completed = false;
 
     protected Match _selectedMatch;
-    // protected Match _nextMatch;
     protected Map<Long, Play> _mapQuizzToPlay;
 
     public MatchView(Context context, AttributeSet attrs) {
@@ -91,12 +82,11 @@ public class MatchView extends View {
 
 	float densityMultiplier = getContext().getResources().getDisplayMetrics().density;
 	_paint = new Paint();
-	_paint.setTextSize(12.0f * densityMultiplier);
+	_paint.setTextSize(10.0f * densityMultiplier);
 	_paint.setTypeface(font);
 
 	Intent intent = ((Activity) context).getIntent();
 	_selectedMatch = (Match) intent.getSerializableExtra(MatchActivity.REQ_MESSAGE_MATCH);
-	// _nextMatch = (Match) intent.getSerializableExtra(QuizzActivity.REQ_MESSAGE_NEXT_MATCH);
 
 	Team home = null;
 	Team away = null;
@@ -244,9 +234,6 @@ public class MatchView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-
-	System.out.println("===========================> DRAW !!!!!!!!!");
-
 	super.onDraw(canvas);
 
 	_completed = false;
@@ -280,19 +267,18 @@ public class MatchView extends View {
     protected void printCoach(Canvas canvas, QuizzPlayer qp) {
 	double imageX = 10;
 	double imageY;
-	double textX = 10;
 	double textY;
-
-	textX = _coach.getWidth() + 15;
+	double textX = _coach.getWidth() + 15;
 	if (qp.isHome()) {
-	    imageY = 10;
-	    textY = _coach.getHeight() + 10;
-	} else {
 	    imageY = this.getHeight() - _coach.getHeight() - 10;
 	    textY = this.getHeight() - 10;
+	} else {
+	    imageY = 10;
+	    textY = _paint.getTextSize() + 10;
 	}
 	canvas.drawBitmap(_coach, (float) imageX, (float) imageY, null);
 	canvas.drawText(qp.getPlayer().getName(), (float) textX, (float) textY, _paint);
+
     }
 
     protected double getPixelPerMeterX(double terrainW) {
@@ -376,18 +362,13 @@ public class MatchView extends View {
 	    double textDecal = textWidth / 2;
 
 	    double textX = playerX + ((double) playerImg.getWidth() / 2) - textDecal;
-	    double textY = playerY + playerImg.getHeight() + TEXT_HIGHT;
+	    double textY = playerY + playerImg.getHeight() + _paint.getTextSize();
 	    canvas.drawText(qp.getPlayer().getName(), (float) textX, (float) textY, _paint);
 	}
     }
 
     protected double getPlayerX(QuizzPlayer aQuizzPlayer, double aLateralMarge, double aMetreX, Bitmap aPlayerImg) {
-	double coordonneeX = 0;
-	if (aQuizzPlayer.isHome()) {
-	    coordonneeX = (START_REPERE + aQuizzPlayer.getX()) * aMetreX;
-	} else {
-	    coordonneeX = (START_REPERE - aQuizzPlayer.getX()) * aMetreX;
-	}
+	double coordonneeX = (START_REPERE_X + aQuizzPlayer.getX()) * aMetreX;
 	coordonneeX -= ((double) aPlayerImg.getWidth() / 2);
 	coordonneeX += aLateralMarge;
 	return coordonneeX;
@@ -395,12 +376,11 @@ public class MatchView extends View {
 
     protected double getPlayerY(QuizzPlayer aQuizzPlauer, double aTerainH, double aMetreY, Bitmap aPlayerImg) {
 	double coordonneeY;
-	double marge = aMetreY * MARGE_METER;
+
 	if (aQuizzPlauer.isHome()) {
-	    coordonneeY = aQuizzPlauer.getY() * aMetreY + marge + aMetreY * 2.5;
+	    coordonneeY = (aTerainH / 2) + (aQuizzPlauer.getY() * aMetreY) - aMetreY * 4;
 	} else {
-	    coordonneeY = aTerainH - (aQuizzPlauer.getY() * aMetreY) - marge - aMetreY * 2.5;
-	    coordonneeY -= TEXT_HIGHT;
+	    coordonneeY = (aTerainH / 2) + (aQuizzPlauer.getY() * aMetreY) + aMetreY * 3.5;
 	}
 	coordonneeY -= aPlayerImg.getHeight() / 2;
 	return coordonneeY;
@@ -408,8 +388,6 @@ public class MatchView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-	Log.v(TAG, "Hello");
-
 	boolean b = super.onTouchEvent(event);
 	if (!_completed) {
 	    return false;
@@ -432,7 +410,7 @@ public class MatchView extends View {
 	    double playerXMax = playerXMin + (double) img.getWidth();
 
 	    double playerYMin = getPlayerY(qp, terrainH, metreY, img);
-	    double playerYMax = playerYMin + img.getHeight() + TEXT_HIGHT;
+	    double playerYMax = playerYMin + img.getHeight() + _paint.getTextSize();
 
 	    if (event.getX() >= playerXMin && event.getX() <= playerXMax && event.getY() >= playerYMin
 		    && event.getY() <= playerYMax) {
