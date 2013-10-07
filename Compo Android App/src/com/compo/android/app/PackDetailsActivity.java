@@ -9,6 +9,7 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.compo.android.app.model.Pack;
+import com.compo.android.app.utils.FontEnum;
 
 public class PackDetailsActivity extends Activity {
     public final static String MESSAGE_SELECTED_PACK = "com.compo.android.app.PackDetailsActivity.MESSAGE1";
@@ -23,7 +24,7 @@ public class PackDetailsActivity extends Activity {
 	setContentView(R.layout.activity_pack_details);
 
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(getAssets(), "MyLuckyPenny.ttf");
+	    _font = Typeface.createFromAsset(getAssets(), FontEnum.LUCKY_PENNY.getName());
 	}
 
 	Intent intent = getIntent();

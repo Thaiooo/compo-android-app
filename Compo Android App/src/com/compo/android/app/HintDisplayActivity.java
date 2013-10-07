@@ -13,6 +13,7 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.compo.android.app.model.QuizzPlayer;
+import com.compo.android.app.utils.FontEnum;
 
 public class HintDisplayActivity extends Activity {
     public final static String MESSAGE_HINT_TYPE = "com.compo.android.app.HintActivity.MESSAGE1";
@@ -34,7 +35,7 @@ public class HintDisplayActivity extends Activity {
 	TextView hintTitle = (TextView) findViewById(R.id.hint_title);
 	TextView hintValue = (TextView) findViewById(R.id.hint_value);
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
+	    _font = Typeface.createFromAsset(getAssets(), FontEnum.ERASER.getName());
 	}
 	hintValue.setTypeface(_font);
 	hintTitle.setTypeface(_font);

@@ -15,6 +15,7 @@ import com.compo.android.app.dao.PlayDao;
 import com.compo.android.app.model.User;
 import com.compo.android.app.model.User.Sound;
 import com.compo.android.app.service.QuizzService;
+import com.compo.android.app.utils.FontEnum;
 import com.compo.android.app.utils.UserFactory;
 
 public class SettingActivity extends Activity {
@@ -35,7 +36,7 @@ public class SettingActivity extends Activity {
 	setContentView(R.layout.activity_setting);
 
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(getAssets(), "MyLuckyPenny.ttf");
+	    _font = Typeface.createFromAsset(getAssets(), FontEnum.LUCKY_PENNY.getName());
 	}
 
 	_title = (TextView) findViewById(R.id.store_title);

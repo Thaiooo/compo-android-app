@@ -20,6 +20,7 @@ import com.compo.android.app.model.QuizzPlayer;
 import com.compo.android.app.model.Team;
 import com.compo.android.app.model.User;
 import com.compo.android.app.service.QuizzService;
+import com.compo.android.app.utils.FontEnum;
 import com.compo.android.app.utils.UserFactory;
 
 public class MatchActivity extends AbstractLSEFragmentActivity {
@@ -43,6 +44,10 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
     private TextView _teams;
     private Button _scorePrinter;
 
+    private static final String BLANK = "";
+    private static final String SPACE = " ";
+    private static final String TEAM_SEPARATOR = " - ";
+
     @Override
     protected int getContentViewId() {
 	return R.layout.activity_match;
@@ -53,11 +58,11 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
 	super.onCreate(savedInstanceState);
 
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(getAssets(), "MyLuckyPenny.ttf");
+	    _font = Typeface.createFromAsset(getAssets(), FontEnum.LUCKY_PENNY.getName());
 	}
 
 	if (_fontSocrePrinter == null) {
-	    _fontSocrePrinter = Typeface.createFromAsset(getAssets(), "light_led_board.ttf");
+	    _fontSocrePrinter = Typeface.createFromAsset(getAssets(), FontEnum.SCORE_FONT.getName());
 	}
 
 	PlayDao playDao = new PlayDao(this);
@@ -88,7 +93,7 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
     private void fillDataToView() {
 	_matchView.setQuizz(_currentMatch);
 	_matchDetail.setText(_currentMatch.getName());
-	_scorePrinter.setText(_currentMatch.getScoreHome() + " - " + _currentMatch.getScoreAway());
+	_scorePrinter.setText(_currentMatch.getScoreHome() + TEAM_SEPARATOR + _currentMatch.getScoreAway());
 
 	Team home = null;
 	Team away = null;
@@ -104,9 +109,9 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
 	}
 
 	if (away != null && home != null) {
-	    _teams.setText(home.getName() + " - " + away.getName());
+	    _teams.setText(home.getName() + TEAM_SEPARATOR + away.getName());
 	} else {
-	    _teams.setText("");
+	    _teams.setText(BLANK);
 	}
     }
 
@@ -131,8 +136,10 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
 		_matchView.invalidate();
 
 		if (play != null) {
-		    Toast.makeText(this, "You have found " + " " + play.getResponse().toUpperCase(Locale.US),
-			    Toast.LENGTH_LONG).show();
+		    StringBuffer mess = new StringBuffer(getString(R.string.message_quizz_success));
+		    mess.append(SPACE);
+		    mess.append(play.getResponse().toUpperCase(Locale.US));
+		    Toast.makeText(this, mess.toString(), Toast.LENGTH_LONG).show();
 		}
 		break;
 	    } else if (resultCode == RESULT_FIRST_USER) {

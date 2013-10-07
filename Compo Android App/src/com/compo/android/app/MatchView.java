@@ -23,6 +23,7 @@ import com.compo.android.app.model.Match;
 import com.compo.android.app.model.Play;
 import com.compo.android.app.model.QuizzPlayer;
 import com.compo.android.app.model.Team;
+import com.compo.android.app.utils.FontEnum;
 
 public class MatchView extends View {
 
@@ -49,6 +50,8 @@ public class MatchView extends View {
     protected static final int TEXT_HIGHT = 20;
 
     private static Typeface font;
+
+    private static final String USER_PREFIX = "player_";
 
     protected Context _context;
     protected Bitmap _terrainRaw;
@@ -77,7 +80,7 @@ public class MatchView extends View {
 	super(context, attrs);
 	_context = context;
 
-	font = Typeface.createFromAsset(_context.getAssets(), "MyLuckyPenny.ttf");
+	font = Typeface.createFromAsset(_context.getAssets(), FontEnum.LUCKY_PENNY.getName());
 
 	_coachRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.coach)).getBitmap();
 	_terrainRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.soccer_field_grass)).getBitmap();
@@ -108,13 +111,16 @@ public class MatchView extends View {
 	    }
 	}
 
-	int idHome = getResources().getIdentifier("player_" + home.getHomeJerseyColor().name().toLowerCase(Locale.US),
-		"drawable", getContext().getPackageName());
-	int idAway = getResources().getIdentifier("player_" + away.getHomeJerseyColor().name().toLowerCase(Locale.US),
-		"drawable", getContext().getPackageName());
+	int idHome = getResources().getIdentifier(
+		USER_PREFIX + home.getHomeJerseyColor().name().toLowerCase(Locale.US), "drawable",
+		getContext().getPackageName());
+	int idAway = getResources().getIdentifier(
+		USER_PREFIX + away.getHomeJerseyColor().name().toLowerCase(Locale.US), "drawable",
+		getContext().getPackageName());
 	if (idAway == idHome) {
-	    idAway = getResources().getIdentifier("player_" + away.getAwayJerseyColor().name().toLowerCase(Locale.US),
-		    "drawable", getContext().getPackageName());
+	    idAway = getResources().getIdentifier(
+		    USER_PREFIX + away.getAwayJerseyColor().name().toLowerCase(Locale.US), "drawable",
+		    getContext().getPackageName());
 	}
 
 	_playerHomeRaw = ((BitmapDrawable) _context.getResources().getDrawable(idHome)).getBitmap();

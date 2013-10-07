@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.compo.android.app.dao.DataBaseHelper;
 import com.compo.android.app.model.User;
+import com.compo.android.app.utils.FontEnum;
 import com.compo.android.app.utils.UserFactory;
 
 public class MainActivity extends Activity {
@@ -41,7 +42,7 @@ public class MainActivity extends Activity {
 	Button buttonSetting = (Button) findViewById(R.id.button_setting);
 
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(getAssets(), "MyLuckyPenny.ttf");
+	    _font = Typeface.createFromAsset(getAssets(), FontEnum.LUCKY_PENNY.getName());
 	}
 	buttonPlay.setTypeface(_font);
 	buttonStore.setTypeface(_font);

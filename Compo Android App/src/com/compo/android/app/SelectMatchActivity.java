@@ -19,6 +19,7 @@ import com.compo.android.app.model.Pack;
 import com.compo.android.app.model.Play;
 import com.compo.android.app.model.Theme;
 import com.compo.android.app.model.User;
+import com.compo.android.app.utils.FontEnum;
 import com.compo.android.app.utils.UserFactory;
 
 public class SelectMatchActivity extends AbstractLSEFragmentActivity {
@@ -46,7 +47,7 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 	super.onCreate(savedInstanceState);
 
 	if (_fontTitle == null) {
-	    _fontTitle = Typeface.createFromAsset(getAssets(), "DrawingGuides.ttf");
+	    _fontTitle = Typeface.createFromAsset(getAssets(), FontEnum.DRAWING_GUIDES.getName());
 	}
 
 	Intent intent = getIntent();

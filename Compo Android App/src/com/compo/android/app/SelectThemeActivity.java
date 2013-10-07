@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.compo.android.app.dao.ThemeDao;
 import com.compo.android.app.model.Theme;
+import com.compo.android.app.utils.FontEnum;
 
 public class SelectThemeActivity extends AbstractLSEFragmentActivity {
 
@@ -38,7 +39,7 @@ public class SelectThemeActivity extends AbstractLSEFragmentActivity {
 	super.onCreate(savedInstanceState);
 
 	if (_fontTitle == null) {
-	    _fontTitle = Typeface.createFromAsset(getAssets(), "DrawingGuides.ttf");
+	    _fontTitle = Typeface.createFromAsset(getAssets(), FontEnum.DRAWING_GUIDES.getName());
 	}
 
 	_mViewPager = (ViewPager) findViewById(R.id.pager);

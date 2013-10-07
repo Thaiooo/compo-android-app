@@ -19,6 +19,7 @@ import com.compo.android.app.model.QuizzPlayer;
 import com.compo.android.app.model.User;
 import com.compo.android.app.service.QuizzService;
 import com.compo.android.app.service.ServiceResultSave;
+import com.compo.android.app.utils.FontEnum;
 import com.compo.android.app.utils.UserFactory;
 
 public class ResponseActivity extends AbstractLSEFragmentActivity {
@@ -68,7 +69,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	_matching = (ImageView) findViewById(R.id.matching_image);
 
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(getAssets(), "Eraser.ttf");
+	    _font = Typeface.createFromAsset(getAssets(), FontEnum.ERASER.getName());
 	}
 	_edit.setTypeface(_font);
 
