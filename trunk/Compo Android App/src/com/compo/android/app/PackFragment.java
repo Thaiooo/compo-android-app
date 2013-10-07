@@ -73,8 +73,8 @@ public class PackFragment extends Fragment {
 	boolean lock = true;
 	if (_previousPack != null) {
 	    if (_previousPackProgress != null) {
-		double percentPreviousPregress = _previousPackProgress.getNumberOfSuccessMatch()
-			/ _previousPack.getMatchs().size();
+		double percentPreviousPregress = (double) _previousPackProgress.getNumberOfSuccessMatch()
+			/ (double) _previousPack.getMatchs().size();
 		if (percentPreviousPregress > UNLOCK_LIMIT) {
 		    lock = false;
 		}
