@@ -14,6 +14,7 @@ from django.template import loader
 from django.template.context import RequestContext
 import datetime
 from compo_manager.forms import MatchFormMatchStep3
+from django.db import transaction
 
 def superuser_check(user):
     return user.is_superuser
@@ -161,6 +162,7 @@ class MatchWizard(SessionWizardView):
     template_name = 'create_match.html'
     file_storage = FileSystemStorage(location=settings.MEDIA_ROOT)
     
+    @transaction.commit_on_success
     def done(self, form_list, **kwargs):
         
         match = Match()
