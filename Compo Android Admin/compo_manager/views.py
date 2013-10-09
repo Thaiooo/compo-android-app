@@ -237,7 +237,7 @@ def validate_match(request, match_id):
  
 @login_required(redirect_field_name='/accounts/login')    
 def index_match(request):
-    matchs = Match.objects.order_by('is_valid')
+    matchs = Match.objects.all()
     template = loader.get_template('index_match.html')
     context = RequestContext(request, {'matchs':matchs})
     return HttpResponse(template.render(context))
