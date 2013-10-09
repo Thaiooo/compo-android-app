@@ -58,7 +58,7 @@ class Match(models.Model):
     
     class Meta:
         permissions = (('validate', 'Can validate a match'))
-        
+        ordering = ['pack', 'order_number']
         
     score_home = models.IntegerField()
     score_away = models.IntegerField()
