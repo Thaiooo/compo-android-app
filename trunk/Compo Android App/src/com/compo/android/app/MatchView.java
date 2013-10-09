@@ -17,6 +17,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.compo.android.app.model.Match;
 import com.compo.android.app.model.Play;
@@ -401,8 +402,7 @@ public class MatchView extends View {
 	double metreY = getPixelPerMeterY(terrainH);
 
 	for (QuizzPlayer qp : _selectedMatch.getQuizzs()) {
-
-	    if (!qp.isHide() || isDiscovered(qp)) {
+	    if (qp.isCoach()) {
 		continue;
 	    }
 
@@ -416,12 +416,19 @@ public class MatchView extends View {
 	    if (event.getX() >= playerXMin && event.getX() <= playerXMax && event.getY() >= playerYMin
 		    && event.getY() <= playerYMax) {
 
-		Intent intent = new Intent(getContext(), ResponseActivity.class);
-		intent.putExtra(ResponseActivity.EXTRA_MESSAGE_QUIZZ, qp);
-		intent.putExtra(ResponseActivity.EXTRA_MESSAGE_PLAY, _mapQuizzToPlay.get(qp.getId()));
-		((MatchActivity) getContext()).startActivityForResult(intent, MatchActivity.EXTRA_MESSAGE_REQUEST_CODE);
+		if (!qp.isHide() || isDiscovered(qp)) {
+		    Toast.makeText(getContext(), qp.getPlayer().getName(), Toast.LENGTH_SHORT).show();
+		    return b;
+		} else {
+		    Intent intent = new Intent(getContext(), ResponseActivity.class);
+		    intent.putExtra(ResponseActivity.EXTRA_MESSAGE_QUIZZ, qp);
+		    intent.putExtra(ResponseActivity.EXTRA_MESSAGE_PLAY, _mapQuizzToPlay.get(qp.getId()));
+		    ((MatchActivity) getContext()).startActivityForResult(intent,
+			    MatchActivity.EXTRA_MESSAGE_REQUEST_CODE);
 
-		return b;
+		    return b;
+		}
+
 	    }
 	}
 	return b;
