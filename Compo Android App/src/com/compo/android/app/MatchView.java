@@ -369,7 +369,7 @@ public class MatchView extends View {
 	    double textY = playerY + playerImg.getHeight() + _paint.getTextSize();
 	    StringBuffer s = new StringBuffer(qp.getPlayer().getName());
 	    if (qp.isCaptain()) {
-		s.append("(C)");
+		s.append(" (C)");
 	    }
 	    canvas.drawText(s.toString(), (float) textX, (float) textY, _paint);
 	}
