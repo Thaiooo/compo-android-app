@@ -68,6 +68,8 @@ public class MatchView extends View {
     protected Match _selectedMatch;
     protected Map<Long, Play> _mapQuizzToPlay;
 
+    private boolean _colorHomeForAwayTeam = true;
+
     public MatchView(Context context, AttributeSet attrs) {
 	super(context, attrs);
 	_context = context;
@@ -109,6 +111,7 @@ public class MatchView extends View {
 		USER_PREFIX + away.getHomeJerseyColor().name().toLowerCase(Locale.US), "drawable",
 		getContext().getPackageName());
 	if (idAway == idHome) {
+	    _colorHomeForAwayTeam = false;
 	    idAway = getResources().getIdentifier(
 		    USER_PREFIX + away.getAwayJerseyColor().name().toLowerCase(Locale.US), "drawable",
 		    getContext().getPackageName());
@@ -423,6 +426,12 @@ public class MatchView extends View {
 		    Intent intent = new Intent(getContext(), ResponseActivity.class);
 		    intent.putExtra(ResponseActivity.EXTRA_MESSAGE_QUIZZ, qp);
 		    intent.putExtra(ResponseActivity.EXTRA_MESSAGE_PLAY, _mapQuizzToPlay.get(qp.getId()));
+		    if (qp.isHome()) {
+			intent.putExtra(ResponseActivity.EXTRA_MESSAGE_HOME_COLOR, true);
+		    } else {
+			intent.putExtra(ResponseActivity.EXTRA_MESSAGE_HOME_COLOR, _colorHomeForAwayTeam);
+		    }
+
 		    ((MatchActivity) getContext()).startActivityForResult(intent,
 			    MatchActivity.EXTRA_MESSAGE_REQUEST_CODE);
 

@@ -11,6 +11,7 @@
         layout="@layout/score_bar" />
 
     <!-- style="@style/post_it_hint_btn" -->
+
     <Button
         android:id="@+id/button_hint"
         android:layout_width="80dp"
@@ -22,6 +23,7 @@
         android:onClick="openHint" />
 
     <!-- style="@style/post_it_hint_btn" -->
+
     <Button
         android:id="@+id/button_random"
         android:layout_width="80dp"
@@ -32,6 +34,7 @@
         android:onClick="openRandom" />
 
     <!-- style="@style/post_it_hint_btn" -->
+
     <Button
         android:id="@+id/button_50"
         android:layout_width="80dp"
@@ -45,6 +48,7 @@
         android:textStyle="bold" />
 
     <!-- style="@style/post_it_hint_btn" -->
+
     <Button
         android:id="@+id/button_100"
         android:layout_width="80dp"
@@ -57,20 +61,47 @@
         android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/player_image"
+        android:id="@+id/player_figure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/score_bar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:src="@drawable/player_response_red" />
+        android:src="@drawable/player_figure" />
+
+    <ImageView
+        android:id="@+id/player_jersey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/score_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/jersey_green" />
+
+    <ImageView
+        android:id="@+id/player_short"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/score_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/short_blue" />
+
+    <ImageView
+        android:id="@+id/player_sock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/score_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/sock_blue" />
 
     <Button
         android:id="@+id/button_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/player_image"
+        android:layout_below="@+id/player_figure"
         android:layout_marginTop="10dp"
         android:onClick="check"
         android:text="VALIDER"
@@ -83,14 +114,14 @@
         style="@style/transparent_edit_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/player_image"
+        android:layout_below="@+id/player_figure"
         android:layout_marginTop="10dp"
         android:layout_toLeftOf="@+id/button_check"
         android:lines="1"
-        android:maxLength="15"
+        android:maxLength="20"
         android:singleLine="true"
         android:textColor="@android:color/white"
-        android:textSize="24sp" />
+        android:textSize="22sp" />
 
     <ImageView
         android:id="@+id/matching_image"
