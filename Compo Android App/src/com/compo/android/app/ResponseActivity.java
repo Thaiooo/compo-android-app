@@ -1,5 +1,7 @@
 package com.compo.android.app;
 
+import java.util.Locale;
+
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
@@ -27,14 +29,22 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 
     public static final String EXTRA_MESSAGE_QUIZZ = "com.compo.android.app.ResponseActivity.MESSAGE.QUIZZ";
     public static final String EXTRA_MESSAGE_PLAY = "com.compo.android.app.ResponseActivity.MESSAGE.PLAY";
+    public static final String EXTRA_MESSAGE_HOME_COLOR = "com.compo.android.app.ResponseActivity.MESSAGE.HOME.COLOR";
 
     public static final String EXTRA_MESSAGE_RESULT = "com.compo.android.app.ResponseActivity.MESSAGE.RESULT";
     public static final int EXTRA_MESSAGE_REQUEST_CODE_HINT_DIALOG = 1;
     public static final int EXTRA_MESSAGE_REQUEST_CODE_SUCCESS_DIALOG = 2;
 
+    private static final String JERSEY_PREFIX = "jersey_";
+    private static final String SHORT_PREFIX = "short_";
+    private static final String SOCK_PREFIX = "sock_";
+
     private static Typeface _font;
     private EditText _edit;
     private ImageView _matching;
+    private ImageView _jersey;
+    private ImageView _short;
+    private ImageView _sock;
     private QuizzPlayer _currentQuizz;
     private Play _currentPlay;
     private Button _buttonHint;
@@ -55,6 +65,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	Intent intent = getIntent();
 	_currentQuizz = (QuizzPlayer) intent.getSerializableExtra(EXTRA_MESSAGE_QUIZZ);
 	_currentPlay = (Play) intent.getSerializableExtra(EXTRA_MESSAGE_PLAY);
+	boolean isHomeColor = (Boolean) intent.getSerializableExtra(EXTRA_MESSAGE_HOME_COLOR);
 
 	new LoadUserTask().execute();
 
@@ -65,6 +76,40 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 		_edit.setSelection(_currentPlay.getResponse().length());
 	    }
 	}
+
+	int idJersey;
+	int idShort;
+	int idSock;
+	if (isHomeColor) {
+	    idJersey = getResources().getIdentifier(
+		    JERSEY_PREFIX + _currentQuizz.getTeam().getHomeJerseyColor().name().toLowerCase(Locale.US),
+		    "drawable", this.getPackageName());
+	    idShort = getResources().getIdentifier(
+		    SHORT_PREFIX + _currentQuizz.getTeam().getHomeShortColor().name().toLowerCase(Locale.US),
+		    "drawable", this.getPackageName());
+	    idSock = getResources().getIdentifier(
+		    SOCK_PREFIX + _currentQuizz.getTeam().getHomeSockColor().name().toLowerCase(Locale.US), "drawable",
+		    this.getPackageName());
+	} else {
+	    idJersey = getResources().getIdentifier(
+		    JERSEY_PREFIX + _currentQuizz.getTeam().getAwayJerseyColor().name().toLowerCase(Locale.US),
+		    "drawable", this.getPackageName());
+	    idShort = getResources().getIdentifier(
+		    SHORT_PREFIX + _currentQuizz.getTeam().getAwayShortColor().name().toLowerCase(Locale.US),
+		    "drawable", this.getPackageName());
+	    idSock = getResources().getIdentifier(
+		    SOCK_PREFIX + _currentQuizz.getTeam().getAwaySockColor().name().toLowerCase(Locale.US), "drawable",
+		    this.getPackageName());
+	}
+
+	_jersey = (ImageView) findViewById(R.id.player_jersey);
+	_jersey.setImageResource(idJersey);
+
+	_short = (ImageView) findViewById(R.id.player_short);
+	_short.setImageResource(idShort);
+
+	_sock = (ImageView) findViewById(R.id.player_sock);
+	_sock.setImageResource(idSock);
 
 	_matching = (ImageView) findViewById(R.id.matching_image);
 
