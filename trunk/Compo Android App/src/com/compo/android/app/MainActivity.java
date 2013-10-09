@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.compo.android.app.dao.DataBaseHelper;
@@ -30,10 +29,10 @@ public class MainActivity extends Activity {
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.activity_main);
 
-	ImageView imgBack = (ImageView) findViewById(R.id.image_back);
-	imgBack.setVisibility(View.INVISIBLE);
-	ImageView imgHome = (ImageView) findViewById(R.id.image_home);
-	imgHome.setVisibility(View.INVISIBLE);
+	Button btnBack = (Button) findViewById(R.id.button_back);
+	btnBack.setVisibility(View.INVISIBLE);
+	Button btnHome = (Button) findViewById(R.id.button_home);
+	btnHome.setVisibility(View.INVISIBLE);
 
 	_userCredit = (TextView) findViewById(R.id.user_credit);
 
