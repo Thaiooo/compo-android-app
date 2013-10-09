@@ -270,11 +270,11 @@ public class MatchView extends View {
 	double textY;
 	double textX = _coach.getWidth() + 15;
 	if (qp.isHome()) {
-	    imageY = this.getHeight() - _coach.getHeight() - 10;
-	    textY = this.getHeight() - 10;
-	} else {
 	    imageY = 10;
 	    textY = _paint.getTextSize() + 10;
+	} else {
+	    imageY = this.getHeight() - _coach.getHeight() - 10;
+	    textY = this.getHeight() - 10;
 	}
 	canvas.drawBitmap(_coach, (float) imageX, (float) imageY, null);
 	canvas.drawText(qp.getPlayer().getName(), (float) textX, (float) textY, _paint);
@@ -377,10 +377,11 @@ public class MatchView extends View {
     protected double getPlayerY(QuizzPlayer aQuizzPlauer, double aTerainH, double aMetreY, Bitmap aPlayerImg) {
 	double coordonneeY;
 
+	coordonneeY = (aTerainH / 2) + (aQuizzPlauer.getY() * aMetreY * -1);
 	if (aQuizzPlauer.isHome()) {
-	    coordonneeY = (aTerainH / 2) + (aQuizzPlauer.getY() * aMetreY) - aMetreY * 4;
+	    coordonneeY += aMetreY * 4;
 	} else {
-	    coordonneeY = (aTerainH / 2) + (aQuizzPlauer.getY() * aMetreY) + aMetreY * 3.5;
+	    coordonneeY -= aMetreY * 4;
 	}
 	coordonneeY -= aPlayerImg.getHeight() / 2;
 	return coordonneeY;
