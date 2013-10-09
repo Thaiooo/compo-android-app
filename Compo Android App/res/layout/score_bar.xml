@@ -4,22 +4,22 @@
     android:layout_height="wrap_content"
     android:background="@drawable/background_score_bar" >
 
-    <ImageView
-        android:id="@+id/image_back"
+    <Button
+        android:id="@+id/button_back"
+        style="@style/back_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="20dp"
-        android:onClick="back"
-        android:src="@drawable/btn_back" />
+        android:onClick="back" />
 
-    <ImageView
-        android:id="@+id/image_home"
+    <Button
+        android:id="@+id/button_home"
+        style="@style/home_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:onClick="home"
-        android:src="@drawable/btn_home" />
+        android:onClick="home" />
 
     <TextView
         android:id="@+id/user_credit"

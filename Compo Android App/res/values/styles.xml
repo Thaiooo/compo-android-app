@@ -41,6 +41,14 @@
         <item name="android:background">@drawable/button_post_it_hint</item>
     </style>
 
+    <style name="home_btn" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/button_home</item>
+    </style>
+
+    <style name="back_btn" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/button_back</item>
+    </style>
+
     <style name="craie_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/btn_craie</item>
     </style>
@@ -48,7 +56,7 @@
     <style name="transparent_edit_text" parent="@android:style/Widget.EditText">
         <item name="android:background">@drawable/edit_text_transparent</item>
     </style>
-    
+
     <style name="logo_blank_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/btn_logo_blank</item>
     </style>
@@ -56,5 +64,5 @@
     <style name="score_printer_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/btn_score_printer</item>
     </style>
-    
+
 </resources>
