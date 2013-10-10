@@ -54,9 +54,16 @@ public class SelectPackAdapter extends FragmentStatePagerAdapter {
     public int getItemPosition(Object item) {
 	PackFragment fragment = (PackFragment) item;
 	Pack pack = fragment.getCurrentPack();
+	int position = _packs.indexOf(pack);
+
+	PackProgress previousPackProgress = null;
+	if (position > 0) {
+	    Pack previousPack = _packs.get(position - 1);
+	    previousPackProgress = _mapPackToProgress.get(previousPack.getId());
+	}
 	PackProgress progress = _mapPackToProgress.get(pack.getId());
-	fragment.refresh(progress);
-	return super.getItemPosition(item);
+	fragment.refresh(progress, previousPackProgress);
+	return position;
     }
 
     @Override
