@@ -68,7 +68,7 @@ public class SettingActivity extends Activity {
     public void eraseData(View view) {
 	// Use the Builder class for convenient dialog construction
 	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	builder.setMessage(R.string.setting_erase_data_confirm)
+	builder.setMessage(R.string.message_setting_erase_data_confirm)
 		.setPositiveButton(R.string.button_validate, new DialogInterface.OnClickListener() {
 		    public void onClick(DialogInterface dialog, int id) {
 
