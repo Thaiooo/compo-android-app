@@ -9,7 +9,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Theme"
         android:textColor="@color/black"
         android:textIsSelectable="false"
         android:textSize="25dp" />
@@ -20,7 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/theme_name"
         android:layout_centerHorizontal="true"
-        android:text="Description"
         android:textColor="@color/black"
         android:textIsSelectable="false"
         android:textSize="15dp" />
@@ -43,7 +41,6 @@
             android:id="@+id/credit_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1OO credits"
             android:textColor="@color/black"
             android:textIsSelectable="false"
             android:textSize="15dp" />
@@ -61,10 +58,8 @@
             android:id="@+id/button_submit"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/pack_description"
-            android:layout_centerHorizontal="true"
             android:onClick="unlockPack"
-            android:text="Unlock"
+            android:text="@string/button_unlock"
             android:textSize="15dp"
             android:textStyle="bold" />
 
@@ -72,10 +67,8 @@
             android:id="@+id/button_cancel"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/pack_description"
             android:onClick="cancel"
-            android:text="Cancel"
+            android:text="@string/button_cancel"
             android:textSize="15dp"
             android:textStyle="bold" />
     </LinearLayout>

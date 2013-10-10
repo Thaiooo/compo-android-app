@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/match_post_it_content_margin_top"
-        android:text="Match 1"
         android:textColor="@color/black"
         android:textIsSelectable="false"
         android:textSize="15dp" />
@@ -21,7 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/match_title"
         android:layout_centerHorizontal="true"
-        android:text="Ligue 1 26e journée"
         android:textColor="@color/black"
         android:textIsSelectable="false"
         android:textSize="10dp" />
