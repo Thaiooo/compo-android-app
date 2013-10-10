@@ -24,7 +24,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/pack_name"
             android:layout_centerHorizontal="true"
-            android:text="Bla bla bla"
             android:textColor="@android:color/black"
             android:textIsSelectable="false"
             android:textSize="@dimen/pack_name_font_size" />
@@ -43,7 +42,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/pack_desc"
             android:layout_centerHorizontal="true"
-            android:text="Progress"
             android:textColor="@android:color/black"
             android:textIsSelectable="false"
             android:textSize="@dimen/pack_progress_font_size" />

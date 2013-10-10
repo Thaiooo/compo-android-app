@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/logo"
             android:onClick="tutorial"
-            android:text="Tutorial"
+            android:text="@string/button_tutorial"
             android:textSize="10dp"
             android:textStyle="bold" />
 

@@ -11,7 +11,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Hello"
+            android:text="@string/label_tutorial"
             android:textColor="@color/red"
             android:textIsSelectable="false"
             android:textSize="15dp" />

@@ -43,7 +43,7 @@
         android:layout_below="@+id/score_bar"
         android:layout_marginTop="10dp"
         android:onClick="open50Percent"
-        android:text="50/50"
+        android:text="@string/button_half"
         android:textSize="15dp"
         android:textStyle="bold" />
 
@@ -56,7 +56,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/button_50"
         android:onClick="openResponse"
-        android:text="100%"
+        android:text="@string/button_full"
         android:textSize="15dp"
         android:textStyle="bold" />
 
@@ -104,7 +104,7 @@
         android:layout_below="@+id/player_figure"
         android:layout_marginTop="10dp"
         android:onClick="check"
-        android:text="VALIDER"
+        android:text="@string/button_check"
         android:textColor="@android:color/white" />
 
     <!--  -->
