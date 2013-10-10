@@ -2,45 +2,55 @@
 <resources>
 
     <string name="app_name">Legendary Starting 11</string>
-    <string name="main_title">Legendary\nStarting 11</string>
-    <string name="logo_desc">Legendary Starting Eleven</string>
     <string name="menu_settings">Settings</string>
+
+    <!-- =========================================================================== -->
+    <!-- MISC -->
+    <!-- =========================================================================== -->
+    <dimen name="myFontSize">10sp</dimen>
+
+    <!-- =========================================================================== -->
+    <!-- IMAGE DESC -->
+    <!-- =========================================================================== -->
+    <string name="image_desc_logo">Legendary Starting Eleven</string>
+
+    <!-- =========================================================================== -->
+    <!-- TITLE -->
+    <string name="title_select_theme">Theme</string>
+    <string name="title_setting">Setting</string>
+    <string name="title_store">More credit!</string>
+    <string name="title_help_hint">Show hint</string>
+    <string name="title_help_random">Show used letters</string>
+    <string name="title_help_half">Some letters in order</string>
+    <string name="title_help_full">Show full response</string>
+
+    <!-- =========================================================================== -->
+    <!-- BUTTON -->
+    <!-- =========================================================================== -->
+    <string name="button_validate">Valider</string>
     <string name="button_play">Play</string>
     <string name="button_setting">Settings</string>
     <string name="button_check">Valider</string>
     <string name="button_store">More credit!</string>
-    <string name="button_cancel">Annuler</string>
-    <string name="activity_setting">Parmètres</string>
-    <string name="activity_select_theme">Theme</string>
-    <string name="activity_select_pack">Pack</string>
-    <string name="activity_quizz">Composition</string>
-    <string name="activity_select_match">Selection Match</string>
-    <string name="dialog_response">Who is the player</string>
-    <string name="store.title">Obtenez des crédits!</string>
-    <string name="store.pack.a">25 crédits</string>
-    <string name="store.pack.b">100 crédits</string>
-    <string name="store.pack.c">500 crédits</string>
-    <string name="setting.title">Paramètres</string>
-    <string name="setting.erase.data.confirm">Voulez vous supprimer toutes les données?</string>
-    <string name="button_validate">Valider</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_store_pack_a">25 credits</string>
+    <string name="button_store_pack_b">100 credits</string>
+    <string name="button_store_pack_c">500 credits</string>
 
+    <!-- =========================================================================== -->
     <!-- LABEL -->
-    <string name="label.credit">credit</string>
+    <!-- =========================================================================== -->
+    <string name="label_credit">credit</string>
+    <string name="label_desc_help_hint">Show the clue sentence of the answer!</string>
+    <string name="label_desc_help_random">Show all the letters of the answer (unordered)</string>
+    <string name="label_desc_help_half">Show some letters of the answer (ordered)</string>
+    <string name="label_desc_help_full">Answer the question for you!</string>
 
+    <!-- =========================================================================== -->
     <!-- MESSAGE -->
-    <string name="message.pack.lock">Completed the previous level before</string>
-    <string name="message.quizz.success">You have found</string>
-
-    <!-- HELP -->
-    <string name="help.hint.title">Show hint</string>
-    <string name="help.hint.desc">Show the clue sentence of the answer!</string>
-    <string name="help.random.title">Show used letters</string>
-    <string name="help.random.desc">Show all the letters of the answer (unordered)</string>
-    <string name="help.half.title">Some letters in order</string>
-    <string name="help.half.desc">Show some letters of the answer (ordered)</string>
-    <string name="help.full.title">Show full response</string>
-    <string name="help.full.desc">Answer the question for you!</string>
-
-    <dimen name="myFontSize">10sp</dimen>
+    <!-- =========================================================================== -->
+    <string name="message_pack_lock">Completed the previous level before</string>
+    <string name="message_quizz_success">You have found</string>
+    <string name="message_setting_erase_data_confirm">Do you really want to erase all the data?</string>
 
 </resources>

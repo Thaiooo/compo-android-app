@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/main_title_margin_top"
-            android:contentDescription="@string/logo_desc"
+            android:contentDescription="@string/image_desc_logo"
             android:src="@drawable/logo" />
 
         <RelativeLayout
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/theme_title_margin_top"
-                android:text="@string/activity_select_theme"
+                android:text="@string/title_select_theme"
                 android:textColor="@android:color/white"
                 android:textIsSelectable="false"
                 android:textSize="@dimen/theme_title_font_size" />

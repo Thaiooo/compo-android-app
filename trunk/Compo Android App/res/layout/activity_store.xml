@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="@string/store.title"
+        android:text="@string/title_store"
         android:textColor="@android:color/black"
         android:textIsSelectable="false"
         android:textSize="@dimen/store_title_font_size" />
@@ -22,7 +22,7 @@
         android:layout_below="@+id/store_title"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="@string/store.pack.a"
+        android:text="@string/button_store_pack_a"
         android:textSize="@dimen/store_button_font_size"
         android:textStyle="bold"
         android:width="@dimen/store_button_width" />
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button_credit_25"
         android:layout_centerHorizontal="true"
-        android:text="@string/store.pack.b"
+        android:text="@string/button_store_pack_b"
         android:textSize="@dimen/store_button_font_size"
         android:textStyle="bold"
         android:width="@dimen/store_button_width" />
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button_credit_100"
         android:layout_centerHorizontal="true"
-        android:text="@string/store.pack.c"
+        android:text="@string/button_store_pack_c"
         android:textSize="@dimen/store_button_font_size"
         android:textStyle="bold"
         android:width="@dimen/store_button_width" />

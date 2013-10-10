@@ -59,23 +59,23 @@ public class HintDialogActivity extends Activity {
 
 	switch (_hintType) {
 	case HINT:
-	    title.setText(getString(R.string.help_hint_title));
-	    description.setText(getString(R.string.help_hint_desc));
+	    title.setText(getString(R.string.title_help_hint));
+	    description.setText(getString(R.string.label_desc_help_hint));
 	    price.setText(Integer.toString(_currentQuizz.getCreditToUnlockHint()));
 	    break;
 	case RANDOM:
-	    title.setText(getString(R.string.help_random_title));
-	    description.setText(getString(R.string.help_random_desc));
+	    title.setText(getString(R.string.title_help_random));
+	    description.setText(getString(R.string.label_desc_help_random));
 	    price.setText(Integer.toString(_currentQuizz.getCreditToUnlockRandom()));
 	    break;
 	case HALF:
-	    title.setText(getString(R.string.help_half_title));
-	    description.setText(getString(R.string.help_half_desc));
+	    title.setText(getString(R.string.title_help_half));
+	    description.setText(getString(R.string.label_desc_help_half));
 	    price.setText(Integer.toString(_currentQuizz.getCreditToUnlockHalf()));
 	    break;
 	default:
-	    title.setText(getString(R.string.help_full_title));
-	    description.setText(getString(R.string.help_full_desc));
+	    title.setText(getString(R.string.title_help_full));
+	    description.setText(getString(R.string.label_desc_help_full));
 	    price.setText(Integer.toString(_currentQuizz.getCreditToUnlockResponse()));
 	    break;
 	}

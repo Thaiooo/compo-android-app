@@ -26,7 +26,6 @@
         </activity>
         <activity
             android:name=".SelectThemeActivity"
-            android:label="@string/activity_select_theme"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -34,7 +33,6 @@
         </activity>
         <activity
             android:name=".SelectPackActivity"
-            android:label="@string/activity_select_pack"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -82,7 +80,6 @@
         </activity>
         <activity
             android:name=".SelectMatchActivity"
-            android:label="@string/activity_select_match"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -90,7 +87,6 @@
         </activity>
         <activity
             android:name=".MatchActivity"
-            android:label="@string/activity_quizz"
             android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
