@@ -70,6 +70,36 @@ public class PackFragment extends Fragment {
 
 	_progress.setTypeface(_font);
 
+	boolean lock = isCurrentPackIsLock();
+	setLockPack(lock);
+
+	return rootView;
+    }
+
+    public Pack getCurrentPack() {
+	return _currentPack;
+    }
+
+    public void refresh(PackProgress aPackProgress, PackProgress aPreviousPackProgress) {
+	_currentPackProgress = aPackProgress;
+	_previousPackProgress = aPreviousPackProgress;
+
+	int progress = 0;
+	if (_currentPackProgress != null) {
+	    progress = _currentPackProgress.getNumberOfSuccessMatch();
+	}
+	StringBuffer buff = new StringBuffer(progress);
+	buff.append(progress);
+	buff.append(SLASH);
+	buff.append(_currentPack.getMatchs().size());
+	_progress.setText(buff.toString());
+
+	boolean lock = isCurrentPackIsLock();
+	setLockPack(lock);
+
+    }
+
+    private boolean isCurrentPackIsLock() {
 	boolean lock = true;
 	if (_previousPack != null) {
 	    if (_previousPackProgress != null) {
@@ -83,8 +113,11 @@ public class PackFragment extends Fragment {
 	} else {
 	    lock = false;
 	}
+	return lock;
+    }
 
-	if (!lock) {
+    private void setLockPack(boolean isLock) {
+	if (!isLock) {
 	    _lockImage.setVisibility(View.INVISIBLE);
 	    _progress.setVisibility(View.VISIBLE);
 	    int progress = 0;
@@ -118,26 +151,5 @@ public class PackFragment extends Fragment {
 		}
 	    });
 	}
-
-	return rootView;
     }
-
-    public Pack getCurrentPack() {
-	return _currentPack;
-    }
-
-    public void refresh(PackProgress aPackProgress) {
-	_currentPackProgress = aPackProgress;
-	int progress = 0;
-	if (_currentPackProgress != null) {
-	    progress = _currentPackProgress.getNumberOfSuccessMatch();
-	}
-	StringBuffer buff = new StringBuffer(progress);
-	buff.append(progress);
-	buff.append(SLASH);
-	buff.append(_currentPack.getMatchs().size());
-	_progress.setText(buff.toString());
-
-    }
-
 }
