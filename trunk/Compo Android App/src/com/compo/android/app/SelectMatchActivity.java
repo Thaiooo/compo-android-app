@@ -29,8 +29,6 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 
     private static Typeface _fontTitle;
 
-    // private TextView _theme_name;
-    // private TextView _pack_name;
     private GridView _gridview;
     private Theme _selectTheme;
     private Pack _selectPack;
@@ -57,13 +55,6 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 	Button title = (Button) findViewById(R.id.button_title);
 	title.setTypeface(_fontTitle);
 	title.setText(_selectTheme.getName() + "\n" + _selectPack.getName());
-	// _theme_name = (TextView) findViewById(R.id.theme_name);
-	// _theme_name.setTypeface(_fontTitle);
-	// _theme_name.setText(_selectTheme.getName());
-
-	// _pack_name = (TextView) findViewById(R.id.pack_name);
-	// _pack_name.setText(_selectPack.getName());
-	// _pack_name.setTypeface(_fontTitle);
 
 	_gridview = (GridView) findViewById(R.id.quizzGrid);
 
@@ -103,38 +94,8 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 		public void onItemClick(AdapterView<?> parent, View v, int aPosition, long id) {
 		    Match selectMatch = aMatchList.get(aPosition);
 
-		    // Match nextMatch = null;
-		    // if (aPosition == aMatchList.size()) {
-		    // nextMatch = aMatchList.get(0);
-		    // } else {
-		    // nextMatch = aMatchList.get(aPosition + 1);
-		    // }
-
-		    // for (int i = aPosition + 1; i < aMatchList.size(); i++) {
-		    // Match m = aMatchList.get(i);
-		    //
-		    // int nbResponse = 0;
-		    // for (QuizzPlayer quizz : m.getQuizzs()) {
-		    // if (!quizz.isHide()) {
-		    // continue;
-		    // }
-		    // String playerName = quizz.getPlayer().getName();
-		    // Play play = _mapQuizzToPlay.get(quizz.getId());
-		    // if (play != null && playerName.equals(play.getResponse())) {
-		    // nbResponse++;
-		    // } else {
-		    // break;
-		    // }
-		    // }
-		    //
-		    // if (m.getQuizzs().size() != nbResponse) {
-		    // nextMatch = m;
-		    // }
-		    // }
-
 		    Intent intent = new Intent(SelectMatchActivity.this, MatchActivity.class);
 		    intent.putExtra(MatchActivity.REQ_MESSAGE_MATCH, selectMatch);
-		    // intent.putExtra(QuizzActivity.REQ_MESSAGE_NEXT_MATCH, nextMatch);
 		    intent.putExtra(MatchActivity.REQ_MESSAGE_PACK, _selectPack);
 		    startActivityForResult(intent, EXTRA_MESSAGE_REQUEST_CODE);
 
