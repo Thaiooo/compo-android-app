@@ -20,14 +20,7 @@ public class UserDao {
 	SQLiteDatabase session = null;
 	try {
 	    session = dataBaseHeleper.getWritableDatabase();
-
-	    ContentValues values = new ContentValues();
-	    values.put(TableConstant.UserTable.COLUMN_CREDIT, o.getCredit());
-	    values.put(TableConstant.UserTable.COLUMN_IS_SOUND_ENABLE, o.getSoundEnable().name());
-
-	    session.update(TableConstant.UserTable.TABLE_NAME, values, TableConstant.UserTable._ID + " = ?",
-		    new String[] { String.valueOf(o.getId()) });
-
+	    save(session, o);
 	} finally {
 	    if (session != null) {
 		session.close();
@@ -37,15 +30,35 @@ public class UserDao {
 	}
     }
 
+    public void save(SQLiteDatabase session, User o) {
+	ContentValues values = new ContentValues();
+	values.put(TableConstant.UserTable.COLUMN_CREDIT, o.getCredit());
+	values.put(TableConstant.UserTable.COLUMN_IS_SOUND_ENABLE, o.getSoundEnable().name());
+
+	session.update(TableConstant.UserTable.TABLE_NAME, values, TableConstant.UserTable._ID + " = ?",
+		new String[] { String.valueOf(o.getId()) });
+    }
+
     public User getUser() {
 	User u = null;
-
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = null;
-	Cursor c = null;
 	try {
 	    session = dataBaseHeleper.getReadableDatabase();
+	} finally {
+	    if (session != null) {
+		session.close();
+	    }
+	    dataBaseHeleper.close();
+	}
+	return u;
+    }
 
+    public User getUser(SQLiteDatabase session) {
+	User u = null;
+
+	Cursor c = null;
+	try {
 	    // The columns to return
 	    String[] projection = { TableConstant.UserTable._ID, TableConstant.UserTable.COLUMN_CREDIT,
 		    TableConstant.UserTable.COLUMN_OVERALL_TIME, TableConstant.UserTable.COLUMN_IS_SOUND_ENABLE };
@@ -70,7 +83,8 @@ public class UserDao {
 		long itemId = c.getLong(c.getColumnIndexOrThrow(TableConstant.UserTable._ID));
 		Integer itemCredit = c.getInt(c.getColumnIndexOrThrow(TableConstant.UserTable.COLUMN_CREDIT));
 		Long itemOverallTime = c.getLong(c.getColumnIndexOrThrow(TableConstant.UserTable.COLUMN_OVERALL_TIME));
-		Sound sound = Sound.valueOf(c.getString(c.getColumnIndexOrThrow(TableConstant.UserTable.COLUMN_IS_SOUND_ENABLE)));
+		Sound sound = Sound.valueOf(c.getString(c
+			.getColumnIndexOrThrow(TableConstant.UserTable.COLUMN_IS_SOUND_ENABLE)));
 
 		u.setId(itemId);
 		u.setCredit(itemCredit);
@@ -81,10 +95,6 @@ public class UserDao {
 	    if (c != null) {
 		c.close();
 	    }
-	    if (session != null) {
-		session.close();
-	    }
-	    dataBaseHeleper.close();
 	}
 
 	return u;

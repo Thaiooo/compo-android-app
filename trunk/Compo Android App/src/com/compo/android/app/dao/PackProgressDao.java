@@ -21,9 +21,22 @@ public class PackProgressDao {
     public void eraseAll() {
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = null;
-	Cursor c = null;
 	try {
 	    session = dataBaseHeleper.getReadableDatabase();
+	    eraseAll(session);
+
+	} finally {
+	    if (session != null) {
+		session.close();
+	    }
+	    dataBaseHeleper.close();
+	}
+
+    }
+
+    public void eraseAll(SQLiteDatabase session) {
+	Cursor c = null;
+	try {
 	    String where = null;
 	    String[] whereArgs = {};
 	    session.delete(TableConstant.PackProgressTable.TABLE_NAME, where, whereArgs);
@@ -31,9 +44,6 @@ public class PackProgressDao {
 	} finally {
 	    if (c != null) {
 		c.close();
-	    }
-	    if (session != null) {
-		session.close();
 	    }
 	    dataBaseHeleper.close();
 	}
@@ -60,7 +70,7 @@ public class PackProgressDao {
 	    req.append("from ");
 	    req.append(TableConstant.PackProgressTable.TABLE_NAME);
 	    req.append(" p ");
-	    
+
 	    req.append("inner join ");
 	    req.append(TableConstant.PackTable.TABLE_NAME);
 	    req.append(" k on k.");
@@ -111,10 +121,24 @@ public class PackProgressDao {
     public PackProgress find(Pack aPack) {
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = null;
-	Cursor c = null;
 	PackProgress progress = null;
 	try {
 	    session = dataBaseHeleper.getReadableDatabase();
+	    progress = find(session, aPack);
+	} finally {
+	    if (session != null) {
+		session.close();
+	    }
+	    dataBaseHeleper.close();
+	}
+
+	return progress;
+    }
+
+    public PackProgress find(SQLiteDatabase session, Pack aPack) {
+	Cursor c = null;
+	PackProgress progress = null;
+	try {
 	    String[] selectionArgs = { String.valueOf(aPack.getId()) };
 
 	    StringBuffer req = new StringBuffer("select ");
@@ -138,10 +162,6 @@ public class PackProgressDao {
 	    if (c != null) {
 		c.close();
 	    }
-	    if (session != null) {
-		session.close();
-	    }
-	    dataBaseHeleper.close();
 	}
 
 	return progress;
@@ -152,21 +172,21 @@ public class PackProgressDao {
 	SQLiteDatabase session = null;
 	try {
 	    session = dataBaseHeleper.getWritableDatabase();
-
-	    ContentValues values = new ContentValues();
-	    values.put(TableConstant.PackProgressTable.COLUMN_NB_MATCH_SUCCESS, aProgress.getNumberOfSuccessMatch());
-
-	    session.update(TableConstant.PackProgressTable.TABLE_NAME, values, TableConstant.PackProgressTable._ID
-		    + " = ?", new String[] { String.valueOf(aProgress.getId()) });
+	    update(session, aProgress);
 
 	} finally {
 	    if (session != null) {
 		session.close();
 	    }
-
 	    dataBaseHeleper.close();
 	}
+    }
 
+    public void update(SQLiteDatabase session, PackProgress aProgress) {
+	ContentValues values = new ContentValues();
+	values.put(TableConstant.PackProgressTable.COLUMN_NB_MATCH_SUCCESS, aProgress.getNumberOfSuccessMatch());
+	session.update(TableConstant.PackProgressTable.TABLE_NAME, values,
+		TableConstant.PackProgressTable._ID + " = ?", new String[] { String.valueOf(aProgress.getId()) });
     }
 
     public void add(PackProgress aProgress) {
@@ -174,21 +194,22 @@ public class PackProgressDao {
 	SQLiteDatabase session = null;
 	try {
 	    session = dataBaseHeleper.getWritableDatabase();
-
-	    ContentValues values = new ContentValues();
-	    values.put(TableConstant.PackProgressTable.COLUMN_NB_MATCH_SUCCESS, aProgress.getNumberOfSuccessMatch());
-	    values.put(TableConstant.PackProgressTable.COLUMN_PACK_ID, aProgress.getPack().getId());
-
-	    session.insert(TableConstant.PackProgressTable.TABLE_NAME, null, values);
+	    add(session, aProgress);
 
 	} finally {
 	    if (session != null) {
 		session.close();
 	    }
-
 	    dataBaseHeleper.close();
 	}
 
+    }
+
+    public void add(SQLiteDatabase session, PackProgress aProgress) {
+	ContentValues values = new ContentValues();
+	values.put(TableConstant.PackProgressTable.COLUMN_NB_MATCH_SUCCESS, aProgress.getNumberOfSuccessMatch());
+	values.put(TableConstant.PackProgressTable.COLUMN_PACK_ID, aProgress.getPack().getId());
+	session.insert(TableConstant.PackProgressTable.TABLE_NAME, null, values);
     }
 
     private String createPackProgressColumnRequest(String aPrefixe) {

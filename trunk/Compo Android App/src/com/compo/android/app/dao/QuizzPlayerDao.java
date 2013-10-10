@@ -14,10 +14,24 @@ public class QuizzPlayerDao {
     public int countHidePlayerForMatch(long aMatchId) {
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = null;
-	Cursor c = null;
 	int count = 0;
 	try {
 	    session = dataBaseHeleper.getReadableDatabase();
+	    count = countHidePlayerForMatch(session, aMatchId);
+	} finally {
+	    if (session != null) {
+		session.close();
+	    }
+	    dataBaseHeleper.close();
+	}
+
+	return count;
+    }
+
+    public int countHidePlayerForMatch(SQLiteDatabase session, long aMatchId) {
+	Cursor c = null;
+	int count = 0;
+	try {
 	    String[] selectionArgs = { String.valueOf(aMatchId) };
 
 	    StringBuffer req = new StringBuffer("select count(*) ");
@@ -36,10 +50,6 @@ public class QuizzPlayerDao {
 	    if (c != null) {
 		c.close();
 	    }
-	    if (session != null) {
-		session.close();
-	    }
-	    dataBaseHeleper.close();
 	}
 
 	return count;
