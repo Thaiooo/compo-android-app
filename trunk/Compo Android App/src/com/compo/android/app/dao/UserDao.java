@@ -45,6 +45,7 @@ public class UserDao {
 	SQLiteDatabase session = null;
 	try {
 	    session = dataBaseHeleper.getReadableDatabase();
+	    u = getUser(session);
 	} finally {
 	    if (session != null) {
 		session.close();
