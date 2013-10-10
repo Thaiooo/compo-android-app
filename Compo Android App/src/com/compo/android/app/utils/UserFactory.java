@@ -1,6 +1,7 @@
 package com.compo.android.app.utils;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.compo.android.app.dao.UserDao;
 import com.compo.android.app.model.User;
@@ -28,9 +29,22 @@ public class UserFactory {
 	return _user;
     }
 
+    public User getUser(SQLiteDatabase session, Context aContext) {
+	if (null == _user) {
+	    UserDao dao = new UserDao(aContext);
+	    _user = dao.getUser(session);
+	}
+	return _user;
+    }
+
     public void updateUser(Context aContext) {
 	UserDao dao = new UserDao(aContext);
 	dao.save(_user);
+    }
+
+    public void updateUser(SQLiteDatabase session, Context aContext) {
+	UserDao dao = new UserDao(aContext);
+	dao.save(session, _user);
     }
 
 }
