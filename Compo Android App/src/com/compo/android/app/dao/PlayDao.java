@@ -25,9 +25,21 @@ public class PlayDao {
     public void eraseAll() {
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = null;
-	Cursor c = null;
 	try {
 	    session = dataBaseHeleper.getReadableDatabase();
+	    eraseAll(session);
+	} finally {
+	    if (session != null) {
+		session.close();
+	    }
+	    dataBaseHeleper.close();
+	}
+
+    }
+
+    public void eraseAll(SQLiteDatabase session) {
+	Cursor c = null;
+	try {
 	    String where = null;
 	    String[] whereArgs = {};
 	    session.delete(TableConstant.PlayTable.TABLE_NAME, where, whereArgs);
@@ -36,12 +48,7 @@ public class PlayDao {
 	    if (c != null) {
 		c.close();
 	    }
-	    if (session != null) {
-		session.close();
-	    }
-	    dataBaseHeleper.close();
 	}
-
     }
 
     public int count() {
@@ -74,29 +81,45 @@ public class PlayDao {
 	return result;
     }
 
-    public void update(Play o) {
+    public void update(Play aPlayer) {
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = null;
 	try {
 	    session = dataBaseHeleper.getWritableDatabase();
+	    update(session, aPlayer);
+	} finally {
+	    if (session != null) {
+		session.close();
+	    }
+	    dataBaseHeleper.close();
+	}
+    }
 
-	    ContentValues values = new ContentValues();
-	    values.put(TableConstant.PlayTable.COLUMN_RESPONSE, o.getResponse());
-	    values.put(
-		    TableConstant.PlayTable.COLUMN_DATE_TIME,
-		    DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.FRANCE).format(
-			    o.getDateTime()));
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_HINT, BooleanUtils.toIntegerObject(o.isUnlockHint()));
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RANDOM,
-		    BooleanUtils.toIntegerObject(o.isUnlockRandom()));
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_50_PERCENT,
-		    BooleanUtils.toIntegerObject(o.isUnlock50Percent()));
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RESPONSE,
-		    BooleanUtils.toIntegerObject(o.isUnlockResponse()));
+    public void update(SQLiteDatabase session, Play aPlayer) {
+	ContentValues values = new ContentValues();
+	values.put(TableConstant.PlayTable.COLUMN_RESPONSE, aPlayer.getResponse());
+	values.put(
+		TableConstant.PlayTable.COLUMN_DATE_TIME,
+		DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.FRANCE).format(
+			aPlayer.getDateTime()));
+	values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_HINT, BooleanUtils.toIntegerObject(aPlayer.isUnlockHint()));
+	values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RANDOM,
+		BooleanUtils.toIntegerObject(aPlayer.isUnlockRandom()));
+	values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_50_PERCENT,
+		BooleanUtils.toIntegerObject(aPlayer.isUnlock50Percent()));
+	values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RESPONSE,
+		BooleanUtils.toIntegerObject(aPlayer.isUnlockResponse()));
 
-	    session.update(TableConstant.PlayTable.TABLE_NAME, values, TableConstant.PlayTable._ID + " = ?",
-		    new String[] { String.valueOf(o.getId()) });
+	session.update(TableConstant.PlayTable.TABLE_NAME, values, TableConstant.PlayTable._ID + " = ?",
+		new String[] { String.valueOf(aPlayer.getId()) });
+    }
 
+    public void add(Play o) {
+	dataBaseHeleper.openDataBase();
+	SQLiteDatabase session = null;
+	try {
+	    session = dataBaseHeleper.getWritableDatabase();
+	    add(session, o);
 	} finally {
 	    if (session != null) {
 		session.close();
@@ -106,37 +129,24 @@ public class PlayDao {
 	}
     }
 
-    public void add(Play o) {
-	dataBaseHeleper.openDataBase();
-	SQLiteDatabase session = null;
-	try {
-	    session = dataBaseHeleper.getWritableDatabase();
+    public void add(SQLiteDatabase session, Play o) {
+	ContentValues values = new ContentValues();
+	values.put(
+		TableConstant.PlayTable.COLUMN_DATE_TIME,
+		DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.FRANCE).format(
+			o.getDateTime()));
+	values.put(TableConstant.PlayTable.COLUMN_QUIZZ_ID, o.getQuizzId());
+	values.put(TableConstant.PlayTable.COLUMN_USER_ID, o.getUserId());
+	values.put(TableConstant.PlayTable.COLUMN_RESPONSE, o.getResponse());
+	values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_HINT, BooleanUtils.toIntegerObject(o.isUnlockHint()));
+	values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RANDOM, BooleanUtils.toIntegerObject(o.isUnlockRandom()));
+	values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_50_PERCENT,
+		BooleanUtils.toIntegerObject(o.isUnlock50Percent()));
+	values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RESPONSE,
+		BooleanUtils.toIntegerObject(o.isUnlockResponse()));
 
-	    ContentValues values = new ContentValues();
-	    values.put(
-		    TableConstant.PlayTable.COLUMN_DATE_TIME,
-		    DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.FRANCE).format(
-			    o.getDateTime()));
-	    values.put(TableConstant.PlayTable.COLUMN_QUIZZ_ID, o.getQuizzId());
-	    values.put(TableConstant.PlayTable.COLUMN_USER_ID, o.getUserId());
-	    values.put(TableConstant.PlayTable.COLUMN_RESPONSE, o.getResponse());
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_HINT, BooleanUtils.toIntegerObject(o.isUnlockHint()));
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RANDOM,
-		    BooleanUtils.toIntegerObject(o.isUnlockRandom()));
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_50_PERCENT,
-		    BooleanUtils.toIntegerObject(o.isUnlock50Percent()));
-	    values.put(TableConstant.PlayTable.COLUMN_IS_UNLOCK_RESPONSE,
-		    BooleanUtils.toIntegerObject(o.isUnlockResponse()));
+	session.insert(TableConstant.PlayTable.TABLE_NAME, null, values);
 
-	    session.insert(TableConstant.PlayTable.TABLE_NAME, null, values);
-
-	} finally {
-	    if (session != null) {
-		session.close();
-	    }
-
-	    dataBaseHeleper.close();
-	}
     }
 
     public Map<Long, Play> getAllPlay(Long anUserId) {

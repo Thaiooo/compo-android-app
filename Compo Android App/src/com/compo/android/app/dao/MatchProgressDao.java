@@ -22,9 +22,22 @@ public class MatchProgressDao {
     public void eraseAll() {
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = null;
-	Cursor c = null;
 	try {
 	    session = dataBaseHeleper.getReadableDatabase();
+	    eraseAll(session);
+
+	} finally {
+	    if (session != null) {
+		session.close();
+	    }
+	    dataBaseHeleper.close();
+	}
+
+    }
+
+    public void eraseAll(SQLiteDatabase session) {
+	Cursor c = null;
+	try {
 	    String where = null;
 	    String[] whereArgs = {};
 	    session.delete(TableConstant.MatchProgressTable.TABLE_NAME, where, whereArgs);
@@ -33,10 +46,6 @@ public class MatchProgressDao {
 	    if (c != null) {
 		c.close();
 	    }
-	    if (session != null) {
-		session.close();
-	    }
-	    dataBaseHeleper.close();
 	}
 
     }
@@ -57,7 +66,7 @@ public class MatchProgressDao {
 	    req.append("from ");
 	    req.append(TableConstant.MatchProgressTable.TABLE_NAME);
 	    req.append(" p ");
-	    
+
 	    req.append("inner join ");
 	    req.append(TableConstant.MatchTable.TABLE_NAME);
 	    req.append(" k on k.");
@@ -98,10 +107,25 @@ public class MatchProgressDao {
     public MatchProgress find(long aMatchId) {
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = null;
-	Cursor c = null;
 	MatchProgress progress = null;
 	try {
 	    session = dataBaseHeleper.getReadableDatabase();
+	    progress = find(session, aMatchId);
+
+	} finally {
+	    if (session != null) {
+		session.close();
+	    }
+	    dataBaseHeleper.close();
+	}
+
+	return progress;
+    }
+
+    public MatchProgress find(SQLiteDatabase session, long aMatchId) {
+	Cursor c = null;
+	MatchProgress progress = null;
+	try {
 	    String[] selectionArgs = { String.valueOf(aMatchId) };
 
 	    StringBuffer req = new StringBuffer("select ");
@@ -124,10 +148,6 @@ public class MatchProgressDao {
 	    if (c != null) {
 		c.close();
 	    }
-	    if (session != null) {
-		session.close();
-	    }
-	    dataBaseHeleper.close();
 	}
 
 	return progress;
@@ -138,13 +158,7 @@ public class MatchProgressDao {
 	SQLiteDatabase session = null;
 	try {
 	    session = dataBaseHeleper.getWritableDatabase();
-
-	    ContentValues values = new ContentValues();
-	    values.put(TableConstant.MatchProgressTable.COLUMN_NB_QUIZZ_SUCCESS, aProgress.getNumberOfSuccessQuizz());
-	    values.put(TableConstant.MatchProgressTable.COLUMN_IS_COMPLETED, aProgress.isCompleted());
-
-	    session.update(TableConstant.MatchProgressTable.TABLE_NAME, values, TableConstant.MatchProgressTable._ID
-		    + " = ?", new String[] { String.valueOf(aProgress.getId()) });
+	    update(session, aProgress);
 
 	} finally {
 	    if (session != null) {
@@ -156,20 +170,21 @@ public class MatchProgressDao {
 
     }
 
+    public void update(SQLiteDatabase session, MatchProgress aProgress) {
+	ContentValues values = new ContentValues();
+	values.put(TableConstant.MatchProgressTable.COLUMN_NB_QUIZZ_SUCCESS, aProgress.getNumberOfSuccessQuizz());
+	values.put(TableConstant.MatchProgressTable.COLUMN_IS_COMPLETED, aProgress.isCompleted());
+
+	session.update(TableConstant.MatchProgressTable.TABLE_NAME, values, TableConstant.MatchProgressTable._ID
+		+ " = ?", new String[] { String.valueOf(aProgress.getId()) });
+    }
+
     public void add(MatchProgress aProgress) {
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = null;
 	try {
 	    session = dataBaseHeleper.getWritableDatabase();
-
-	    ContentValues values = new ContentValues();
-	    values.put(TableConstant.MatchProgressTable.COLUMN_NB_QUIZZ_SUCCESS, aProgress.getNumberOfSuccessQuizz());
-	    values.put(TableConstant.MatchProgressTable.COLUMN_MATCH_ID, aProgress.getMatch().getId());
-	    values.put(TableConstant.MatchProgressTable.COLUMN_IS_COMPLETED,
-		    BooleanUtils.toIntegerObject(aProgress.isCompleted()));
-
-	    session.insert(TableConstant.MatchProgressTable.TABLE_NAME, null, values);
-
+	    add(session, aProgress);
 	} finally {
 	    if (session != null) {
 		session.close();
@@ -177,7 +192,15 @@ public class MatchProgressDao {
 
 	    dataBaseHeleper.close();
 	}
+    }
 
+    public void add(SQLiteDatabase session, MatchProgress aProgress) {
+	ContentValues values = new ContentValues();
+	values.put(TableConstant.MatchProgressTable.COLUMN_NB_QUIZZ_SUCCESS, aProgress.getNumberOfSuccessQuizz());
+	values.put(TableConstant.MatchProgressTable.COLUMN_MATCH_ID, aProgress.getMatch().getId());
+	values.put(TableConstant.MatchProgressTable.COLUMN_IS_COMPLETED,
+		BooleanUtils.toIntegerObject(aProgress.isCompleted()));
+	session.insert(TableConstant.MatchProgressTable.TABLE_NAME, null, values);
     }
 
     private int fillMatchProgress(Cursor c, int index, MatchProgress progress) {

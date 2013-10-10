@@ -30,10 +30,24 @@ public class PackDao {
     public Pack findPackLightByMatch(Long aMatchId) {
 	dataBaseHeleper.openDataBase();
 	SQLiteDatabase session = null;
-	Cursor c = null;
 	Pack pack = null;
 	try {
 	    session = dataBaseHeleper.getReadableDatabase();
+	    pack = findPackLightByMatch(session, aMatchId);
+	} finally {
+	    if (session != null) {
+		session.close();
+	    }
+	    dataBaseHeleper.close();
+	}
+
+	return pack;
+    }
+
+    public Pack findPackLightByMatch(SQLiteDatabase session, Long aMatchId) {
+	Cursor c = null;
+	Pack pack = null;
+	try {
 	    String[] selectionArgs = { String.valueOf(aMatchId) };
 
 	    StringBuffer req = new StringBuffer("select ");
@@ -80,10 +94,6 @@ public class PackDao {
 	    if (c != null) {
 		c.close();
 	    }
-	    if (session != null) {
-		session.close();
-	    }
-	    dataBaseHeleper.close();
 	}
 
 	return pack;
