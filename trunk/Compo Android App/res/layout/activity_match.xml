@@ -19,7 +19,7 @@
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/white"
             android:textIsSelectable="false"
-            android:textSize="15dp" />
+            android:textSize="@dimen/match_detail_font_size" />
 
         <TextView
             android:id="@+id/match_teams"
@@ -29,7 +29,7 @@
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/white"
             android:textIsSelectable="false"
-            android:textSize="15dp" />
+            android:textSize="@dimen/match_teams_font_size" />
 
         <Button
             android:id="@+id/score_printer"
@@ -39,7 +39,7 @@
             android:layout_below="@+id/match_teams"
             android:layout_centerHorizontal="true"
             android:textColor="@color/red"
-            android:textSize="20dp"
+            android:textSize="@dimen/match_score_font_size"
             android:textStyle="bold" />
 
         <ImageView
@@ -48,7 +48,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/match_teams"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/match_advertising_side_margin"
+            android:contentDescription="@string/image_advertising_left"
             android:src="@drawable/advertising_left" />
 
         <ImageView
@@ -57,7 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/match_teams"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="@dimen/match_advertising_side_margin"
+            android:contentDescription="@string/image_advertising_right"
             android:src="@drawable/advertising_right" />
 
         <com.compo.android.app.MatchView

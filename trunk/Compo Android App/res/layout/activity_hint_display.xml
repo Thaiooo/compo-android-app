@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="@dimen/hint_display_width"
     android:layout_height="wrap_content"
     android:background="@drawable/background_dialog" >
 
@@ -21,7 +21,7 @@
         android:layout_centerHorizontal="true"
         android:textColor="@android:color/black"
         android:textIsSelectable="false"
-        android:textSize="15dp" />
+        android:textSize="@dimen/hint_display_title_font_size" />
 
     <TextView
         android:id="@+id/hint_value"
@@ -31,6 +31,6 @@
         android:layout_centerHorizontal="true"
         android:textColor="@android:color/black"
         android:textIsSelectable="false"
-        android:textSize="15dp" />
+        android:textSize="@dimen/hint_display_content_font_size" />
 
 </RelativeLayout>

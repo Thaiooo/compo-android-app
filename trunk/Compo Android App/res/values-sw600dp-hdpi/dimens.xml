@@ -53,5 +53,16 @@
     <dimen name="hint_dialog_button_width">80dp</dimen>
     <dimen name="hint_dialog_button_margin_top">10dp</dimen>
     <dimen name="hint_dialog_price_margin_top">10dp</dimen>
+    
+    <!-- Hint display -->
+    <dimen name="hint_display_width">200dp</dimen>
+    <dimen name="hint_display_title_font_size">25dp</dimen>
+    <dimen name="hint_display_content_font_size">25dp</dimen>
+    
+    <!-- Match -->
+    <dimen name="match_detail_font_size">15dp</dimen>
+    <dimen name="match_teams_font_size">15dp</dimen>
+    <dimen name="match_score_font_size">20dp</dimen>
+    <dimen name="match_advertising_side_margin">10dp</dimen>
 
 </resources>
