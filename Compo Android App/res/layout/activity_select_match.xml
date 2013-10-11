@@ -21,7 +21,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/main_title_margin_top"
             android:textColor="@android:color/white"
-            android:textSize="15dp"
+            android:textSize="@dimen/select_match_title_font_size"
             android:textStyle="bold" />
 
         <RelativeLayout
