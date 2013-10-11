@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/score_bar"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/response_hint_margin_top"
         android:drawableTop="@drawable/idee"
         android:onClick="openHint" />
 
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/score_bar"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/response_hint_margin_top"
         android:drawableTop="@drawable/half"
         android:onClick="open50Percent"
         android:textStyle="bold" />
@@ -60,7 +60,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/score_bar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/response_player_image_margin_top"
+        android:contentDescription="@string/image_player_figure"
         android:src="@drawable/player_figure" />
 
     <ImageView
@@ -69,8 +70,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/score_bar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/jersey_green" />
+        android:layout_marginTop="@dimen/response_player_image_margin_top"
+        android:contentDescription="@string/image_player_jersey" />
 
     <ImageView
         android:id="@+id/player_short"
@@ -78,8 +79,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/score_bar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/short_blue" />
+        android:layout_marginTop="@dimen/response_player_image_margin_top"
+        android:contentDescription="@string/image_player_short" />
 
     <ImageView
         android:id="@+id/player_sock"
@@ -87,8 +88,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/score_bar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/sock_blue" />
+        android:layout_marginTop="@dimen/response_player_image_margin_top"
+        android:contentDescription="@string/image_player_sock" />
 
     <Button
         android:id="@+id/button_check"
@@ -96,32 +97,31 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/player_figure"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/response_edit_field_margin_top"
         android:onClick="check"
         android:text="@string/button_check"
         android:textColor="@android:color/white" />
 
-    <!--  -->
-
     <EditText
-        android:id="@+id/edit_responseMMM"
+        android:id="@+id/edit_response"
         style="@style/transparent_edit_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/player_figure"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/response_edit_field_margin_top"
         android:layout_toLeftOf="@+id/button_check"
         android:lines="1"
         android:maxLength="20"
         android:singleLine="true"
         android:textColor="@android:color/white"
-        android:textSize="22sp" />
+        android:textSize="@dimen/response_edit_field_font_size" />
 
     <ImageView
         android:id="@+id/matching_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/edit_responseMMM"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/edit_response"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/image_response_matching" />
 
 </RelativeLayout>
