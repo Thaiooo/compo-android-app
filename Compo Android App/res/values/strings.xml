@@ -16,6 +16,11 @@
     <string name="image_desc_coins">Coins</string>
     <string name="image_advertising_left">Addidas</string>
     <string name="image_advertising_right">So Foot</string>
+    <string name="image_player_figure">Player</string>
+    <string name="image_player_jersey">Jersey</string>
+    <string name="image_player_short">Short</string>
+    <string name="image_player_sock">Sock</string>
+    <string name="image_response_matching">Matching Image</string>
 
     <!-- =========================================================================== -->
     <!-- TITLE -->
