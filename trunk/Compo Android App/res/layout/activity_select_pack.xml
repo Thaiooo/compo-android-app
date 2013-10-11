@@ -33,17 +33,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/pack_theme_margin_top"
+                android:layout_marginTop="@dimen/pack_theme_name_margin_top"
                 android:textColor="@android:color/white"
                 android:textIsSelectable="false"
-                android:textSize="@dimen/pack_theme_font_size" />
+                android:textSize="@dimen/pack_theme_name_font_size" />
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/pager"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/pack_image_height"
+                android:layout_height="@dimen/pack_list_height"
                 android:layout_below="@+id/theme_name"
-                android:layout_marginTop="@dimen/pack_image_margin_top" >
+                android:layout_marginTop="@dimen/pack_list_margin_top" >
             </android.support.v4.view.ViewPager>
 
             <LinearLayout
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/pager"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/pack_indicator_list_margin_top"
                 android:orientation="horizontal" >
             </LinearLayout>
 
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignTop="@+id/pager"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="@dimen/pack_button_next_prev_margin_top"
                 android:onClick="previewTheme"
                 android:text="@string/button_preview"
                 android:textSize="10dp"
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignTop="@+id/pager"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="@dimen/pack_button_next_prev_margin_top"
                 android:onClick="nextTheme"
                 android:text="@string/button_next"
                 android:textSize="10dp"
