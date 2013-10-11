@@ -7,15 +7,15 @@
     <dimen name="main_button_font_size">24dp</dimen>
     <dimen name="main_button_play_margin_top">45dp</dimen>
 
-    <!--  -->
-    <dimen name="score_font_size">20dp</dimen>
+    <!-- Tool bar -->
+    <dimen name="credit_font_size">20dp</dimen>
 
-    <!--  -->
+    <!-- Store -->
     <dimen name="store_title_font_size">24dp</dimen>
     <dimen name="store_button_font_size">24dp</dimen>
     <dimen name="store_button_width">180dp</dimen>
 
-    <!--  -->
+    <!-- Setting -->
     <dimen name="setting_title_font_size">24dp</dimen>
     <dimen name="setting_dialog_width">200dp</dimen>
 
@@ -35,10 +35,8 @@
     <dimen name="pack_image_margin_top">25dp</dimen>
     <dimen name="pack_image_height">250dp</dimen>
 
-    <!--  -->
-    <dimen name="match_image_margin_top">25dp</dimen>
-    <dimen name="match_image_height">250dp</dimen>
-    <dimen name="match_name_font_size">15dp</dimen>
+    <!-- Select Match -->
+    <dimen name="select_match_title_font_size">15dp</dimen>
 
     <!--  -->
     <dimen name="match_post_it_content_margin_top">10dp</dimen>
