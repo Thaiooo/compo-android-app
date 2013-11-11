@@ -26,7 +26,7 @@
     <dimen name="theme_image_margin_top">25dp</dimen>
     <dimen name="theme_image_height">200dp</dimen>
 
-    <!--  -->
+    <!-- Select Pack -->
     <dimen name="pack_theme_name_margin_top">15dp</dimen>
     <dimen name="pack_theme_name_font_size">20dp</dimen>
     <dimen name="pack_name_font_size">20dp</dimen>
@@ -34,6 +34,8 @@
     <dimen name="pack_progress_font_size">30dp</dimen>
     <dimen name="pack_list_margin_top">25dp</dimen>
     <dimen name="pack_list_height">200dp</dimen>
+    <dimen name="pack_button_next_prev_margin_top">80dp</dimen>
+    <dimen name="pack_indicator_list_margin_top">10dp</dimen>
 
     <!-- Select Match -->
     <dimen name="select_match_title_font_size">15dp</dimen>
@@ -51,18 +53,18 @@
     <dimen name="hint_dialog_button_width">80dp</dimen>
     <dimen name="hint_dialog_button_margin_top">10dp</dimen>
     <dimen name="hint_dialog_price_margin_top">10dp</dimen>
-    
+
     <!-- Hint display -->
     <dimen name="hint_display_width">200dp</dimen>
     <dimen name="hint_display_title_font_size">25dp</dimen>
     <dimen name="hint_display_content_font_size">25dp</dimen>
-    
+
     <!-- Match -->
     <dimen name="match_detail_font_size">15dp</dimen>
     <dimen name="match_teams_font_size">15dp</dimen>
     <dimen name="match_score_font_size">20dp</dimen>
     <dimen name="match_advertising_side_margin">10dp</dimen>
-    
+
     <!-- Response -->
     <dimen name="response_hint_margin_top">10dp</dimen>
     <dimen name="response_player_image_margin_top">20dp</dimen>
