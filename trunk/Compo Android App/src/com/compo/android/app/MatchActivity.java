@@ -3,7 +3,6 @@ package com.compo.android.app;
 import java.util.Locale;
 import java.util.Map;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -115,7 +114,6 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
 	}
     }
 
-    @SuppressLint("DefaultLocale")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	if (data == null) {
