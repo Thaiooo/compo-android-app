@@ -3,7 +3,6 @@
 
     <!--  -->
     <dimen name="main_title_font_size">30dp</dimen>
-    <dimen name="main_title_margin_top">15dp</dimen>
     <dimen name="main_button_font_size">24dp</dimen>
     <dimen name="main_button_play_margin_top">45dp</dimen>
 
