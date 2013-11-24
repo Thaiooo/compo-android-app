@@ -64,7 +64,7 @@ public class SelectThemeActivity extends AbstractLSEFragmentActivity {
 	    if (i == _mViewPager.getCurrentItem()) {
 		ball.setImageResource(R.drawable.ball_red);
 	    } else {
-		ball.setImageResource(R.drawable.ball);
+		ball.setImageResource(R.drawable.ball_white);
 	    }
 	    _themeIndicatorListLayout.addView(ball);
 	}
@@ -83,7 +83,7 @@ public class SelectThemeActivity extends AbstractLSEFragmentActivity {
 	    if (i == _mViewPager.getCurrentItem()) {
 		ball.setImageResource(R.drawable.ball_red);
 	    } else {
-		ball.setImageResource(R.drawable.ball);
+		ball.setImageResource(R.drawable.ball_white);
 	    }
 	    _themeIndicatorListLayout.addView(ball);
 	}
@@ -113,7 +113,7 @@ public class SelectThemeActivity extends AbstractLSEFragmentActivity {
 		if (i == 0) {
 		    ball.setImageResource(R.drawable.ball_red);
 		} else {
-		    ball.setImageResource(R.drawable.ball);
+		    ball.setImageResource(R.drawable.ball_white);
 		}
 		_themeIndicatorListLayout.addView(ball);
 	    }
@@ -136,7 +136,7 @@ public class SelectThemeActivity extends AbstractLSEFragmentActivity {
 		if (i == position) {
 		    ball.setImageResource(R.drawable.ball_red);
 		} else {
-		    ball.setImageResource(R.drawable.ball);
+		    ball.setImageResource(R.drawable.ball_white);
 		}
 		_themeIndicatorListLayout.addView(ball);
 	    }
