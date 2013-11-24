@@ -41,8 +41,8 @@
                 android:id="@+id/pager"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/pack_list_height"
-                android:layout_below="@+id/theme_name"
-                android:layout_marginTop="@dimen/pack_list_margin_top" >
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" >
             </android.support.v4.view.ViewPager>
 
             <LinearLayout
