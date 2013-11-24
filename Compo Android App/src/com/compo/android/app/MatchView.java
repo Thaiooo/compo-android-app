@@ -81,7 +81,7 @@ public class MatchView extends View {
 	_ballRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.ball)).getBitmap();
 	_ballRedRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.ball_red)).getBitmap();
 	_start = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.start)).getBitmap();
-	_cercle = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.cercle)).getBitmap();
+	_cercle = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.hide)).getBitmap();
 
 	float densityMultiplier = getContext().getResources().getDisplayMetrics().density;
 	_paint = new Paint();
