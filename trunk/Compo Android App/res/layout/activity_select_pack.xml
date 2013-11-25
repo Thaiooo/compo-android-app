@@ -60,9 +60,8 @@
                 style="@style/previous_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignTop="@+id/pager"
-                android:layout_marginTop="@dimen/pack_button_next_prev_margin_top"
+                android:layout_alignLeft="@+id/pager"
+                android:layout_centerVertical="true"
                 android:onClick="previewTheme"
                 android:visibility="invisible" />
 
@@ -71,9 +70,8 @@
                 style="@style/next_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/pager"
-                android:layout_marginTop="@dimen/pack_button_next_prev_margin_top"
+                android:layout_alignRight="@+id/pager"
+                android:layout_centerVertical="true"
                 android:onClick="nextTheme" />
         </RelativeLayout>
     </RelativeLayout>
