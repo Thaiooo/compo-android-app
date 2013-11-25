@@ -52,8 +52,6 @@
     <string name="button_tutorial">Tutorial</string>
     <string name="button_full">100%</string>
     <string name="button_half">50/50</string>
-    <string name="button_preview">&lt;</string>
-    <string name="button_next">&gt;</string>
 
     <!-- =========================================================================== -->
     <!-- LABEL -->
