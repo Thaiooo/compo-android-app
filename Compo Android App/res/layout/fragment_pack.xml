@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/pack_desc"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/lock_theme" />
+            android:src="@drawable/lock_pack" />
 
         <TextView
             android:id="@+id/progress"
