@@ -1,42 +1,53 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/setting_dialog_width"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/background_dialog"
-    android:gravity="center_horizontal" >
+    android:gravity="center_horizontal"
+    android:padding="10dp" >
 
     <TextView
         android:id="@+id/store_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
         android:text="@string/title_setting"
         android:textColor="@android:color/black"
         android:textIsSelectable="false"
-        android:textSize="@dimen/setting_title_font_size" />
+        android:textSize="@dimen/setting_title_font_size"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/button_sound"
+        style="@style/blank_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/store_title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/sound"
-        android:onClick="changeSound" />
+        android:drawableLeft="@drawable/sound_on"
+        android:onClick="changeSound"
+        android:text="Sound ON"
+        android:textSize="@dimen/main_button_font_size"
+        android:width="220dp" />
 
     <Button
         android:id="@+id/button_trash"
+        style="@style/blank_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button_sound"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/trash_full"
-        android:onClick="eraseData" />
+        android:layout_marginTop="5dp"
+        android:drawableLeft="@drawable/erase_data"
+        android:onClick="eraseData"
+        android:text="Erase response"
+        android:textSize="@dimen/main_button_font_size"
+        android:width="220dp" />
 
     <Button
         android:id="@+id/button_cancel"
-        style="@style/paper_post_it_red_btn"
-        android:layout_width="fill_parent"
+        style="@style/common_btn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button_trash"
         android:layout_centerHorizontal="true"
@@ -44,6 +55,7 @@
         android:onClick="cancel"
         android:text="@string/button_cancel"
         android:textSize="@dimen/main_button_font_size"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:width="220dp" />
 
 </RelativeLayout>
