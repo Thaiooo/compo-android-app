@@ -22,7 +22,7 @@ public class SettingActivity extends Activity {
 
     public static final int EXTRA_MESSAGE_REQUEST_CODE = 1;
 
-    private static Typeface _font;
+    // private static Typeface _font;
     private TextView _title;
     private Button _sound;
     private Button _trash;
@@ -35,15 +35,15 @@ public class SettingActivity extends Activity {
 	requestWindowFeature(Window.FEATURE_NO_TITLE);
 	setContentView(R.layout.activity_setting);
 
-	if (_font == null) {
-	    _font = Typeface.createFromAsset(getAssets(), FontEnum.LUCKY_PENNY.getName());
-	}
+	// if (_font == null) {
+	// _font = Typeface.createFromAsset(getAssets(), FontEnum.LUCKY_PENNY.getName());
+	// }
 
 	_title = (TextView) findViewById(R.id.store_title);
-	_title.setTypeface(_font);
+	// _title.setTypeface(_font);
 
 	_cancel = (Button) findViewById(R.id.button_cancel);
-	_cancel.setTypeface(_font);
+	// _cancel.setTypeface(_font);
 
 	_sound = (Button) findViewById(R.id.button_sound);
 
@@ -51,7 +51,7 @@ public class SettingActivity extends Activity {
 	if (_currentUser.getSoundEnable() == Sound.OFF) {
 	    _sound.setBackgroundResource(R.drawable.sound_off);
 	} else {
-	    _sound.setBackgroundResource(R.drawable.sound);
+	    _sound.setBackgroundResource(R.drawable.sound_on);
 	}
 
 	_trash = (Button) findViewById(R.id.button_trash);
@@ -86,7 +86,7 @@ public class SettingActivity extends Activity {
 
     public void changeSound(View view) {
 	if (_currentUser.getSoundEnable() == Sound.OFF) {
-	    _sound.setBackgroundResource(R.drawable.sound);
+	    _sound.setBackgroundResource(R.drawable.sound_on);
 	    _currentUser.setSoundEnable(Sound.ON);
 	} else {
 	    _sound.setBackgroundResource(R.drawable.sound_off);
