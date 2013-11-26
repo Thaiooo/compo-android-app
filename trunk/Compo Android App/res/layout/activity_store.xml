@@ -2,67 +2,73 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/background_dialog"
-    android:gravity="center_horizontal" >
+    android:gravity="center_horizontal"
+    android:padding="10dp" >
 
     <TextView
         android:id="@+id/store_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
         android:text="@string/title_store"
         android:textColor="@android:color/black"
         android:textIsSelectable="false"
-        android:textSize="@dimen/store_title_font_size" />
+        android:textSize="@dimen/store_title_font_size"
+        android:textStyle="bold" />
 
     <Button
-        android:id="@+id/button_credit_25"
-        style="@style/paper_post_it_purple_btn"
+        android:id="@+id/pack_1"
+        style="@style/blank_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/store_title"
         android:layout_centerHorizontal="true"
+        android:drawableLeft="@drawable/coins_2"
+        android:onClick="cancel"
+        android:text="50 credits"
+        android:textSize="@dimen/main_button_font_size"
+        android:width="@dimen/store_button_width" />
+
+    <Button
+        android:id="@+id/pack_2"
+        style="@style/blank_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pack_1"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="@string/button_store_pack_a"
-        android:textSize="@dimen/store_button_font_size"
-        android:textStyle="bold"
+        android:drawableLeft="@drawable/coins_3"
+        android:onClick="cancel"
+        android:text="100 credits"
+        android:textSize="@dimen/main_button_font_size"
         android:width="@dimen/store_button_width" />
 
     <Button
-        android:id="@+id/button_credit_100"
-        style="@style/paper_post_it_orange_btn"
+        android:id="@+id/pack_3"
+        style="@style/blank_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button_credit_25"
+        android:layout_below="@+id/pack_2"
         android:layout_centerHorizontal="true"
-        android:text="@string/button_store_pack_b"
-        android:textSize="@dimen/store_button_font_size"
-        android:textStyle="bold"
-        android:width="@dimen/store_button_width" />
-
-    <Button
-        android:id="@+id/button_credit_500"
-        style="@style/paper_post_it_yellow_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button_credit_100"
-        android:layout_centerHorizontal="true"
-        android:text="@string/button_store_pack_c"
-        android:textSize="@dimen/store_button_font_size"
-        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/coins_4"
+        android:onClick="cancel"
+        android:text="150 credits"
+        android:textSize="@dimen/main_button_font_size"
         android:width="@dimen/store_button_width" />
 
     <Button
         android:id="@+id/button_cancel"
-        style="@style/paper_post_it_red_btn"
+        style="@style/common_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button_credit_500"
+        android:layout_below="@+id/pack_3"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:onClick="cancel"
         android:text="@string/button_cancel"
         android:textSize="@dimen/main_button_font_size"
-        android:textStyle="bold"
         android:width="@dimen/store_button_width" />
 
 </RelativeLayout>
