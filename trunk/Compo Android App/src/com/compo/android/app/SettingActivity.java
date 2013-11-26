@@ -49,19 +49,21 @@ public class SettingActivity extends Activity {
 
 	_currentUser = UserFactory.getInstance().getUser(this);
 	if (_currentUser.getSoundEnable() == Sound.OFF) {
-	    _sound.setBackgroundResource(R.drawable.sound_off);
+	    _sound.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sound_off, 0, 0, 0);
+	    // _sound.setBackgroundResource(R.drawable.sound_off);
 	} else {
-	    _sound.setBackgroundResource(R.drawable.sound_on);
+	    _sound.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sound_on, 0, 0, 0);
+	    // _sound.setBackgroundResource(R.drawable.sound_on);
 	}
 
-	_trash = (Button) findViewById(R.id.button_trash);
-	PlayDao dao = new PlayDao(this);
-	int playNb = dao.count();
-	if (playNb > 0) {
-	    _trash.setBackgroundResource(R.drawable.trash_full);
-	} else {
-	    _trash.setBackgroundResource(R.drawable.trash_empty);
-	}
+	// _trash = (Button) findViewById(R.id.button_trash);
+	// PlayDao dao = new PlayDao(this);
+	// int playNb = dao.count();
+	// if (playNb > 0) {
+	// _trash.setBackgroundResource(R.drawable.trash_full);
+	// } else {
+	// _trash.setBackgroundResource(R.drawable.trash_empty);
+	// }
 
     }
 
@@ -75,7 +77,7 @@ public class SettingActivity extends Activity {
 			QuizzService service = new QuizzService(SettingActivity.this);
 			service.resetAllUserData();
 
-			_trash.setBackgroundResource(R.drawable.trash_empty);
+			// _trash.setBackgroundResource(R.drawable.trash_empty);
 		    }
 		}).setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
 		    public void onClick(DialogInterface dialog, int id) {
@@ -86,10 +88,12 @@ public class SettingActivity extends Activity {
 
     public void changeSound(View view) {
 	if (_currentUser.getSoundEnable() == Sound.OFF) {
-	    _sound.setBackgroundResource(R.drawable.sound_on);
+	    // _sound.setBackgroundResource(R.drawable.sound_on);
+	    _sound.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sound_on, 0, 0, 0);
 	    _currentUser.setSoundEnable(Sound.ON);
 	} else {
-	    _sound.setBackgroundResource(R.drawable.sound_off);
+	    // _sound.setBackgroundResource(R.drawable.sound_off);
+	    _sound.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sound_off, 0, 0, 0);
 	    _currentUser.setSoundEnable(Sound.OFF);
 	}
 	UserFactory.getInstance().updateUser(this);
