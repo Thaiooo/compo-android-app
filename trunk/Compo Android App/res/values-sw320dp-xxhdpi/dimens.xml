@@ -9,7 +9,7 @@
     <dimen name="dialog_padding">10dp</dimen>
     <dimen name="dialog_tittle_margin">15dp</dimen>
     <dimen name="dialog_button_margin">20dp</dimen>
-    <dimen name="dialog_bouton_spacing">5dp</dimen>
+    <dimen name="dialog_button_spacing">5dp</dimen>
     <dimen name="dialog_title_font_size">24dp</dimen>
     <dimen name="dialog_button_font_size">24dp</dimen>
     
@@ -27,6 +27,7 @@
     <dimen name="theme_name_font_size">15dp</dimen>
     <dimen name="theme_title_margin_top">15dp</dimen>
     <dimen name="theme_image_height">200dp</dimen>
+    <dimen name="theme_detail_button_width">100dp</dimen>
 
     <!-- Select Pack -->
     <dimen name="pack_theme_name_margin_top">15dp</dimen>
