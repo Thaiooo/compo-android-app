@@ -54,7 +54,7 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 
 	Button title = (Button) findViewById(R.id.button_title);
 	title.setTypeface(_fontTitle);
-	title.setText(_selectTheme.getName() + "\n" + _selectPack.getName());
+	title.setText(_selectTheme.getName() + " - " + _selectPack.getName());
 
 	_gridview = (GridView) findViewById(R.id.quizzGrid);
 
