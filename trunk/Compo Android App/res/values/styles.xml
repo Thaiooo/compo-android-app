@@ -17,26 +17,14 @@
         <item name="android:background">@drawable/button_paper_post_it_bleu</item>
     </style>
 
-    <style name="paper_post_it_orange_btn" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/button_paper_post_it_orange</item>
-    </style>
-
     <style name="paper_post_it_green_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/button_paper_post_it_green</item>
-    </style>
-
-    <style name="paper_post_it_purple_btn" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/button_paper_post_it_purple</item>
     </style>
 
     <style name="paper_post_it_red_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/button_paper_post_it_red</item>
     </style>
 
-    <style name="paper_post_it_yellow_btn" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/button_paper_post_it_yellow</item>
-    </style>
-    
     <style name="previous_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/button_previous</item>
     </style>
@@ -63,10 +51,6 @@
 
     <style name="back_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/button_back</item>
-    </style>
-
-    <style name="craie_btn" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/btn_craie</item>
     </style>
 
     <style name="transparent_edit_text" parent="@android:style/Widget.EditText">
