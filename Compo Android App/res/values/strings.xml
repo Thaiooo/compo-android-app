@@ -59,7 +59,7 @@
     <!-- =========================================================================== -->
     <!-- LABEL -->
     <!-- =========================================================================== -->
-    <string name="label_credit">credit</string>
+    <string name="label_credit">credits</string>
     <string name="label_desc_help_hint">Show the clue sentence of the answer!</string>
     <string name="label_desc_help_random">Show all the letters of the answer (unordered)</string>
     <string name="label_desc_help_half">Show some letters of the answer (ordered)</string>
