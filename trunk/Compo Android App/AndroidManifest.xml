@@ -63,14 +63,6 @@
                 android:value="com.compo.android.app.MainActivity" />
         </activity>
         <activity
-            android:name=".PackDetailsActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/DialogTheme" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.compo.android.app.PackDetailsActivity" />
-        </activity>
-        <activity
             android:name=".ThemeDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DialogTheme" >
