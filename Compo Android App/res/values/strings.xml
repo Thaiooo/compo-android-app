@@ -38,6 +38,9 @@
     <string name="button_validate">Valider</string>
     <string name="button_play">Play</string>
     <string name="button_setting">Settings</string>
+    <string name="button_setting_sound_on">Sound ON</string>
+    <string name="button_setting_sound_off">Sound OFF</string>
+    <string name="button_setting_reset">Reset game</string>
     <string name="button_store">More credit!</string>
     <string name="button_cancel">Cancel</string>
     <string name="button_store_pack_a">25 credits</string>
@@ -61,8 +64,7 @@
     <string name="label_desc_help_random">Show all the letters of the answer (unordered)</string>
     <string name="label_desc_help_half">Show some letters of the answer (ordered)</string>
     <string name="label_desc_help_full">Answer the question for you!</string>
-	<string name="label_tutorial">Bla bla bla...</string>
-    
+    <string name="label_tutorial">Bla bla bla...</string>
 
     <!-- =========================================================================== -->
     <!-- MESSAGE -->
