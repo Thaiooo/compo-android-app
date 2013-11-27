@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button_sound"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dialog_bouton_spacing"
+        android:layout_marginTop="@dimen/dialog_button_spacing"
         android:drawableLeft="@drawable/erase_data"
         android:onClick="eraseData"
         android:text="@string/button_setting_reset"
@@ -55,7 +55,6 @@
         android:onClick="cancel"
         android:text="@string/button_cancel"
         android:textSize="@dimen/dialog_button_font_size"
-        android:textStyle="bold"
         android:width="@dimen/setting_button_width" />
 
 </RelativeLayout>
