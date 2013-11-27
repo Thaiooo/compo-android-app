@@ -1,23 +1,28 @@
 <!-- SW 600dp hdpi -->
 <resources>
 
-    <!--  -->
+    <!-- Home -->
     <dimen name="main_title_font_size">60dp</dimen>
     <dimen name="main_button_font_size">40dp</dimen>
 
+    <!-- Dialog -->
+    <dimen name="dialog_padding">10dp</dimen>
+    <dimen name="dialog_tittle_margin">15dp</dimen>
+    <dimen name="dialog_button_margin">20dp</dimen>
+    <dimen name="dialog_bouton_spacing">5dp</dimen>
+    <dimen name="dialog_title_font_size">24dp</dimen>
+    <dimen name="dialog_button_font_size">24dp</dimen>
+        
     <!-- Tool bar -->
     <dimen name="credit_font_size">30dp</dimen>
 
     <!-- Store -->
-    <dimen name="store_title_font_size">40dp</dimen>
-    <dimen name="store_button_font_size">40dp</dimen>
     <dimen name="store_button_width">300dp</dimen>
 
     <!-- Setting -->
-    <dimen name="setting_title_font_size">40dp</dimen>
-    <dimen name="setting_dialog_width">300dp</dimen>
+    <dimen name="setting_button_width">300dp</dimen>
 
-    <!--  -->
+    <!-- Theme -->
     <dimen name="theme_title_font_size">50dp</dimen>
     <dimen name="theme_name_font_size">30dp</dimen>
     <dimen name="theme_title_margin_top">40dp</dimen>
