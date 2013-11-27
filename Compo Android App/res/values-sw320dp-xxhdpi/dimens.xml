@@ -39,7 +39,7 @@
     <dimen name="pack_indicator_list_margin_top">10dp</dimen>
 
     <!-- Select Match -->
-    <dimen name="select_match_title_font_size">15dp</dimen>
+    <dimen name="select_match_title_font_size">20dp</dimen>
 
     <!--  -->
     <dimen name="match_post_it_content_margin_top">0dp</dimen>
