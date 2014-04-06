@@ -1,0 +1,73 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/play_background" >
+
+    <include
+        android:id="@+id/score_bar"
+        layout="@layout/score_bar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/score_bar" >
+
+        <TextView
+            android:id="@+id/match_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/match_detail_font_size" />
+
+        <TextView
+            android:id="@+id/match_teams"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/match_details"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/match_teams_font_size" />
+
+        <Button
+            android:id="@+id/score_printer"
+            style="@style/score_printer_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/match_teams"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/red"
+            android:textSize="@dimen/match_score_font_size"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/publicite_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/match_teams"
+            android:layout_marginLeft="@dimen/match_advertising_side_margin"
+            android:contentDescription="@string/image_advertising_left"
+            android:src="@drawable/advertising_left" />
+
+        <ImageView
+            android:id="@+id/publicite_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/match_teams"
+            android:layout_marginRight="@dimen/match_advertising_side_margin"
+            android:contentDescription="@string/image_advertising_right"
+            android:src="@drawable/advertising_right" />
+
+        <com.compo.android.app.MatchView
+            android:id="@+id/quizz_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/publicite_left"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+</RelativeLayout>

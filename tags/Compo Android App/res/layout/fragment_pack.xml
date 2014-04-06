@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background_pack" >
+
+    <RelativeLayout
+        android:id="@+id/pack_content_layout_id"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TextView
+            android:id="@+id/pack_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="top"
+            android:textColor="@android:color/black"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/pack_name_font_size" />
+
+        <TextView
+            android:id="@+id/pack_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pack_name"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/black"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/pack_name_font_size" />
+
+        <ImageView
+            android:id="@+id/lock_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pack_desc"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/lock_pack" />
+
+        <TextView
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pack_desc"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/black"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/pack_progress_font_size" />
+    </RelativeLayout>
+
+</LinearLayout>

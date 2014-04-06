@@ -1,0 +1,75 @@
+<!-- SW 320dp xhdpi -->
+<resources>
+
+    <!-- Home -->
+    <dimen name="main_title_font_size">30dp</dimen>
+    <dimen name="main_button_font_size">24dp</dimen>
+
+    <!-- Dialog -->
+    <dimen name="dialog_padding">10dp</dimen>
+    <dimen name="dialog_tittle_margin">15dp</dimen>
+    <dimen name="dialog_button_margin">20dp</dimen>
+    <dimen name="dialog_button_spacing">5dp</dimen>
+    <dimen name="dialog_title_font_size">24dp</dimen>
+    <dimen name="dialog_button_font_size">24dp</dimen>
+    
+    <!-- Tool bar -->
+    <dimen name="credit_font_size">20dp</dimen>
+
+    <!-- Store -->
+    <dimen name="store_button_width">180dp</dimen>
+
+    <!-- Setting -->
+    <dimen name="setting_button_width">200dp</dimen>
+
+    <!-- Theme -->
+    <dimen name="theme_title_font_size">30dp</dimen>
+    <dimen name="theme_name_font_size">15dp</dimen>
+    <dimen name="theme_title_margin_top">15dp</dimen>
+    <dimen name="theme_image_height">200dp</dimen>
+    <dimen name="theme_detail_button_width">100dp</dimen>
+
+    <!-- Select Pack -->
+    <dimen name="pack_theme_name_margin_top">15dp</dimen>
+    <dimen name="pack_theme_name_font_size">20dp</dimen>
+    <dimen name="pack_name_font_size">20dp</dimen>
+    <dimen name="pack_desc_font_size">15dp</dimen>
+    <dimen name="pack_progress_font_size">30dp</dimen>
+    <dimen name="pack_list_height">200dp</dimen>
+    <dimen name="pack_indicator_list_margin_top">10dp</dimen>
+
+    <!-- Select Match -->
+    <dimen name="select_match_title_font_size">20dp</dimen>
+
+    <!--  -->
+    <dimen name="match_post_it_content_margin_top">0dp</dimen>
+    <dimen name="match_post_it_ball_margin_top">5dp</dimen>
+
+    <!-- Hint dialog -->
+    <dimen name="hint_dialog_width">200dp</dimen>
+    <dimen name="hint_dialog_title_font_size">25dp</dimen>
+    <dimen name="hint_dialog_button_font_size">15dp</dimen>
+    <dimen name="hint_dialog_description_font_size">15dp</dimen>
+    <dimen name="hint_dialog_price_font_size">15dp</dimen>
+    <dimen name="hint_dialog_button_width">80dp</dimen>
+    <dimen name="hint_dialog_button_margin_top">10dp</dimen>
+    <dimen name="hint_dialog_price_margin_top">10dp</dimen>
+
+    <!-- Hint display -->
+    <dimen name="hint_display_width">200dp</dimen>
+    <dimen name="hint_display_title_font_size">25dp</dimen>
+    <dimen name="hint_display_content_font_size">25dp</dimen>
+
+    <!-- Match -->
+    <dimen name="match_detail_font_size">15dp</dimen>
+    <dimen name="match_teams_font_size">15dp</dimen>
+    <dimen name="match_score_font_size">20dp</dimen>
+    <dimen name="match_advertising_side_margin">10dp</dimen>
+
+    <!-- Response -->
+    <dimen name="response_hint_margin_top">10dp</dimen>
+    <dimen name="response_player_image_margin_top">20dp</dimen>
+    <dimen name="response_edit_field_margin_top">10dp</dimen>
+    <dimen name="response_edit_field_font_size">22sp</dimen>
+
+</resources>

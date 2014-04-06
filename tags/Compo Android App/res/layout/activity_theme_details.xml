@@ -1,0 +1,73 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_dialog"
+    android:padding="@dimen/dialog_padding" >
+
+    <TextView
+        android:id="@+id/theme_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dialog_tittle_margin"
+        android:textColor="@color/black"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/dialog_title_font_size"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/credit_description_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/theme_name"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_theme_detail_coins"
+            android:src="@drawable/coins_4" />
+
+        <TextView
+            android:id="@+id/credit_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/black"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/theme_detail_content_font_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/credit_description_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dialog_button_margin"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/button_submit"
+            style="@style/common_btn"
+            android:layout_width="@dimen/theme_detail_button_width"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:onClick="unlockPack"
+            android:text="@string/button_unlock"
+            android:textSize="@dimen/dialog_button_font_size" />
+
+        <Button
+            android:id="@+id/button_cancel"
+            style="@style/common_btn"
+            android:layout_width="@dimen/theme_detail_button_width"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:onClick="cancel"
+            android:text="@string/button_cancel"
+            android:textSize="@dimen/dialog_button_font_size" />
+    </LinearLayout>
+
+</RelativeLayout>

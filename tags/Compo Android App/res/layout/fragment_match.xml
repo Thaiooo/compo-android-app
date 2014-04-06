@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_match" >
+
+    <TextView
+        android:id="@+id/match_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/match_post_it_content_margin_top"
+        android:textColor="@color/black"
+        android:textIsSelectable="false"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/match_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/match_title"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:textIsSelectable="false"
+        android:textSize="10dp" />
+
+    <TextView
+        android:id="@+id/match_score_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/match_desc"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:textIsSelectable="false"
+        android:textSize="10dp" />
+
+    <TextView
+        android:id="@+id/match_score_away"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/match_score_home"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:textIsSelectable="false"
+        android:textSize="10dp" />
+
+    <LinearLayout
+        android:id="@+id/ball_list_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/match_score_away"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/match_post_it_ball_margin_top"
+        android:orientation="horizontal" >
+    </LinearLayout>
+
+</RelativeLayout>

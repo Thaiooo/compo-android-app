@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_app" >
+
+    <include
+        android:id="@+id/score_bar"
+        layout="@layout/score_bar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/score_bar"
+        android:background="@drawable/background_cadre" >
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/image_desc_logo"
+            android:src="@drawable/logo" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/logo"
+            android:background="@drawable/background_soccer_field" >
+
+            <Button
+                android:id="@+id/button_store"
+                style="@style/paper_post_it_green_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/button_setting"
+                android:layout_centerVertical="true"
+                android:onClick="store"
+                android:text="@string/button_store"
+                android:textSize="@dimen/main_button_font_size"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button_setting"
+                style="@style/paper_post_it_red_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/button_store"
+                android:layout_centerHorizontal="true"
+                android:onClick="setting"
+                android:text="@string/button_setting"
+                android:textSize="@dimen/main_button_font_size"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button_play"
+                style="@style/paper_post_it_bleu_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/button_store"
+                android:layout_alignLeft="@+id/button_store"
+                android:onClick="play"
+                android:text="@string/button_play"
+                android:textSize="@dimen/main_button_font_size"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/button_tutorial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/relativeLayout1"
+            android:layout_alignTop="@+id/logo"
+            android:onClick="tutorial"
+            android:text="@string/button_tutorial"
+            android:textSize="10dp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,127 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/responseLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_ardoise" >
+
+    <!-- style="@style/transparent_edit_text" -->
+
+    <include
+        android:id="@+id/score_bar"
+        layout="@layout/score_bar" />
+
+    <Button
+        android:id="@+id/button_hint"
+        style="@style/post_it_hint_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/score_bar"
+        android:layout_marginTop="@dimen/response_hint_margin_top"
+        android:drawableTop="@drawable/idee"
+        android:onClick="openHint" />
+
+    <Button
+        android:id="@+id/button_random"
+        style="@style/post_it_hint_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button_hint"
+        android:drawableTop="@drawable/des"
+        android:onClick="openRandom" />
+
+    <Button
+        android:id="@+id/button_50"
+        style="@style/post_it_hint_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/score_bar"
+        android:layout_marginTop="@dimen/response_hint_margin_top"
+        android:drawableTop="@drawable/half"
+        android:onClick="open50Percent"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button_100"
+        style="@style/post_it_hint_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/button_50"
+        android:drawableTop="@drawable/full"
+        android:onClick="openResponse"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/player_figure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/score_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/response_player_image_margin_top"
+        android:contentDescription="@string/image_player_figure"
+        android:src="@drawable/player_figure" />
+
+    <ImageView
+        android:id="@+id/player_jersey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/score_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/response_player_image_margin_top"
+        android:contentDescription="@string/image_player_jersey" />
+
+    <ImageView
+        android:id="@+id/player_short"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/score_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/response_player_image_margin_top"
+        android:contentDescription="@string/image_player_short" />
+
+    <ImageView
+        android:id="@+id/player_sock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/score_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/response_player_image_margin_top"
+        android:contentDescription="@string/image_player_sock" />
+
+    <Button
+        android:id="@+id/button_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/player_figure"
+        android:layout_marginTop="@dimen/response_edit_field_margin_top"
+        android:onClick="check"
+        android:text="@string/button_check"
+        android:textColor="@android:color/white" />
+
+    <EditText
+        android:id="@+id/edit_response"
+        style="@style/transparent_edit_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/player_figure"
+        android:layout_marginTop="@dimen/response_edit_field_margin_top"
+        android:layout_toLeftOf="@+id/button_check"
+        android:lines="1"
+        android:maxLength="20"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/response_edit_field_font_size" />
+
+    <ImageView
+        android:id="@+id/matching_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/edit_response"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/image_response_matching" />
+
+</RelativeLayout>

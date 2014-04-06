@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Legendary Starting 11</string>
+    <string name="menu_settings">Settings</string>
+
+    <!-- =========================================================================== -->
+    <!-- MISC -->
+    <!-- =========================================================================== -->
+    <dimen name="myFontSize">10sp</dimen>
+
+    <!-- =========================================================================== -->
+    <!-- IMAGE DESC -->
+    <!-- =========================================================================== -->
+    <string name="image_desc_logo">Legendary Starting Eleven</string>
+    <string name="image_desc_coins">Coins</string>
+    <string name="image_advertising_left">Addidas</string>
+    <string name="image_advertising_right">So Foot</string>
+    <string name="image_player_figure">Player</string>
+    <string name="image_player_jersey">Jersey</string>
+    <string name="image_player_short">Short</string>
+    <string name="image_player_sock">Sock</string>
+    <string name="image_response_matching">Matching Image</string>
+    <string name="image_theme_detail_coins">Coins Image</string>
+
+    <!-- =========================================================================== -->
+    <!-- TITLE -->
+    <string name="title_select_theme">Theme</string>
+    <string name="title_setting">Setting</string>
+    <string name="title_store">More credit!</string>
+    <string name="title_help_hint">Show hint</string>
+    <string name="title_help_random">Show used letters</string>
+    <string name="title_help_half">Some letters in order</string>
+    <string name="title_help_full">Show full response</string>
+
+    <!-- =========================================================================== -->
+    <!-- BUTTON -->
+    <!-- =========================================================================== -->
+    <string name="button_validate">Valider</string>
+    <string name="button_play">Play</string>
+    <string name="button_setting">Settings</string>
+    <string name="button_setting_sound_on">Sound ON</string>
+    <string name="button_setting_sound_off">Sound OFF</string>
+    <string name="button_setting_reset">Reset game</string>
+    <string name="button_store">More credit!</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_store_pack_a">25 credits</string>
+    <string name="button_store_pack_b">100 credits</string>
+    <string name="button_store_pack_c">500 credits</string>
+    <string name="button_unlock">Unlock</string>
+    <string name="button_check">Check</string>
+    <string name="button_next_match">Next</string>
+    <string name="button_ok">OK</string>
+
+    <!-- Temporaire -->
+    <string name="button_tutorial">Tutorial</string>
+    <string name="button_full">100%</string>
+    <string name="button_half">50/50</string>
+
+    <!-- =========================================================================== -->
+    <!-- LABEL -->
+    <!-- =========================================================================== -->
+    <string name="label_credit">credits</string>
+    <string name="label_desc_help_hint">Show the clue sentence of the answer!</string>
+    <string name="label_desc_help_random">Show all the letters of the answer (unordered)</string>
+    <string name="label_desc_help_half">Show some letters of the answer (ordered)</string>
+    <string name="label_desc_help_full">Answer the question for you!</string>
+    <string name="label_tutorial">Tutorial</string>
+
+    <!-- =========================================================================== -->
+    <!-- MESSAGE -->
+    <!-- =========================================================================== -->
+    <string name="message_pack_lock">Completed the previous level before</string>
+    <string name="message_quizz_success">You have found</string>
+    <string name="message_setting_erase_data_confirm">Do you really want to erase all the data?</string>
+
+</resources>
