@@ -46,7 +46,7 @@ public class PackFragment extends Fragment {
 	View rootView = inflater.inflate(R.layout.fragment_pack, container, false);
 
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(getActivity().getAssets(), FontEnum.LUCKY_PENNY.getName());
+	    _font = Typeface.createFromAsset(getActivity().getAssets(), FontEnum.PACK_NAME.getName());
 	}
 
 	Bundle args = getArguments();
