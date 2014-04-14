@@ -29,16 +29,20 @@ public class ThemeFragment extends Fragment {
     private final static String THEME_PREFIX = "theme_";
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-	View rootView = inflater.inflate(R.layout.fragment_theme, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	    Bundle savedInstanceState) {
+	View rootView = inflater.inflate(R.layout.fragment_theme, container,
+		false);
 
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(getActivity().getAssets(), FontEnum.THEME_NAME.getName());
+	    _font = Typeface.createFromAsset(getActivity().getAssets(),
+		    FontEnum.THEME_NAME.getName());
 	}
 
 	_themeName = (TextView) rootView.findViewById(R.id.theme_name);
 	_themeImage = (ImageView) rootView.findViewById(R.id.theme_image_id);
-	_contentView = (View) rootView.findViewById(R.id.theme_content_layout_id);
+	_contentView = (View) rootView
+		.findViewById(R.id.theme_content_layout_id);
 	_imageLock = (ImageView) rootView.findViewById(R.id.theme_lock_id);
 
 	Bundle args = getArguments();
@@ -46,7 +50,8 @@ public class ThemeFragment extends Fragment {
 	_themeName.setText(_currentTheme.getName());
 	_themeName.setTypeface(_font);
 
-	int id = getResources().getIdentifier(THEME_PREFIX + _currentTheme.getCode(), "drawable",
+	int id = getResources().getIdentifier(
+		THEME_PREFIX + _currentTheme.getCode(), "drawable",
 		getActivity().getPackageName());
 	if (id != 0) {
 	    _themeImage.setImageResource(id);
@@ -59,10 +64,14 @@ public class ThemeFragment extends Fragment {
 	    _contentView.setOnClickListener(new View.OnClickListener() {
 		@Override
 		public void onClick(View view) {
-		    Intent intent = new Intent(getActivity(), ThemeDetailsActivity.class);
-		    intent.putExtra(ThemeDetailsActivity.MESSAGE_SELECTED_THEME, _currentTheme);
+		    Intent intent = new Intent(getActivity(),
+			    ThemeDetailsActivity.class);
+		    intent.putExtra(
+			    ThemeDetailsActivity.MESSAGE_SELECTED_THEME,
+			    _currentTheme);
 		    startActivity(intent);
-		    getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+		    getActivity().overridePendingTransition(
+			    android.R.anim.fade_in, android.R.anim.fade_out);
 		}
 	    });
 	} else {
@@ -70,10 +79,13 @@ public class ThemeFragment extends Fragment {
 	    _contentView.setOnClickListener(new View.OnClickListener() {
 		@Override
 		public void onClick(View view) {
-		    Intent intent = new Intent(getActivity(), SelectPackActivity.class);
+		    Intent intent = new Intent(getActivity(),
+			    SelectPackActivity.class);
 		    intent.putExtra(EXTRA_MESSAGE_ARG, _currentTheme);
-		    startActivityForResult(intent, MainActivity.EXTRA_MESSAGE_REQUEST_CODE);
-		    getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+		    startActivityForResult(intent,
+			    MainActivity.EXTRA_MESSAGE_REQUEST_CODE);
+		    getActivity().overridePendingTransition(
+			    android.R.anim.fade_in, android.R.anim.fade_out);
 		}
 	    });
 	}
