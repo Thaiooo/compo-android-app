@@ -33,7 +33,7 @@ public class ThemeFragment extends Fragment {
 	View rootView = inflater.inflate(R.layout.fragment_theme, container, false);
 
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(getActivity().getAssets(), FontEnum.LUCKY_PENNY.getName());
+	    _font = Typeface.createFromAsset(getActivity().getAssets(), FontEnum.THEME_NAME.getName());
 	}
 
 	_themeName = (TextView) rootView.findViewById(R.id.theme_name);

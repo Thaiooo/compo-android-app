@@ -34,7 +34,7 @@ public class SelectMatchAdapter extends BaseAdapter {
 	_mapQuizzToPlay = aMapQuizzToPlay;
 
 	if (_font == null) {
-	    _font = Typeface.createFromAsset(c.getAssets(), FontEnum.LUCKY_PENNY.getName());
+	    _font = Typeface.createFromAsset(c.getAssets(), FontEnum.THEME_NAME.getName());
 	}
     }
 
