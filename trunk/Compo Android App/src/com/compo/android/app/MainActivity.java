@@ -55,7 +55,7 @@ public class MainActivity extends AbstractLSEFragmentActivity {
 	super.onCreate(savedInstanceState);
 
 	if (_fontTitle == null) {
-	    _fontTitle = Typeface.createFromAsset(getAssets(), FontEnum.DEFAULT.getName());
+	    _fontTitle = Typeface.createFromAsset(getAssets(), FontEnum.TITLE.getName());
 	}
 
 	_mViewPager = (ViewPager) findViewById(R.id.pager);
