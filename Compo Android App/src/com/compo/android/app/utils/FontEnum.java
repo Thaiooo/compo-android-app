@@ -6,6 +6,8 @@ public enum FontEnum {
     /***/
     THEME_NAME("FiraSansOT-Regular.otf"),
     /***/
+    PACK_NAME("FiraSansOT-Regular.otf"),
+    /***/
     DIALOG_TITLE("FiraSansOT-Bold.otf"),
     /***/
     DIALOG_CONTENT("FiraSansOT-Regular.otf"),
