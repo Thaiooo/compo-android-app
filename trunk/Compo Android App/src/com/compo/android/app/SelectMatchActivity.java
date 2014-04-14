@@ -9,8 +9,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.compo.android.app.dao.MatchDao;
 import com.compo.android.app.dao.PlayDao;
@@ -39,6 +39,11 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
     protected int getContentViewId() {
 	return R.layout.activity_select_match;
     }
+    
+    @Override
+    protected void createDatabse() {
+       // RAS
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,7 +57,7 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 	_selectTheme = (Theme) intent.getSerializableExtra(PackFragment.MESSAGE_THEME);
 	_selectPack = (Pack) intent.getSerializableExtra(PackFragment.MESSAGE_CURRENT_PACK);
 
-	Button title = (Button) findViewById(R.id.button_title);
+	TextView title = (TextView) findViewById(R.id.button_title);
 	title.setTypeface(_fontTitle);
 	title.setText(_selectTheme.getName() + " - " + _selectPack.getName());
 

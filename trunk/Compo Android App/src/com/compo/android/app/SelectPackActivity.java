@@ -42,6 +42,11 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
     protected int getContentViewId() {
 	return R.layout.activity_select_pack;
     }
+    
+    @Override
+    protected void createDatabse() {
+       // RAS
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +80,9 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 	for (int i = 0; i < pageSize; i++) {
 	    ImageView ball = new ImageView(SelectPackActivity.this);
 	    if (i == _mViewPager.getCurrentItem()) {
-		ball.setImageResource(R.drawable.ball_red);
+		ball.setImageResource(R.drawable.element_selected);
 	    } else {
-		ball.setImageResource(R.drawable.ball_white);
+		ball.setImageResource(R.drawable.element_unselected);
 	    }
 	    _packIndicatorListLayout.addView(ball);
 	}
@@ -94,9 +99,9 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 	for (int i = 0; i < pageSize; i++) {
 	    ImageView ball = new ImageView(SelectPackActivity.this);
 	    if (i == _mViewPager.getCurrentItem()) {
-		ball.setImageResource(R.drawable.ball_red);
+		ball.setImageResource(R.drawable.element_selected);
 	    } else {
-		ball.setImageResource(R.drawable.ball_white);
+		ball.setImageResource(R.drawable.element_unselected);
 	    }
 	    _packIndicatorListLayout.addView(ball);
 	}
@@ -136,9 +141,9 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 	    for (int i = 0; i < aPacks.size(); i++) {
 		ImageView ball = new ImageView(SelectPackActivity.this);
 		if (i == 0) {
-		    ball.setImageResource(R.drawable.ball_red);
+		    ball.setImageResource(R.drawable.element_selected);
 		} else {
-		    ball.setImageResource(R.drawable.ball_white);
+		    ball.setImageResource(R.drawable.element_unselected);
 		}
 		_packIndicatorListLayout.addView(ball);
 	    }
@@ -159,9 +164,9 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 	    for (int i = 0; i < pageSize; i++) {
 		ImageView ball = new ImageView(SelectPackActivity.this);
 		if (i == position) {
-		    ball.setImageResource(R.drawable.ball_red);
+		    ball.setImageResource(R.drawable.element_selected);
 		} else {
-		    ball.setImageResource(R.drawable.ball_white);
+		    ball.setImageResource(R.drawable.element_unselected);
 		}
 		_packIndicatorListLayout.addView(ball);
 	    }
