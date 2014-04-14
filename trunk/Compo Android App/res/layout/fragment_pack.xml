@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/background_pack" >
@@ -6,7 +6,9 @@
     <RelativeLayout
         android:id="@+id/pack_content_layout_id"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" >
 
         <TextView
             android:id="@+id/pack_name"
@@ -47,4 +49,4 @@
             android:textSize="@dimen/pack_progress_font_size" />
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>
