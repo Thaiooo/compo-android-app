@@ -25,13 +25,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SelectThemeActivity"
-            android:screenOrientation="portrait" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.compo.android.app.MainActivity" />
-        </activity>
-        <activity
             android:name=".SelectPackActivity"
             android:screenOrientation="portrait" >
             <meta-data
