@@ -21,23 +21,25 @@
         android:layout_centerHorizontal="true"
         android:onClick="home" />
 
-    <TextView
-        android:id="@+id/user_credit"
+    <Button
+        android:id="@+id/button_setting"
+        style="@style/setting_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"
-        android:textColor="@android:color/white"
-        android:textIsSelectable="false"
-        android:textSize="@dimen/credit_font_size" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="20dp"
+        android:onClick="setting" />
 
-    <ImageView
-        android:id="@+id/image_user_coins"
+    <Button
+        android:id="@+id/button_store"
+        style="@style/store_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/user_credit"
-        android:layout_marginRight="2dp"
-        android:layout_toLeftOf="@+id/user_credit"
-        android:src="@drawable/coins" />
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/button_setting"
+        android:onClick="store"
+        android:text="1"
+        android:textColor="@android:color/white" />
 
 </RelativeLayout>
