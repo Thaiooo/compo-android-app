@@ -8,6 +8,7 @@
     <color name="black">#000000</color>
     <color name="blue">#1f497d</color>
     <color name="red">#DC143C</color>
+    <color name="white">#ffffff</color>
 
     <style name="DialogTheme" parent="@android:style/Theme.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
