@@ -7,74 +7,69 @@
         android:id="@+id/score_bar"
         layout="@layout/score_bar" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/score_bar"
-        android:background="@drawable/background_cadre" >
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/image_desc_logo"
+        android:src="@drawable/logo" />
 
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:contentDescription="@string/image_desc_logo"
-            android:src="@drawable/logo" />
+    <TextView
+        android:id="@+id/activity_theme_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:layout_centerHorizontal="true"
+        android:text="@string/title_select_theme"
+        android:textColor="@color/blue"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/theme_title_font_size" />
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/logo"
-            android:background="@drawable/background_soccer_field" >
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/theme_image_height"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" >
+    </android.support.v4.view.ViewPager>
 
-            <Button
-                android:id="@+id/button_store"
-                style="@style/paper_post_it_green_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/button_setting"
-                android:layout_centerVertical="true"
-                android:onClick="store"
-                android:text="@string/button_store"
-                android:textSize="@dimen/main_button_font_size"
-                android:textStyle="bold" />
+    <LinearLayout
+        android:id="@+id/theme_indicator_list_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pager"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+    </LinearLayout>
 
-            <Button
-                android:id="@+id/button_setting"
-                style="@style/paper_post_it_red_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/button_store"
-                android:layout_centerHorizontal="true"
-                android:onClick="setting"
-                android:text="@string/button_setting"
-                android:textSize="@dimen/main_button_font_size"
-                android:textStyle="bold" />
+    <Button
+        android:id="@+id/button_preview"
+        style="@style/previous_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/pager"
+        android:layout_centerVertical="true"
+        android:onClick="previewTheme"
+        android:visibility="invisible" />
 
-            <Button
-                android:id="@+id/button_play"
-                style="@style/paper_post_it_bleu_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/button_store"
-                android:layout_alignLeft="@+id/button_store"
-                android:onClick="play"
-                android:text="@string/button_play"
-                android:textSize="@dimen/main_button_font_size"
-                android:textStyle="bold" />
-        </RelativeLayout>
+    <Button
+        android:id="@+id/button_next"
+        style="@style/next_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/pager"
+        android:layout_centerVertical="true"
+        android:onClick="nextTheme" />
 
-        <Button
-            android:id="@+id/button_tutorial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/relativeLayout1"
-            android:layout_alignTop="@+id/logo"
-            android:onClick="tutorial"
-            android:text="@string/button_tutorial"
-            android:textSize="10dp"
-            android:textStyle="bold" />
-    </RelativeLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/image_desc_logo"
+        android:src="@drawable/background_ball" />
 
 </RelativeLayout>

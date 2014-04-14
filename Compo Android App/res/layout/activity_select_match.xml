@@ -7,38 +7,48 @@
         android:id="@+id/score_bar"
         layout="@layout/score_bar" />
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/score_bar"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/image_desc_logo"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/button_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/white"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/select_match_title_font_size"
+        android:textStyle="bold" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/score_bar"
-        android:background="@drawable/background_cadre" >
+        android:layout_below="@+id/button_title" >
 
-        <Button
-            android:id="@+id/button_title"
-            style="@style/logo_blank_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/select_match_title_font_size"
-            android:textStyle="bold" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/button_title"
-            android:background="@drawable/background_soccer_field" >
-
-            <GridView
-                android:id="@+id/quizzGrid"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="center"
-                android:horizontalSpacing="0dp"
-                android:numColumns="auto_fit"
-                android:stretchMode="columnWidth"
-                android:verticalSpacing="0dp" />
-        </RelativeLayout>
+        <GridView
+            android:id="@+id/quizzGrid"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:horizontalSpacing="0dp"
+            android:numColumns="auto_fit"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="0dp" />
     </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/image_desc_logo"
+        android:src="@drawable/background_ball" />
 
 </RelativeLayout>

@@ -6,7 +6,7 @@
     </style>
 
     <color name="black">#000000</color>
-    <color name="blue">#0000FF</color>
+    <color name="blue">#1f497d</color>
     <color name="red">#DC143C</color>
 
     <style name="DialogTheme" parent="@android:style/Theme.Dialog">
@@ -51,6 +51,14 @@
 
     <style name="back_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/button_back</item>
+    </style>
+    
+    <style name="store_btn" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/button_store</item>
+    </style>
+    
+    <style name="setting_btn" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/button_setting</item>
     </style>
 
     <style name="transparent_edit_text" parent="@android:style/Widget.EditText">

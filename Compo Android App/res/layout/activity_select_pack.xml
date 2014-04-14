@@ -7,73 +7,69 @@
         android:id="@+id/score_bar"
         layout="@layout/score_bar" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/score_bar"
-        android:background="@drawable/background_cadre" >
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/image_desc_logo"
+        android:src="@drawable/logo" />
 
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:contentDescription="@string/image_desc_logo"
-            android:src="@drawable/logo" />
+    <TextView
+        android:id="@+id/theme_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/pack_theme_name_margin_top"
+        android:textColor="@android:color/white"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/pack_theme_name_font_size" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/logo"
-            android:background="@drawable/background_soccer_field" >
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/pack_list_height"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" >
+    </android.support.v4.view.ViewPager>
 
-            <TextView
-                android:id="@+id/theme_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/pack_theme_name_margin_top"
-                android:textColor="@android:color/white"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/pack_theme_name_font_size" />
+    <LinearLayout
+        android:id="@+id/pack_indicator_list_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pager"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/pack_indicator_list_margin_top"
+        android:orientation="horizontal" >
+    </LinearLayout>
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/pager"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/pack_list_height"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" >
-            </android.support.v4.view.ViewPager>
+    <Button
+        android:id="@+id/button_preview"
+        style="@style/previous_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/pager"
+        android:layout_centerVertical="true"
+        android:onClick="previewTheme"
+        android:visibility="invisible" />
 
-            <LinearLayout
-                android:id="@+id/pack_indicator_list_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/pager"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/pack_indicator_list_margin_top"
-                android:orientation="horizontal" >
-            </LinearLayout>
+    <Button
+        android:id="@+id/button_next"
+        style="@style/next_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/pager"
+        android:layout_centerVertical="true"
+        android:onClick="nextTheme" />
 
-            <Button
-                android:id="@+id/button_preview"
-                style="@style/previous_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/pager"
-                android:layout_centerVertical="true"
-                android:onClick="previewTheme"
-                android:visibility="invisible" />
-
-            <Button
-                android:id="@+id/button_next"
-                style="@style/next_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/pager"
-                android:layout_centerVertical="true"
-                android:onClick="nextTheme" />
-        </RelativeLayout>
-    </RelativeLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/image_desc_logo"
+        android:src="@drawable/background_ball" />
 
 </RelativeLayout>
