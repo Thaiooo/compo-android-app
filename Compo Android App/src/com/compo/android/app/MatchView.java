@@ -78,8 +78,8 @@ public class MatchView extends View {
 
 	_coachRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.coach)).getBitmap();
 	_terrainRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.soccer_field_grass)).getBitmap();
-	_ballRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.ball_white)).getBitmap();
-	_ballRedRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.ball_red)).getBitmap();
+	_ballRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.element_unselected)).getBitmap();
+	_ballRedRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.element_selected)).getBitmap();
 	_start = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.start)).getBitmap();
 	_cercle = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.hide)).getBitmap();
 

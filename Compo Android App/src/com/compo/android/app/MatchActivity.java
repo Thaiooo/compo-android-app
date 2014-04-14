@@ -53,6 +53,11 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
     }
 
     @Override
+    protected void createDatabse() {
+       // RAS
+    }
+    
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 
@@ -126,7 +131,7 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
 	}
 
 	User u = UserFactory.getInstance().getUser(MatchActivity.this);
-	_userCredit.setText(Integer.toString(u.getCredit()));
+//	_userCredit.setText(Integer.toString(u.getCredit()));
 
 	switch (requestCode) {
 	case EXTRA_MESSAGE_REQUEST_CODE:
@@ -156,7 +161,7 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
     private class LoadNextMatchTask extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected Void doInBackground(Void... params) {
-	    // Rechercher le match suivant. Dans un job au début de l'activité
+	    // Rechercher le match suivant. Dans un job au dï¿½but de l'activitï¿½
 	    QuizzService service = new QuizzService(MatchActivity.this);
 	    _nextMatch = service.getNexMatch(_currentPack, _currentMatch);
 	    return null;

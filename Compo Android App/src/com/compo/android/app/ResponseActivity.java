@@ -56,6 +56,11 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
     protected int getContentViewId() {
 	return R.layout.activity_response;
     }
+    
+    @Override
+    protected void createDatabse() {
+       // RAS
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -316,7 +321,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 
 	@Override
 	protected void onPostExecute(User anUser) {
-	    _userCredit.setText(Integer.toString(anUser.getCredit()));
+//	    _userCredit.setText(Integer.toString(anUser.getCredit()));
 	}
     }
 
