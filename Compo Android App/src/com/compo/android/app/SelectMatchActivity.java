@@ -50,7 +50,7 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 	super.onCreate(savedInstanceState);
 
 	if (_fontTitle == null) {
-	    _fontTitle = Typeface.createFromAsset(getAssets(), FontEnum.DRAWING_GUIDES.getName());
+	    _fontTitle = Typeface.createFromAsset(getAssets(), FontEnum.TITLE.getName());
 	}
 
 	Intent intent = getIntent();
