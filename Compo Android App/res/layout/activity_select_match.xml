@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/background_title"
         android:textColor="@android:color/white"
         android:textIsSelectable="false"
         android:textSize="@dimen/select_match_title_font_size"
