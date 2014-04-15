@@ -2,7 +2,7 @@ package com.compo.android.app.utils;
 
 public enum FontEnum {
     /***/
-    TITLE("FiraSansOT-Regular.otf"),
+    ACTIVITY_TITLE("FiraSansOT-Regular.otf"),
     /***/
     THEME_NAME("FiraSansOT-Regular.otf"),
     /***/
