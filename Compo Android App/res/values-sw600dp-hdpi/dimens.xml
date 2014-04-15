@@ -1,12 +1,7 @@
 <!-- SW 600dp hdpi -->
 <resources>
 
-    <!-- Home -->
-    <dimen name="main_title_font_size">60dp</dimen>
-    <dimen name="main_button_font_size">40dp</dimen>
-
     <!-- Dialog -->
-    <dimen name="dialog_padding">10dp</dimen>
     <dimen name="dialog_tittle_margin">15dp</dimen>
     <dimen name="dialog_button_margin">20dp</dimen>
     <dimen name="dialog_button_spacing">5dp</dimen>
