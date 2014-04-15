@@ -43,7 +43,7 @@ public class ThemeDetailsActivity extends Activity {
 	_selectTheme = (Theme) intent
 		.getSerializableExtra(MESSAGE_SELECTED_THEME);
 
-	TextView name = (TextView) findViewById(R.id.activity_theme_name);
+	TextView name = (TextView) findViewById(R.id.activity_pack_title);
 	name.setTypeface(_fontTitle);
 	name.setText(_selectTheme.getName());
 
