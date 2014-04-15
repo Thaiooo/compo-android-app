@@ -20,206 +20,162 @@ import com.compo.android.app.model.Theme;
 import com.compo.android.app.utils.FontEnum;
 
 public class MainActivity extends AbstractLSEFragmentActivity {
-    private static final String TAG = MainActivity.class.getName();
 
-    public static final int EXTRA_MESSAGE_REQUEST_CODE = 1;
-    
-    
-    private static Typeface _fontTitle;
-    private ViewPager _mViewPager;
-    private TextView _activity_theme_title;
-    private LinearLayout _themeIndicatorListLayout;
-    private Button _button_preview;
-    private Button _button_next;
-    private int pageSize = 0;
-    
-    
-    @Override
-    protected int getContentViewId() {
-	return R.layout.activity_main;
-    }
-    
-    @Override
-    protected void createDatabse() {
-	DataBaseHelper myDbHelper = new DataBaseHelper(this);
-	try {
-	    myDbHelper.createDataBase();
-	} catch (IOException ioe) {
-	    throw new Error("Unable to create database");
-	}
-    }
-    
+	public static final int EXTRA_MESSAGE_REQUEST_CODE = 1;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-	super.onCreate(savedInstanceState);
+	private static Typeface _fontTitle;
+	private ViewPager _mViewPager;
+	private TextView _activity_theme_title;
+	private LinearLayout _themeIndicatorListLayout;
+	private Button _button_preview;
+	private Button _button_next;
+	private int pageSize = 0;
 
-	if (_fontTitle == null) {
-	    _fontTitle = Typeface.createFromAsset(getAssets(), FontEnum.TITLE.getName());
+	@Override
+	protected int getContentViewId() {
+		return R.layout.activity_main;
 	}
 
-	_mViewPager = (ViewPager) findViewById(R.id.pager);
-	_themeIndicatorListLayout = (LinearLayout) findViewById(R.id.theme_indicator_list_layout);
-	_button_preview = (Button) findViewById(R.id.button_preview);
-	_button_next = (Button) findViewById(R.id.button_next);
+	@Override
+	protected void createDatabse() {
+		DataBaseHelper myDbHelper = new DataBaseHelper(this);
+		try {
+			myDbHelper.createDataBase();
+		} catch (IOException ioe) {
+			throw new Error("Unable to create database");
+		}
+	}
 
-	_activity_theme_title = (TextView) findViewById(R.id.activity_theme_title);
-	_activity_theme_title.setTypeface(_fontTitle);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-	_mViewPager.setOnPageChangeListener(new PageListener());
+		if (_fontTitle == null) {
+			_fontTitle = Typeface.createFromAsset(getAssets(),
+					FontEnum.TITLE.getName());
+		}
 
-	new LoadThemeTask().execute();
-	
-	
-	
-	
+		_mViewPager = (ViewPager) findViewById(R.id.pager);
+		_themeIndicatorListLayout = (LinearLayout) findViewById(R.id.theme_indicator_list_layout);
+		_button_preview = (Button) findViewById(R.id.button_preview);
+		_button_next = (Button) findViewById(R.id.button_next);
 
-//	Button btnBack = (Button) findViewById(R.id.button_back);
-//	btnBack.setVisibility(View.INVISIBLE);
-//	Button btnHome = (Button) findViewById(R.id.button_home);
-//	btnHome.setVisibility(View.INVISIBLE);
+		_activity_theme_title = (TextView) findViewById(R.id.activity_theme_title);
+		_activity_theme_title.setTypeface(_fontTitle);
 
-//	_userCredit = (TextView) findViewById(R.id.user_credit);
+		_mViewPager.setOnPageChangeListener(new PageListener());
 
-//	Button buttonPlay = (Button) findViewById(R.id.button_play);
-//	Button buttonStore = (Button) findViewById(R.id.button_store);
-//	Button buttonSetting = (Button) findViewById(R.id.button_setting);
-//
-//	if (_font == null) {
-//	    _font = Typeface.createFromAsset(getAssets(), FontEnum.LUCKY_PENNY.getName());
-//	}
-//	buttonPlay.setTypeface(_font);
-//	buttonStore.setTypeface(_font);
-//	buttonSetting.setTypeface(_font);
+		new LoadThemeTask().execute();
 
-    }
+		Button btnBack = (Button) findViewById(R.id.button_back);
+		btnBack.setVisibility(View.INVISIBLE);
+		Button btnHome = (Button) findViewById(R.id.button_home);
+		btnHome.setVisibility(View.INVISIBLE);
+	}
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//	return false;
-//    }
-//
-//    @Override
-//    protected void onRestart() {
-//	super.onRestart();
-//	new LoadUserTask().execute();
-//    }
+	// @Override
+	// protected void onRestart() {
+	// super.onRestart();
+	// new LoadUserTask().execute();
+	// }
 
-//    public void store(View view) {
-//	Intent intent = new Intent(MainActivity.this, StoreActivity.class);
-//	startActivityForResult(intent, 1);
-//    }
-//
-//    public void setting(View view) {
-//	Intent intent = new Intent(MainActivity.this, SettingActivity.class);
-//	startActivityForResult(intent, 1);
-//    }
-//
-//    public void tutorial(View view) {
-//	Intent intent = new Intent(MainActivity.this, TutorialActivity.class);
-//	startActivity(intent);
-//    }
+	public void previewTheme(View view) {
+		_mViewPager.setCurrentItem(_mViewPager.getCurrentItem() - 1, true);
 
+		_themeIndicatorListLayout.removeAllViews();
+		for (int i = 0; i < pageSize; i++) {
+			ImageView ball = new ImageView(MainActivity.this);
+			if (i == _mViewPager.getCurrentItem()) {
+				ball.setImageResource(R.drawable.element_selected);
+			} else {
+				ball.setImageResource(R.drawable.element_unselected);
+			}
+			_themeIndicatorListLayout.addView(ball);
+		}
 
-    
-    
-    public void previewTheme(View view) {
-   	_mViewPager.setCurrentItem(_mViewPager.getCurrentItem() - 1, true);
+		if (_mViewPager.getCurrentItem() == 0) {
+			_button_preview.setVisibility(View.INVISIBLE);
+		}
+		_button_next.setVisibility(View.VISIBLE);
+	}
 
-   	_themeIndicatorListLayout.removeAllViews();
-   	for (int i = 0; i < pageSize; i++) {
-   	    ImageView ball = new ImageView(MainActivity.this);
-   	    if (i == _mViewPager.getCurrentItem()) {
-   		ball.setImageResource(R.drawable.element_selected);
-   	    } else {
-   		ball.setImageResource(R.drawable.element_unselected);
-   	    }
-   	    _themeIndicatorListLayout.addView(ball);
-   	}
+	public void nextTheme(View view) {
+		_mViewPager.setCurrentItem(_mViewPager.getCurrentItem() + 1, true);
+		_themeIndicatorListLayout.removeAllViews();
+		for (int i = 0; i < pageSize; i++) {
+			ImageView ball = new ImageView(MainActivity.this);
+			if (i == _mViewPager.getCurrentItem()) {
+				ball.setImageResource(R.drawable.element_selected);
+			} else {
+				ball.setImageResource(R.drawable.element_unselected);
+			}
+			_themeIndicatorListLayout.addView(ball);
+		}
 
-   	if (_mViewPager.getCurrentItem() == 0) {
-   	    _button_preview.setVisibility(View.INVISIBLE);
-   	}
-   	_button_next.setVisibility(View.VISIBLE);
-       }
+		if (_mViewPager.getCurrentItem() == (pageSize - 1)) {
+			_button_next.setVisibility(View.INVISIBLE);
+		}
+		_button_preview.setVisibility(View.VISIBLE);
+	}
 
-       public void nextTheme(View view) {
-   	_mViewPager.setCurrentItem(_mViewPager.getCurrentItem() + 1, true);
-   	_themeIndicatorListLayout.removeAllViews();
-   	for (int i = 0; i < pageSize; i++) {
-   	    ImageView ball = new ImageView(MainActivity.this);
-   	    if (i == _mViewPager.getCurrentItem()) {
-   		ball.setImageResource(R.drawable.element_selected);
-   	    } else {
-   		ball.setImageResource(R.drawable.element_unselected);
-   	    }
-   	    _themeIndicatorListLayout.addView(ball);
-   	}
+	private class LoadThemeTask extends AsyncTask<Void, Void, List<Theme>> {
+		@Override
+		protected List<Theme> doInBackground(Void... params) {
+			ThemeDao dao = new ThemeDao(MainActivity.this);
+			List<Theme> themes = dao.getAllTheme();
+			return themes;
+		}
 
-   	if (_mViewPager.getCurrentItem() == (pageSize - 1)) {
-   	    _button_next.setVisibility(View.INVISIBLE);
-   	}
-   	_button_preview.setVisibility(View.VISIBLE);
-       }
+		@Override
+		protected void onPostExecute(final List<Theme> aThemes) {
+			SelectThemeAdapter collectionThemeLevelPagerAdapter = new SelectThemeAdapter(
+					getSupportFragmentManager(), aThemes);
+			_mViewPager.setAdapter(collectionThemeLevelPagerAdapter);
 
-       private class LoadThemeTask extends AsyncTask<Void, Void, List<Theme>> {
-   	@Override
-   	protected List<Theme> doInBackground(Void... params) {
-   	    ThemeDao dao = new ThemeDao(MainActivity.this);
-   	    List<Theme> themes = dao.getAllTheme();
-   	    return themes;
-   	}
+			for (int i = 0; i < aThemes.size(); i++) {
+				ImageView ball = new ImageView(MainActivity.this);
+				if (i == 0) {
+					ball.setImageResource(R.drawable.element_selected);
+				} else {
+					ball.setImageResource(R.drawable.element_unselected);
+				}
+				_themeIndicatorListLayout.addView(ball);
+			}
 
-   	@Override
-   	protected void onPostExecute(final List<Theme> aThemes) {
-   	    SelectThemeAdapter collectionThemeLevelPagerAdapter = new SelectThemeAdapter(getSupportFragmentManager(),
-   		    aThemes);
-   	    _mViewPager.setAdapter(collectionThemeLevelPagerAdapter);
+			if (aThemes.size() == 0) {
+				_button_next.setVisibility(View.INVISIBLE);
+			}
 
-   	    for (int i = 0; i < aThemes.size(); i++) {
-   		ImageView ball = new ImageView(MainActivity.this);
-   		if (i == 0) {
-   		    ball.setImageResource(R.drawable.element_selected);
-   		} else {
-   		    ball.setImageResource(R.drawable.element_unselected);
-   		}
-   		_themeIndicatorListLayout.addView(ball);
-   	    }
+			pageSize = aThemes.size();
+		}
+	}
 
-   	    if (aThemes.size() == 0) {
-   		_button_next.setVisibility(View.INVISIBLE);
-   	    }
+	private class PageListener extends SimpleOnPageChangeListener {
+		@Override
+		public void onPageSelected(int position) {
+			super.onPageSelected(position);
+			_themeIndicatorListLayout.removeAllViews();
+			for (int i = 0; i < pageSize; i++) {
+				ImageView ball = new ImageView(MainActivity.this);
+				if (i == position) {
+					ball.setImageResource(R.drawable.element_selected);
+				} else {
+					ball.setImageResource(R.drawable.element_unselected);
+				}
+				_themeIndicatorListLayout.addView(ball);
+			}
 
-   	    pageSize = aThemes.size();
-   	}
-       }
-
-       private class PageListener extends SimpleOnPageChangeListener {
-   	@Override
-   	public void onPageSelected(int position) {
-   	    super.onPageSelected(position);
-   	    _themeIndicatorListLayout.removeAllViews();
-   	    for (int i = 0; i < pageSize; i++) {
-   		ImageView ball = new ImageView(MainActivity.this);
-   		if (i == position) {
-   		    ball.setImageResource(R.drawable.element_selected);
-   		} else {
-   		    ball.setImageResource(R.drawable.element_unselected);
-   		}
-   		_themeIndicatorListLayout.addView(ball);
-   	    }
-
-   	    if (_mViewPager.getCurrentItem() == (pageSize - 1)) {
-   		_button_next.setVisibility(View.INVISIBLE);
-   		_button_preview.setVisibility(View.VISIBLE);
-   	    } else if (_mViewPager.getCurrentItem() == 0) {
-   		_button_next.setVisibility(View.VISIBLE);
-   		_button_preview.setVisibility(View.INVISIBLE);
-   	    } else {
-   		_button_next.setVisibility(View.VISIBLE);
-   		_button_preview.setVisibility(View.VISIBLE);
-   	    }
-   	}
-       }
+			if (_mViewPager.getCurrentItem() == (pageSize - 1)) {
+				_button_next.setVisibility(View.INVISIBLE);
+				_button_preview.setVisibility(View.VISIBLE);
+			} else if (_mViewPager.getCurrentItem() == 0) {
+				_button_next.setVisibility(View.VISIBLE);
+				_button_preview.setVisibility(View.INVISIBLE);
+			} else {
+				_button_next.setVisibility(View.VISIBLE);
+				_button_preview.setVisibility(View.VISIBLE);
+			}
+		}
+	}
 
 }
