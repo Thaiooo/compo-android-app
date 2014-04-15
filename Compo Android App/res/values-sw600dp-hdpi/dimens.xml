@@ -37,7 +37,7 @@
     <dimen name="pack_indicator_list_margin_top">10dp</dimen>
 
     <!-- Select Match -->
-    <dimen name="select_match_title_font_size">15dp</dimen>
+    <dimen name="match_title_font_size">15dp</dimen>
 
     <!--  -->
     <dimen name="match_post_it_content_margin_top">20dp</dimen>
@@ -59,10 +59,10 @@
     <dimen name="hint_display_content_font_size">25dp</dimen>
 
     <!-- Match -->
-    <dimen name="match_detail_font_size">15dp</dimen>
-    <dimen name="match_teams_font_size">15dp</dimen>
-    <dimen name="match_score_font_size">20dp</dimen>
-    <dimen name="match_advertising_side_margin">10dp</dimen>
+    <dimen name="field_detail_font_size">15dp</dimen>
+    <dimen name="field_teams_font_size">15dp</dimen>
+    <dimen name="field_score_font_size">20dp</dimen>
+    <dimen name="field_advertising_side_margin">10dp</dimen>
 
     <!-- Response -->
     <dimen name="response_hint_margin_top">10dp</dimen>
