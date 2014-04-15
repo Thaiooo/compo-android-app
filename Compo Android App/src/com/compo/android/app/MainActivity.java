@@ -25,10 +25,10 @@ public class MainActivity extends AbstractLSEFragmentActivity {
 
 	private static Typeface _fontTitle;
 	private ViewPager _mViewPager;
-	private TextView _activity_theme_title;
-	private LinearLayout _themeIndicatorListLayout;
-	private Button _button_preview;
-	private Button _button_next;
+	private TextView _activityTitle;
+	private LinearLayout _indicatorListLayout;
+	private Button _buttonPreview;
+	private Button _buttonNext;
 	private int pageSize = 0;
 
 	@Override
@@ -52,16 +52,16 @@ public class MainActivity extends AbstractLSEFragmentActivity {
 
 		if (_fontTitle == null) {
 			_fontTitle = Typeface.createFromAsset(getAssets(),
-					FontEnum.TITLE.getName());
+					FontEnum.ACTIVITY_TITLE.getName());
 		}
 
 		_mViewPager = (ViewPager) findViewById(R.id.pager);
-		_themeIndicatorListLayout = (LinearLayout) findViewById(R.id.theme_indicator_list_layout);
-		_button_preview = (Button) findViewById(R.id.button_preview);
-		_button_next = (Button) findViewById(R.id.button_next);
+		_indicatorListLayout = (LinearLayout) findViewById(R.id.theme_indicator_list_layout);
+		_buttonPreview = (Button) findViewById(R.id.button_preview);
+		_buttonNext = (Button) findViewById(R.id.button_next);
 
-		_activity_theme_title = (TextView) findViewById(R.id.activity_theme_title);
-		_activity_theme_title.setTypeface(_fontTitle);
+		_activityTitle = (TextView) findViewById(R.id.activity_theme_title);
+		_activityTitle.setTypeface(_fontTitle);
 
 		_mViewPager.setOnPageChangeListener(new PageListener());
 
@@ -82,7 +82,7 @@ public class MainActivity extends AbstractLSEFragmentActivity {
 	public void previewTheme(View view) {
 		_mViewPager.setCurrentItem(_mViewPager.getCurrentItem() - 1, true);
 
-		_themeIndicatorListLayout.removeAllViews();
+		_indicatorListLayout.removeAllViews();
 		for (int i = 0; i < pageSize; i++) {
 			ImageView ball = new ImageView(MainActivity.this);
 			if (i == _mViewPager.getCurrentItem()) {
@@ -90,18 +90,18 @@ public class MainActivity extends AbstractLSEFragmentActivity {
 			} else {
 				ball.setImageResource(R.drawable.element_unselected);
 			}
-			_themeIndicatorListLayout.addView(ball);
+			_indicatorListLayout.addView(ball);
 		}
 
 		if (_mViewPager.getCurrentItem() == 0) {
-			_button_preview.setVisibility(View.INVISIBLE);
+			_buttonPreview.setVisibility(View.INVISIBLE);
 		}
-		_button_next.setVisibility(View.VISIBLE);
+		_buttonNext.setVisibility(View.VISIBLE);
 	}
 
 	public void nextTheme(View view) {
 		_mViewPager.setCurrentItem(_mViewPager.getCurrentItem() + 1, true);
-		_themeIndicatorListLayout.removeAllViews();
+		_indicatorListLayout.removeAllViews();
 		for (int i = 0; i < pageSize; i++) {
 			ImageView ball = new ImageView(MainActivity.this);
 			if (i == _mViewPager.getCurrentItem()) {
@@ -109,13 +109,13 @@ public class MainActivity extends AbstractLSEFragmentActivity {
 			} else {
 				ball.setImageResource(R.drawable.element_unselected);
 			}
-			_themeIndicatorListLayout.addView(ball);
+			_indicatorListLayout.addView(ball);
 		}
 
 		if (_mViewPager.getCurrentItem() == (pageSize - 1)) {
-			_button_next.setVisibility(View.INVISIBLE);
+			_buttonNext.setVisibility(View.INVISIBLE);
 		}
-		_button_preview.setVisibility(View.VISIBLE);
+		_buttonPreview.setVisibility(View.VISIBLE);
 	}
 
 	private class LoadThemeTask extends AsyncTask<Void, Void, List<Theme>> {
@@ -139,11 +139,11 @@ public class MainActivity extends AbstractLSEFragmentActivity {
 				} else {
 					ball.setImageResource(R.drawable.element_unselected);
 				}
-				_themeIndicatorListLayout.addView(ball);
+				_indicatorListLayout.addView(ball);
 			}
 
 			if (aThemes.size() == 0) {
-				_button_next.setVisibility(View.INVISIBLE);
+				_buttonNext.setVisibility(View.INVISIBLE);
 			}
 
 			pageSize = aThemes.size();
@@ -154,7 +154,7 @@ public class MainActivity extends AbstractLSEFragmentActivity {
 		@Override
 		public void onPageSelected(int position) {
 			super.onPageSelected(position);
-			_themeIndicatorListLayout.removeAllViews();
+			_indicatorListLayout.removeAllViews();
 			for (int i = 0; i < pageSize; i++) {
 				ImageView ball = new ImageView(MainActivity.this);
 				if (i == position) {
@@ -162,18 +162,18 @@ public class MainActivity extends AbstractLSEFragmentActivity {
 				} else {
 					ball.setImageResource(R.drawable.element_unselected);
 				}
-				_themeIndicatorListLayout.addView(ball);
+				_indicatorListLayout.addView(ball);
 			}
 
 			if (_mViewPager.getCurrentItem() == (pageSize - 1)) {
-				_button_next.setVisibility(View.INVISIBLE);
-				_button_preview.setVisibility(View.VISIBLE);
+				_buttonNext.setVisibility(View.INVISIBLE);
+				_buttonPreview.setVisibility(View.VISIBLE);
 			} else if (_mViewPager.getCurrentItem() == 0) {
-				_button_next.setVisibility(View.VISIBLE);
-				_button_preview.setVisibility(View.INVISIBLE);
+				_buttonNext.setVisibility(View.VISIBLE);
+				_buttonPreview.setVisibility(View.INVISIBLE);
 			} else {
-				_button_next.setVisibility(View.VISIBLE);
-				_button_preview.setVisibility(View.VISIBLE);
+				_buttonNext.setVisibility(View.VISIBLE);
+				_buttonPreview.setVisibility(View.VISIBLE);
 			}
 		}
 	}

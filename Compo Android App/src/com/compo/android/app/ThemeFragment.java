@@ -39,7 +39,7 @@ public class ThemeFragment extends Fragment {
 		    FontEnum.THEME_NAME.getName());
 	}
 
-	_themeName = (TextView) rootView.findViewById(R.id.theme_name);
+	_themeName = (TextView) rootView.findViewById(R.id.activity_theme_name);
 	_themeImage = (ImageView) rootView.findViewById(R.id.theme_image_id);
 	_contentView = (View) rootView
 		.findViewById(R.id.theme_content_layout_id);
