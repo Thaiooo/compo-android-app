@@ -28,21 +28,16 @@
         android:textSize="@dimen/select_match_title_font_size"
         android:textStyle="bold" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/button_title" >
-
-        <GridView
-            android:id="@+id/quizzGrid"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="center"
-            android:horizontalSpacing="0dp"
-            android:numColumns="auto_fit"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="0dp" />
-    </RelativeLayout>
+    <GridView
+        android:id="@+id/quizzGrid"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/button_title"
+        android:gravity="center"
+        android:horizontalSpacing="0dp"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="0dp" />
 
     <ImageView
         android:layout_width="wrap_content"
