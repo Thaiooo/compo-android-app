@@ -29,7 +29,7 @@ public class MainActivity extends AbstractLSEFragmentActivity {
 	private LinearLayout _indicatorListLayout;
 	private Button _buttonPreview;
 	private Button _buttonNext;
-	private int pageSize = 0;
+	private int _pageSize = 0;
 
 	@Override
 	protected int getContentViewId() {
@@ -83,7 +83,7 @@ public class MainActivity extends AbstractLSEFragmentActivity {
 		_mViewPager.setCurrentItem(_mViewPager.getCurrentItem() - 1, true);
 
 		_indicatorListLayout.removeAllViews();
-		for (int i = 0; i < pageSize; i++) {
+		for (int i = 0; i < _pageSize; i++) {
 			ImageView ball = new ImageView(MainActivity.this);
 			if (i == _mViewPager.getCurrentItem()) {
 				ball.setImageResource(R.drawable.element_selected);
@@ -102,7 +102,7 @@ public class MainActivity extends AbstractLSEFragmentActivity {
 	public void nextTheme(View view) {
 		_mViewPager.setCurrentItem(_mViewPager.getCurrentItem() + 1, true);
 		_indicatorListLayout.removeAllViews();
-		for (int i = 0; i < pageSize; i++) {
+		for (int i = 0; i < _pageSize; i++) {
 			ImageView ball = new ImageView(MainActivity.this);
 			if (i == _mViewPager.getCurrentItem()) {
 				ball.setImageResource(R.drawable.element_selected);
@@ -112,7 +112,7 @@ public class MainActivity extends AbstractLSEFragmentActivity {
 			_indicatorListLayout.addView(ball);
 		}
 
-		if (_mViewPager.getCurrentItem() == (pageSize - 1)) {
+		if (_mViewPager.getCurrentItem() == (_pageSize - 1)) {
 			_buttonNext.setVisibility(View.INVISIBLE);
 		}
 		_buttonPreview.setVisibility(View.VISIBLE);
@@ -146,7 +146,7 @@ public class MainActivity extends AbstractLSEFragmentActivity {
 				_buttonNext.setVisibility(View.INVISIBLE);
 			}
 
-			pageSize = aThemes.size();
+			_pageSize = aThemes.size();
 		}
 	}
 
@@ -155,7 +155,7 @@ public class MainActivity extends AbstractLSEFragmentActivity {
 		public void onPageSelected(int position) {
 			super.onPageSelected(position);
 			_indicatorListLayout.removeAllViews();
-			for (int i = 0; i < pageSize; i++) {
+			for (int i = 0; i < _pageSize; i++) {
 				ImageView ball = new ImageView(MainActivity.this);
 				if (i == position) {
 					ball.setImageResource(R.drawable.element_selected);
@@ -165,7 +165,7 @@ public class MainActivity extends AbstractLSEFragmentActivity {
 				_indicatorListLayout.addView(ball);
 			}
 
-			if (_mViewPager.getCurrentItem() == (pageSize - 1)) {
+			if (_mViewPager.getCurrentItem() == (_pageSize - 1)) {
 				_buttonNext.setVisibility(View.INVISIBLE);
 				_buttonPreview.setVisibility(View.VISIBLE);
 			} else if (_mViewPager.getCurrentItem() == 0) {
