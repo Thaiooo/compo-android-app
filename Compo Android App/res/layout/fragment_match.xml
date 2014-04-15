@@ -12,7 +12,7 @@
         android:layout_marginTop="@dimen/match_post_it_content_margin_top"
         android:textColor="@color/black"
         android:textIsSelectable="false"
-        android:textSize="15dp" />
+        android:textSize="@dimen/match_title_font_size" />
 
     <TextView
         android:id="@+id/match_desc"
@@ -22,7 +22,7 @@
         android:layout_centerHorizontal="true"
         android:textColor="@color/black"
         android:textIsSelectable="false"
-        android:textSize="10dp" />
+        android:textSize="@dimen/match_desc_font_size" />
 
     <TextView
         android:id="@+id/match_score_home"
@@ -32,7 +32,7 @@
         android:layout_centerHorizontal="true"
         android:textColor="@color/black"
         android:textIsSelectable="false"
-        android:textSize="10dp" />
+        android:textSize="@dimen/match_score_font_size" />
 
     <TextView
         android:id="@+id/match_score_away"
@@ -42,7 +42,7 @@
         android:layout_centerHorizontal="true"
         android:textColor="@color/black"
         android:textIsSelectable="false"
-        android:textSize="10dp" />
+        android:textSize="@dimen/match_score_font_size" />
 
     <LinearLayout
         android:id="@+id/ball_list_layout"
