@@ -17,7 +17,7 @@
         android:src="@drawable/logo" />
 
     <TextView
-        android:id="@+id/button_title"
+        android:id="@+id/activity_match_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/logo"
@@ -32,7 +32,7 @@
         android:id="@+id/quizzGrid"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/button_title"
+        android:layout_below="@+id/activity_match_title"
         android:gravity="center"
         android:horizontalSpacing="0dp"
         android:numColumns="auto_fit"
