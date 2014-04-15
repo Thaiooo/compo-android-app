@@ -2,11 +2,12 @@
 <resources>
 
     <!-- Dialog -->
-    <dimen name="dialog_title_font_size">24dp</dimen>
+    <dimen name="dialog_title_font_size">20dp</dimen>
     <dimen name="dialog_tittle_margin">15dp</dimen>
     <dimen name="dialog_button_margin">20dp</dimen>
     <dimen name="dialog_button_spacing">5dp</dimen>
-    <dimen name="dialog_button_font_size">24dp</dimen>
+    <dimen name="dialog_button_font_size">20dp</dimen>
+    <dimen name="dialog_content_font_size">20dp</dimen>
 
     <!-- Tool bar -->
     <dimen name="credit_font_size">20dp</dimen>
