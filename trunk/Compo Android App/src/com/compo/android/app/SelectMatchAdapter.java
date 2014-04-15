@@ -32,6 +32,8 @@ public class SelectMatchAdapter extends BaseAdapter {
     private Map<Long, Play> _mapQuizzToPlay;
     private LinearLayout _ballListLayout;
 
+    private final static String MATCH_NAME_PREFIX = "Match";
+
     public SelectMatchAdapter(Context c, List<Match> aMatchs, Map<Long, Play> aMapQuizzToPlay) {
 	_inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	_matchs = aMatchs;
@@ -91,7 +93,7 @@ public class SelectMatchAdapter extends BaseAdapter {
 
 	TextView title = (TextView) vi.findViewById(R.id.match_title);
 	title.setTypeface(_fontMatchName);
-	title.setText("Match " + (position + 1));
+	title.setText(MATCH_NAME_PREFIX + (position + 1));
 
 	TextView desc = (TextView) vi.findViewById(R.id.match_desc);
 	desc.setTypeface(_fontMatchDesc);
