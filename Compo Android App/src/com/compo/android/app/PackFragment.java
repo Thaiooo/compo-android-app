@@ -27,7 +27,9 @@ public class PackFragment extends Fragment {
     private static final double UNLOCK_LIMIT = 0.8d;
     private static final String SLASH = "/";
 
-    private static Typeface _font;
+    private static Typeface _fontPackName;
+    private static Typeface _fontPackDesc;
+    private static Typeface _fontPackProgress;
 
     private TextView _packName;
     private TextView _packDescription;
@@ -45,8 +47,14 @@ public class PackFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	View rootView = inflater.inflate(R.layout.fragment_pack, container, false);
 
-	if (_font == null) {
-	    _font = Typeface.createFromAsset(getActivity().getAssets(), FontEnum.PACK_NAME.getName());
+	if (_fontPackName == null) {
+	    _fontPackName = Typeface.createFromAsset(getActivity().getAssets(), FontEnum.PACK_NAME.getName());
+	}
+	if (_fontPackDesc == null) {
+	    _fontPackDesc = Typeface.createFromAsset(getActivity().getAssets(), FontEnum.PACK_DESC.getName());
+	}
+	if (_fontPackProgress == null) {
+	    _fontPackProgress = Typeface.createFromAsset(getActivity().getAssets(), FontEnum.PACK_PROGRESS.getName());
 	}
 
 	Bundle args = getArguments();
@@ -63,12 +71,12 @@ public class PackFragment extends Fragment {
 	_contentView = (View) rootView.findViewById(R.id.pack_content_layout_id);
 
 	_packName.setText(_currentPack.getName());
-	_packName.setTypeface(_font);
+	_packName.setTypeface(_fontPackName);
 
 	_packDescription.setText(_currentPack.getDescription());
-	_packDescription.setTypeface(_font);
+	_packDescription.setTypeface(_fontPackDesc);
 
-	_progress.setTypeface(_font);
+	_progress.setTypeface(_fontPackProgress);
 
 	boolean lock = isCurrentPackIsLock();
 	setLockPack(lock);
