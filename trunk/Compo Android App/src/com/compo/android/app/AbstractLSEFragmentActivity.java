@@ -29,8 +29,7 @@ public abstract class AbstractLSEFragmentActivity extends FragmentActivity {
 		Intent intent = new Intent(this, MainActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
-		overridePendingTransition(android.R.anim.fade_in,
-				android.R.anim.fade_out);
+		overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 	}
 
 	public void setting(View view) {
