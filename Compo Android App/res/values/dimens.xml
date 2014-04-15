@@ -25,18 +25,16 @@
     <!-- Theme -->
     <dimen name="theme_title_font_size">25dp</dimen>
     <dimen name="theme_name_font_size">15dp</dimen>
-    <dimen name="theme_title_margin_top">40dp</dimen>
-    <dimen name="theme_image_height">250dp</dimen>
+    <dimen name="theme_cadre_height">250dp</dimen>
     <dimen name="theme_detail_button_width">100dp</dimen>
     <dimen name="theme_detail_content_font_size">30dp</dimen>
 
     <!-- Select Pack -->
-    <dimen name="pack_theme_name_margin_top">40dp</dimen>
-    <dimen name="pack_theme_name_font_size">40dp</dimen>
+    <dimen name="pack_title_font_size">40dp</dimen>
     <dimen name="pack_name_font_size">15dp</dimen>
     <dimen name="pack_desc_font_size">15dp</dimen>
     <dimen name="pack_progress_font_size">30dp</dimen>
-    <dimen name="pack_list_height">250dp</dimen>
+    <dimen name="pack_cadre_height">250dp</dimen>
     <dimen name="pack_indicator_list_margin_top">10dp</dimen>
 
     <!-- Select Match -->
