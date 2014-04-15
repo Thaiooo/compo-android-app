@@ -5,14 +5,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
-@SuppressLint("SdCardPath")
+
 public class DataBaseHelper extends SQLiteOpenHelper {
     // The Android's default system path of your application database.
     private static String DB_PATH = "/data/data/com.compo.android.app/databases/";
