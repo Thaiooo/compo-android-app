@@ -22,7 +22,11 @@ import com.compo.android.app.model.Team;
 import com.compo.android.app.utils.FontEnum;
 
 public class SelectMatchAdapter extends BaseAdapter {
-    private static Typeface _font;
+
+    private static Typeface _fontMatchName;
+    private static Typeface _fontMatchDesc;
+    private static Typeface _fontMatchScore;
+
     private static LayoutInflater _inflater = null;
     private List<Match> _matchs;
     private Map<Long, Play> _mapQuizzToPlay;
@@ -33,8 +37,14 @@ public class SelectMatchAdapter extends BaseAdapter {
 	_matchs = aMatchs;
 	_mapQuizzToPlay = aMapQuizzToPlay;
 
-	if (_font == null) {
-	    _font = Typeface.createFromAsset(c.getAssets(), FontEnum.THEME_NAME.getName());
+	if (_fontMatchName == null) {
+	    _fontMatchName = Typeface.createFromAsset(c.getAssets(), FontEnum.MATCH_NAME.getName());
+	}
+	if (_fontMatchDesc == null) {
+	    _fontMatchDesc = Typeface.createFromAsset(c.getAssets(), FontEnum.MATCH_DESC.getName());
+	}
+	if (_fontMatchScore == null) {
+	    _fontMatchScore = Typeface.createFromAsset(c.getAssets(), FontEnum.MATCH_SCORE.getName());
 	}
     }
 
@@ -80,16 +90,16 @@ public class SelectMatchAdapter extends BaseAdapter {
 	}
 
 	TextView title = (TextView) vi.findViewById(R.id.match_title);
-	title.setTypeface(_font);
+	title.setTypeface(_fontMatchName);
 	title.setText("Match " + (position + 1));
 
 	TextView desc = (TextView) vi.findViewById(R.id.match_desc);
-	desc.setTypeface(_font);
+	desc.setTypeface(_fontMatchDesc);
 	desc.setText(match.getName());
 
 	TextView scoreHome = (TextView) vi.findViewById(R.id.match_score_home);
 	if (home != null) {
-	    scoreHome.setTypeface(_font);
+	    scoreHome.setTypeface(_fontMatchScore);
 	    scoreHome.setText(home.getName() + " : " + match.getScoreHome());
 	} else {
 	    scoreHome.setText("");
@@ -97,7 +107,7 @@ public class SelectMatchAdapter extends BaseAdapter {
 
 	TextView scoreAway = (TextView) vi.findViewById(R.id.match_score_away);
 	if (away != null) {
-	    scoreAway.setTypeface(_font);
+	    scoreAway.setTypeface(_fontMatchScore);
 	    scoreAway.setText(away.getName() + " : " + match.getScoreAway());
 	} else {
 	    scoreAway.setText("");
