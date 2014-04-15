@@ -22,7 +22,6 @@
     <dimen name="theme_name_font_size">15dp</dimen>
     <dimen name="theme_cadre_height">250dp</dimen>
     <dimen name="theme_detail_button_width">100dp</dimen>
-    <dimen name="theme_detail_content_font_size">30dp</dimen>
 
     <!-- Select Pack -->
     <dimen name="pack_title_font_size">40dp</dimen>
