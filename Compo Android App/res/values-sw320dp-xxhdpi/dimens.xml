@@ -12,7 +12,7 @@
     <dimen name="dialog_button_spacing">5dp</dimen>
     <dimen name="dialog_title_font_size">24dp</dimen>
     <dimen name="dialog_button_font_size">24dp</dimen>
-    
+
     <!-- Tool bar -->
     <dimen name="credit_font_size">20dp</dimen>
 
@@ -23,23 +23,21 @@
     <dimen name="setting_button_width">200dp</dimen>
 
     <!-- Theme -->
-    <dimen name="theme_title_font_size">20dp</dimen>
+    <dimen name="theme_title_font_size">15dp</dimen>
     <dimen name="theme_name_font_size">15dp</dimen>
-    <dimen name="theme_title_margin_top">15dp</dimen>
-    <dimen name="theme_image_height">200dp</dimen>
+    <dimen name="theme_cadre_height">200dp</dimen>
     <dimen name="theme_detail_button_width">110dp</dimen>
 
     <!-- Select Pack -->
-    <dimen name="pack_theme_name_margin_top">15dp</dimen>
-    <dimen name="pack_theme_name_font_size">20dp</dimen>
+    <dimen name="pack_title_font_size">15dp</dimen>
     <dimen name="pack_name_font_size">20dp</dimen>
     <dimen name="pack_desc_font_size">15dp</dimen>
     <dimen name="pack_progress_font_size">30dp</dimen>
-    <dimen name="pack_list_height">200dp</dimen>
+    <dimen name="pack_cadre_height">200dp</dimen>
     <dimen name="pack_indicator_list_margin_top">10dp</dimen>
 
     <!-- Select Match -->
-    <dimen name="select_match_title_font_size">20dp</dimen>
+    <dimen name="select_match_title_font_size">15dp</dimen>
 
     <!--  -->
     <dimen name="match_post_it_content_margin_top">0dp</dimen>
