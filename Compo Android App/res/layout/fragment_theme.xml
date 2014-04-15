@@ -25,7 +25,7 @@
             android:src="@drawable/lock_theme" />
 
         <TextView
-            android:id="@+id/activity_theme_name"
+            android:id="@+id/activity_pack_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/theme_image_id"
