@@ -5,7 +5,7 @@
     android:background="@drawable/background_dialog" >
 
     <TextView
-        android:id="@+id/theme_name"
+        android:id="@+id/activity_theme_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -19,7 +19,7 @@
         android:id="@+id/credit_description_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/theme_name"
+        android:layout_below="@+id/activity_theme_name"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal" >
 
