@@ -51,8 +51,7 @@ public class MainActivity extends AbstractLSEFragmentActivity {
 		super.onCreate(savedInstanceState);
 
 		if (_fontTitle == null) {
-			_fontTitle = Typeface.createFromAsset(getAssets(),
-					FontEnum.ACTIVITY_TITLE.getName());
+			_fontTitle = Typeface.createFromAsset(getAssets(), FontEnum.ACTIVITY_TITLE.getName());
 		}
 
 		_mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -128,8 +127,8 @@ public class MainActivity extends AbstractLSEFragmentActivity {
 
 		@Override
 		protected void onPostExecute(final List<Theme> aThemes) {
-			SelectThemeAdapter collectionThemeLevelPagerAdapter = new SelectThemeAdapter(
-					getSupportFragmentManager(), aThemes);
+			SelectThemeAdapter collectionThemeLevelPagerAdapter = new SelectThemeAdapter(getSupportFragmentManager(),
+					aThemes);
 			_mViewPager.setAdapter(collectionThemeLevelPagerAdapter);
 
 			for (int i = 0; i < aThemes.size(); i++) {

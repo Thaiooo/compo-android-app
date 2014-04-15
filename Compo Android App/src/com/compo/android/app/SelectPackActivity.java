@@ -53,13 +53,11 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 		super.onCreate(savedInstanceState);
 
 		if (_fontTitle == null) {
-			_fontTitle = Typeface.createFromAsset(getAssets(),
-					FontEnum.ACTIVITY_TITLE.getName());
+			_fontTitle = Typeface.createFromAsset(getAssets(), FontEnum.ACTIVITY_TITLE.getName());
 		}
 
 		Intent intent = getIntent();
-		_selectTheme = (Theme) intent
-				.getSerializableExtra(ThemeFragment.EXTRA_MESSAGE_ARG);
+		_selectTheme = (Theme) intent.getSerializableExtra(ThemeFragment.EXTRA_MESSAGE_ARG);
 
 		_mViewPager = (ViewPager) findViewById(R.id.pager);
 		_activityTitle = (TextView) findViewById(R.id.activity_pack_title);
@@ -117,10 +115,8 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 	@Override
 	protected void onRestart() {
 		super.onRestart();
-		PackProgressDao packProgressDao = new PackProgressDao(
-				SelectPackActivity.this);
-		_mapPackToProgress = packProgressDao
-				.getAllPackProgressByTheme(_selectTheme.getId());
+		PackProgressDao packProgressDao = new PackProgressDao(SelectPackActivity.this);
+		_mapPackToProgress = packProgressDao.getAllPackProgressByTheme(_selectTheme.getId());
 		_collectionPacksPagerAdapter.setMapPackToProgress(_mapPackToProgress);
 		_collectionPacksPagerAdapter.notifyDataSetChanged();
 	}
@@ -131,17 +127,14 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 			PackDao packDao = new PackDao(SelectPackActivity.this);
 			List<Pack> packs = packDao.findPacks(_selectTheme);
 
-			PackProgressDao packProgressDao = new PackProgressDao(
-					SelectPackActivity.this);
-			_mapPackToProgress = packProgressDao
-					.getAllPackProgressByTheme(_selectTheme.getId());
+			PackProgressDao packProgressDao = new PackProgressDao(SelectPackActivity.this);
+			_mapPackToProgress = packProgressDao.getAllPackProgressByTheme(_selectTheme.getId());
 			return packs;
 		}
 
 		@Override
 		protected void onPostExecute(final List<Pack> aPacks) {
-			_collectionPacksPagerAdapter = new SelectPackAdapter(
-					getSupportFragmentManager(), _selectTheme, aPacks,
+			_collectionPacksPagerAdapter = new SelectPackAdapter(getSupportFragmentManager(), _selectTheme, aPacks,
 					_mapPackToProgress);
 			_mViewPager.setAdapter(_collectionPacksPagerAdapter);
 
