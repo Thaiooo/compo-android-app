@@ -62,7 +62,7 @@ public class SelectPackActivity extends AbstractLSEFragmentActivity {
 				.getSerializableExtra(ThemeFragment.EXTRA_MESSAGE_ARG);
 
 		_mViewPager = (ViewPager) findViewById(R.id.pager);
-		_activityTitle = (TextView) findViewById(R.id.activity_theme_name);
+		_activityTitle = (TextView) findViewById(R.id.activity_pack_title);
 		_activityTitle.setTypeface(_fontTitle);
 		_activityTitle.setText(_selectTheme.getName());
 
