@@ -74,53 +74,74 @@ public class MatchView extends View {
 	super(context, attrs);
 	_context = context;
 
-	font = Typeface.createFromAsset(_context.getAssets(), FontEnum.LUCKY_PENNY.getName());
+	if (!isInEditMode()) {
 
-	_coachRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.coach)).getBitmap();
-	_terrainRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.soccer_field_grass)).getBitmap();
-	_ballRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.element_unselected)).getBitmap();
-	_ballRedRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.element_selected)).getBitmap();
-	_start = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.start)).getBitmap();
-	_cercle = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.hide)).getBitmap();
+	    font = Typeface.createFromAsset(_context.getAssets(),
+		    FontEnum.LUCKY_PENNY.getName());
 
-	float densityMultiplier = getContext().getResources().getDisplayMetrics().density;
-	_paint = new Paint();
-	_paint.setTextSize(10.0f * densityMultiplier);
-	_paint.setTypeface(font);
+	    _coachRaw = ((BitmapDrawable) _context.getResources().getDrawable(
+		    R.drawable.coach)).getBitmap();
+	    _terrainRaw = ((BitmapDrawable) _context.getResources()
+		    .getDrawable(R.drawable.soccer_field_grass)).getBitmap();
+	    _ballRaw = ((BitmapDrawable) _context.getResources().getDrawable(
+		    R.drawable.element_unselected)).getBitmap();
+	    _ballRedRaw = ((BitmapDrawable) _context.getResources()
+		    .getDrawable(R.drawable.element_selected)).getBitmap();
+	    _start = ((BitmapDrawable) _context.getResources().getDrawable(
+		    R.drawable.start)).getBitmap();
+	    _cercle = ((BitmapDrawable) _context.getResources().getDrawable(
+		    R.drawable.hide)).getBitmap();
 
-	Intent intent = ((Activity) context).getIntent();
-	_selectedMatch = (Match) intent.getSerializableExtra(MatchActivity.REQ_MESSAGE_MATCH);
+	    float densityMultiplier = getContext().getResources()
+		    .getDisplayMetrics().density;
+	    _paint = new Paint();
+	    _paint.setTextSize(10.0f * densityMultiplier);
+	    _paint.setTypeface(font);
 
-	Team home = null;
-	Team away = null;
-	for (QuizzPlayer qp : _selectedMatch.getQuizzs()) {
-	    if (qp.isHome()) {
-		home = qp.getTeam();
-	    } else {
-		away = qp.getTeam();
+	    Intent intent = ((Activity) context).getIntent();
+	    _selectedMatch = (Match) intent
+		    .getSerializableExtra(MatchActivity.REQ_MESSAGE_MATCH);
+
+	    Team home = null;
+	    Team away = null;
+	    for (QuizzPlayer qp : _selectedMatch.getQuizzs()) {
+		if (qp.isHome()) {
+		    home = qp.getTeam();
+		} else {
+		    away = qp.getTeam();
+		}
+		if (home != null && away != null) {
+		    break;
+		}
 	    }
-	    if (home != null && away != null) {
-		break;
-	    }
-	}
 
-	int idHome = getResources().getIdentifier(
-		USER_PREFIX + home.getHomeJerseyColor().name().toLowerCase(Locale.US), "drawable",
-		getContext().getPackageName());
-	int idAway = getResources().getIdentifier(
-		USER_PREFIX + away.getHomeJerseyColor().name().toLowerCase(Locale.US), "drawable",
-		getContext().getPackageName());
-	if (idAway == idHome) {
-	    _colorHomeForAwayTeam = false;
-	    idAway = getResources().getIdentifier(
-		    USER_PREFIX + away.getAwayJerseyColor().name().toLowerCase(Locale.US), "drawable",
+	    int idHome = getResources().getIdentifier(
+		    USER_PREFIX
+			    + home.getHomeJerseyColor().name()
+				    .toLowerCase(Locale.US), "drawable",
 		    getContext().getPackageName());
+	    int idAway = getResources().getIdentifier(
+		    USER_PREFIX
+			    + away.getHomeJerseyColor().name()
+				    .toLowerCase(Locale.US), "drawable",
+		    getContext().getPackageName());
+	    if (idAway == idHome) {
+		_colorHomeForAwayTeam = false;
+		idAway = getResources().getIdentifier(
+			USER_PREFIX
+				+ away.getAwayJerseyColor().name()
+					.toLowerCase(Locale.US), "drawable",
+			getContext().getPackageName());
+	    }
+
+	    _playerHomeRaw = ((BitmapDrawable) _context.getResources()
+		    .getDrawable(idHome)).getBitmap();
+	    _playerAwayRaw = ((BitmapDrawable) _context.getResources()
+		    .getDrawable(idAway)).getBitmap();
+
+	    _matrix = new Matrix();
+
 	}
-
-	_playerHomeRaw = ((BitmapDrawable) _context.getResources().getDrawable(idHome)).getBitmap();
-	_playerAwayRaw = ((BitmapDrawable) _context.getResources().getDrawable(idAway)).getBitmap();
-
-	_matrix = new Matrix();
     }
 
     // private Bitmap getBitmapFromAsset(String strName) {
@@ -135,7 +156,8 @@ public class MatchView extends View {
     // return bitmap;
     // }
 
-    protected BitmapDrawable scaleImage(BitmapDrawable srcTerrain, int destW, int destH) {
+    protected BitmapDrawable scaleImage(BitmapDrawable srcTerrain, int destW,
+	    int destH) {
 	int terrainW = srcTerrain.getBitmap().getWidth();
 	int terrainH = srcTerrain.getBitmap().getHeight();
 
@@ -156,7 +178,8 @@ public class MatchView extends View {
 	Matrix matrix = new Matrix();
 	matrix.postScale((float) scale, (float) scale);
 
-	Bitmap scaledBitmap = Bitmap.createBitmap(srcTerrain.getBitmap(), 0, 0, terrainW, terrainH, matrix, true);
+	Bitmap scaledBitmap = Bitmap.createBitmap(srcTerrain.getBitmap(), 0, 0,
+		terrainW, terrainH, matrix, true);
 	return new BitmapDrawable(scaledBitmap);
     }
 
@@ -188,45 +211,49 @@ public class MatchView extends View {
 
     protected void scaleTerrain() {
 	if (_terrain == null) {
-	    Bitmap scaledBitmap = Bitmap.createBitmap(_terrainRaw, 0, 0, _terrainRaw.getWidth(),
-		    _terrainRaw.getHeight(), _matrix, true);
+	    Bitmap scaledBitmap = Bitmap.createBitmap(_terrainRaw, 0, 0,
+		    _terrainRaw.getWidth(), _terrainRaw.getHeight(), _matrix,
+		    true);
 	    _terrain = scaledBitmap;
 	}
     }
 
     protected void scalePlayerHome() {
 	if (_playerHome == null) {
-	    Bitmap scaledBitmap = Bitmap.createBitmap(_playerHomeRaw, 0, 0, _playerHomeRaw.getWidth(),
-		    _playerHomeRaw.getHeight(), _matrix, true);
+	    Bitmap scaledBitmap = Bitmap.createBitmap(_playerHomeRaw, 0, 0,
+		    _playerHomeRaw.getWidth(), _playerHomeRaw.getHeight(),
+		    _matrix, true);
 	    _playerHome = scaledBitmap;
 	}
     }
 
     protected void scalePlayerAway() {
 	if (_playerAway == null) {
-	    Bitmap scaledBitmap = Bitmap.createBitmap(_playerAwayRaw, 0, 0, _playerAwayRaw.getWidth(),
-		    _playerAwayRaw.getHeight(), _matrix, true);
+	    Bitmap scaledBitmap = Bitmap.createBitmap(_playerAwayRaw, 0, 0,
+		    _playerAwayRaw.getWidth(), _playerAwayRaw.getHeight(),
+		    _matrix, true);
 	    _playerAway = scaledBitmap;
 	}
     }
 
     protected void scaleCoach() {
 	if (_coach == null) {
-	    Bitmap scaledBitmap = Bitmap.createBitmap(_coachRaw, 0, 0, _coachRaw.getWidth(), _coachRaw.getHeight(),
-		    _matrix, true);
+	    Bitmap scaledBitmap = Bitmap.createBitmap(_coachRaw, 0, 0,
+		    _coachRaw.getWidth(), _coachRaw.getHeight(), _matrix, true);
 	    _coach = scaledBitmap;
 	}
     }
 
     protected void scaleBall() {
 	if (_ball == null) {
-	    Bitmap scaledBitmap = Bitmap.createBitmap(_ballRaw, 0, 0, _ballRaw.getWidth(), _ballRaw.getHeight(),
-		    _matrix, true);
+	    Bitmap scaledBitmap = Bitmap.createBitmap(_ballRaw, 0, 0,
+		    _ballRaw.getWidth(), _ballRaw.getHeight(), _matrix, true);
 	    _ball = scaledBitmap;
 	}
 	if (_ballRed == null) {
-	    Bitmap scaledBitmap = Bitmap.createBitmap(_ballRedRaw, 0, 0, _ballRedRaw.getWidth(),
-		    _ballRedRaw.getHeight(), _matrix, true);
+	    Bitmap scaledBitmap = Bitmap.createBitmap(_ballRedRaw, 0, 0,
+		    _ballRedRaw.getWidth(), _ballRedRaw.getHeight(), _matrix,
+		    true);
 	    _ballRed = scaledBitmap;
 	}
     }
@@ -239,33 +266,36 @@ public class MatchView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 	super.onDraw(canvas);
+	if (!isInEditMode()) {
 
-	_completed = false;
+	    _completed = false;
 
-	setScaleMatrix();
-	scaleTerrain();
-	scalePlayerHome();
-	scalePlayerAway();
-	scaleCoach();
-	scaleBall();
+	    setScaleMatrix();
+	    scaleTerrain();
+	    scalePlayerHome();
+	    scalePlayerAway();
+	    scaleCoach();
+	    scaleBall();
 
-	// =================================================================
-	// Terrain
-	// =================================================================
-	printTerrain(canvas);
+	    // =================================================================
+	    // Terrain
+	    // =================================================================
+	    printTerrain(canvas);
 
-	// =================================================================
-	// Player
-	// =================================================================
-	for (QuizzPlayer qp : _selectedMatch.getQuizzs()) {
-	    if (qp.isCoach()) {
-		printCoach(canvas, qp);
-	    } else {
-		printPlayer(canvas, qp);
+	    // =================================================================
+	    // Player
+	    // =================================================================
+	    for (QuizzPlayer qp : _selectedMatch.getQuizzs()) {
+		if (qp.isCoach()) {
+		    printCoach(canvas, qp);
+		} else {
+		    printPlayer(canvas, qp);
+		}
 	    }
+
+	    _completed = true;
 	}
 
-	_completed = true;
     }
 
     protected void printCoach(Canvas canvas, QuizzPlayer qp) {
@@ -281,7 +311,8 @@ public class MatchView extends View {
 	    textY = this.getHeight() - 10;
 	}
 	canvas.drawBitmap(_coach, (float) imageX, (float) imageY, null);
-	canvas.drawText(qp.getPlayer().getName(), (float) textX, (float) textY, _paint);
+	canvas.drawText(qp.getPlayer().getName(), (float) textX, (float) textY,
+		_paint);
 
     }
 
@@ -297,7 +328,9 @@ public class MatchView extends View {
 
     private boolean isDiscovered(QuizzPlayer qp) {
 	Play play = _mapQuizzToPlay.get(qp.getId());
-	if (play != null && StringUtils.equalsIgnoreCase(play.getResponse(), qp.getPlayer().getName())) {
+	if (play != null
+		&& StringUtils.equalsIgnoreCase(play.getResponse(), qp
+			.getPlayer().getName())) {
 	    return true;
 	} else {
 	    return false;
@@ -335,7 +368,8 @@ public class MatchView extends View {
 	    canvas.drawBitmap(backImg, (float) backImgX, (float) backImgY, null);
 
 	    if (isDiscovered(qp)) {
-		canvas.drawBitmap(playerImg, (float) playerX, (float) playerY, null);
+		canvas.drawBitmap(playerImg, (float) playerX, (float) playerY,
+			null);
 	    }
 	} else {
 	    canvas.drawBitmap(playerImg, (float) playerX, (float) playerY, null);
@@ -344,18 +378,22 @@ public class MatchView extends View {
 	int ballNumber = 0;
 	if (qp.getGoal() > 0) {
 	    for (int i = 0; i < qp.getGoal(); i++) {
-		double ballX = playerX + playerImg.getWidth() - _ball.getWidth();
+		double ballX = playerX + playerImg.getWidth()
+			- _ball.getWidth();
 		ballX += ballNumber * _ball.getWidth();
-		double ballY = playerY + playerImg.getHeight() - _ball.getHeight();
+		double ballY = playerY + playerImg.getHeight()
+			- _ball.getHeight();
 		canvas.drawBitmap(_ball, (float) ballX, (float) ballY, null);
 		ballNumber++;
 	    }
 	}
 	if (qp.getCsc() > 0) {
 	    for (int i = 0; i < qp.getCsc(); i++) {
-		double ballX = playerX + playerImg.getWidth() - _ballRed.getWidth();
+		double ballX = playerX + playerImg.getWidth()
+			- _ballRed.getWidth();
 		ballX += ballNumber * _ball.getWidth();
-		double ballY = playerY + playerImg.getHeight() - _ballRed.getHeight();
+		double ballY = playerY + playerImg.getHeight()
+			- _ballRed.getHeight();
 		canvas.drawBitmap(_ballRed, (float) ballX, (float) ballY, null);
 		ballNumber++;
 	    }
@@ -365,8 +403,10 @@ public class MatchView extends View {
 	    double textWidth = _paint.measureText(qp.getPlayer().getName());
 	    double textDecal = textWidth / 2;
 
-	    double textX = playerX + ((double) playerImg.getWidth() / 2) - textDecal;
-	    double textY = playerY + playerImg.getHeight() + _paint.getTextSize();
+	    double textX = playerX + ((double) playerImg.getWidth() / 2)
+		    - textDecal;
+	    double textY = playerY + playerImg.getHeight()
+		    + _paint.getTextSize();
 	    StringBuffer s = new StringBuffer(qp.getPlayer().getName());
 	    if (qp.isCaptain()) {
 		s.append(" (C)");
@@ -375,14 +415,16 @@ public class MatchView extends View {
 	}
     }
 
-    protected double getPlayerX(QuizzPlayer aQuizzPlayer, double aLateralMarge, double aMetreX, Bitmap aPlayerImg) {
+    protected double getPlayerX(QuizzPlayer aQuizzPlayer, double aLateralMarge,
+	    double aMetreX, Bitmap aPlayerImg) {
 	double coordonneeX = (START_REPERE_X + aQuizzPlayer.getX()) * aMetreX;
 	coordonneeX -= ((double) aPlayerImg.getWidth() / 2);
 	coordonneeX += aLateralMarge;
 	return coordonneeX;
     }
 
-    protected double getPlayerY(QuizzPlayer aQuizzPlauer, double aTerainH, double aMetreY, Bitmap aPlayerImg) {
+    protected double getPlayerY(QuizzPlayer aQuizzPlauer, double aTerainH,
+	    double aMetreY, Bitmap aPlayerImg) {
 	double coordonneeY;
 
 	coordonneeY = (aTerainH / 2) + (aQuizzPlauer.getY() * aMetreY * -1);
@@ -418,26 +460,33 @@ public class MatchView extends View {
 	    double playerXMax = playerXMin + (double) img.getWidth();
 
 	    double playerYMin = getPlayerY(qp, terrainH, metreY, img);
-	    double playerYMax = playerYMin + img.getHeight() + _paint.getTextSize();
+	    double playerYMax = playerYMin + img.getHeight()
+		    + _paint.getTextSize();
 
-	    if (event.getX() >= playerXMin && event.getX() <= playerXMax && event.getY() >= playerYMin
-		    && event.getY() <= playerYMax) {
+	    if (event.getX() >= playerXMin && event.getX() <= playerXMax
+		    && event.getY() >= playerYMin && event.getY() <= playerYMax) {
 
 		if (!qp.isHide() || isDiscovered(qp)) {
-		    Toast.makeText(getContext(), qp.getPlayer().getName(), Toast.LENGTH_SHORT).show();
+		    Toast.makeText(getContext(), qp.getPlayer().getName(),
+			    Toast.LENGTH_SHORT).show();
 		    return b;
 		} else {
-		    Intent intent = new Intent(getContext(), ResponseActivity.class);
+		    Intent intent = new Intent(getContext(),
+			    ResponseActivity.class);
 		    intent.putExtra(ResponseActivity.EXTRA_MESSAGE_QUIZZ, qp);
-		    intent.putExtra(ResponseActivity.EXTRA_MESSAGE_PLAY, _mapQuizzToPlay.get(qp.getId()));
+		    intent.putExtra(ResponseActivity.EXTRA_MESSAGE_PLAY,
+			    _mapQuizzToPlay.get(qp.getId()));
 		    if (qp.isHome()) {
-			intent.putExtra(ResponseActivity.EXTRA_MESSAGE_HOME_COLOR, true);
+			intent.putExtra(
+				ResponseActivity.EXTRA_MESSAGE_HOME_COLOR, true);
 		    } else {
-			intent.putExtra(ResponseActivity.EXTRA_MESSAGE_HOME_COLOR, _colorHomeForAwayTeam);
+			intent.putExtra(
+				ResponseActivity.EXTRA_MESSAGE_HOME_COLOR,
+				_colorHomeForAwayTeam);
 		    }
 
-		    ((MatchActivity) getContext()).startActivityForResult(intent,
-			    MatchActivity.EXTRA_MESSAGE_REQUEST_CODE);
+		    ((MatchActivity) getContext()).startActivityForResult(
+			    intent, MatchActivity.EXTRA_MESSAGE_REQUEST_CODE);
 
 		    return b;
 		}
