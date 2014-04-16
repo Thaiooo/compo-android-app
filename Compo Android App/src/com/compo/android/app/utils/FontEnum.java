@@ -31,10 +31,11 @@ public enum FontEnum {
 
 	/***/
 	BUTTON("FiraSansOT-Regular.otf"),
+	
 	/***/
 	FIELD_TITLE("FiraSansOT-Regular.otf"),
 	/***/
-	SCORE_FONT("light_led_board.ttf");
+	FIELD_SCORE("light_led_board.ttf");
 
 	private String name;
 
