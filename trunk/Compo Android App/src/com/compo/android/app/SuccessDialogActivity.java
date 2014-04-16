@@ -31,7 +31,7 @@ public class SuccessDialogActivity extends Activity {
 
 		TextView earnCreditValue = (TextView) findViewById(R.id.earn_credit_value);
 		if (_font == null) {
-			_font = Typeface.createFromAsset(getAssets(), FontEnum.ERASER.getName());
+			_font = Typeface.createFromAsset(getAssets(), FontEnum.DIALOG_TITLE.getName());
 		}
 		earnCreditValue.setTypeface(_font);
 		earnCreditValue.setText(Integer.toString(_currentQuizz.getEarnCredit()));

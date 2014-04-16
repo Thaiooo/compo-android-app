@@ -39,7 +39,8 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	private static final String SHORT_PREFIX = "short_";
 	private static final String SOCK_PREFIX = "sock_";
 
-	private static Typeface _font;
+	private static Typeface _fontButton;
+	private static Typeface _fontEditText;
 	private EditText _edit;
 	private ImageView _matching;
 	private ImageView _jersey;
@@ -118,13 +119,16 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 
 		_matching = (ImageView) findViewById(R.id.matching_image);
 
-		if (_font == null) {
-			_font = Typeface.createFromAsset(getAssets(), FontEnum.ERASER.getName());
+		if (_fontEditText == null) {
+			_fontEditText = Typeface.createFromAsset(getAssets(), FontEnum.RESPONSE_CONTENT.getName());
 		}
-		_edit.setTypeface(_font);
+		_edit.setTypeface(_fontEditText);
 
+		if (_fontButton == null) {
+			_fontButton = Typeface.createFromAsset(getAssets(), FontEnum.BUTTON.getName());
+		}
 		Button check = (Button) findViewById(R.id.button_check);
-		check.setTypeface(_font);
+		check.setTypeface(_fontButton);
 
 		_buttonHint = (Button) findViewById(R.id.button_hint);
 		_buttonRandom = (Button) findViewById(R.id.button_random);

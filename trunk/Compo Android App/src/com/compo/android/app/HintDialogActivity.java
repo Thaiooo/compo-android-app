@@ -53,9 +53,6 @@ public class HintDialogActivity extends Activity {
 		TextView description = (TextView) findViewById(R.id.hint_description);
 		TextView price = (TextView) findViewById(R.id.hint_price);
 
-		if (_font == null) {
-			_font = Typeface.createFromAsset(getAssets(), FontEnum.ERASER.getName());
-		}
 		title.setTypeface(_font);
 		description.setTypeface(_font);
 		price.setTypeface(_font);

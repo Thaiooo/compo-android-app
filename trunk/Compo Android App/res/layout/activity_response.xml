@@ -93,6 +93,7 @@
 
     <Button
         android:id="@+id/button_check"
+        style="@style/common_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -100,7 +101,8 @@
         android:layout_marginTop="@dimen/response_edit_field_margin_top"
         android:onClick="check"
         android:text="@string/button_check"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/response_button_font_size" />
 
     <EditText
         android:id="@+id/edit_response"
