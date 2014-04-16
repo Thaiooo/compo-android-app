@@ -4,16 +4,24 @@
     android:layout_height="wrap_content"
     android:background="@drawable/background_dialog" >
 
+    <!-- ===== -->
+    <!-- TITRE -->
+    <!-- ===== -->
+
     <TextView
         android:id="@+id/hint_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/dialog_tittle_margin"
+        android:layout_marginBottom="@dimen/dialog_title_margin"
         android:background="@drawable/background_title"
         android:textColor="@color/white"
         android:textIsSelectable="false"
         android:textSize="@dimen/dialog_title_font_size" />
+
+    <!-- ======== -->
+    <!-- CONTENUE -->
+    <!-- ======== -->
 
     <TextView
         android:id="@+id/hint_description"
@@ -38,9 +46,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dialog_button_spacing"
+            android:layout_marginRight="@dimen/hint_dialog_price_spacing"
             android:contentDescription="@string/image_desc_coins"
-            android:src="@drawable/coins_4" />
+            android:src="@drawable/coins_3" />
 
         <TextView
             android:id="@+id/hint_price"
@@ -52,6 +60,10 @@
             android:textIsSelectable="false"
             android:textSize="@dimen/hint_dialog_price_font_size" />
     </RelativeLayout>
+
+    <!-- =========== -->
+    <!-- LES BOUTONS -->
+    <!-- =========== -->
 
     <LinearLayout
         android:layout_width="wrap_content"
