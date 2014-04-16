@@ -33,11 +33,10 @@
         android:textIsSelectable="false"
         android:textSize="@dimen/dialog_content_font_size" />
 
-    <!-- ========= -->
+    <!-- ====== -->
     <!-- BOUTON -->
-    <!-- ========= -->
-
-    <Button
+    <!-- ====== -->
+    <Button
         android:id="@+id/button_cancel"
         style="@style/common_btn"
         android:layout_width="wrap_content"
