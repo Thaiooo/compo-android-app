@@ -17,6 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/background_title"
             android:textColor="@android:color/white"
             android:textIsSelectable="false"
             android:textSize="@dimen/field_detail_font_size" />
