@@ -4,7 +4,9 @@
     android:layout_height="wrap_content"
     android:background="@drawable/background_dialog" >
 
-    <!-- *** IMAGE DU POUCE *** -->
+    <!-- ============== -->
+    <!-- IMAGE DU POUCE -->
+    <!-- ============== -->
 
     <ImageView
         android:id="@+id/success_image"
@@ -14,7 +16,9 @@
         android:contentDescription="TODO"
         android:src="@drawable/coins" />
 
-    <!-- *** CREDIT GAGNE *** -->
+    <!-- ============ -->
+    <!-- CREDIT GAGNE -->
+    <!-- ============ -->
 
     <RelativeLayout
         android:id="@+id/earn_credit_layout"
@@ -45,7 +49,9 @@
             android:textSize="@dimen/success_dialog_earn_font_size" />
     </RelativeLayout>
 
-    <!-- *** LES BOUTTONS *** -->
+    <!-- =========== -->
+    <!-- LES BOUTONS -->
+    <!-- =========== -->
 
     <LinearLayout
         android:id="@+id/button_success_only_layout"
