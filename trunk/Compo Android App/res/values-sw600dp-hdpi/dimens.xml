@@ -44,9 +44,6 @@
     <dimen name="hint_dialog_price_margin_top">10dp</dimen>
 
     <!-- Hint display -->
-    <dimen name="hint_display_width">200dp</dimen>
-    <dimen name="hint_display_title_font_size">25dp</dimen>
-    <dimen name="hint_display_content_font_size">25dp</dimen>
 
     <!-- Match -->
     <dimen name="field_detail_font_size">15dp</dimen>
