@@ -8,7 +8,7 @@ public enum FontEnum {
 	THEME_NAME("FiraSansOT-Regular.otf"),
 
 	/***/
-	PACK_NAME("FiraSansOT-Regular.otf"),
+	PACK_NAME("FiraSansOT-Bold.otf"),
 	/***/
 	PACK_DESC("FiraSansOT-Regular.otf"),
 	/***/
@@ -25,18 +25,16 @@ public enum FontEnum {
 	DIALOG_TITLE("FiraSansOT-Regular.otf"),
 	/***/
 	DIALOG_CONTENT("FiraSansOT-Regular.otf"),
+
+	/***/
+	RESPONSE_CONTENT("FiraSansOT-Regular.otf"),
+
 	/***/
 	BUTTON("FiraSansOT-Regular.otf"),
 	/***/
-	DEFAULT("SFCollegiateSolid-Bold.ttf"),
+	FIELD_TITLE("FiraSansOT-Regular.otf"),
 	/***/
-	LUCKY_PENNY("MyLuckyPenny.ttf"),
-	/***/
-	ERASER("Eraser.ttf"),
-	/***/
-	SCORE_FONT("light_led_board.ttf"),
-	/***/
-	DRAWING_GUIDES("DrawingGuides.ttf");
+	SCORE_FONT("light_led_board.ttf");
 
 	private String name;
 

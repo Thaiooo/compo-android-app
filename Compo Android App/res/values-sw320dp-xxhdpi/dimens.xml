@@ -61,6 +61,7 @@
     <dimen name="response_hint_margin_top">10dp</dimen>
     <dimen name="response_player_image_margin_top">20dp</dimen>
     <dimen name="response_edit_field_margin_top">10dp</dimen>
-    <dimen name="response_edit_field_font_size">22sp</dimen>
+    <dimen name="response_edit_field_font_size">20dp</dimen>
+    <dimen name="response_button_font_size">20dp</dimen>
 
 </resources>

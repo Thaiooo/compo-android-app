@@ -62,7 +62,7 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
 		super.onCreate(savedInstanceState);
 
 		if (_font == null) {
-			_font = Typeface.createFromAsset(getAssets(), FontEnum.LUCKY_PENNY.getName());
+			_font = Typeface.createFromAsset(getAssets(), FontEnum.FIELD_TITLE.getName());
 		}
 
 		if (_fontSocrePrinter == null) {

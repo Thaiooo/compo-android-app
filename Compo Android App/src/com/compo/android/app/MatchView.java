@@ -76,7 +76,7 @@ public class MatchView extends View {
 
 		if (!isInEditMode()) {
 
-			font = Typeface.createFromAsset(_context.getAssets(), FontEnum.LUCKY_PENNY.getName());
+			font = Typeface.createFromAsset(_context.getAssets(), FontEnum.FIELD_TITLE.getName());
 
 			_coachRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.coach)).getBitmap();
 			_terrainRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.soccer_field_grass))
