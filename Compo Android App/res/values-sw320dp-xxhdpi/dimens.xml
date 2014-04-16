@@ -3,7 +3,7 @@
 
     <!-- Dialog -->
     <dimen name="dialog_title_font_size">20dp</dimen>
-    <dimen name="dialog_tittle_margin">15dp</dimen>
+    <dimen name="dialog_title_margin">15dp</dimen>
     <dimen name="dialog_button_margin">20dp</dimen>
     <dimen name="dialog_button_spacing">5dp</dimen>
     <dimen name="dialog_button_font_size">20dp</dimen>
@@ -43,13 +43,9 @@
     <dimen name="match_post_it_ball_margin_top">5dp</dimen>
 
     <!-- Hint dialog -->
-    <dimen name="hint_dialog_width">250dp</dimen>
-    <dimen name="hint_dialog_title_font_size">20dp</dimen>
-    <dimen name="hint_dialog_button_font_size">20dp</dimen>
-    <dimen name="hint_dialog_description_font_size">20dp</dimen>
     <dimen name="hint_dialog_price_font_size">30dp</dimen>
     <dimen name="hint_dialog_button_width">110dp</dimen>
-    <dimen name="hint_dialog_button_margin_top">10dp</dimen>
+    <dimen name="hint_dialog_price_spacing">10dp</dimen>
     <dimen name="hint_dialog_price_margin_top">10dp</dimen>
 
     <!-- Hint display -->
