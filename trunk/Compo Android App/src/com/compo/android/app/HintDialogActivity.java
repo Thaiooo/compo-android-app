@@ -29,6 +29,9 @@ public class HintDialogActivity extends Activity {
 	private HintTypeEnum _hintType;
 	private User _currentUser;
 
+	// TODO A externaliser
+	private static final String PRICE_SUFFIX = " credits";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,7 +39,7 @@ public class HintDialogActivity extends Activity {
 		setContentView(R.layout.activity_hint_dialog);
 
 		if (_font == null) {
-			_font = Typeface.createFromAsset(getAssets(), FontEnum.LUCKY_PENNY.getName());
+			_font = Typeface.createFromAsset(getAssets(), FontEnum.DIALOG_TITLE.getName());
 		}
 
 		_currentUser = UserFactory.getInstance().getUser(this);
@@ -61,22 +64,22 @@ public class HintDialogActivity extends Activity {
 		case HINT:
 			title.setText(getString(R.string.title_help_hint));
 			description.setText(getString(R.string.label_desc_help_hint));
-			price.setText(Integer.toString(_currentQuizz.getCreditToUnlockHint()));
+			price.setText(Integer.toString(_currentQuizz.getCreditToUnlockHint()) + PRICE_SUFFIX);
 			break;
 		case RANDOM:
 			title.setText(getString(R.string.title_help_random));
 			description.setText(getString(R.string.label_desc_help_random));
-			price.setText(Integer.toString(_currentQuizz.getCreditToUnlockRandom()));
+			price.setText(Integer.toString(_currentQuizz.getCreditToUnlockRandom()) + PRICE_SUFFIX);
 			break;
 		case HALF:
 			title.setText(getString(R.string.title_help_half));
 			description.setText(getString(R.string.label_desc_help_half));
-			price.setText(Integer.toString(_currentQuizz.getCreditToUnlockHalf()));
+			price.setText(Integer.toString(_currentQuizz.getCreditToUnlockHalf()) + PRICE_SUFFIX);
 			break;
 		default:
 			title.setText(getString(R.string.title_help_full));
 			description.setText(getString(R.string.label_desc_help_full));
-			price.setText(Integer.toString(_currentQuizz.getCreditToUnlockResponse()));
+			price.setText(Integer.toString(_currentQuizz.getCreditToUnlockResponse()) + PRICE_SUFFIX);
 			break;
 		}
 
@@ -106,7 +109,7 @@ public class HintDialogActivity extends Activity {
 			startActivity(intent);
 			overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
-			// TODO D�cr�menter le cr�dit de l'utilisateur
+			// TODO Decrementer le credit de l'utilisateur
 
 			// Update de l'objet play
 			if (_currentPlay == null) {
@@ -133,7 +136,7 @@ public class HintDialogActivity extends Activity {
 			QuizzService service = new QuizzService(HintDialogActivity.this);
 			_currentPlay = service.savePlay(_currentPlay);
 
-			// Pour r�percuter la maj sur l'�cran ResponseActivity
+			// Pour repercuter la maj sur l'ecran ResponseActivity
 			Intent newIntent = new Intent();
 			newIntent.putExtra(ResponseActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
 			setResult(RESULT_OK, newIntent);

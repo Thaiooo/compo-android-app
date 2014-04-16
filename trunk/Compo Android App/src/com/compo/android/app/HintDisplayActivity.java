@@ -35,7 +35,7 @@ public class HintDisplayActivity extends Activity {
 		TextView hintTitle = (TextView) findViewById(R.id.hint_title);
 		TextView hintValue = (TextView) findViewById(R.id.hint_value);
 		if (_font == null) {
-			_font = Typeface.createFromAsset(getAssets(), FontEnum.ERASER.getName());
+			_font = Typeface.createFromAsset(getAssets(), FontEnum.DIALOG_TITLE.getName());
 		}
 		hintValue.setTypeface(_font);
 		hintTitle.setTypeface(_font);
