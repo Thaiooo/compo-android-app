@@ -1,42 +1,51 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="200dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/background_dialog" >
 
-    <!-- *** Image du pouce *** -->
+    <!-- *** IMAGE DU POUCE *** -->
 
     <ImageView
         android:id="@+id/success_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:contentDescription="TODO"
         android:src="@drawable/coins" />
 
-    <!-- *** Credit gagné *** -->
+    <!-- *** CREDIT GAGNE *** -->
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/earn_credit_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/success_image"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal" >
+        android:layout_marginTop="10dp" >
 
         <ImageView
+            android:id="@+id/img_coin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/coins" />
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:contentDescription="TODO"
+            android:src="@drawable/coins_3" />
 
         <TextView
             android:id="@+id/earn_credit_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/img_coin"
+            android:text="test"
             android:textColor="@color/black"
             android:textIsSelectable="false"
-            android:textSize="15dp" />
-    </LinearLayout>
+            android:textSize="@dimen/success_dialog_earn_font_size" />
+    </RelativeLayout>
+
+    <!-- *** LES BOUTTONS *** -->
 
     <LinearLayout
         android:id="@+id/button_success_only_layout"
@@ -44,17 +53,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/earn_credit_layout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/dialog_button_margin"
         android:orientation="horizontal"
         android:visibility="invisible" >
 
         <Button
-            android:layout_width="80dp"
+            style="@style/common_btn"
+            android:layout_width="@dimen/success_dialog_button_width"
             android:layout_height="wrap_content"
             android:onClick="success"
             android:text="@string/button_ok"
-            android:textSize="15dp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/response_edit_field_font_size" />
     </LinearLayout>
 
     <LinearLayout
@@ -63,25 +72,27 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/earn_credit_layout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/dialog_button_margin"
         android:orientation="horizontal"
         android:visibility="invisible" >
 
         <Button
-            android:layout_width="80dp"
+            style="@style/common_btn"
+            android:layout_width="@dimen/success_dialog_button_width"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dialog_button_spacing"
             android:onClick="success"
             android:text="@string/button_ok"
-            android:textSize="15dp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/response_edit_field_font_size" />
 
         <Button
-            android:layout_width="80dp"
+            style="@style/common_btn"
+            android:layout_width="@dimen/success_dialog_button_width"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dialog_button_spacing"
             android:onClick="next"
             android:text="@string/button_next_match"
-            android:textSize="15dp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/response_edit_field_font_size" />
     </LinearLayout>
 
 </RelativeLayout>
