@@ -131,6 +131,7 @@
             android:layout_toLeftOf="@+id/button_check"
             android:gravity="center"
             android:inputType="text"
+            android:background="@drawable/background_input"
             android:lines="1"
             android:maxLength="20"
             android:singleLine="true"
