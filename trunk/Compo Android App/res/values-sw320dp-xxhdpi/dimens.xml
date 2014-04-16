@@ -64,4 +64,8 @@
     <dimen name="response_edit_field_font_size">20dp</dimen>
     <dimen name="response_button_font_size">20dp</dimen>
 
+    <!-- Success dialog -->
+    <dimen name="success_dialog_earn_font_size">30dp</dimen>
+    <dimen name="success_dialog_button_width">80dp</dimen>
+
 </resources>
