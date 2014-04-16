@@ -16,7 +16,7 @@
 
     <Button
         android:id="@+id/button_hint"
-        style="@style/post_it_hint_btn"
+        style="@style/hint1_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -27,7 +27,7 @@
 
     <Button
         android:id="@+id/button_random"
-        style="@style/post_it_hint_btn"
+        style="@style/hint2_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -37,7 +37,7 @@
 
     <Button
         android:id="@+id/button_50"
-        style="@style/post_it_hint_btn"
+        style="@style/hint3_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -49,7 +49,7 @@
 
     <Button
         android:id="@+id/button_100"
-        style="@style/post_it_hint_btn"
+        style="@style/hint4_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -129,9 +129,9 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/button_check"
+            android:background="@drawable/background_input"
             android:gravity="center"
             android:inputType="text"
-            android:background="@drawable/background_input"
             android:lines="1"
             android:maxLength="20"
             android:singleLine="true"
@@ -142,7 +142,8 @@
     <!-- ====================== -->
     <!-- CARTON D'AVERTISSEMENT -->
     <!-- ====================== -->
-    <ImageView
+
+    <ImageView
         android:id="@+id/matching_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -29,21 +29,33 @@
     <style name="previous_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/button_previous</item>
     </style>
-    
+
     <style name="next_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/button_next</item>
     </style>
-    
+
     <style name="common_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/button_common</item>
     </style>
-    
+
     <style name="blank_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/button_blank</item>
     </style>
 
-    <style name="post_it_hint_btn" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/button_post_it_hint</item>
+    <style name="hint1_btn" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/button_hint1</item>
+    </style>
+
+    <style name="hint2_btn" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/button_hint2</item>
+    </style>
+
+    <style name="hint3_btn" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/button_hint3</item>
+    </style>
+
+    <style name="hint4_btn" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/button_hint4</item>
     </style>
 
     <style name="home_btn" parent="@android:style/Widget.Button">
@@ -53,11 +65,11 @@
     <style name="back_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/button_back</item>
     </style>
-    
+
     <style name="store_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/button_store</item>
     </style>
-    
+
     <style name="setting_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/button_setting</item>
     </style>
