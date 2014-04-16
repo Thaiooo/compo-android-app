@@ -66,7 +66,7 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
 		}
 
 		if (_fontSocrePrinter == null) {
-			_fontSocrePrinter = Typeface.createFromAsset(getAssets(), FontEnum.SCORE_FONT.getName());
+			_fontSocrePrinter = Typeface.createFromAsset(getAssets(), FontEnum.FIELD_SCORE.getName());
 		}
 
 		PlayDao playDao = new PlayDao(this);
