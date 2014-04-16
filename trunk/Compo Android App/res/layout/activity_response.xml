@@ -10,6 +10,10 @@
         android:id="@+id/score_bar"
         layout="@layout/score_bar" />
 
+    <!-- ==== -->
+    <!-- HELP -->
+    <!-- ==== -->
+
     <Button
         android:id="@+id/button_hint"
         style="@style/post_it_hint_btn"
@@ -54,6 +58,10 @@
         android:onClick="openResponse"
         android:textStyle="bold" />
 
+    <!-- ============ -->
+    <!-- IMAGE JOUEUR -->
+    <!-- ============ -->
+
     <ImageView
         android:id="@+id/player_figure"
         android:layout_width="wrap_content"
@@ -91,38 +99,53 @@
         android:layout_marginTop="@dimen/response_player_image_margin_top"
         android:contentDescription="@string/image_player_sock" />
 
-    <Button
-        android:id="@+id/button_check"
-        style="@style/common_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/player_figure"
-        android:layout_marginTop="@dimen/response_edit_field_margin_top"
-        android:onClick="check"
-        android:text="@string/button_check"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/response_button_font_size" />
+    <!-- ============== -->
+    <!-- ZONE DE SAISIE -->
+    <!-- ============== -->
 
-    <EditText
-        android:id="@+id/edit_response"
-        style="@style/transparent_edit_text"
+    <RelativeLayout
+        android:id="@+id/input_response_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/player_figure"
-        android:layout_marginTop="@dimen/response_edit_field_margin_top"
-        android:layout_toLeftOf="@+id/button_check"
-        android:lines="1"
-        android:maxLength="20"
-        android:singleLine="true"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/response_edit_field_font_size" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/response_edit_field_margin_top" >
 
-    <ImageView
+        <Button
+            android:id="@+id/button_check"
+            style="@style/common_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:onClick="check"
+            android:text="@string/button_check"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/response_button_font_size" />
+
+        <EditText
+            android:id="@+id/edit_response"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/button_check"
+            android:gravity="center"
+            android:inputType="text"
+            android:lines="1"
+            android:maxLength="20"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/response_edit_field_font_size" />
+    </RelativeLayout>
+
+    <!-- ====================== -->
+    <!-- CARTON D'AVERTISSEMENT -->
+    <!-- ====================== -->
+    <ImageView
         android:id="@+id/matching_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/edit_response"
+        android:layout_above="@+id/input_response_layout"
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/image_response_matching" />
 
