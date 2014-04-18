@@ -32,7 +32,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	public static final String EXTRA_MESSAGE_HOME_COLOR = "com.compo.android.app.ResponseActivity.MESSAGE.HOME.COLOR";
 
 	public static final String EXTRA_MESSAGE_RESULT = "com.compo.android.app.ResponseActivity.MESSAGE.RESULT";
-	
+
 	private static final String JERSEY_PREFIX = "jersey_";
 	private static final String SHORT_PREFIX = "short_";
 	private static final String SOCK_PREFIX = "sock_";
@@ -265,7 +265,8 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		if (requestCode == REQUEST_CODE_HINT_DIALOG) {
+		switch (requestCode) {
+		case REQUEST_CODE_HINT_DIALOG:
 			// =========================================================================================================
 			// Cas du retour de la page Hint dialog
 			// =========================================================================================================
@@ -288,7 +289,9 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 					_buttonResponse.setText("unlock");
 				}
 			}
-		} else {
+			break;
+
+		case REQUEST_CODE_SUCCESS_DIALOG:
 			// =========================================================================================================
 			// Cas du retour de la page Success dialog
 			// =========================================================================================================
@@ -306,6 +309,10 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 			}
 
 			finish();
+			break;
+
+		default:
+			break;
 		}
 
 	}
