@@ -144,7 +144,7 @@ public class PackFragment extends Fragment {
 					Intent intent = new Intent(getActivity(), SelectMatchActivity.class);
 					intent.putExtra(MESSAGE_THEME, _currentTheme);
 					intent.putExtra(MESSAGE_CURRENT_PACK, _currentPack);
-					startActivityForResult(intent, SelectPackActivity.EXTRA_MESSAGE_REQUEST_CODE);
+					startActivityForResult(intent, SelectPackActivity.REQUEST_CODE_LIST_MATCH);
 					getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 				}
 			});

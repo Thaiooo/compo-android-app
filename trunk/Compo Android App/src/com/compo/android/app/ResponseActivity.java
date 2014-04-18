@@ -32,9 +32,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	public static final String EXTRA_MESSAGE_HOME_COLOR = "com.compo.android.app.ResponseActivity.MESSAGE.HOME.COLOR";
 
 	public static final String EXTRA_MESSAGE_RESULT = "com.compo.android.app.ResponseActivity.MESSAGE.RESULT";
-	public static final int EXTRA_MESSAGE_REQUEST_CODE_HINT_DIALOG = 1;
-	public static final int EXTRA_MESSAGE_REQUEST_CODE_SUCCESS_DIALOG = 2;
-
+	
 	private static final String JERSEY_PREFIX = "jersey_";
 	private static final String SHORT_PREFIX = "short_";
 	private static final String SOCK_PREFIX = "sock_";
@@ -197,7 +195,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 			} else {
 				successDialogIntent.putExtra(SuccessDialogActivity.MESSAGE_DISPLAY_NEXT, false);
 			}
-			startActivityForResult(successDialogIntent, EXTRA_MESSAGE_REQUEST_CODE_SUCCESS_DIALOG);
+			startActivityForResult(successDialogIntent, REQUEST_CODE_SUCCESS_DIALOG);
 
 		} else {
 			if (percent >= 50) {
@@ -219,7 +217,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 		intent.putExtra(HintDialogActivity.MESSAGE_HINT_TYPE, aType);
 		intent.putExtra(HintDialogActivity.MESSAGE_QUIZZ_PLAYER, _currentQuizz);
 		intent.putExtra(HintDialogActivity.MESSAGE_PLAY, _currentPlay);
-		startActivityForResult(intent, EXTRA_MESSAGE_REQUEST_CODE_HINT_DIALOG);
+		startActivityForResult(intent, REQUEST_CODE_HINT_DIALOG);
 		overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 	}
 
@@ -267,7 +265,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
-		if (requestCode == EXTRA_MESSAGE_REQUEST_CODE_HINT_DIALOG) {
+		if (requestCode == REQUEST_CODE_HINT_DIALOG) {
 			// =========================================================================================================
 			// Cas du retour de la page Hint dialog
 			// =========================================================================================================

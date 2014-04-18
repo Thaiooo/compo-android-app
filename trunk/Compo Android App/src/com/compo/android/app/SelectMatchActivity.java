@@ -25,7 +25,6 @@ import com.compo.android.app.utils.UserFactory;
 public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 
 	public static final String EXTRA_MESSAGE_ARG = "com.compo.android.app.QuizzLevelFragment.MESSAGE.ARG";
-	public static final int EXTRA_MESSAGE_REQUEST_CODE = 1;
 
 	private static Typeface _fontTitle;
 
@@ -102,7 +101,7 @@ public class SelectMatchActivity extends AbstractLSEFragmentActivity {
 					Intent intent = new Intent(SelectMatchActivity.this, MatchActivity.class);
 					intent.putExtra(MatchActivity.REQ_MESSAGE_MATCH, selectMatch);
 					intent.putExtra(MatchActivity.REQ_MESSAGE_PACK, _selectPack);
-					startActivityForResult(intent, EXTRA_MESSAGE_REQUEST_CODE);
+					startActivityForResult(intent, REQUEST_CODE_MATCH);
 
 					overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 				}
