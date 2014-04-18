@@ -229,14 +229,14 @@ public class MatchDao {
 	aMatch.setName(quizzName);
 
 	anIndex++;
-	String quizzDate = aCursor.getString(anIndex);
-	try {
-	    java.util.Date d = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE).parse(quizzDate);
-	    Date date = new Date(d.getTime());
-	    aMatch.setDate(date);
-	} catch (ParseException e) {
-	    e.printStackTrace();
-	}
+//	String quizzDate = aCursor.getString(anIndex);
+//	try {
+//	    java.util.Date d = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE).parse(quizzDate);
+//	    Date date = new Date(d.getTime());
+//	    aMatch.setDate(date);
+//	} catch (ParseException e) {
+//	    e.printStackTrace();
+//	}
 
 	anIndex++;
 	int quizzScoreAway = aCursor.getInt(anIndex);

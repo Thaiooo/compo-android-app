@@ -269,14 +269,14 @@ public class PackDao {
 	aMatch.setName(aCursor.getString(anIndex));
 
 	anIndex++;
-	String matchDate = aCursor.getString(anIndex);
-	try {
-	    java.util.Date d = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE).parse(matchDate);
-	    Date date = new Date(d.getTime());
-	    aMatch.setDate(date);
-	} catch (ParseException e) {
-	    e.printStackTrace();
-	}
+//	String matchDate = aCursor.getString(anIndex);
+//	try {
+//	    java.util.Date d = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE).parse(matchDate);
+//	    Date date = new Date(d.getTime());
+//	    aMatch.setDate(date);
+//	} catch (ParseException e) {
+//	    e.printStackTrace();
+//	}
 
 	anIndex++;
 	aMatch.setScoreAway(aCursor.getInt(anIndex));
