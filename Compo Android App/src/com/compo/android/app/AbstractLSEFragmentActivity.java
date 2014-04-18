@@ -12,6 +12,9 @@ import com.compo.android.app.utils.UserFactory;
 
 public abstract class AbstractLSEFragmentActivity extends FragmentActivity {
 
+	public static final int EXTRA_MESSAGE_REQUEST_CODE_SETTING = 1;
+	public static final int EXTRA_MESSAGE_REQUEST_CODE_STORE = 2;
+
 	protected Button _userCredit;
 
 	@Override
@@ -27,6 +30,17 @@ public abstract class AbstractLSEFragmentActivity extends FragmentActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		User u = UserFactory.getInstance().getUser(getBaseContext());
 		_userCredit.setText(Integer.toString(u.getCredit()));
+
+		switch (requestCode) {
+		case EXTRA_MESSAGE_REQUEST_CODE_SETTING:
+			if (resultCode == RESULT_OK) {
+				home(null);
+			}
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	public void home(View view) {
@@ -38,12 +52,12 @@ public abstract class AbstractLSEFragmentActivity extends FragmentActivity {
 
 	public void setting(View view) {
 		Intent intent = new Intent(this, SettingActivity.class);
-		startActivityForResult(intent, 1);
+		startActivityForResult(intent, EXTRA_MESSAGE_REQUEST_CODE_SETTING);
 	}
 
 	public void store(View view) {
 		Intent intent = new Intent(this, StoreActivity.class);
-		startActivityForResult(intent, 1);
+		startActivityForResult(intent, EXTRA_MESSAGE_REQUEST_CODE_STORE);
 	}
 
 	// public void tutorial(View view) {
