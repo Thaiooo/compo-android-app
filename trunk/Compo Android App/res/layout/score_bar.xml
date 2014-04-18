@@ -39,7 +39,6 @@
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/button_setting"
         android:onClick="store"
-        android:text="1"
         android:textColor="@android:color/white" />
 
 </RelativeLayout>
