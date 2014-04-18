@@ -221,44 +221,20 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 		overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 	}
 
-	private void displayHint(HintTypeEnum aType) {
-		Intent intent = new Intent(ResponseActivity.this, HintDisplayActivity.class);
-		intent.putExtra(HintDisplayActivity.MESSAGE_HINT_TYPE, aType);
-		intent.putExtra(HintDisplayActivity.MESSAGE_QUIZZ_PLAYER, _currentQuizz);
-		startActivity(intent);
-		overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-	}
-
 	public void openHint(View view) {
-		if (_currentPlay != null && _currentPlay.isUnlockHint()) {
-			displayHint(HintTypeEnum.HINT);
-		} else {
-			displayHintDialog(HintTypeEnum.HINT);
-		}
+		displayHintDialog(HintTypeEnum.HINT);
 	}
 
 	public void openRandom(View view) {
-		if (_currentPlay != null && _currentPlay.isUnlockRandom()) {
-			displayHint(HintTypeEnum.RANDOM);
-		} else {
-			displayHintDialog(HintTypeEnum.RANDOM);
-		}
+		displayHintDialog(HintTypeEnum.RANDOM);
 	}
 
 	public void open50Percent(View view) {
-		if (_currentPlay != null && _currentPlay.isUnlock50Percent()) {
-			displayHint(HintTypeEnum.HALF);
-		} else {
-			displayHintDialog(HintTypeEnum.HALF);
-		}
+		displayHintDialog(HintTypeEnum.HALF);
 	}
 
 	public void openResponse(View view) {
-		if (_currentPlay != null && _currentPlay.isUnlockResponse()) {
-			displayHint(HintTypeEnum.RESPONSE);
-		} else {
-			displayHintDialog(HintTypeEnum.RESPONSE);
-		}
+		displayHintDialog(HintTypeEnum.RESPONSE);
 	}
 
 	@Override

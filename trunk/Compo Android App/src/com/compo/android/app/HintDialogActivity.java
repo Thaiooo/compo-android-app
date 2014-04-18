@@ -1,6 +1,9 @@
 package com.compo.android.app;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +11,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.compo.android.app.model.Play;
@@ -24,7 +29,6 @@ public class HintDialogActivity extends Activity {
 	public final static String MESSAGE_HINT_TYPE = "com.compo.android.app.HintDialogActivity.MESSAGE1";
 	public final static String MESSAGE_QUIZZ_PLAYER = "com.compo.android.app.HintDialogActivity.MESSAGE2";
 	public final static String MESSAGE_PLAY = "com.compo.android.app.HintDialogActivity.MESSAGE4";
-	public static final String MESSAGE_HINT_RESULT = "com.compo.android.app.HintDialogActivity.MESSAGE.HINT.RESULT";
 
 	private static Typeface _font;
 
@@ -32,6 +36,10 @@ public class HintDialogActivity extends Activity {
 	private QuizzPlayer _currentQuizz;
 	private HintTypeEnum _hintType;
 	private User _currentUser;
+	private TextView _hintContents;
+	private TextView _price;
+	private ImageView _imgCoins;
+	private Button _btnSubmit;
 
 	// TODO A externaliser
 	private static final String PRICE_SUFFIX = " credits";
@@ -55,53 +63,63 @@ public class HintDialogActivity extends Activity {
 
 		TextView title = (TextView) findViewById(R.id.hint_title);
 		TextView description = (TextView) findViewById(R.id.hint_description);
-		TextView price = (TextView) findViewById(R.id.hint_price);
+
+		_btnSubmit = (Button) findViewById(R.id.button_submit);
+		_price = (TextView) findViewById(R.id.hint_price);
+		_hintContents = (TextView) findViewById(R.id.hint_contents);
+		_imgCoins = (ImageView) findViewById(R.id.img_coin);
 
 		title.setTypeface(_font);
 		description.setTypeface(_font);
-		price.setTypeface(_font);
+		_price.setTypeface(_font);
 
 		switch (_hintType) {
 		case HINT:
 			title.setText(getString(R.string.title_help_hint));
 			description.setText(getString(R.string.label_desc_help_hint));
-			price.setText(Integer.toString(_currentQuizz.getCreditToUnlockHint()) + PRICE_SUFFIX);
+
+			if (_currentPlay != null && _currentPlay.isUnlockHint()) {
+				displayHint();
+			} else {
+				displayPrice(_currentQuizz.getCreditToUnlockHint());
+			}
 			break;
+
 		case RANDOM:
 			title.setText(getString(R.string.title_help_random));
 			description.setText(getString(R.string.label_desc_help_random));
-			price.setText(Integer.toString(_currentQuizz.getCreditToUnlockRandom()) + PRICE_SUFFIX);
+
+			if (_currentPlay != null && _currentPlay.isUnlockRandom()) {
+				displayHint();
+			} else {
+				displayPrice(_currentQuizz.getCreditToUnlockRandom());
+			}
 			break;
+
 		case HALF:
 			title.setText(getString(R.string.title_help_half));
 			description.setText(getString(R.string.label_desc_help_half));
-			price.setText(Integer.toString(_currentQuizz.getCreditToUnlockHalf()) + PRICE_SUFFIX);
+
+			if (_currentPlay != null && _currentPlay.isUnlock50Percent()) {
+				displayHint();
+			} else {
+				displayPrice(_currentQuizz.getCreditToUnlockHalf());
+			}
 			break;
+
 		default:
 			title.setText(getString(R.string.title_help_full));
 			description.setText(getString(R.string.label_desc_help_full));
-			price.setText(Integer.toString(_currentQuizz.getCreditToUnlockResponse()) + PRICE_SUFFIX);
-			break;
-		}
 
-	}
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-
-		Intent newIntent = new Intent();
-		newIntent.putExtra(ResponseActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
-
-		if (data != null) {
-			String mess = (String) data.getSerializableExtra(MESSAGE_HINT_RESULT);
-			if (mess != null) {
-				newIntent.putExtra(ResponseActivity.EXTRA_MESSAGE_HINT_RESULT, mess);
+			if (_currentPlay != null && _currentPlay.isUnlockResponse()) {
+				displayHint();
+			} else {
+				displayPrice(_currentQuizz.getCreditToUnlockResponse());
 			}
-		}
-		setResult(RESULT_OK, newIntent);
+			break;
 
-		this.finish();
+		}
+
 	}
 
 	public void unlockPack(View view) {
@@ -122,12 +140,6 @@ public class HintDialogActivity extends Activity {
 		}
 
 		if (_currentUser.getCredit() >= cost) {
-			Intent intent = new Intent(HintDialogActivity.this, HintDisplayActivity.class);
-			intent.putExtra(HintDisplayActivity.MESSAGE_HINT_TYPE, _hintType);
-			intent.putExtra(HintDisplayActivity.MESSAGE_QUIZZ_PLAYER, _currentQuizz);
-			startActivityForResult(intent, REQUEST_CODE_DISPLAY_HINT);
-			overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
 			// TODO Decrementer le credit de l'utilisateur
 
 			// Update de l'objet play
@@ -136,6 +148,7 @@ public class HintDialogActivity extends Activity {
 				_currentPlay.setQuizzId(_currentQuizz.getId());
 				_currentPlay.setUserId(_currentUser.getId());
 			}
+
 			switch (_hintType) {
 			case HINT:
 				_currentPlay.setUnlockHint(true);
@@ -152,6 +165,8 @@ public class HintDialogActivity extends Activity {
 			}
 			_currentPlay.setDateTime(new Date());
 
+			displayHint();
+
 			QuizzService service = new QuizzService(HintDialogActivity.this);
 			_currentPlay = service.savePlay(_currentPlay);
 
@@ -163,7 +178,84 @@ public class HintDialogActivity extends Activity {
 	}
 
 	public void cancel(View view) {
+		Intent newIntent = new Intent();
+		newIntent.putExtra(ResponseActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
+
+		if (_hintType == HintTypeEnum.RESPONSE && _currentPlay != null && _currentPlay.isUnlockResponse()) {
+			String hint = getHint(_hintType);
+			newIntent.putExtra(ResponseActivity.EXTRA_MESSAGE_HINT_RESULT, hint);
+		}
+
+		setResult(RESULT_OK, newIntent);
+
 		this.finish();
+	}
+
+	private void displayPrice(int aPrice) {
+		_hintContents.setVisibility(View.INVISIBLE);
+		_imgCoins.setVisibility(View.VISIBLE);
+		_price.setVisibility(View.VISIBLE);
+		_price.setText(Integer.toString(aPrice) + PRICE_SUFFIX);
+	}
+
+	private void displayHint() {
+		String hint = getHint(_hintType);
+		_hintContents.setVisibility(View.VISIBLE);
+		_hintContents.setText(hint);
+		_imgCoins.setVisibility(View.INVISIBLE);
+		_price.setVisibility(View.INVISIBLE);
+		_btnSubmit.setVisibility(View.GONE);
+	}
+
+	private String getHint(HintTypeEnum hintType) {
+		String hint;
+
+		String playerName = _currentQuizz.getPlayer().getName();
+
+		switch (hintType) {
+		case HINT:
+			hint = _currentQuizz.getHint();
+			break;
+
+		case RANDOM:
+			char[] tab = playerName.toCharArray();
+			List<Character> list = new ArrayList<Character>();
+			for (int i = 0; i < tab.length; i++) {
+				list.add(tab[i]);
+			}
+
+			StringBuffer randomLetters = new StringBuffer();
+			Random r = new Random();
+			int size = list.size();
+			while (size > 0) {
+				int index = r.nextInt(size);
+				randomLetters.append(list.get(index));
+				list.remove(index);
+				size = list.size();
+			}
+			hint = randomLetters.toString();
+			break;
+
+		case HALF:
+			StringBuffer s = new StringBuffer();
+			for (int i = 0; i < playerName.length(); i++) {
+				// Que pour les emplacements impaire
+				if (i % 2 == 1) {
+					s.append(playerName.charAt(i));
+				} else {
+					s.append("?");
+				}
+			}
+			hint = s.toString();
+			break;
+
+		default:
+			hint = playerName;
+			break;
+
+		}
+
+		return hint;
 	}
 
 }
