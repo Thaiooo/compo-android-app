@@ -18,9 +18,13 @@ import com.compo.android.app.utils.FontEnum;
 import com.compo.android.app.utils.UserFactory;
 
 public class HintDialogActivity extends Activity {
-	public final static String MESSAGE_HINT_TYPE = "com.compo.android.app.HintDetailsActivity.MESSAGE1";
-	public final static String MESSAGE_QUIZZ_PLAYER = "com.compo.android.app.HintDetailsActivity.MESSAGE2";
-	public final static String MESSAGE_PLAY = "com.compo.android.app.HintDetailsActivity.MESSAGE4";
+
+	public static final int REQUEST_CODE_DISPLAY_HINT = 1;
+
+	public final static String MESSAGE_HINT_TYPE = "com.compo.android.app.HintDialogActivity.MESSAGE1";
+	public final static String MESSAGE_QUIZZ_PLAYER = "com.compo.android.app.HintDialogActivity.MESSAGE2";
+	public final static String MESSAGE_PLAY = "com.compo.android.app.HintDialogActivity.MESSAGE4";
+	public static final String MESSAGE_HINT_RESULT = "com.compo.android.app.HintDialogActivity.MESSAGE.HINT.RESULT";
 
 	private static Typeface _font;
 
@@ -82,6 +86,24 @@ public class HintDialogActivity extends Activity {
 
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		Intent newIntent = new Intent();
+		newIntent.putExtra(ResponseActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
+
+		if (data != null) {
+			String mess = (String) data.getSerializableExtra(MESSAGE_HINT_RESULT);
+			if (mess != null) {
+				newIntent.putExtra(ResponseActivity.EXTRA_MESSAGE_HINT_RESULT, mess);
+			}
+		}
+		setResult(RESULT_OK, newIntent);
+
+		this.finish();
+	}
+
 	public void unlockPack(View view) {
 		int cost = 0;
 		switch (_hintType) {
@@ -103,7 +125,7 @@ public class HintDialogActivity extends Activity {
 			Intent intent = new Intent(HintDialogActivity.this, HintDisplayActivity.class);
 			intent.putExtra(HintDisplayActivity.MESSAGE_HINT_TYPE, _hintType);
 			intent.putExtra(HintDisplayActivity.MESSAGE_QUIZZ_PLAYER, _currentQuizz);
-			startActivity(intent);
+			startActivityForResult(intent, REQUEST_CODE_DISPLAY_HINT);
 			overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
 			// TODO Decrementer le credit de l'utilisateur
@@ -133,16 +155,11 @@ public class HintDialogActivity extends Activity {
 			QuizzService service = new QuizzService(HintDialogActivity.this);
 			_currentPlay = service.savePlay(_currentPlay);
 
-			// Pour repercuter la maj sur l'ecran ResponseActivity
-			Intent newIntent = new Intent();
-			newIntent.putExtra(ResponseActivity.EXTRA_MESSAGE_RESULT, _currentPlay);
-			setResult(RESULT_OK, newIntent);
-
 		} else {
 			Intent intent = new Intent(HintDialogActivity.this, StoreActivity.class);
 			startActivity(intent);
+			this.finish();
 		}
-		this.finish();
 	}
 
 	public void cancel(View view) {

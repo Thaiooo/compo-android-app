@@ -30,8 +30,8 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	public static final String EXTRA_MESSAGE_QUIZZ = "com.compo.android.app.ResponseActivity.MESSAGE.QUIZZ";
 	public static final String EXTRA_MESSAGE_PLAY = "com.compo.android.app.ResponseActivity.MESSAGE.PLAY";
 	public static final String EXTRA_MESSAGE_HOME_COLOR = "com.compo.android.app.ResponseActivity.MESSAGE.HOME.COLOR";
-
 	public static final String EXTRA_MESSAGE_RESULT = "com.compo.android.app.ResponseActivity.MESSAGE.RESULT";
+	public static final String EXTRA_MESSAGE_HINT_RESULT = "com.compo.android.app.ResponseActivity.MESSAGE.HINT.RESULT";
 
 	private static final String JERSEY_PREFIX = "jersey_";
 	private static final String SHORT_PREFIX = "short_";
@@ -274,6 +274,11 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 			if (data == null) {
 				return;
 			}
+			String hintMess = (String) data.getSerializableExtra(ResponseActivity.EXTRA_MESSAGE_HINT_RESULT);
+			if (hintMess != null) {
+				_edit.setText(hintMess);
+			}
+
 			_currentPlay = (Play) data.getSerializableExtra(ResponseActivity.EXTRA_MESSAGE_RESULT);
 			if (_currentPlay != null) {
 				if (_currentPlay.isUnlockHint()) {
