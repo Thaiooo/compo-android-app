@@ -44,8 +44,7 @@
         android:layout_below="@+id/score_bar"
         android:layout_marginTop="@dimen/response_hint_margin_top"
         android:drawableTop="@drawable/half"
-        android:onClick="open50Percent"
-        android:textStyle="bold" />
+        android:onClick="open50Percent" />
 
     <Button
         android:id="@+id/button_100"
@@ -55,8 +54,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/button_50"
         android:drawableTop="@drawable/full"
-        android:onClick="openResponse"
-        android:textStyle="bold" />
+        android:onClick="openResponse" />
 
     <!-- ============ -->
     <!-- IMAGE JOUEUR -->

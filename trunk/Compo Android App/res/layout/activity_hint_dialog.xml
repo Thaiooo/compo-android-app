@@ -41,6 +41,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/hint_dialog_price_margin_top" >
 
+        <TextView
+            android:id="@+id/hint_contents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/dialog_content_font_size" />
+
         <ImageView
             android:id="@+id/img_coin"
             android:layout_width="wrap_content"
