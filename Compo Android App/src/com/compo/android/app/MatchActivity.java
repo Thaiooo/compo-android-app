@@ -167,7 +167,7 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
 	private class LoadNextMatchTask extends AsyncTask<Void, Void, Void> {
 		@Override
 		protected Void doInBackground(Void... params) {
-			// Rechercher le match suivant. Dans un job au d�but de l'activit�
+			// Rechercher le match suivant. Dans un job au debut de l'activite
 			QuizzService service = new QuizzService(MatchActivity.this);
 			_nextMatch = service.getNexMatch(_currentPack, _currentMatch);
 			return null;
