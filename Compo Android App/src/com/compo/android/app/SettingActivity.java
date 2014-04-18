@@ -3,6 +3,7 @@ package com.compo.android.app;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -20,6 +21,7 @@ public class SettingActivity extends Activity {
 
 	private Button _sound;
 	private User _currentUser;
+	private boolean _eraseData = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,8 @@ public class SettingActivity extends Activity {
 
 						QuizzService service = new QuizzService(SettingActivity.this);
 						service.resetAllUserData();
+						_eraseData = true;
+
 					}
 				}).setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
@@ -72,6 +76,11 @@ public class SettingActivity extends Activity {
 	}
 
 	public void cancel(View view) {
+		if (_eraseData) {
+			Intent newIntent = new Intent();
+			newIntent.putExtra(MatchActivity.RESULT_MESSAGE, "Hello");
+			setResult(RESULT_OK, newIntent);
+		}
 		finish();
 	}
 
