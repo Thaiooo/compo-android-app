@@ -81,10 +81,8 @@ public class MatchView extends View {
 			_coachRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.coach)).getBitmap();
 			_terrainRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.soccer_field_grass))
 					.getBitmap();
-			_ballRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.goal))
-					.getBitmap();
-			_ballRedRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.csc))
-					.getBitmap();
+			_ballRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.goal)).getBitmap();
+			_ballRedRaw = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.csc)).getBitmap();
 			_start = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.start)).getBitmap();
 			_cercle = ((BitmapDrawable) _context.getResources().getDrawable(R.drawable.hide)).getBitmap();
 
@@ -96,38 +94,51 @@ public class MatchView extends View {
 			Intent intent = ((Activity) context).getIntent();
 			_selectedMatch = (Match) intent.getSerializableExtra(MatchActivity.REQ_MESSAGE_MATCH);
 
-			Team home = null;
-			Team away = null;
-			for (QuizzPlayer qp : _selectedMatch.getQuizzs()) {
-				if (qp.isHome()) {
-					home = qp.getTeam();
-				} else {
-					away = qp.getTeam();
-				}
-				if (home != null && away != null) {
-					break;
-				}
-			}
-
-			int idHome = getResources().getIdentifier(
-					USER_PREFIX + home.getHomeJerseyColor().name().toLowerCase(Locale.US), "drawable",
-					getContext().getPackageName());
-			int idAway = getResources().getIdentifier(
-					USER_PREFIX + away.getHomeJerseyColor().name().toLowerCase(Locale.US), "drawable",
-					getContext().getPackageName());
-			if (idAway == idHome) {
-				_colorHomeForAwayTeam = false;
-				idAway = getResources().getIdentifier(
-						USER_PREFIX + away.getAwayJerseyColor().name().toLowerCase(Locale.US), "drawable",
-						getContext().getPackageName());
-			}
-
-			_playerHomeRaw = ((BitmapDrawable) _context.getResources().getDrawable(idHome)).getBitmap();
-			_playerAwayRaw = ((BitmapDrawable) _context.getResources().getDrawable(idAway)).getBitmap();
-
-			_matrix = new Matrix();
+			loadShirtImg();
 
 		}
+	}
+
+	private void loadShirtImg() {
+		Team home = null;
+		Team away = null;
+		for (QuizzPlayer qp : _selectedMatch.getQuizzs()) {
+			if (qp.isHome()) {
+				home = qp.getTeam();
+			} else {
+				away = qp.getTeam();
+			}
+			if (home != null && away != null) {
+				break;
+			}
+		}
+
+		int idHome = getResources().getIdentifier(
+				USER_PREFIX + home.getHomeJerseyColor().name().toLowerCase(Locale.US), "drawable",
+				getContext().getPackageName());
+		int idAway = getResources().getIdentifier(
+				USER_PREFIX + away.getHomeJerseyColor().name().toLowerCase(Locale.US), "drawable",
+				getContext().getPackageName());
+		if (idAway == idHome) {
+			_colorHomeForAwayTeam = false;
+			idAway = getResources().getIdentifier(
+					USER_PREFIX + away.getAwayJerseyColor().name().toLowerCase(Locale.US), "drawable",
+					getContext().getPackageName());
+		}
+
+		_playerHomeRaw = ((BitmapDrawable) _context.getResources().getDrawable(idHome)).getBitmap();
+		_playerAwayRaw = ((BitmapDrawable) _context.getResources().getDrawable(idAway)).getBitmap();
+
+		_playerHome = null;
+		_playerAway = null;
+
+		_matrix = new Matrix();
+	}
+
+	@Override
+	public void invalidate() {
+		super.invalidate();
+		loadShirtImg();
 	}
 
 	// private Bitmap getBitmapFromAsset(String strName) {
