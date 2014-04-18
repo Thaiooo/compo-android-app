@@ -13,8 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:contentDescription="TODO"
-        android:src="@drawable/coins" />
+        android:contentDescription="@string/image_success"
+        android:src="@drawable/success" />
 
     <!-- ============ -->
     <!-- CREDIT GAGNE -->
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/image_desc_coins"
             android:src="@drawable/coins_3" />
 
         <TextView
@@ -43,7 +43,6 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/img_coin"
-            android:text="test"
             android:textColor="@color/black"
             android:textIsSelectable="false"
             android:textSize="@dimen/success_dialog_earn_font_size" />
