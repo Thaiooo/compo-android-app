@@ -284,14 +284,13 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 					_buttonRandom.setText("unlock");
 				}
 				if (_currentPlay.isUnlock50Percent()) {
-					_buttonHalf.setText("*");
+					_buttonHalf.setText("unlock");
 				}
 				if (_currentPlay.isUnlockResponse()) {
-					_buttonResponse.setText("*");
+					_buttonResponse.setText("unlock");
 				}
 			}
 		} else {
-			System.out.println("===> ici");
 			// =========================================================================================================
 			// Cas du retour de la page Success dialog
 			// =========================================================================================================
@@ -325,7 +324,7 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 
 		@Override
 		protected void onPostExecute(User anUser) {
-			// _userCredit.setText(Integer.toString(anUser.getCredit()));
+			_userCredit.setText(Integer.toString(anUser.getCredit()));
 		}
 	}
 
