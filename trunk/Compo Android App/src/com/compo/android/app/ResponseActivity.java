@@ -50,6 +50,10 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 	private Button _buttonRandom;
 	private Button _buttonHalf;
 	private Button _buttonResponse;
+	private Button _buttonHintUnlock;
+	private Button _buttonRandomUnlock;
+	private Button _buttonHalfUnlock;
+	private Button _buttonResponseUnlock;
 
 	@Override
 	protected int getContentViewId() {
@@ -132,19 +136,53 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 		_buttonRandom = (Button) findViewById(R.id.button_random);
 		_buttonHalf = (Button) findViewById(R.id.button_50);
 		_buttonResponse = (Button) findViewById(R.id.button_100);
+
+		_buttonHintUnlock = (Button) findViewById(R.id.button_hint_unlock);
+		_buttonRandomUnlock = (Button) findViewById(R.id.button_random_unlock);
+		_buttonHalfUnlock = (Button) findViewById(R.id.button_50_unlock);
+		_buttonResponseUnlock = (Button) findViewById(R.id.button_100_unlock);
+
 		if (_currentPlay != null) {
 			if (_currentPlay.isUnlockHint()) {
-				_buttonHint.setText("unlock");
+				_buttonHint.setVisibility(View.INVISIBLE);
+				_buttonHintUnlock.setVisibility(View.VISIBLE);
+			} else {
+				_buttonHint.setVisibility(View.VISIBLE);
+				_buttonHintUnlock.setVisibility(View.INVISIBLE);
 			}
 			if (_currentPlay.isUnlockRandom()) {
-				_buttonRandom.setText("unlock");
+				_buttonRandom.setVisibility(View.INVISIBLE);
+				_buttonRandomUnlock.setVisibility(View.VISIBLE);
+			} else {
+				_buttonRandom.setVisibility(View.VISIBLE);
+				_buttonRandomUnlock.setVisibility(View.INVISIBLE);
 			}
 			if (_currentPlay.isUnlock50Percent()) {
-				_buttonHalf.setText("*");
+				_buttonHalf.setVisibility(View.INVISIBLE);
+				_buttonHalfUnlock.setVisibility(View.VISIBLE);
+			} else {
+				_buttonHalf.setVisibility(View.VISIBLE);
+				_buttonHalfUnlock.setVisibility(View.INVISIBLE);
 			}
 			if (_currentPlay.isUnlockResponse()) {
-				_buttonResponse.setText("*");
+				_buttonResponse.setVisibility(View.INVISIBLE);
+				_buttonResponseUnlock.setVisibility(View.VISIBLE);
+			} else {
+				_buttonResponse.setVisibility(View.VISIBLE);
+				_buttonResponseUnlock.setVisibility(View.INVISIBLE);
 			}
+		} else {
+			_buttonHint.setVisibility(View.VISIBLE);
+			_buttonHintUnlock.setVisibility(View.INVISIBLE);
+
+			_buttonRandom.setVisibility(View.VISIBLE);
+			_buttonRandomUnlock.setVisibility(View.INVISIBLE);
+
+			_buttonHalf.setVisibility(View.VISIBLE);
+			_buttonHalfUnlock.setVisibility(View.INVISIBLE);
+
+			_buttonResponse.setVisibility(View.VISIBLE);
+			_buttonResponseUnlock.setVisibility(View.INVISIBLE);
 		}
 
 		RelativeLayout layout = (RelativeLayout) findViewById(R.id.responseLayout);
@@ -258,16 +296,20 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 			_currentPlay = (Play) data.getSerializableExtra(ResponseActivity.EXTRA_MESSAGE_RESULT);
 			if (_currentPlay != null) {
 				if (_currentPlay.isUnlockHint()) {
-					_buttonHint.setText("unlock");
+					_buttonHint.setVisibility(View.INVISIBLE);
+					_buttonHintUnlock.setVisibility(View.VISIBLE);
 				}
 				if (_currentPlay.isUnlockRandom()) {
-					_buttonRandom.setText("unlock");
+					_buttonRandom.setVisibility(View.INVISIBLE);
+					_buttonRandomUnlock.setVisibility(View.VISIBLE);
 				}
 				if (_currentPlay.isUnlock50Percent()) {
-					_buttonHalf.setText("unlock");
+					_buttonHalf.setVisibility(View.INVISIBLE);
+					_buttonHalfUnlock.setVisibility(View.VISIBLE);
 				}
 				if (_currentPlay.isUnlockResponse()) {
-					_buttonResponse.setText("unlock");
+					_buttonResponse.setVisibility(View.INVISIBLE);
+					_buttonResponseUnlock.setVisibility(View.VISIBLE);
 				}
 			}
 			break;

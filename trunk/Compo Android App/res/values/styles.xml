@@ -46,16 +46,32 @@
         <item name="android:background">@drawable/button_hint1</item>
     </style>
 
+    <style name="hint1_unlock_btn" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/button_hint1_unlock</item>
+    </style>
+
     <style name="hint2_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/button_hint2</item>
+    </style>
+
+    <style name="hint2_unlock_btn" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/button_hint2_unlock</item>
     </style>
 
     <style name="hint3_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/button_hint3</item>
     </style>
 
+    <style name="hint3_unlock_btn" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/button_hint3_unlock</item>
+    </style>
+
     <style name="hint4_btn" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/button_hint4</item>
+    </style>
+
+    <style name="hint4_unlock_btn" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/button_hint4_unlock</item>
     </style>
 
     <style name="home_btn" parent="@android:style/Widget.Button">

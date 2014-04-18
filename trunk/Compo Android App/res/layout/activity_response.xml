@@ -23,7 +23,20 @@
         android:layout_below="@+id/score_bar"
         android:layout_marginTop="@dimen/response_hint_margin_top"
         android:drawableTop="@drawable/idee"
-        android:onClick="openHint" />
+        android:onClick="openHint"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/button_hint_unlock"
+        style="@style/hint1_unlock_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/score_bar"
+        android:layout_marginTop="@dimen/response_hint_margin_top"
+        android:drawableTop="@drawable/idee"
+        android:onClick="openHint"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/button_random"
@@ -33,7 +46,19 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/button_hint"
         android:drawableTop="@drawable/des"
-        android:onClick="openRandom" />
+        android:onClick="openRandom"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/button_random_unlock"
+        style="@style/hint2_unlock_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button_hint"
+        android:drawableTop="@drawable/des"
+        android:onClick="openRandom"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/button_50"
@@ -44,7 +69,20 @@
         android:layout_below="@+id/score_bar"
         android:layout_marginTop="@dimen/response_hint_margin_top"
         android:drawableTop="@drawable/half"
-        android:onClick="open50Percent" />
+        android:onClick="open50Percent"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/button_50_unlock"
+        style="@style/hint3_unlock_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/score_bar"
+        android:layout_marginTop="@dimen/response_hint_margin_top"
+        android:drawableTop="@drawable/half"
+        android:onClick="open50Percent"
+        android:visibility="invisible" />
 
     <Button
         android:id="@+id/button_100"
@@ -54,7 +92,19 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/button_50"
         android:drawableTop="@drawable/full"
-        android:onClick="openResponse" />
+        android:onClick="openResponse"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/button_100_unlock"
+        style="@style/hint4_unlock_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/button_50"
+        android:drawableTop="@drawable/full"
+        android:onClick="openResponse"
+        android:visibility="invisible" />
 
     <!-- ============ -->
     <!-- IMAGE JOUEUR -->
