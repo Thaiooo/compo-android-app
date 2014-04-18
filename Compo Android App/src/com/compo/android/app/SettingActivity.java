@@ -3,7 +3,6 @@ package com.compo.android.app;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -77,9 +76,7 @@ public class SettingActivity extends Activity {
 
 	public void cancel(View view) {
 		if (_eraseData) {
-			Intent newIntent = new Intent();
-			newIntent.putExtra(MatchActivity.RESULT_MESSAGE, "Hello");
-			setResult(RESULT_OK, newIntent);
+			setResult(RESULT_OK);
 		}
 		finish();
 	}

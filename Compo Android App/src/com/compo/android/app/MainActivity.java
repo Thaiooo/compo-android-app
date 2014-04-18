@@ -21,8 +21,6 @@ import com.compo.android.app.utils.FontEnum;
 
 public class MainActivity extends AbstractLSEFragmentActivity {
 
-	public static final int EXTRA_MESSAGE_REQUEST_CODE = 1;
-
 	private static Typeface _fontTitle;
 	private ViewPager _mViewPager;
 	private TextView _activityTitle;

@@ -12,8 +12,14 @@ import com.compo.android.app.utils.UserFactory;
 
 public abstract class AbstractLSEFragmentActivity extends FragmentActivity {
 
-	public static final int EXTRA_MESSAGE_REQUEST_CODE_SETTING = 1;
-	public static final int EXTRA_MESSAGE_REQUEST_CODE_STORE = 2;
+	public static final int REQUEST_CODE_SETTING = 1;
+	public static final int REQUEST_CODE_STORE = 2;
+	public static final int REQUEST_CODE_PACK = 3;
+	public static final int REQUEST_CODE_RESPONSE = 4;
+	public static final int REQUEST_CODE_HINT_DIALOG = 5;
+	public static final int REQUEST_CODE_SUCCESS_DIALOG = 6;
+	public static final int REQUEST_CODE_MATCH = 7;
+	public static final int REQUEST_CODE_LIST_MATCH = 8;
 
 	protected Button _userCredit;
 
@@ -32,7 +38,7 @@ public abstract class AbstractLSEFragmentActivity extends FragmentActivity {
 		_userCredit.setText(Integer.toString(u.getCredit()));
 
 		switch (requestCode) {
-		case EXTRA_MESSAGE_REQUEST_CODE_SETTING:
+		case REQUEST_CODE_SETTING:
 			if (resultCode == RESULT_OK) {
 				home(null);
 			}
@@ -52,12 +58,12 @@ public abstract class AbstractLSEFragmentActivity extends FragmentActivity {
 
 	public void setting(View view) {
 		Intent intent = new Intent(this, SettingActivity.class);
-		startActivityForResult(intent, EXTRA_MESSAGE_REQUEST_CODE_SETTING);
+		startActivityForResult(intent, REQUEST_CODE_SETTING);
 	}
 
 	public void store(View view) {
 		Intent intent = new Intent(this, StoreActivity.class);
-		startActivityForResult(intent, EXTRA_MESSAGE_REQUEST_CODE_STORE);
+		startActivityForResult(intent, REQUEST_CODE_STORE);
 	}
 
 	// public void tutorial(View view) {

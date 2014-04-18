@@ -458,7 +458,7 @@ public class MatchView extends View {
 					}
 
 					((MatchActivity) getContext()).startActivityForResult(intent,
-							MatchActivity.EXTRA_MESSAGE_REQUEST_CODE);
+							MatchActivity.REQUEST_CODE_RESPONSE);
 
 					return b;
 				}

@@ -28,9 +28,7 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
 
 	public static final String REQ_MESSAGE_MATCH = "com.compo.android.app.QuizzActivity.MESSAGE.MATCH";
 	public static final String REQ_MESSAGE_PACK = "com.compo.android.app.QuizzActivity.MESSAGE.PACK";
-
 	public static final String RESULT_MESSAGE = "com.compo.android.app.QuizzActivity.MESSAGE.RESULT";
-	public static final int EXTRA_MESSAGE_REQUEST_CODE = 1;
 
 	private static Typeface _font;
 	private static Typeface _fontSocrePrinter;
@@ -140,7 +138,7 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
 		_userCredit.setText(Integer.toString(u.getCredit()));
 
 		switch (requestCode) {
-		case EXTRA_MESSAGE_REQUEST_CODE:
+		case REQUEST_CODE_RESPONSE:
 			if (resultCode == RESULT_OK) {
 				_matchView.invalidate();
 
