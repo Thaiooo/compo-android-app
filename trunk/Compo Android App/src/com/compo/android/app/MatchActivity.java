@@ -137,7 +137,7 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
 		}
 
 		User u = UserFactory.getInstance().getUser(MatchActivity.this);
-		// _userCredit.setText(Integer.toString(u.getCredit()));
+		_userCredit.setText(Integer.toString(u.getCredit()));
 
 		switch (requestCode) {
 		case EXTRA_MESSAGE_REQUEST_CODE:

@@ -5,24 +5,28 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.widget.Button;
+
+import com.compo.android.app.model.User;
+import com.compo.android.app.utils.UserFactory;
 
 public abstract class AbstractLSEFragmentActivity extends FragmentActivity {
 
-	// protected TextView _userCredit;
+	protected Button _userCredit;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		createDatabse();
 		setContentView(getContentViewId());
-		// _userCredit = (TextView) findViewById(R.id.user_credit);
+		_userCredit = (Button) findViewById(R.id.button_store);
 		new LoadUserTask().execute();
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// User u = UserFactory.getInstance().getUser(getBaseContext());
-		// _userCredit.setText(Integer.toString(u.getCredit()));
+		User u = UserFactory.getInstance().getUser(getBaseContext());
+		_userCredit.setText(Integer.toString(u.getCredit()));
 	}
 
 	public void home(View view) {
@@ -58,8 +62,8 @@ public abstract class AbstractLSEFragmentActivity extends FragmentActivity {
 	private class LoadUserTask extends AsyncTask<Void, Void, Void> {
 		@Override
 		protected Void doInBackground(Void... params) {
-			// User u = UserFactory.getInstance().getUser(getBaseContext());
-			// _userCredit.setText(Integer.toString(u.getCredit()));
+			User u = UserFactory.getInstance().getUser(getBaseContext());
+			_userCredit.setText(Integer.toString(u.getCredit()));
 			return null;
 		}
 	}
