@@ -40,7 +40,8 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
 	private Match _nextMatch;
 	private Pack _currentPack;
 	private TextView _matchDetail;
-	private TextView _teams;
+	private TextView _teamHome;
+	private TextView _teamAway;
 	private Button _scorePrinter;
 
 	private static final String BLANK = "";
@@ -85,8 +86,11 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
 		_matchDetail = (TextView) findViewById(R.id.match_details);
 		_matchDetail.setTypeface(_font);
 
-		_teams = (TextView) findViewById(R.id.match_teams);
-		_teams.setTypeface(_font);
+		_teamHome = (TextView) findViewById(R.id.team_home);
+		_teamHome.setTypeface(_font);
+
+		_teamAway = (TextView) findViewById(R.id.team_away);
+		_teamAway.setTypeface(_font);
 
 		_scorePrinter = (Button) findViewById(R.id.score_printer);
 		_scorePrinter.setTypeface(_fontSocrePrinter);
@@ -113,9 +117,11 @@ public class MatchActivity extends AbstractLSEFragmentActivity {
 		}
 
 		if (away != null && home != null) {
-			_teams.setText(home.getName() + TEAM_SEPARATOR + away.getName());
+			_teamHome.setText(home.getName());
+			_teamAway.setText(away.getName());
 		} else {
-			_teams.setText(BLANK);
+			_teamHome.setText(BLANK);
+			_teamAway.setText(BLANK);
 		}
 	}
 
