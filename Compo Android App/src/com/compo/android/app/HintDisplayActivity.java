@@ -16,8 +16,8 @@ import com.compo.android.app.model.QuizzPlayer;
 import com.compo.android.app.utils.FontEnum;
 
 public class HintDisplayActivity extends Activity {
-	public final static String MESSAGE_HINT_TYPE = "com.compo.android.app.HintActivity.MESSAGE1";
-	public final static String MESSAGE_QUIZZ_PLAYER = "com.compo.android.app.HintActivity.MESSAGE2";
+	public final static String MESSAGE_HINT_TYPE = "com.compo.android.app.HintDisplayActivity.MESSAGE1";
+	public final static String MESSAGE_QUIZZ_PLAYER = "com.compo.android.app.HintDisplayActivity.MESSAGE2";
 
 	private QuizzPlayer _currentQuizz;
 	private static Typeface _font;
@@ -46,7 +46,10 @@ public class HintDisplayActivity extends Activity {
 		case HINT:
 			hintTitle.setText("Hint");
 			hintValue.setText(_currentQuizz.getHint());
+
+			setResult(RESULT_OK);
 			break;
+
 		case RANDOM:
 			hintTitle.setText("Used Letters");
 			char[] tab = playerName.toCharArray();
@@ -65,6 +68,8 @@ public class HintDisplayActivity extends Activity {
 				size = list.size();
 			}
 			hintValue.setText(randomLetters.toString());
+
+			setResult(RESULT_OK);
 			break;
 		case HALF:
 			hintTitle.setText("50/50");
@@ -77,12 +82,19 @@ public class HintDisplayActivity extends Activity {
 					s.append("?");
 				}
 			}
-
 			hintValue.setText(s.toString());
+
+			setResult(RESULT_OK);
 			break;
+
 		default:
 			hintTitle.setText("Response");
 			hintValue.setText(playerName);
+
+			Intent newIntent = new Intent();
+			newIntent.putExtra(HintDialogActivity.MESSAGE_HINT_RESULT, playerName);
+
+			setResult(RESULT_OK, newIntent);
 			break;
 		}
 
