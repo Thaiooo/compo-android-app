@@ -182,6 +182,7 @@
             android:inputType="text"
             android:lines="1"
             android:maxLength="20"
+            android:enabled="false"
             android:singleLine="true"
             android:textColor="@android:color/black"
             android:textSize="@dimen/response_edit_field_font_size" />
@@ -198,5 +199,14 @@
         android:layout_above="@+id/input_response_layout"
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/image_response_matching" />
+    
+    
+    <com.compo.android.app.KeyboardView
+            android:id="@+id/keyboard_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/input_response_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp" />
 
 </RelativeLayout>
