@@ -80,9 +80,9 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 		_edit = (EditText) findViewById(R.id.edit_response);
 		if (_currentPlay != null) {
 			_edit.setText(_currentPlay.getResponse());
-			if (StringUtils.isNotBlank(_currentPlay.getResponse())) {
-				_edit.setSelection(_currentPlay.getResponse().length());
-			}
+//			if (StringUtils.isNotBlank(_currentPlay.getResponse())) {
+//				_edit.setSelection(_currentPlay.getResponse().length());
+//			}
 		}
 
 		int idJersey;
@@ -185,14 +185,14 @@ public class ResponseActivity extends AbstractLSEFragmentActivity {
 			_buttonResponseUnlock.setVisibility(View.INVISIBLE);
 		}
 
-		RelativeLayout layout = (RelativeLayout) findViewById(R.id.responseLayout);
-		layout.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-				imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
-			}
-		});
+//		RelativeLayout layout = (RelativeLayout) findViewById(R.id.responseLayout);
+//		layout.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View view) {
+//				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//				imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+//			}
+//		});
 	}
 
 	@Override
